@@ -2,6 +2,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="board.notice.*"%>
 <%@ page import="util.*"%>
+<%@ page import="property.*"%>
 <%
 NoticeVO notice_param = (NoticeVO)request.getAttribute("notice_vo");
 NoticeVO notice_data = (NoticeVO)request.getAttribute("notice_data");
@@ -37,9 +38,9 @@ NoticeVO notice_data = (NoticeVO)request.getAttribute("notice_data");
         <div class="notice">
             <div class="support-list">
                 <ul class="support-list-center">
-                    <li class="on"><a href="notice.html">공지사항</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="qna.html">Q&A</a></li>
+                    <li class="on"><a href="/support/notice/notice">공지사항</a></li>
+                    <li><a href="/support/faq/faq">FAQ</a></li>
+                    <li><a href="/support/qna/qna">Q&A</a></li>
                 </ul>
             </div>
         </div>
@@ -62,7 +63,7 @@ NoticeVO notice_data = (NoticeVO)request.getAttribute("notice_data");
                         <h1>내용</h1>
                         <div class="notice-cont"><%=notice_data.getContents() %></div>
                         <h1>첨부파일</h1>
-                        <div class="notice-title"></div>
+                        <div class="notice-title"><a href="<%= Function.downloadUrl(SiteProperty.NOTICE_UPLOAD_PATH, java.net.URLEncoder.encode(notice_data.getFile_org(), "UTF-8"), notice_data.getFile()) %>" target="_blank"><%=notice_data.getFile_org()%></a></div>
                         <input type="submit" value="목록">
                   </form>
                 </div>

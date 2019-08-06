@@ -12,17 +12,17 @@
 	<select id="list" parameterClass="pkg_res_vo" resultClass="pkg_res_vo">
         select *
         from pkg_res
-		ORDER BY use_date DESC LIMIT $startPageNo$, $pageRows$
+		ORDER BY purchase_date DESC LIMIT $startPageNo$, $pageRows$
     </select>
     
 	<!-- 해당 테이블에 게시글 작성 -->
     <insert id="insert" parameterClass="pkg_res_vo">
         INSERT INTO pkg_res (
-        	pkg_name, use_date, guest_kname, purchase_date, pkg_pk,
-        	guest_tel, email, pkg_price, pkg_count, total_price
+        	pkg_name, use_date, guest_name1, guest_name2, purchase_date, pkg_pk,
+        	guest_tel1, guest_tel2, guest_tel3, email, pkg_price, pkg_count, total_price
         ) VALUES (
-        	#pkg_name#, #use_date#, #guest_kname#, now(), #pkg_pk#,
-        	#guest_tel#, #email#, #pkg_price#, #pkg_count#, #total_price#
+        	#pkg_name#, #use_date#, #guest_name1#, #guest_name2#, now(), #pkg_pk#,
+        	#guest_tel1#, #guest_tel2#, #guest_tel3#, #email#, #pkg_price#, #pkg_count#, #total_price#
         )
         <selectKey keyProperty="no" resultClass="Integer">
         	SELECT LAST_INSERT_ID()
@@ -35,7 +35,8 @@
     
     <update id="update" parameterClass="pkg_res_vo">
         update pkg_res set
-        	pkg_name=#pkg_name#, use_date=#use_date#, guest_kname=#guest_kname#, guest_tel=#guest_tel#, 
+        	pkg_name=#pkg_name#, use_date=#use_date#, guest_name1=#guest_name1#, guest_name2=#guest_name2#, 
+        	guest_tel1=#guest_tel1#, guest_tel2=#guest_tel2#, guest_tel3=#guest_tel3#, 
         	email=#email#, pkg_price=#pkg_price#, pkg_count=#pkg_count#, total_price=#total_price#
         where no=#no#
     </update>

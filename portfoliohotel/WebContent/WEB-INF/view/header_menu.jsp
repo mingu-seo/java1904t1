@@ -137,7 +137,7 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                                     <div class="pc-sub-center center clear">
                                             <div class="pc-sub-box">
                                                 <h2 class="no-line">Support</h2>
-                                                <a href="/membership/notice" class="notice-a">
+                                                <a href="/support/notice/notice" class="notice-a">
                                                 <ul>
                                                     <li>Notice</li>
                                                     <li class="support-text">
@@ -149,7 +149,7 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                                                 </a>
                                             </div>
                                             <div class="pc-sub-box mtop">
-                                                <a href="/membership/faq">
+                                                <a href="/support/faq/faq">
                                                 <ul>
                                                     <li>FAQ</li>
                                                     <li class="support-text">
