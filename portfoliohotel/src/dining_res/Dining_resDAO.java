@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
 
-import db.SqlMapClientDAOSupport;
-import dining.DiningVO;	
+import db.SqlMapClientDAOSupport;	
 
 @Repository
 public class Dining_resDAO extends SqlMapClientDAOSupport {

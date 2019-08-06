@@ -84,10 +84,10 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                                         <div class="pc-sub-box">
                                             <h2>Dining</h2>
                                             <ul class="Dining">
-                                                <li><a href="#">The Festa</a></li>
-                                                <li><a href="#">Granum Dining Lounge</a></li>
-                                                <li><a href="#">Moon Bar</a></li>
-                                                <li><a href="#">The Oasis Outdoor Kitchen</a></li>
+                                                <li><a href="/dining/thefesta">The Festa</a></li>
+                                                <li><a href="/dining/granum-dining">Granum Dining Lounge</a></li>
+                                                <li><a href="/dining/moon-bar">Moon Bar</a></li>
+                                                <li><a href="/dining/outdoor-kitchen">The Oasis Outdoor Kitchen</a></li>
                                             </ul>
                                         </div>
                                         <div class="pc-sub-box">
