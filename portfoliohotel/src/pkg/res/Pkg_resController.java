@@ -4,13 +4,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import manage.admin.AdminVO;
+import board.member.MemberService;
+import board.member.MemberVO;
 import pkg.PkgService;
 import pkg.PkgVO;
 import util.Function;
@@ -23,6 +25,9 @@ public class Pkg_resController {
 	
 	@Autowired
 	PkgService pkgService;
+	
+	@Autowired
+	MemberService memberService;
 
 	/* [관리자] pkg_res 목록 */
 	@RequestMapping("/manage/pkg/pkg_res/index")
@@ -50,11 +55,14 @@ public class Pkg_resController {
 	  
 	/* [사용자] pkg_res 글쓰기 */
 	@RequestMapping("/book/pkg_pkg_book")
-	public String insertReview(Model model, PkgVO param, Pkg_resVO rsparam) throws Exception {
+	public String insertReview(Model model, PkgVO param, Pkg_resVO rsparam, HttpSession session) throws Exception {
+		MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
+		
 		PkgVO prdata = pkgService.read(param.getNo());
 		model.addAttribute("vo", param); 
 		model.addAttribute("rsparam", rsparam);
 		model.addAttribute("prdata", prdata);
+		model.addAttribute("memberInfo", memberInfo);
 		return "book/pkg_pkg_book";
 	}
 	 

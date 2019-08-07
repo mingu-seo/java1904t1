@@ -35,6 +35,12 @@
 		$("#frm").submit();
 		
 	}
+	function cal_price() {
+		var pkg_price = $("#pkg_price").val();
+		var pkg_count = $("#pkg_count").val();
+		var price = Number(pkg_price) * Number(pkg_count);
+		$("#total_price").val(price);
+	}
 	
 </script>
 </head>

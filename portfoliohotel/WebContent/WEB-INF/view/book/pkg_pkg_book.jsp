@@ -2,9 +2,22 @@
 <%@ page import="pkg.*"%>
 <%@ page import="pkg.res.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="board.member.*" %>
 <%
 PkgVO pkg_param = (PkgVO) request.getAttribute("pkg_param");
 PkgVO prdata = (PkgVO) request.getAttribute("prdata");
+%>
+<%
+MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
+
+// 변수를 선언해놓고 memberInfo가 null이 아닐경우에는 변수에 값을 넣어준다.
+/* String email = "";
+
+if (memberInfo != null) {
+	
+} else {
+	
+} */
 %>
 <%
 Pkg_resVO res_data = (Pkg_resVO) request.getAttribute("res_data");
@@ -72,8 +85,8 @@ function cal_price() {
 
                             <div class="name_ko">
                                     <label for="name_ko">성명 (한글)＊</label>
-                                    <input type="text" id="guest_name1" name="guest_name1" placeholder="성">
-                                    <input type="text" id="guest_name2" name="guest_name2" placeholder="이름">
+                                    <input type="text" id="guest_name1" name="guest_name1" placeholder="성" value="<% if(memberInfo!=null) out.print(memberInfo.getF_name());%>" style="color:#000000">
+                                    <input type="text" id="guest_name2" name="guest_name2" placeholder="이름" value="<% if(memberInfo!=null) out.print(memberInfo.getL_name());%>" style="color:#000000">
                             </div>
 
                             <!-- <div class="name_en clear">
@@ -94,15 +107,16 @@ function cal_price() {
 
                             <div class="phoneNumber">
                                     <label for="phoneNumber">연락처＊</label>
-                                    <select id="guest_tel1" name="guest_tel1">
+                                    <%-- <select id="guest_tel1" name="guest_tel1" value="<% if(memberInfo!=null) out.print(memberInfo.getF_tel());%>">
                                         <option>선택</option>
                                         <option value="010">010</option>
                                         <option value="011">011</option>
                                         <option value="017">017</option>
-                                    </select>
+                                    </select> --%>
+                                    <input type="text" id="guest_tel1" name="guest_tel1" value="<% if(memberInfo!=null) out.print(memberInfo.getF_tel());%>" placeholder="숫자만 입력가능" style="color:#000000">
                                     <!-- <input type="text" id="guest_tel1" name="guest_tel1" placeholder="숫자만 입력가능"> -->
-                                    <input type="text" id="guest_tel2" name="guest_tel2" placeholder="숫자만 입력가능">
-                                    <input type="text" id="guest_tel3" name="guest_tel3" placeholder="숫자만 입력가능">
+                                    <input type="text" id="guest_tel2" name="guest_tel2" value="<% if(memberInfo!=null) out.print(memberInfo.getM_tel());%>" placeholder="숫자만 입력가능" style="color:#000000">
+                                    <input type="text" id="guest_tel3" name="guest_tel3" value="<% if(memberInfo!=null) out.print(memberInfo.getL_tel());%>" placeholder="숫자만 입력가능" style="color:#000000">
                             </div>
 
                             <div class="email">
@@ -112,7 +126,7 @@ function cal_price() {
                                         </li>
                                     
                                         <li>
-                                            <input type="text" id="email" name="email" value title="이메일 아이디 입력" maxlength="40" style="color:#000000">
+                                            <input type="text" id="email" name="email" value="<% if(memberInfo!=null) out.print(memberInfo.getEmail()); %>" title="이메일 아이디 입력" maxlength="40" style="color:#000000">
                                         </li>
 
                                         <!-- <li class="at">@</li>
