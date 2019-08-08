@@ -1,0 +1,382 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page import="util.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="room.*"%>
+
+<%
+ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/default.css">
+<link rel="stylesheet" href="/css/jquery-ui.css">
+<link rel="stylesheet" href="/css/header-fixed.css">
+<link rel="stylesheet" href="/css/check_room.css">
+<link rel="stylesheet" href="/css/footer.css">
+<script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/datepicker.js"></script>
+<script type="text/javascript" src="/js/gnb.js"></script>
+<script>
+var arr_in;
+var arr_out;
+var time_in;
+var time_out;
+var day_stay;
+var adult_add;
+var kid_add;
+var person_price;
+
+$(function() {
+	$("#checkin_select, #checkout_select").datepicker({
+        monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+        dateFormat: "yy-mm-dd",
+        yearRange: "2019:2019",
+        minDate: "0D" 
+    });
+	
+	arr_in = $("#checkin_select").val().split("-");
+	arr_out = $("#checkout_select").val().split("-");
+	time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
+	time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
+	day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
+	$("#day_stay"+no).val(day_stay);
+	$("#room_price"+no).val(Number($("#price_span"+no).html()) * day_stay);
+	$("#checkin"+no).val($("checkin_select").val());
+	$("#checkout"+no).val($("checkout_select").val());
+	
+	$("#scheckin").val($("checkin_select").val());
+	$("#scheckout").val($("checkout_select").val());
+	$("#sday_stay").val(day_stay);
+	
+	/* $("#checkin_select, #checkout_select").change(function() {
+		var arr_in = $("#checkin_select").val().split("-");
+		var arr_out = $("#checkout_select").val().split("-");
+		var time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
+		var time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
+		var day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
+		$("#day_stay"+no).val(day_stay);
+		$("#room_price"+no).val(Number($("#price_span"+no).html()) * day_stay);
+		$("#checkin"+no).val($("checkin_select").val());
+		$("#checkout"+no).val($("checkout_select").val());
+		
+		$("#scheckin").val($("checkin_select").val());
+		$("#scheckout").val($("checkout_select").val());
+		$("#sday_stay").val(day_stay);
+	}); */
+	
+	adult_add = 0;
+	kid_add = 0;
+	if($("#adult_select option:selected").val() > $("#adult_basic"+no).val()){
+		adult_add = ($("#adult_select option:selected").val() - $("#adult_basic"+no).val())*100000;
+	} else { 
+		adult_add = 0;
+	}
+	if($("#kid_select option:selected").val() > $("#kid_basic"+no).val()){
+		kid_add = ($("#kid_select option:selected").val() - $("#kid_basic"+no).val())*(100000*0.7);
+	} else {
+		kid_add = 0;
+	}
+	
+	person_price = adult_add + kid_add;
+	$("#person_price"+no).val(person_price);
+	$("#adult_add"+no).val($("#adult_select option:selected").val() - $("#adult_basic"+no).val());
+	$("#kid_add"+no).val($("#kid_select option:selected").val() - $("#kid_basic"+no).val());
+	
+	/* $("#adult_select, #kid_select").change(function() {
+		$("#adult"+no).val($("#adult_select option:selected").val());
+		$("#kid"+no).val($("#kid_select option:selected").val());
+			
+		$("#sadult").val($("#adult_select option:selected").val());
+		$("#skid").val($("#kid_select option:selected").val());
+		
+		var adult_add = 0;
+		var kid_add = 0;
+		if($("#adult_select option:selected").val() > $("#adult_basic"+no).val()){
+			adult_add = ($("#adult_select option:selected").val() - $("#adult_basic"+no).val())*100000;
+		} else { 
+			adult_add = 0;
+		}
+		if($("#kid_select option:selected").val() > $("#kid_basic"+no).val()){
+			kid_add = ($("#kid_select option:selected").val() - $("#kid_basic"+no).val())*(100000*0.7);
+		} else {
+			kid_add = 0;
+		}
+		
+		var person_price = adult_add + kid_add;
+		$("#person_price"+no).val(person_price);
+		$("#adult_add"+no).val($("#adult_select option:selected").val() - $("#adult_basic"+no).val());
+		$("#kid_add"+no).val($("#kid_select option:selected").val() - $("#kid_basic"+no).val());
+	});	 */
+	
+});
+
+function goSubmit(no) {
+	$("#room_name"+no).val($("#room_name_span"+no).html());
+	$("#room_pk"+no).val(Number($("#room_pk_span"+no).html()));
+	$("#adult_basic"+no).val(Number($("#adult_basic_span"+no).html()));
+	$("#kid_basic"+no).val(Number($("#kid_basic_span"+no).html()));
+	$("#checkin"+no).val('<%=request.getParameter("checkin")%>');
+	$("#checkout"+no).val('<%=request.getParameter("checkout")%>');
+	$("#adult"+no).val(<%=request.getParameter("adult")%>);
+	$("#kid"+no).val(<%=request.getParameter("kid")%>);
+	
+	adult_add = 0;
+	kid_add = 0;
+	if($("#adult_select option:selected").val() > $("#adult_basic"+no).val()){
+		adult_add = ($("#adult_select option:selected").val() - $("#adult_basic"+no).val())*100000;
+	} else { 
+		adult_add = 0;
+	}
+	if($("#kid_select option:selected").val() > $("#kid_basic"+no).val()){
+		kid_add = ($("#kid_select option:selected").val() - $("#kid_basic"+no).val())*(100000*0.7);
+	} else {
+		kid_add = 0;
+	}
+	
+	person_price = adult_add + kid_add;
+	$("#person_price"+no).val(person_price);
+	$("#adult_add"+no).val($("#adult_select option:selected").val() - $("#adult_basic"+no).val());
+	$("#kid_add"+no).val($("#kid_select option:selected").val() - $("#kid_basic"+no).val());
+	
+	arr_in = $("#checkin_select").val().split("-");
+	arr_out = $("#checkout_select").val().split("-");
+	time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
+	time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
+	day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
+	$("#day_stay"+no).val(day_stay);
+	$("#room_price"+no).val(Number($("#price_span"+no).html()) * day_stay);
+}
+
+function goPrice() {
+	$("#sadult").val(<%=request.getParameter("adult")%>);
+	$("#skid").val(<%=request.getParameter("kid")%>);
+	$("#scheckin").val('<%=request.getParameter("checkin")%>');
+	$("#scheckout").val('<%=request.getParameter("checkout")%>');
+	$("#sday_stay").val(day_stay);
+	
+	document.room_search.submit();
+}
+
+function goRescan() {
+	
+}
+</script>
+<title>객실검색</title>
+</head>
+<body>
+	<jsp:include page="/header_menu" flush="true" />
+
+	<div id="container">
+		<div class="chk-section">
+			<h2>객실검색</h2>
+			<ul class="cha_index clear">
+				<li><a href="/book/room/check_room">객실검색 <span>></span></a></li>
+				<li class="/book/room/detail_sub"><a href="#">객실예약</a></li>
+				<li><a href="/book/room/personal_info"><span>></span>정보입력</a></li>
+				<li><a href="/book/room/confirm_room"><span>></span> 예약완료</a></li>
+			</ul>
+			
+			<!-- 객실 검색 박스 -->
+			<div class="select-info-box">
+				<form class="room-search" name="room_search" action="/book/room/check_room" method="post">
+					<div class="period after">
+						<label for="period">숙박기간</label>
+					</div>
+
+					<div class="checkInOut">
+						<input type="text" name="checkin_select" id="checkin_select" class="InDate" maxlength="10" placeholder="체크인"
+							value="<%=request.getParameter("checkin") %>" readonly>~ 
+						<input type="text" name="checkout_select" id="checkout_select" class="OutDate" maxlength="10" placeholder="체크아웃"
+							value="<%=request.getParameter("checkout") %>" readonly>
+					</div>
+					<div class="days"><%=request.getParameter("day_stay")%>	박</div>
+					<div class="room after">
+						<label for="roomCount">객실</label>
+					</div>
+					<div class="roomCount select-option">
+						<select name="roomCount" id="roomCount" class="option01" aria-hidden="true">
+							<option value="1" selected>1개</option>
+							<option value="2">2개</option>
+							<option value="3">3개</option>
+							<option value="4">4개</option>
+							<option value="5">5개</option>
+						</select>
+					</div>
+
+					<div class="adult after">
+						<label for="adult">어른</label>
+					</div>
+					
+					<div class="adultCount select-option">
+						<select name="adult_select" id="adult_select" class="option1" aria-hidden="true">
+							<option value="1" <%=Integer.parseInt(request.getParameter("adult")) == 1 ? "selected" : ""%>>1명</option>
+							<option value="2" <%=Integer.parseInt(request.getParameter("adult")) == 2 ? "selected" : ""%>>2명</option>
+							<option value="3" <%=Integer.parseInt(request.getParameter("adult")) == 3 ? "selected" : ""%>>3명</option>
+							<option value="4" <%=Integer.parseInt(request.getParameter("adult")) == 4 ? "selected" : ""%>>4명</option>
+							<option value="5" <%=Integer.parseInt(request.getParameter("adult")) == 5 ? "selected" : ""%>>5명</option>
+						</select>
+					</div>
+
+					<div class="child after">
+						<label for="child">어린이</label>
+					</div>
+					
+					<div class="childCount select-option">
+						<select name="kid_select" id="kid_select" class="option1" aria-hidden="true">
+							<option value="0" <%=Integer.parseInt(request.getParameter("kid")) == 0 ? "selected" : ""%>>0명</option>
+							<option value="1" <%=Integer.parseInt(request.getParameter("kid")) == 1 ? "selected" : ""%>>1명</option>
+							<option value="2" <%=Integer.parseInt(request.getParameter("kid")) == 2 ? "selected" : ""%>>2명</option>
+							<option value="3" <%=Integer.parseInt(request.getParameter("kid")) == 3 ? "selected" : ""%>>3명</option>
+							<option value="4" <%=Integer.parseInt(request.getParameter("kid")) == 4 ? "selected" : ""%>>4명</option>
+							<option value="5" <%=Integer.parseInt(request.getParameter("kid")) == 5 ? "selected" : ""%>>5명</option>
+						</select>
+					</div>
+					<div class="re-try">
+						<button class="re-check-btn" onclick="return goRescan();">재검색</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- 탭메뉴 객실/요금으로 보기 -->
+		<div class="room-info">
+			<form name="goPrice_room" id="goPrice_room" action="/book/room/price_room" method="post">
+				<ul class="tabMenu clear">
+					<li class="on"><a href="#">객실로 보기</a></li>
+					<li><a href="#" onclick="goPrice();">요금으로 보기</a></li>
+				</ul>
+				
+				<input type="hidden" name="scheckin" id="scheckin" value=""/>
+				<input type="hidden" name="scheckout" id="scheckout" value=""/>
+				<input type="hidden" name="sday_stay" id="sday_stay" value=""/>
+				<input type="hidden" name="sadult" id="sadult" value=""/>
+				<input type="hidden" name="skid" id="skid" value=""/>
+			</form>
+
+			<%
+			for(int i=0; i<list_r.size(); i++) {
+			%>
+			<form action="/book/room/add_option" method="post" id="frm<%=i%>">
+			<!--예약 가능한 객실 조회 결과 나오는 영역 -->
+			<div class="roomResult-area clear">
+				<ul>
+					<li class="photo roomtype01">
+						<h1 class="camera">
+							<a href="/room/detail_sub<%=i %>" target="_blank"><img src="/img/ico_photo.png"></a>
+						</h1>
+					</li>		
+					<li>
+						<ul class="roomResult-info clear">
+							<li><h2><span id="room_name_span<%=i %>"><%=list_r.get(i).getName()%></span></h2></li>
+							<li class="specific-notice clear">
+								<ul class="specific-notice01">
+									<li>객실크기 : <%=list_r.get(i).getSize() %></li>
+									<li>객실위치 : <%=list_r.get(i).getLocation() %></li>
+									<li>수용인원 : 어른 <%=list_r.get(i).getAdult() %> 명, 어린이 <%=list_r.get(i).getKid() %> 명</li>
+								</ul>
+								<ul class="specific-notice02">
+									<li>객실타입 : <%=list_r.get(i).getType() %></li>
+									<li>배드타입 : 킹 사이즈 / 트윈</li>
+								</ul>
+							</li>
+							<li>
+								<p>
+									<%=list_r.get(i).getInstruction() %>
+								</p>
+							</li>
+							<li>
+								<div class="priceResult clear">
+									<ul class="etc clear">
+										<li><h1>
+												<%=Function.toPriceComma(list_r.get(i).getPrice()) %> 원 <span>~</span>
+											</h1></li>
+										<li>
+											<h3>KRW/1박, 1객실</h3>
+											<p>(세금 및 수수료 별도)</p>
+										</li>
+									</ul>
+									<button class="reservation-btn">
+										<a onclick="goSubmit(<%=i%>)">예약하기</a>
+									</button>
+								</div>
+							</li>
+						</ul>
+					</li>	
+				</ul>
+				
+				<span style="display:none;" id="room_pk_span<%=i %>"><%=list_r.get(i).getNo() %></span>
+				<span style="display:none;" id="price_span<%=i %>"><%=list_r.get(i).getPrice() %></span>
+				<span style="display:none;" id="adult_basic_span<%=i %>"><%=list_r.get(i).getAdult() %></span>
+				<span style="display:none;" id="kid_basic_span<%=i %>"><%=list_r.get(i).getKid() %></span>
+				
+				<input type="hidden" name="checkin" id="checkin<%=i %>" value=""/>
+				<input type="hidden" name="checkout" id="checkout<%=i %>" value=""/>
+				<input type="hidden" name="room_name" id="room_name<%=i %>" value=""/>
+				<input type="hidden" name="adult" id="adult<%=i %>" value=""/>
+				<input type="hidden" name="kid" id="kid<%=i %>" value=""/>
+				<input type="hidden" name="adult_basic" id="adult_basic<%=i %>" value=""/>
+				<input type="hidden" name="kid_basic" id="kid_basic<%=i %>" value=""/>
+				<input type="hidden" name="adult_add" id="adult_add<%=i %>" value=""/>
+				<input type="hidden" name="kid_add" id="kid_add<%=i %>" value=""/>
+				<input type="hidden" name="day_stay" id="day_stay<%=i %>" value=""/>
+				<input type="hidden" name="person_price" id="person_price<%=i %>" value=""/>
+				<input type="hidden" name="room_price" id="room_price<%=i %>" value=""/>
+				<input type="hidden" name="room_pk" id="room_pk<%=i %>" value=""/>
+				
+			</div>
+			</form>
+			<%
+			}
+			%>
+		</div>
+		<!-- room-info 영역 끝 -->
+	</div>
+	<!-- container 영역 끝 -->
+
+	<div id="footer">
+		<!-- <div class="footer-logo"><img src="img/footer_logo.png"></div> -->
+
+		<div class="footer-center">
+			<div class="footer-top">
+				<ul class="company-info clear">
+					<li><a href="#">호텔소개</a></li>
+					<li><a href="#">오시는 길</a></li>
+					<li><a href="#">문의</a></li>
+					<li><a href="#">인재채용</a></li>
+					<li><a href="#">이용약관</a></li>
+					<li><a href="#">개인정보처리방침</a></li>
+				</ul>
+				<ul class="sns clear">
+					<li><a href="#"><img src="/img/sns1.png"></a></li>
+					<li><a href="#"><img src="/img/sns2.png"></a></li>
+					<li><a href="#"><img src="/img/sns3.png"></a></li>
+					<li><a href="#"><img src="/img/sns4.png"></a></li>
+				</ul>
+			</div>
+			<div class="footer-bottom">
+				<h5>
+					에이블현대호텔앤리조트주식회사 대표이사 JANG PAUL HYUK (장혁),최종윤 사업자 등록번호 104-81-21344
+					통신판매업신고번호 2012-서울중구-1214<br /> 서울시 중구 장충단로60(장충동2가), 04605 / TEL
+					02.2250.8000
+				</h5>
+				<h6>Copyright 2018 Banyan Tree Club & Spa. All Rights Reserved</h6>
+				<ul class="support-logo clear">
+					<li><img src="/img/footericon1.png"></li>
+					<li><img src="/img/footericon2.png"></li>
+					<li><img src="/img/footericon3.png"></li>
+					<li><img src="/img/footericon4.png"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

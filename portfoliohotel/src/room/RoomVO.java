@@ -17,6 +17,8 @@ public class RoomVO extends Parameter{
 	private String landscape; //객실 뷰
 	private String type; //객실 타입_방 개수
 	
+	private String size;
+	
 	public int getNo() {
 		return no;
 	}
@@ -88,6 +90,12 @@ public class RoomVO extends Parameter{
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
 	}
 	
 }
