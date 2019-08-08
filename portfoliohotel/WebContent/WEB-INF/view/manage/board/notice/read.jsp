@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ page import="board.notice.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="property.*"%>
 <%
 NoticeVO param = (NoticeVO) request.getAttribute("param");
 NoticeVO data = (NoticeVO) request.getAttribute("data");
@@ -91,7 +92,8 @@ NoticeVO data = (NoticeVO) request.getAttribute("data");
 										</tr>
 										<tr>
 											<th scope="row"><label for="">첨부파일</label></th>
-											<td colspan="5"><img src="/upload/notice/<%=data.getFile()%>" /></td>
+											<td colspan="5">
+											<a href="<%= Function.downloadUrl(SiteProperty.NOTICE_UPLOAD_PATH, java.net.URLEncoder.encode(data.getFile_org(), "UTF-8"), data.getFile()) %>" target="_blank"><%=data.getFile_org()%></a></td>
 										</tr>
 										<tr>
 											<th scope="row"><label for="">상세정보</label></th>

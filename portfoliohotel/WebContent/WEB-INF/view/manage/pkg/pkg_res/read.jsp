@@ -82,18 +82,18 @@ Pkg_resVO res_param = (Pkg_resVO) request.getAttribute("res_param");
 											<td colspan="3"><%=res_data.getPkg_name()%></td>
 										</tr>
 										<tr>
+											<th scope="row"><label for="">고객명</label></th>
+											<td><%=res_data.getGuest_name1()%><%=res_data.getGuest_name2()%></td>
+										</tr>										
+										<tr>
 											<th scope="row"><label for="">사용일</label></th>
 											<td><%=res_data.getUse_date()%></td>
-											<th scope="row"><label for="">구매일</label></th>
+											<th scope="row"><label for="">예약일</label></th>
 											<td><%=res_data.getPurchase_date()%></td>
 										</tr>
 										<tr>
-											<th scope="row"><label for="">고객명</label></th>
-											<td><%=res_data.getGuest_kname() %></td>
-										</tr>
-										<tr>
 											<th scope="row"><label for="">고객 연락처</label></th>
-											<td><%=res_data.getGuest_tel()%></td>
+											<td><%=res_data.getGuest_tel1()%>&nbsp&nbsp<%=res_data.getGuest_tel2()%>&nbsp&nbsp<%=res_data.getGuest_tel3()%></td>
 											<th scope="row"><label for="">고객 이메일</label></th>
 											<td><%=res_data.getEmail() %></td>
 										</tr>										

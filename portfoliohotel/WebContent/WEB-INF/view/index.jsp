@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
 <%@ page import="java.util.*" %>
 <%@ page import="board.member.*" %>
 <%@ page import="util.*" %>
 <%
+MemberVO param = (MemberVO)request.getAttribute("vo");
+ArrayList<MemberVO> list = (ArrayList)request.getAttribute("list");
 MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 MemberVO data = (MemberVO)request.getAttribute("data");
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -58,14 +62,6 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                 });
 
                 //메인페이지 객실예약 선택 달력플러그인 사용
-                $("#checkin, #checkout").datepicker({
-                    monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-                    dateFormat: "yy-mm-dd",
-                    yearRange: "2019:2019",
-                    minDate: "0D" 
-                });
-				
                 $("#checkin, #checkout").change(function() {
             		var arr_in = $("#checkin").val().split("-");
             		var arr_out = $("#checkout").val().split("-");
@@ -74,7 +70,7 @@ MemberVO data = (MemberVO)request.getAttribute("data");
             		day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
             		$("#day_stay").val(day_stay);
             		console.log($("#day_stay").val());
-            	});
+				});
             });
         </script>
     <title>Portfolio Hotel</title>
@@ -82,13 +78,10 @@ MemberVO data = (MemberVO)request.getAttribute("data");
 
 <body>
 	
-    <jsp:include page="/header_menu" flush="true"/>
-    
-    <%if(sessionMember != null) {%>
+	<%if(sessionMember != null) {%>
           <div id="logined">
             <div class="logined-box">
                 <h2 class="close-btn"><a href="#">x</a></h2>
-                 
                 <h3><%=sessionMember.getF_name()%> <%=sessionMember.getL_name()%><span>님 안녕하세요.</span></h3>
                 <p class="mypage"><a href="/membership/mypage">마이페이지 <img src="img/white-arrow.png" class="white-arrow"></a></p>
                 <table>
@@ -108,8 +101,12 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                 </table>
             </div>      
         </div>  
-        <%} %>
+    <%} %>
+        
+    <jsp:include page="/header_menu" flush="true"/>
     
+    
+
     <!-- 컨테이너 영역 시작 -->
     <div id="container">
 
@@ -141,9 +138,9 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                 <div class="d-r-input clear"><!-- direct-reservation 단어 너무길어서 d-r 로 줄임 -->
                         <form name="frm" id="frm" action="/book/room/check_room/" method="post">
                             <div class="d-r-input1">
-                                <input type="text" name="checkin" id="checkin">
+                                <input type="text" id="start-date">
                                 <p>~</p>
-                                <input type="text" name="checkout" id="checkout"> 
+                                <input type="text" id="end-date"> 
                                 <select name="adult">
                                     <option>성인</option>
                                     <option value="1">1</option>
@@ -151,15 +148,18 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
                                 </select> 
-                                <select name="kid">
+                                <select name="child">
                                     <option>어린이</option>
-                                    <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
                                 </select> 
                             </div>
                             <div class="d-r-input2">
