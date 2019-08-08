@@ -11,10 +11,10 @@ RoomVO param = (RoomVO)request.getAttribute("vo");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="/WEB-INF/view/manage/include/headHtml.jsp" %>
 <script>
-var oEditors; // 에디터 객체 담을 곳
+/* var oEditors; // 에디터 객체 담을 곳
 jQuery(window).load(function(){
 	oEditors = setEditor("instruction"); // 에디터 셋팅
-});
+}); */
 
 function groupDelete() {	
 	if ( isSeleted(document.frm.no) ){
@@ -59,14 +59,14 @@ function goSave() {
 		return false;
 	}
 	
-	var sHTML = oEditors.getById["instruction"].getIR();
+	/* var sHTML = oEditors.getById["instruction"].getIR();
 	if (sHTML == "" || sHTML == "<p><br></p>") {
 		alert('객실 정보를 입력하세요.');
 		$("#instruction").focus();
 		return false;
 	} else {
 		oEditors.getById["instruction"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
-	}
+	} */
 	
 	if($("#checkin_time").val() == ""){
 		alert('체크인 시간을 입력하세요.');
@@ -81,6 +81,11 @@ function goSave() {
 	if($("#location").val() == ""){
 		alert('객실 위치를 입력하세요.');
 		$("#location").focus();
+		return false;
+	}
+	if($("#size").val() == ""){
+		alert('객실 크기를 입력하세요.');
+		$("#size").focus();
 		return false;
 	}
 	if($("#landscape").val() == ""){
@@ -183,7 +188,7 @@ $(function(){
 									</tr>
 									<tr>
 										<th>객실 소개</th>
-										<td colspan="5"><textarea id="instruction" name="instruction" style="width:100%;"></textarea></td>
+										<td colspan="5"><textarea id="instruction" name="instruction" style="width:100%;" rows="20"></textarea></td>
 									</tr>
 									<tr>
 										<th>체크인 시간</th>
@@ -193,7 +198,9 @@ $(function(){
 									</tr>
 									<tr>
 										<th>객실 위치</th>
-										<td colspan="5"><input type="text" id="location" name="location" class="w50" /></td>
+										<td colspan="2"><input type="text" id="location" name="location" class="w25" /></td>
+										<th>객실 크기</th>
+										<td colspan="2"><input type="text" id="size" name="size" class="w25" /></td>
 									</tr>
 									<tr>
 										<th>객실 전망</th>

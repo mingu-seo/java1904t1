@@ -30,8 +30,19 @@ public class RoomService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ArrayList list(RoomVO vo) throws Exception {
-		ArrayList list = roomDAO.list(vo);
+	public ArrayList<RoomVO> list(RoomVO vo) throws Exception {
+		ArrayList<RoomVO> list = roomDAO.list(vo);
+		return list;
+	}
+	
+	/**
+	 * 객실 목록 내림차순
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
+	public ArrayList<RoomVO> list_price(RoomVO vo) throws Exception {
+		ArrayList<RoomVO> list = roomDAO.list_price(vo);
 		return list;
 	}
 	

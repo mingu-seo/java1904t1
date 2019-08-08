@@ -54,12 +54,11 @@ ArrayList<Room_optVO> list_o = (ArrayList<Room_optVO>)request.getAttribute("list
     				price_opt += $(".option_num").eq(idx).find("option:selected").data("option_price");
     			}
     			//$("#count").val($(".option_num").eq(idx).find("option:selected").val()); //추가옵션 수량
-    			$("input[name='count']").eq(idx).val($(".option_num").eq(idx).val()); //추가옵션 수량
+    			$("input[name='count']").eq(idx).val(Number($(".option_num").eq(idx).val())); //추가옵션 수량
     		});
     		$("#option_price").val(Number(price_opt));
     		$("#option_price_span").text(numberWithCommas(price_opt));
     		calculate();
-    		
     	});
     });   
     
@@ -93,10 +92,10 @@ ArrayList<Room_optVO> list_o = (ArrayList<Room_optVO>)request.getAttribute("list
         <div class="option_channel clear">
             <h1 class="head-title">객실예약</h1>
             <ul class="cha_index clear">
-                <li><a href="/book/check_room">객실검색 <span>></span> </a></li>
+                <li><a href="/book/room/check_room">객실검색 <span>></span> </a></li>
                 <li class="current-page"><a href="#">객실예약</a></li>
-                <li><a href="/book/personal_info"><span>></span>정보입력</a></li>
-                <li><a href="/book/confirm_room"><span>></span> 예약완료</a></li>
+                <li><a href="/book/room/personal_info"><span>></span>정보입력</a></li>
+                <li><a href="/book/room/confirm_room"><span>></span> 예약완료</a></li>
             </ul>
             <!-- 폼태그 / summit 입력버튼 311번 -->
             <form action="/book/personal_info" method="post">
@@ -135,6 +134,7 @@ ArrayList<Room_optVO> list_o = (ArrayList<Room_optVO>)request.getAttribute("list
 										<p style="float:left;"><%=list_o.get(i).getInfo() %></p>
 										<div style="float:right;">
 											<select name="option_num" class="option_num" >
+												<option value="0" data-option_price="0">선택</option>
 												<%
 												for(int j=0; j<=5; j++) {
 												%>

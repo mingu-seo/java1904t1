@@ -65,17 +65,19 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                     yearRange: "2019:2019",
                     minDate: "0D" 
                 });
-
-                /* $("#checkout").datepicker({
-                    monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-                    dateFormat: "yy-mm-dd",
-                    yearRange: "2019:2019",
-                    minDate: "0D" 
-                }); */
+				
+                $("#checkin, #checkout").change(function() {
+            		var arr_in = $("#checkin").val().split("-");
+            		var arr_out = $("#checkout").val().split("-");
+            		var time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
+            		var time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
+            		day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
+            		$("#day_stay").val(day_stay);
+            		console.log($("#day_stay").val());
+            	});
             });
         </script>
-    <title>테스트</title>
+    <title>Portfolio Hotel</title>
 </head>
 
 <body>
@@ -137,7 +139,7 @@ MemberVO data = (MemberVO)request.getAttribute("data");
             <div class="direct-reservation">
                 <h2>RESERVATION</h2>
                 <div class="d-r-input clear"><!-- direct-reservation 단어 너무길어서 d-r 로 줄임 -->
-                        <form name="frm" id="frm" action="/book/check_room/" method="post">
+                        <form name="frm" id="frm" action="/book/room/check_room/" method="post">
                             <div class="d-r-input1">
                                 <input type="text" name="checkin" id="checkin">
                                 <p>~</p>
@@ -165,6 +167,7 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                                 
                                 <input type="hidden" name="checkin" id="checkin" value=""/>
                                 <input type="hidden" name="checkout" id="checkout" value=""/>
+                                <input type="hidden" name="day_stay" id="day_stay" value=""/>
                                 <input type="hidden" name="adult" id="adult" value=""/>
                                 <input type="hidden" name="kid" id="kid" value=""/>
                                 

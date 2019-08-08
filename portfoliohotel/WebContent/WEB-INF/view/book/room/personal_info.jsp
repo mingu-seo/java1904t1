@@ -11,12 +11,8 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link
-	href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Noto+Sans+KR:100,300,400,500,700,900&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Noto+Sans+KR:100,300,400,500,700,900&display=swap"	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/default.css">
 <link rel="stylesheet" href="../css/header-fixed.css">
 <link rel="stylesheet" href="../css/personal_info.css">
@@ -24,53 +20,84 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 <script src="../js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="../js/gnb.js"></script>
 <script>
-        $(function(){
-            //left-section 높이값 알아내서 right-section 높이값을 동일하게
-            var leftHei = $(".left-section").height();
-            $(".right-section").height(leftHei+2);
-            var secHei = $(".section-wrap").height();
-            //스크롤 했을때 
-            $(window).scroll(function(){
-                //스크롤바 위치값 알아내기
-                var scTop = $(this).scrollTop();
-                //section-wrap 시작하는 위치값 알아내기
-                var secWrap = $(".section-wrap").offset().top;
-                //footer 시작하는 위치값 알아내기
-                var ftStart = $("#footer").offset().top-800;
-                
-                if(scTop >= secWrap && scTop < secHei-390) {
-                    $(".confirmation-box").addClass("fix");
-                }
-                else if(scTop >= secHei-390) {
-                    $(".confirmation-box").removeClass("fix");
-                    $(".confirmation-box").addClass("fix2");
-                }
-                else {
-                    $(".confirmation-box").removeClass("fix2");
-                    $(".confirmation-box").removeClass("fix");
-                }
-            });
-            
-            $("#guest_tel1_select").change(function() {
-            	$("#guest_tel1").val($("#guest_tel1_select option:selected").val());
-            	console.log($("#guest_tel1").val());
-            });
-            
-            $("#guest_email").change(function() {
-            	console.log($("#option_pk").val());
-            	var at = "@";
-            	var chk_email = $("#guest_email").val();
-            	
-            	if(chk_email.indexOf(at) < 0) {
-            		$("#email_span").show();
-            		$("#email_span").text("* @을 포함하십시오.");
-            		$("#guest_email").focus();
-            	} else {
-            		$("#email_span").hide();
-            	}
-            });
-        });
-    </script>
+$(function(){
+    //left-section 높이값 알아내서 right-section 높이값을 동일하게
+    var leftHei = $(".left-section").height();
+    $(".right-section").height(leftHei+2);
+    var secHei = $(".section-wrap").height();
+    //스크롤 했을때 
+    $(window).scroll(function(){
+        //스크롤바 위치값 알아내기
+        var scTop = $(this).scrollTop();
+        //section-wrap 시작하는 위치값 알아내기
+        var secWrap = $(".section-wrap").offset().top;
+        //footer 시작하는 위치값 알아내기
+        var ftStart = $("#footer").offset().top-800;
+        
+        if(scTop >= secWrap && scTop < secHei-390) {
+            $(".confirmation-box").addClass("fix");
+        }
+        else if(scTop >= secHei-390) {
+            $(".confirmation-box").removeClass("fix");
+            $(".confirmation-box").addClass("fix2");
+        }
+        else {
+            $(".confirmation-box").removeClass("fix2");
+            $(".confirmation-box").removeClass("fix");
+        }
+    });
+    
+    $("#guest_tel1_select").change(function() {
+    	$("#guest_tel1").val($("#guest_tel1_select option:selected").val());
+    });
+});        
+
+var chknum = /[0-9]/g;
+var chkat = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+function goCheck() {
+	if($("#guest_lastname").val()==""){
+		$("#guest_lastname").focus();
+		return false;
+	}
+	if($("#guest_firstname").val()==""){
+		$("#guest_firstname").focus();
+		return false;
+	}
+	if($("#guest_tel2").val()=="" || !chknum.test($("#guest_tel2").val())){
+		$("#tel_span").show();
+		$("#tel_span").text("* 숫자만 입력하세요.");
+		$("#guest_tel2").focus();
+		return false;
+	} else {
+		$("#tel_span").remove();
+	}
+	if($("#guest_tel3").val()=="" || !chknum.test($("#guest_tel3").val())){
+		$("#tel_span").show();
+		$("#tel_span").text("* 숫자만 입력하세요.");
+		$("#guest_tel3").focus();
+		return false;
+	} else {
+		$("#tel_span").remove();
+	}
+	if($("#guest_email").val()=="" || !chkat.test($("#guest_email").val())){
+		$("#email_span").show();
+		$("#email_span").text("* 메일 주소를 정확하게 입력하세요.");
+		$("#guest_email").focus();
+		return false;
+	} else {
+		$("#email_span").remove();
+	}
+	
+	return true;
+}
+
+function maxLengthCheck(object) {
+	if(object.value.length > object.maxLength) {
+		object.value = object.value.slice(0, object.maxLength);
+	}
+}
+</script>
 <title>정보입력</title>
 </head>
 <body>
@@ -83,13 +110,13 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 			<!-- 상단 제목 아래 객실예약 진행 순서 -->
 			<ul class="cha_index clear">
 				<li><a href="#">객실검색 <span>></span></a></li>
-				<li><a href="add_option">객실예약</a></li>
+				<li><a href="/book/room/add_option">객실예약</a></li>
 				<li class="current-page"><a href="#"><span>></span>정보입력</a></li>
-				<li><a href="confirm_room"><span>></span> 예약완료</a></li>
+				<li><a href="/book/room/confirm_room"><span>></span> 예약완료</a></li>
 			</ul>
 
 			<!-- 폼태그 / summit 입력버튼 311번 -->
-			<form action="/room/res/submit" method="post">
+			<form action="/room/res/submit" method="post" onsubmit="return goCheck();">
 				<div class="section-wrap clear">
 					<!-- 왼쪽 정보 입력 박스 구역 -->
 					<div class="left-section">
@@ -117,8 +144,9 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 								</select> 
 								<input type="hidden" name="member_pk" id="member_pk" value="<%=sessionMember.getNo()%>"/>
 								<input type="hidden" name="guest_tel1" id="guest_tel1" value="<%=sessionMember.getF_tel()%>"/>
-								<input type="text" name="guest_tel2" id="guest_tel2" value="<%=sessionMember.getM_tel()%>">
-								<input type="text" name="guest_tel3" id="guest_tel3" value="<%=sessionMember.getL_tel()%>">
+								<input type="text" name="guest_tel2" id="guest_tel2" maxlength="4" oninput="maxLengthCheck(this)" value="<%=sessionMember.getM_tel()%>">
+								<input type="text" name="guest_tel3" id="guest_tel3" maxlength="4" oninput="maxLengthCheck(this)" value="<%=sessionMember.getL_tel()%>">
+								<span id="tel_span" style="color:#ff0000; font-size:10px; padding:0; margin:0;"></span>
 							</div>
 
 							<div class="email">
@@ -130,18 +158,6 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 										<input type="text" name="guest_email" id="guest_email" value="<%=sessionMember.getEmail()%>" maxlength="40"><br/>
 										<span id="email_span" style="color:#ff0000; font-size:10px; padding:0; margin:0;"></span>
 									</li>
-									<!-- <li class="at">@</li>
-									<li>
-										<input type="text" id="emailAdress" value="" title="이메일 주소 입력" maxlength="40">
-									</li>
-									<li class="adress">
-										<select id="email_select">
-											<option>직접입력</option>
-											<option value="naver.com">naver.com</option>
-											<option value="hanmail.net">hanmail.net</option>
-											<option value="google.com">google.com</option>
-										</select>
-									</li> -->
 								</ul>
 							</div>
 						</div>
@@ -163,8 +179,9 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 									<option value="017">017</option>
 								</select> 
 								<input type="hidden" name="guest_tel1" id="guest_tel1" value=""/>
-								<input type="text" name="guest_tel2" id="guest_tel2" placeholder="숫자만 입력가능">
-								<input type="text" name="guest_tel3" id="guest_tel3" placeholder="숫자만 입력가능">
+								<input type="text" name="guest_tel2" id="guest_tel2" maxlength="4" oninput="maxLengthCheck(this)" placeholder="숫자만 입력가능">
+								<input type="text" name="guest_tel3" id="guest_tel3" maxlength="4" oninput="maxLengthCheck(this)" placeholder="숫자만 입력가능">
+								<span id="tel_span" style="color:#ff0000; font-size:10px; padding:0; margin:0;"></span>
 							</div>
 
 							<div class="email">
@@ -263,7 +280,7 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 								<p>(투숙기간. 객실 수. 옵션 포함, 세금 및 수수료 각 10%포함)</p>
 
 								<div class="next-but">
-									<input id="countsubmit" type="submit" value="예약 완료" href="confirm_room">
+									<input id="countsubmit" type="submit" value="예약 완료" href="/book/room/confirm_room">
 								</div>
 
 								<h4>

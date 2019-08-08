@@ -121,7 +121,14 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
             </div>
 
             <div class="brief">
-                <h5><%=read.getInstruction() %></h5>
+            	<%
+            	String r_instruction = "";
+            	String[] arr = read.getInstruction().split("<br/>");
+            	for(int i=0; i<arr.length; i++) {
+            		r_instruction += arr[i];
+            	}
+            	%>
+                <h5><%=r_instruction %></h5>
 
                 <div class="book"><a href="#">객실 예약하기</a></div>
 
@@ -173,7 +180,6 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
 						</p>
 					</div>
 				</div>
-
 			</div>
             
             <div class="info-box">
