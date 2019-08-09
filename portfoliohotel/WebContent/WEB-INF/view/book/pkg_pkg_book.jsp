@@ -2,9 +2,22 @@
 <%@ page import="pkg.*"%>
 <%@ page import="pkg.res.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="board.member.*" %>
 <%
 PkgVO pkg_param = (PkgVO) request.getAttribute("pkg_param");
 PkgVO prdata = (PkgVO) request.getAttribute("prdata");
+%>
+<%
+MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
+
+// 변수를 선언해놓고 memberInfo가 null이 아닐경우에는 변수에 값을 넣어준다.
+/* String email = "";
+
+if (memberInfo != null) {
+	
+} else {
+	
+} */
 %>
 <%
 Pkg_resVO res_data = (Pkg_resVO) request.getAttribute("res_data");
@@ -30,13 +43,30 @@ Pkg_resVO res_data = (Pkg_resVO) request.getAttribute("res_data");
 </head>
 <script>
 function goSave() {
-	if ($("#guest_kname").val() == "") {
+	if ($("#guest_name1").val() == "") {
 		alert('이름을 입력하세요.')
-		$("#guest_kname").focus();
+		$("#guest_kname1").focus();
 		return false;
-	} 
-	$("#frm").submit();
 	}
+	return true;
+}
+	
+function cal_price() {
+	var pkg_price = $("#pkg_price").val();
+	var pkg_count = $("#pkg_count").val();
+	var price = Number(pkg_price) * Number(pkg_count);
+	$("#total_price").val(price);
+}
+//전화번호칸에 입력받은 값이 숫자가 아닐경우
+<%-- <%
+if (guest_tel1 != ) {
+	alert('숫자만 입력해주세요');
+} else if(guest_tel2 != ) {
+	alert('숫자만 입력해주세요');
+} else if(guest_tel3 != ) {
+	alert('숫자만 입력해주세요');
+}
+%> --%>
 </script>
 <body>
     <jsp:include page="/header_menu" flush="true"/>
@@ -52,7 +82,7 @@ function goSave() {
         <div class="option_channel clear">
             
             <!-- 폼태그 / summit 입력버튼 311번 -->
-            <form name="frm" id="frm" action="/book/confirm_pkg/process" method="POST" onsubmit="goSave()">
+            <form name="frm" id="frm" action="/book/confirm_pkg/process" method="POST" onsubmit="return goSave()">
                 <div class="section-wrap clear">
 
                     <!-- 왼쪽 정보 입력 박스 구역 -->
@@ -65,8 +95,8 @@ function goSave() {
 
                             <div class="name_ko">
                                     <label for="name_ko">성명 (한글)＊</label>
-                                    <input type="text" id="guest_kname" name="guest_kname" placeholder="성">
-                                    <input type="text" id="guest_kname" name="guest_kname" placeholder="이름">
+                                    <input type="text" id="guest_name1" name="guest_name1" placeholder="성" value="<% if(memberInfo!=null) out.print(memberInfo.getF_name());%>" style="color:#000000">
+                                    <input type="text" id="guest_name2" name="guest_name2" placeholder="이름" value="<% if(memberInfo!=null) out.print(memberInfo.getL_name());%>" style="color:#000000">
                             </div>
 
                             <!-- <div class="name_en clear">
@@ -87,13 +117,16 @@ function goSave() {
 
                             <div class="phoneNumber">
                                     <label for="phoneNumber">연락처＊</label>
-                                    <select>
+                                    <%-- <select id="guest_tel1" name="guest_tel1" value="<% if(memberInfo!=null) out.print(memberInfo.getF_tel());%>">
                                         <option>선택</option>
-                                        <option>010</option>
-                                        <option>011</option>
-                                        <option>017</option>
-                                    </select>
-                                    <input type="text" id="guest_tel" name="guest_tel" placeholder="숫자만 입력가능">
+                                        <option value="010">010</option>
+                                        <option value="011">011</option>
+                                        <option value="017">017</option>
+                                    </select> --%>
+                                    <input type="text" id="guest_tel1" name="guest_tel1" value="<% if(memberInfo!=null) out.print(memberInfo.getF_tel());%>" placeholder="숫자만 입력가능" style="color:#000000">
+                                    <!-- <input type="text" id="guest_tel1" name="guest_tel1" placeholder="숫자만 입력가능"> -->
+                                    <input type="text" id="guest_tel2" name="guest_tel2" value="<% if(memberInfo!=null) out.print(memberInfo.getM_tel());%>" placeholder="숫자만 입력가능" style="color:#000000">
+                                    <input type="text" id="guest_tel3" name="guest_tel3" value="<% if(memberInfo!=null) out.print(memberInfo.getL_tel());%>" placeholder="숫자만 입력가능" style="color:#000000">
                             </div>
 
                             <div class="email">
@@ -103,10 +136,10 @@ function goSave() {
                                         </li>
                                     
                                         <li>
-                                            <input type="text" id="email" name="email" value title="이메일 아이디 입력" maxlength="40">
+                                            <input type="text" id="email" name="email" value="<% if(memberInfo!=null) out.print(memberInfo.getEmail()); %>" title="이메일 아이디 입력" maxlength="40" style="color:#000000">
                                         </li>
 
-                                        <li class="at">@</li>
+                                        <!-- <li class="at">@</li>
 
                                         <li>
                                             <input type="text" id="email" name="email" value title="이메일 주소 입력" maxlength="40">
@@ -118,7 +151,7 @@ function goSave() {
                                                         <option>hanmail.net</option>
                                                         <option>google.com</option>
                                                 </select>
-                                        </li>
+                                        </li> -->
                                     </ul>
                             </div>
                         </div>
@@ -146,7 +179,7 @@ function goSave() {
 
                             <div class="cardType">
                                 <label for="name_ko">예약 수량<span>＊</span></label>
-                                <select name="pkg_count">
+                                <select id="pkg_count" name="pkg_count" onchange="cal_price()">
                                     <option>구매하시려는 패키지의 수량을 선택해주세요</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -159,6 +192,11 @@ function goSave() {
                                     <option value="9">9</option>
                                 </select>
                             </div>
+                            
+                            <div class="cardType">
+                                    <label for="name_ko">총 가격 &nbsp &nbsp<span>＊</span></label>
+                                    <input type="text" id="total_price" name="total_price" value="" style="color:#000000;">
+                            </div>                            
                             
                             <!-- <div class="cardType">
                                     <label for="name_ko">총 가격 &nbsp &nbsp<span>＊</span></label>

@@ -91,7 +91,9 @@ function goDelete() {
 									</tr>
 									<tr>
 										<th>객실 위치</th>
-										<td colspan="5"><%=read.getLocation() %></td>
+										<td colspan="2"><%=read.getLocation() %></td>
+										<th>객실 크기</th>
+										<td colspan="2"><%=read.getSize() %></td>
 									</tr>
 									<tr>
 										<th>객실 전망</th>

@@ -101,8 +101,8 @@
 										<th scope="row"><label for="">운영기간 종료일</label></th>
 										<td>
 											<input type="text" id="enddate" name="enddate" class="inputTitle" value=""/>&nbsp;
-											<span id="CalstartdateIcon">
-												<img src="/manage/img/calendar_icon.png" id="CalstartdateIconImg" style="cusor:pointer;"/>
+											<span id="CalenddateIcon">
+												<img src="/manage/img/calendar_icon.png" id="CalenddateIconImg" style="cusor:pointer;"/>
 											</span>
 										</td>
 									<tr>

@@ -65,6 +65,8 @@ function goSearch() {
 									<col class="w3"/>
 									<col class="w20" />
 									<col class="w10" />
+									<col class="w10"/>
+									<col class="w10"/>
 									<col class="w4" />
 								</colgroup>
 								<thead>
@@ -72,7 +74,9 @@ function goSearch() {
 										<th scope="col" class="first"><input type="checkbox" name="allChk" id="allChk" onClick="check(this, document.frm.no)"/></th>
 										<th scope="col">번호</th>
 										<th scope="col">패키지 이름</th>
-										<th scope="col">가격</th> 
+										<th scope="col">가격</th>
+										<th scope="col">운영기간 시작일</th>
+										<th scope="col">운영기간 종료일</th> 
 										<th scope="col" class="last">삭제</th>
 									</tr>
 								</thead>
@@ -97,6 +101,8 @@ function goSearch() {
 										<td <%=targetUrl%>><%=totCount - ((param.getReqPageNo()-1)*param.getPageRows()) - i%></td>
 										<td <%=targetUrl%> class="name"><%=data.getEname() %></td>
 										<td <%=targetUrl%>><%=data.getPrice()%></td>
+										<td <%=targetUrl%>><%=data.getStartdate()%></td>
+										<td <%=targetUrl%>><%=data.getEnddate()%></td>
 										<td class="last"><input type="button" value="삭제" onclick="goDelete(<%=data.getNo()%>);"/></td>
 									</tr>
 								<%
@@ -118,14 +124,17 @@ function goSearch() {
 								<div class="btnRight">
 									<a class="wbtn" href="write"><strong>등록</strong> </a>
 								</div>
+								<!-- 페이징 처리 -->
+								<%=Page.indexList(param.getReqPageNo(), totPage, request)%>
+								<!-- 페이징 처리 -->
 							</div>
 							<!--//btn-->
 							<!-- 페이징 처리 -->
-							<%-- <%=Page.indexList(param.getReqPageNo(), totPage, request)%>
+							<%=Page.indexList(param.getReqPageNo(), totPage, request)%>
 							<!-- //페이징 처리 -->
 							<form name="searchForm" id="searchForm" action="index" method="post">
 								<div class="search">
-									<select name="member" onchange="$('#searchForm').submit();">
+									<%-- <select name="member" onchange="$('#searchForm').submit();">
 										<option value="0" <%=Function.getSelected(param.getMember(), 0)%>>전체</option>
 										<option value="1" <%=Function.getSelected(param.getMember(), 1)%>>공개</option>
 										<option value="2" <%=Function.getSelected(param.getMember(), 2)%>>비공개</option>
@@ -139,16 +148,17 @@ function goSearch() {
 										<option value="0" <%=Function.getSelected(param.getTop(), 0)%>>전체</option>
 										<option value="1" <%=Function.getSelected(param.getTop(), 1)%>>상단미노출</option>
 										<option value="2" <%=Function.getSelected(param.getTop(), 2)%>>상단노출</option>
-									</select>
+									</select> --%>
 									<select name="stype" title="검색을 선택해주세요">
 										<option value="all" <%=Function.getSelected(param.getStype(), "all") %>>전체</option>
-										<option value="title" <%=Function.getSelected(param.getStype(), "title") %>>제목</option>
-										<option value="contents" <%=Function.getSelected(param.getStype(), "contents") %>>상세정보</option>
+										<option value="ename" <%=Function.getSelected(param.getStype(), "ename") %>>패키지명</option>
+										<option value="startdate" <%=Function.getSelected(param.getStype(), "startdate") %>>운영기간 시작일</option>
+										<option value="enddate" <%=Function.getSelected(param.getStype(), "enddate") %>>운영기간 종료일</option>
 									</select>
 									<input type="text" name="sval" value="<%=param.getSval()%>" title="검색할 내용을 입력해주세요" />
 									<input type="image" src="/manage/img/btn_search.gif" class="sbtn" alt="검색" />
 								</div>
-							</form> --%>
+							</form>
 							<!-- //search --> 
 						</div>
 						<!-- //blist -->

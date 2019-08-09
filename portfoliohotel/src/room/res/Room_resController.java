@@ -222,15 +222,15 @@ public class Room_resController {
 	}
 	
 	
-	@RequestMapping("/book/add_option")
+	@RequestMapping("/book/room/add_option")
 	public String add_option(Model model, Room_optVO vo) throws Exception {
 		ArrayList<Room_optVO> list_o = roomService.list_opt(vo);
 		model.addAttribute("list_o", list_o);
 
-		return "book/add_option";
+		return "book/room/add_option";
 	}
 	
-	@RequestMapping("/book/personal_info")
+	@RequestMapping("/book/room/personal_info")
 	public String personal_info(Model model, Room_optVO vo, MemberVO mvo, HttpSession session) throws Exception {
 		if (memberService.loginCheck(mvo)) {
 			MemberVO memberInfo = memberService.getLoginSessionInfo(mvo);
@@ -238,25 +238,29 @@ public class Room_resController {
 			
 			session.setAttribute("memberInfo", memberInfo);	// 세션 저장
 		}
-		return "book/personal_info";
+		return "book/room/personal_info";
 	}
 	
-	@RequestMapping("/book/confirm_room")
+	@RequestMapping("/book/room/confirm_room")
 	public String confirm_room(Model model, Room_optVO vo) throws Exception {
 
-		return "book/confirm_room";
+		return "book/room/confirm_room";
 	}
 
-	@RequestMapping("/book/check_room")
-	public String check_room(Model model, AdminVO vo) throws Exception {
-
-		return "book/check_room";
+	@RequestMapping("/book/room/check_room")
+	public String check_room(Model model, RoomVO rvo) throws Exception {
+		ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)roomService.list(rvo);
+		
+		model.addAttribute("list_r", list_r);
+		return "book/room/check_room";
 	}
 
-	@RequestMapping("/book/price_room")
-	public String price_room(Model model, AdminVO vo) throws Exception {
-
-		return "book/price_room";
+	@RequestMapping("/book/room/price_room")
+	public String price_room(Model model, RoomVO rvo) throws Exception {
+		ArrayList<RoomVO> list_rp = (ArrayList<RoomVO>)roomService.list_price(rvo);
+		
+		model.addAttribute("list_rp", list_rp);
+		return "book/room/price_room";
 	}
 
 	@RequestMapping("/room/res/submit")
