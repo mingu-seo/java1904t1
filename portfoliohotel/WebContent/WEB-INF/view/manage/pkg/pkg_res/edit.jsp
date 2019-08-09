@@ -1,10 +1,10 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@ page import="pkg.*" %>
+<%@ page import="pkg.res.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="property.*" %>
 <%
-PkgVO param = (PkgVO)request.getAttribute("vo");
-PkgVO data = (PkgVO)request.getAttribute("data");
+Pkg_resVO res_param = (Pkg_resVO)request.getAttribute("param");
+Pkg_resVO res_data = (Pkg_resVO)request.getAttribute("res_data");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
@@ -109,73 +109,70 @@ function goSave() {
 								</colgroup>
 								<tbody>
 									<tr>
-										<th scope="row"><label for="">패키지 한글이름</label></th>
-										<td>
-											<input type="text" id="kname" name="kname" value="<%=data.getKname()%>"/>
-										</td>
-										<th scope="row"><label for="">패키지 영어이름</label></th>
-										<td>
-											<input type="text" id="ename" name="ename" value="<%=data.getEname()%>"/>
+										<th scope="row"><label for="">패키지 이름</label></th>
+										<td colspan="3">
+											<input type="text" id="pkg_name" name="pkg_name" value="<%=res_data.getPkg_name()%>"/>
 										</td>
 									</tr>
 									<tr>
-										<th scope="row"><label for="">패키지 소개</label></th>
+										<th scope="row"><label for="">사용일</label></th>
 										<td>
-											<input type="text" id="intro" name="intro" value="<%=data.getIntro()%>"/>
-										</td>
-										<th scope="row"><label for="">패키지 상세 소개</label></th>
-										<td>
-											<input type="text" id="intro_detail" name="intro_detail" value="<%=data.getIntro_detail()%>"/>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row"><label for="">운영기간 시작일</label></th>
-										<td>
-										<input type="text" id="startdate" name="startdate" class="inputTitle" value=""/>&nbsp;
+										<input type="text" id="use_date" name="use_date" class="inputTitle" value="<%=res_data.getUse_date()%>"/>&nbsp;
 											<span id="CalstartdateIcon">
 										<img src="/manage/img/calendar_icon.png" id="CalstartdateIconImg" style="cursor:pointer;"/>
 											</span>
 										</td>
-										<th scope="row"><label for="">운영기간 종료일</label></th>
+										<th scope="row"><label for="">예약일</label></th>
 										<td>
-										<input type="text" id="enddate" name="enddate" class="inputTitle" value=""/>&nbsp;
+										<input type="text" id="purchase_date" name="purchase_date" class="inputTitle" value="<%=res_data.getPurchase_date()%>"/>&nbsp;
 											<span id="CalstartdateIcon">
 										<img src="/manage/img/calendar_icon.png" id="CalstartdateIconImg" style="cursor:pointer;"/>
 											</span>
 										</td>
 									</tr>
 									<tr>										
-										<th scope="row"><label for="">가격</label></th>
+										<th scope="row"><label for="">고객명</label></th>
 										<td colspan="3">
-											<input type="text" id="price" name="price" value="<%=data.getPrice() %>"/>
+											<input type="text" id="guest_kname" name="guest_kname" value="<%=res_data.getGuest_name1()%><%=res_data.getGuest_name2()%>"/>
 										</td>
 									</tr>
-										<th scope="row"><label for="">포함내역</label></th>
-										<td colspan="3">
-											<textarea id="pkg" name="pkg" style="width:100%"><%=data.getPkg()%></textarea>
+									<tr>
+										<th scope="row"><label for="">고객 연락처</label></th>
+										<td>
+											<input type="text" id="guest_tel" name="guest_tel" style="width:100%" 
+											value="<%=res_data.getGuest_tel1()%>-<%=res_data.getGuest_tel2()%>-<%=res_data.getGuest_tel3()%>"/>
 										</td>
+										<th scope="row"><label for="">고객 이메일</label></th>
+										<td>
+											<input type="text" id="email" name="email" style="width:100%" value="<%=res_data.getEmail()%>"/>
+										</td>
+									</tr>
+									<tr>
+										<th scope="row"><label for="">패키지 금액</label></th>
+										<td>
+											<input type="text" id="pkg_price" name="pkg_price" style="width:100%" value="<%=res_data.getPkg_price()%>"/>
+										</td>
+										<th scope="row"><label for="">구매 수량</label></th>
+										<td>
+											<input type="text" id="pkg_count" name="pkg_count" style="width:100%" value="<%=res_data.getPkg_count()%>"/>
+										</td>
+									</tr>																												
 									<tr>										
-										<th scope="row"><label for="">이벤트</label></th>
+										<th scope="row"><label for="">총 결제 금액</label></th>
 										<td colspan="3">
-											<input type="text" id="event" name="event" value="<%=data.getEvent() %>"/>
+											<input type="text" id="total_price" name="total_price" value="<%=res_data.getTotal_price() %>"/>
 										</td>
 									</tr>		
-									<tr>										
-										<th scope="row"><label for="">안내</label></th>
-										<td colspan="3">
-											<input type="text" id="guide" name="guide" value="<%=data.getGuide() %>"/>
-										</td>
-									</tr>															
 								</tbody>
 							</table>
 							<input type="hidden" name="cmd" value="edit">
-							<input type="hidden" name="stype" id="stype" value="<%=param.getStype()%>"/>
-							<input type="hidden" name="sval" id="sval" value="<%=param.getSval()%>"/>
-							<input type="hidden" name="no" id="no" value="<%=param.getNo()%>"/>
+							<%-- <input type="hidden" name="stype" id="stype" value="<%=res_param.getStype()%>"/>
+							<input type="hidden" name="sval" id="sval" value="<%=res_param.getSval()%>"/> --%>
+							<%-- <input type="hidden" name="no" id="no" value="<%=res_param.getNo()%>"/> --%>
 							</form>
 							<div class="btn">
 								<div class="btnLeft">
-									<a class="btns" href="<%=param.getTargetURLParam("index", param, 0)%>"><strong>목록</strong></a>
+									<%-- <a class="btns" href="<%=res_param.getTargetURLParam("index", res_param, 0)%>"><strong>목록</strong></a> --%>
 								</div>
 								<div class="btnRight">
 									<a class="btns" href="#" onclick="goSave();"><strong>저장</strong></a>

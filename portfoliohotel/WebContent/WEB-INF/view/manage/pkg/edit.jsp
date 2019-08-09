@@ -131,14 +131,14 @@ function goSave() {
 									<tr>
 										<th scope="row"><label for="">운영기간 시작일</label></th>
 										<td>
-										<input type="text" id="startdate" name="startdate" class="inputTitle" value=""/>&nbsp;
+										<input type="text" id="startdate" name="startdate" class="inputTitle" value="<%=data.getStartdate()%>"/>&nbsp;
 											<span id="CalstartdateIcon">
 										<img src="/manage/img/calendar_icon.png" id="CalstartdateIconImg" style="cursor:pointer;"/>
 											</span>
 										</td>
 										<th scope="row"><label for="">운영기간 종료일</label></th>
 										<td>
-										<input type="text" id="enddate" name="enddate" class="inputTitle" value=""/>&nbsp;
+										<input type="text" id="enddate" name="enddate" class="inputTitle" value="<%=data.getEnddate()%>"/>&nbsp;
 											<span id="CalstartdateIcon">
 										<img src="/manage/img/calendar_icon.png" id="CalstartdateIconImg" style="cursor:pointer;"/>
 											</span>

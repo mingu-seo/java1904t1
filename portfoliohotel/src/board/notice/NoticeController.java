@@ -33,7 +33,7 @@ public class NoticeController {
 	}	
 	
 	/* [사용자] 공지사항 목록 */
-	@RequestMapping("/membership/notice")
+	@RequestMapping("/support/notice/notice")
 	public String Nindex(Model model, NoticeVO param) throws Exception {
 		param.setTablename("notice");
 		int[] rowPageCount = noticeService.count(param);
@@ -44,7 +44,7 @@ public class NoticeController {
 		model.addAttribute("nlist", list);
 		model.addAttribute("nvo", param);
 		
-		return "membership/notice";
+		return "support/notice/notice";
 	}	
 	
 	/* [관리자] 공지사항 상세페이지 */
@@ -58,13 +58,13 @@ public class NoticeController {
 	}
 	
 	/* [사용자] 공지사항 상세페이지 */
-	@RequestMapping("/membership/notice_watchonly")
+	@RequestMapping("/support/notice/notice_watchonly")
 	public String Nread(Model model, NoticeVO param) throws Exception {
 		NoticeVO data = noticeService.read(param.getNo(), true);
 		model.addAttribute("notice_data", data);
 		model.addAttribute("notice_vo", param);
 		
-		return "membership/notice_watchonly";
+		return "support/notice/notice_watchonly";
 	}
 	
 	@RequestMapping("/membership/notice_form")

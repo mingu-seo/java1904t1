@@ -23,14 +23,14 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
 	}); */
 	
 	function goSave() {
-		if ($("#familyname").val() ==""){
+		if ($("#fisrtName").val() ==""){
 			alert("성을 입력해 주세요");
-			$("#familyname").focus();
+			$("#fisrtName").focus();
 			return false;
 		}
-		if ($("#firstname").val() ==""){
+		if ($("#lastName").val() ==""){
 			alert("이름을 입력해 주세요");
-			$("#firstname").focus();
+			$("#lastName").focus();
 			return false;
 		}
 		if ($("#tel1").val() ==""){
@@ -51,11 +51,6 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
 		if ($("#email").val() ==""){
 			alert("이메일을 입력해 주세요");
 			$("#email").focus();
-			return false;
-		}
-		if ($("#email2").val() ==""){
-			alert("이메일 주소를 확인해 주세요");
-			$("#email2").focus();
 			return false;
 		}
 		if ($("#title").val() =="") {
@@ -97,6 +92,7 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
 	}
 	
 	
+/* 	
 	$(function() {
 		
 		if($("#hideEmailOpt").val() == "@") {
@@ -118,8 +114,8 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
 			            $("#email2").attr("disabled",true); //비활성화
 			         } 
 			    }); 
-		});
-	});
+		}); */
+	
 	
 	
 	
@@ -139,132 +135,7 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
     <title>Tree_qna</title>
 </head>
 <body>
-    <div id="header">
-        <div class="header-center">
-            <div class="pc-header">
-                <h1 class="logo"><a href="/index.html"><img src="/img/header-logo.png"></a></h1>
-                <ul class="pc-gnb">
-                    <li>
-                        <a href="#">BOOK</a>
-                            <div class="pc-sub">
-                                    <div class="pc-sub-center">
-                                        <div class="pc-sub-box">
-                                            <h2><a href="/special_promotion.html">Promotion</a></h2>
-                                            <ul class="offer">
-                                                <li><a href="/room_offer.html">Room Package</a></li>
-                                                <li><a href="/room_offer.html">Dining Package</a></li>
-                                                <li><a href="/room_offer.html">Events & Gift</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="pc-sub-box">
-                                            <h2>Rooms</h2>
-                                            <ul class="Rooms">
-                                                <li><a href="room-detail-subpage.html">Namsan Pool Deluxe Room</a></li>
-                                                <li><a href="room-detail-subpage.html">Namsan Pool Premier Suite</a></li>
-                                                <li><a href="room-detail-subpage.html">Namsan Presidential Suite</a></li>
-                                                <li><a href="room-detail-subpage.html">Spa Sanctuary Suite</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="pc-sub-box">
-                                            <h2>Dining</h2>
-                                            <ul class="Dining">
-                                                <li><a href="#">The Festa</a></li>
-                                                <li><a href="#">Granum Dining Lounge</a></li>
-                                                <li><a href="#">Moon Bar</a></li>
-                                                <li><a href="#">The Oasis Outdoor Kitchen</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="pc-sub-box">
-                                            <h2>Meeting & Wedding</h2>
-                                            <ul class="Meeting & Wedding">
-                                                <li><a href="#">Meeting</li>
-                                                <li><a href="#">Wedding</a></li>
-                                                <li><a href="#">Family Party</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                            </div>
-                    </li>
-                    <li class="facilities">
-                        <a href="#">Facilities</a>
-                            <div class="pc-sub">
-                                    <div class="pc-sub-center center clear">
-                                            <div class="pc-sub-box facil-left">
-                                                <h2 class="no-line">Facilities</h2>
-                                                <ul>
-                                                    <li><a href="/facilities.html#f1">The Oasis</a></li>
-                                                    <li><a href="/facilities.html#f2">Indoor Swimming Pool</a></li>
-                                                    
-                                                </ul>
-                                            </div>
-                                            <div class="pc-sub-box mtop">
-                
-                                                <ul class="Rooms">
-                                                        <li><a href="/facilities.html#f3">Fitness Centre</a></li>
-                                                        <li><a href="/facilities.html#f4">Sauna</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pc-sub-box mtop facil-right">
-                                                
-                                                <ul class="Dining">
-                                                    <li><a href="#">Troon Golf Academy</a></li>
-                                                    <li><a href="#">Foresta Beauty Salon</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                            </div>
-                        
-                    </li>
-                    <li>
-                        <a href="#">Support</a>
-                            <div class="pc-sub">
-                                    <div class="pc-sub-center center clear">
-                                            <div class="pc-sub-box">
-                                                <h2 class="no-line">Support</h2>
-                                                <a href="/notice.html" class="notice-a">
-                                                <ul>
-                                                    <li>Notice</li>
-                                                    <li class="support-text">
-                                                        반얀트리 공지사항과<br/>
-                                                        놓칠 수 없는 이벤트 정보를 알려드립니다.
-                                                    </li>
-                                                    <li class="support-icon"><img src="/img/notice-icon.png"></li>
-                                                </ul>
-                                                </a>
-                                            </div>
-                                            <div class="pc-sub-box mtop">
-                                                <a href="/faq.html">
-                                                <ul>
-                                                    <li>FAQ</li>
-                                                    <li class="support-text">
-                                                        반얀트리에 대한<br/>
-                                                        자주 묻는 질문입니다.
-                                                    </li>
-                                                    <li class="support-icon"><img src="/img/faq-icon.png"></li>
-                                                </ul>
-                                                </a>
-                                            </div>
-                                            <div class="pc-sub-box mtop">
-                                                <a href="qna">
-                                                <ul>
-                                                    <li>Q&A</li>
-                                                    <li class="support-text">
-                                                        반얀트리에 관한질문 사항이나 궁금한 점을<br/> 
-                                                        남겨 주시면 신속하게 답변을 드리겠습니다.
-                                                    </li>
-                                                    <li class="support-icon"><img src="/img/qna-icon.png"></li>
-                                                </ul>
-                                                </a>
-                                        </div>
-                            </div>
-                    </li>
-                    <!-- <li><a href="#">SIGN IN</a></li> -->
-                </ul>
-                <a href="sign_in.html">SIGN IN</a>
-            </div>
-        </div>
-    </div>
-    
+<jsp:include page="/header_menu" flush="true"/>
     
     <div id="container">
         
@@ -286,28 +157,32 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
             </div>
             <div class="qna_q-table">
                 <div class="qna_q-box">
-                	<% 
-                	String name1 = "";
-                	String name2 = "";
+     
+                	<%
+                	
                 	String email1 = "";
-                	String email2 = "";
                 	String tel1 = "";
                 	String tel2 = "";
                 	String tel3 = "";
+                	String FName = "";
+                	String LName = "";
                 	
-                	if(member_vo != null) { 
-                		String[] emailArr= member_vo.getEmail().split("@");
-                		email1 = emailArr[0];
-                		email2 = emailArr[1];
-						String[] nameArr= member_vo.getName().split(",");
-						name1 = nameArr[0];
-						name2 = nameArr[1];
-						String[] telArr= member_vo.getTel().split(",");
-						tel1 = telArr[0];
-						tel2 = telArr[1];
-						tel3 = telArr[2];
+                	if(member_vo != null) {
+                		String Email= member_vo.getEmail();
+                		email1 = Email;
+                		String TelF= member_vo.getF_tel();
+                		String TelM= member_vo.getM_tel();
+                		String TelL= member_vo.getL_tel();
+                		tel1 = TelF;
+                		tel2 = TelM;
+                		tel3 = TelL;
+                		String NameL = member_vo.getL_name();
+                		String NameF = member_vo.getF_name();
+                		FName = NameL;
+                		LName = NameF;
                 	}
                 	%>
+           
 						<form method="POST"name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/processU" enctype="multipart/form-data" onsubmit="return goSave();" >
                    
                     	<ul class="base_info clear">
@@ -329,34 +204,21 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
                         <ul class="base_info clear">
                             <li>
                                 <label for="qna-title">이름</label>
-                               		<input type="text" style="width:100px;height:45px;" id="familyname" name="name" value="<%=name1%>" title="성을 입력해주세요" placeholder="성"></input>	
-									<input type="text" style="width:150px;height:45px;" id="firstname" name="name" value="<%=name2 %>" title="이름을 입력해주세요" placeholder="이름"></input>
+                               		<input type="text" style="width:100px;height:45px;" id="lastName" name="lastName"  title="성을 입력해주세요" placeholder="성" value="<%=LName %>"/>
+									<input type="text" style="width:150px;height:45px;" id="firstName" name="firstName"  title="이름을 입력해주세요" placeholder="이름" value="<%=FName %>"/>
                                  
                             </li>
                             <li>
                                 <label for="qna-title">연락처</label>
-                                <input type="text" style="width:100px;height:45px;" id="tel1" name="tel"  title="연락처를 입력해주세요" value="<%=tel1%>" maxlength=3/>	
-								<input type="text" style="width:100px;height:45px;" id="tel2" name="tel"  title="연락처를 입력해주세요" value="<%=tel2%>" maxlength=4/>	
-								<input type="text" style="width:100px;height:45px;" id="tel3" name="tel"  title="연락처를 입력해주세요" value="<%=tel3%>" maxlength=4/>	
-                            </li>
+                                <input type="text" style="width:100px;height:45px;" id="tel1" name="tel1"  title="연락처를 입력해주세요"  maxlength=3 value="<%=tel1 %>"/>
+								<input type="text" style="width:100px;height:45px;" id="tel2" name="tel2"  title="연락처를 입력해주세요"  maxlength=4 value="<%=tel2 %>"/>	
+								<input type="text" style="width:100px;height:45px;" id="tel3" name="tel3"  title="연락처를 입력해주세요"  maxlength=4 value="<%=tel3 %>"/>
+                            </li> 
                         </ul>
                         <label for="">이메일</label>
-                       		<input type="text" name="email" id="email" style="width:200px" value="<%=email1%>"> @ 
-							<input type="text" name="email" id="email2" style="width:100px;" disabled value="<%=email2%>">
-							<select style="width:100px;height:30px;" name="email" id="selectEmail"> 
-								
-								<option value="@<%=email2%>" id="hideEmailOpt"><%=email2%></option>
-								<option value="1" >직접입력</option> 
-								<option value="@naver.com" <%="@naver.com".equals(email2) ? "selected":""%>>naver.com</option> 
-								<option value="@daum.net" <%="@daum.net".equals(email2) ? "selected":""%>>hanmail.net</option>
-								<option value="@hanmail.net" <%="@hanmail.net".equals(email2) ? "selected":""%>>hanmail.net</option>
-								<option value="@gmail.com" <%="@gmail.com".equals(email2) ? "selected":""%>>gmail.com</option>  
-								<option value="@hotmail.com" <%="@hotmail.com".equals(email2) ? "selected":""%>>hotmail.com</option> 
-								<option value="@nate.com" <%="@nate.com".equals(email2) ? "selected":""%>>nate.com</option> 
-								<option value="@dreamwiz.com" <%="@dreamwiz.com".equals(email2) ? "selected":""%>>dreamwiz.com</option> 
-											
-							</select> 
-							
+                       		<input type="text" name="email" id="email" style="width:200px" value="<%=email1 %>"/>  
+						
+					
 						<label for="">게시글 비밀번호</label>
 							<input type="password" id="password" name="password" style="width:150px;height:45px;border: 2px solid #eee;" maxlength="12" title="비밀번호를 입력해주세요" />
 							

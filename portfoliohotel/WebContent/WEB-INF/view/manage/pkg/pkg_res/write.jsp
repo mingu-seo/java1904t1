@@ -13,9 +13,8 @@
 <script>
 	var oEditors; // 에디터 객체 담을 곳
 	jQuery(window).load(function(){
-		oEditors = setEditor("pkg"); // 에디터 셋팅
-		initCal({id:"startdate",type:"day",today:"y"});
-		initCal({id:"enddate",type:"day",today:"y"});
+		/* oEditors = setEditor("pkg"); // 에디터 셋팅 */
+		initCal({id:"use_date",type:"day",today:"y"});
 	});
 	
 	function goSave() {
@@ -24,19 +23,24 @@
 			$("#name").focus();
 			return false;
 		}
-		var sHTML = oEditors.getById["pkg"].getIR();
+		/* var sHTML = oEditors.getById["pkg"].getIR();
 		if (sHTML == "" || sHTML == "<p><br></p>") {
 			alert('포함내역을 입력하세요.');
 			$("#pkg").focus();
 			return false;
 		} else {
 			oEditors.getById["pkg"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
-		}
+		}  */
 		
 		$("#frm").submit();
 		
 	}
-	
+	function cal_price() {
+		var pkg_price = $("#pkg_price").val();
+		var pkg_count = $("#pkg_count").val();
+		var price = Number(pkg_price) * Number(pkg_count);
+		$("#total_price").val(price);
+	}
 	
 </script>
 </head>
@@ -77,35 +81,34 @@
 									<tr>
 										<th scope="row"><label for="">패키지 이름</label></th>
 										<td colspan="3">
-											<input type="text" id="name" name="name" class="w30" title="제목을 입력해주세요" />	
+											<input type="text" id="pkg_name" name="pkg_name" class="w30" title="제목을 입력해주세요" />	
 										</td>
 									</tr>		
 									<tr>
 										<th scope="row"><label for="">사용일</label></th>
 										<td colspan="3">
 											<input type="text" id="use_date" name="use_date" class="inputTitle" value=""/>&nbsp;
-											<span id="CalstartdateIcon">
-												<img src="/manage/img/calendar_icon.png" id="CalstartdateIconImg" style="cusor:pointer;"/>
+											<span id="Caluse_dateIcon">
+												<img src="/manage/img/calendar_icon.png" id="Caluse_dateIconImg" style="cusor:pointer;"/>
 											</span>
 										</td>
 									<tr>
-										<th scope="row"><label for="">고객 한글명</label></th>
-										<td>
-											<input type="text" id="guest_kname" name="guest_kname" class="w50"/>
-										</td>
-										<th scope="row"><label for="">고객 영문명</label></th>
-										<td>
-											<input type="text" id="guest_ename" name="guest_ename" class="w50"/>
+										<th scope="row"><label for="">고객명</label></th>
+										<td colspan="3">
+											<input type="text" id="guest_name1" name="guest_name1" placeholder="성" class="w10"/>
+											<input type="text" id="guest_name2" name="guest_name2" placeholder="이름" class="w10"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row"><label for="">고객 연락처</lavel></th>
 										<td>
-											<input type="text" id="guest_tel" name="guest_tel" class="w50"/>
+											<input type="text" id="guest_tel1" name="guest_tel1" class="w20"/>
+											<input type="text" id="guest_tel2" name="guest_tel2" class="w20"/>
+											<input type="text" id="guest_tel3" name="guest_tel3" class="w20"/>
 										</td>
 										<th scope="row"><label for="">고객 이메일</label></th>
 										<td>
-											<input type="text" id="guest_email" name="guest_email" class="w50"/>
+											<input type="text" id="email" name="email" class="w50"/>
 										</td>
 									</tr>
 									<tr>
@@ -115,7 +118,19 @@
 										</td>
 										<th scope="row"><label for="">수량</label></th>
 										<td>
-											<input type="text" id="pkg_count" name="pkg_count" class="w50"/>
+											<select id="pkg_count" name="pkg_count" onchage="cal_price()" class="w50" onchange="cal_price()">
+												<option>패키지의 수량을 선택해주세요.</option>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option vlaue="4">4</option>
+												<option vlaue="5">5</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option vlaue="9">9</option>
+											</select>
+											<!-- <input type="text" id="pkg_count" name="pkg_count" class="w50"/> -->
 										</td>
 									</tr>
 									<tr>

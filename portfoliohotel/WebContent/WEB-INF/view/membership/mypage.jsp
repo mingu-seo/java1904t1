@@ -130,7 +130,7 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
                                                 </a>
                                             </div>
                                             <div class="pc-sub-box mtop">
-                                                <a href="../qna.html">
+                                                <a href="/support/qna/qna">
                                                 <ul>
                                                     <li>Q&A</li>
                                                     <li class="support-text">

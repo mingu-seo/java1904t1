@@ -17,9 +17,9 @@
 .after {padding:0 18px;}
 .after:after {content:""; display:inline-block; width:1px; height:18px; background-color:#898989; position:relative; left:18px; top:3px;}
 
-.checkInOut input[type="text"] {width:155px; padding:0 35px;}
+.checkInOut input[type="text"] {width:155px; padding:0 10px;}
 
-.days {width:70px; padding-left:18px;}
+.days {width:70px; padding-left:10px;}
 .days:before {content:""; display:inline-block; width:1px; height:18px; background-color:#898989; position:relative; left:-18px; top:3px;}
 
 .room{border-left:1px solid #898989;}
@@ -27,7 +27,7 @@
 .select-option {border-right:1px solid #898989; padding:0 12px}
 .select-option select {border:none;}
 
-.re-try {width:260px; height:56px; background-color:#1a7149; position: absolute; top:0; right:0; }
+.re-try {width:250px; height:56px; background-color:#1a7149; position: absolute; top:0; right:0; }
 .re-check-btn {width:100%; height:100%; border:none; background-color:transparent; color:#fff; font-weight:600;}
 
 

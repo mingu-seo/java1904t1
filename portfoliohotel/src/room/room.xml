@@ -7,11 +7,15 @@
 		SELECT * FROM room
 	</select>
 	
+	<select id="list_price" parameterClass="roomVO" resultClass="roomVO">
+		SELECT * FROM room ORDER BY price DESC;
+	</select>
+	
 	<insert id="insert" parameterClass="roomVO">
 		INSERT INTO room (name, price, count, adult, kid, instruction, checkin_time,  
-							checkout_time, location, landscape, type)
+							checkout_time, location, landscape, type, size)
 		VALUES (#name#, #price#, #count#, #adult#, #kid#, #instruction#, #checkin_time#,
-				#checkout_time#, #location#, #landscape#, #type#)
+				#checkout_time#, #location#, #landscape#, #type#, #size#)
 				
 		<selectKey keyProperty="no" resultClass="Integer">
 			SELECT LAST_INSERT_ID()
@@ -26,7 +30,7 @@
 		UPDATE room SET
 			name=#name#, price=#price#, count=#count#, adult=#adult#, kid=#kid#, 
 			instruction=#instruction#, checkin_time=#checkin_time#, checkout_time=#checkout_time#, 
-			location=#location#, landscape=#landscape#, type=#type#
+			location=#location#, landscape=#landscape#, type=#type#, size=#size#
 		WHERE no=#no#
 	</update>
 	
