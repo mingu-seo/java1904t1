@@ -2,7 +2,6 @@ package board.member;
 
 import java.util.ArrayList;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import property.SiteProperty;
+import pkg.res.Pkg_resService;
+import pkg.res.Pkg_resVO;
 import util.Function;
 
 @Controller
@@ -19,6 +19,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private Pkg_resService pkg_resService;
 	
 	
 	//========================================관리자===================================================
@@ -246,10 +249,18 @@ public class MemberController {
 
 	
 	@RequestMapping("/membership/mypage")
-	public String mypage(Model model, MemberVO param) throws Exception {
+	public String mypage(Model model, MemberVO param, Pkg_resVO prparam, HttpSession session) throws Exception {
 		MemberVO data = memberService.read(param.getNo());
+		MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
+		Pkg_resVO prdata = pkg_resService.read(prparam.getMember_pk());
+		
 		model.addAttribute("data", data);
 		model.addAttribute("vo", param);
+		
+		model.addAttribute("memberInfo", memberInfo);
+		
+		model.addAttribute("prparam",prparam);
+		model.addAttribute("prdata",prdata);
 
 		return "membership/mypage";
 	}
