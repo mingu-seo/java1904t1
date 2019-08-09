@@ -1,13 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="board.member.*" %>
-<%@ page import="util.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="util.*"%>
 <%
 MemberVO param = (MemberVO)request.getAttribute("vo");
-MemberVO data = (MemberVO)request.getAttribute("data");
 MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
+MemberVO data = (MemberVO)request.getAttribute("data");
+int r = (Integer)request.getAttribute("r");
 %>
 
+<script>
+
+function goSave() {
+
+if ($("#password").val() == "") {
+		alert("비밀번호를 입력해주세요.");
+		$("#password").focus();
+		return false;
+	}
+if ($("#passwordCheck").val() == "") {
+	alert("비밀번호확인을  입력해주세요.");
+	$("#passwordCheck").focus();
+	return false;
+}
+	
+if($("#password").val()!=$("#passwordCheck").val()){
+	alert("비밀번호가 다릅니다.");
+	$("#password").focus();
+	return false;
+}
+$("#frm").submit();
+}
+</script>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,11 +41,11 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
     <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/default.css">
     <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/mypage.css">
+    <link rel="stylesheet" href="/css/edit_account.css">
     <link rel="stylesheet" href="/css/footer.css">
     <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="/js/gnb.js"></script>
-    <title>마이페이지</title>
+    <title>비밀번호변경</title>
 </head>
 <body>
     <div id="header">
@@ -130,7 +154,7 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
                                                 </a>
                                             </div>
                                             <div class="pc-sub-box mtop">
-                                                <a href="/support/qna/qna">
+                                                <a href="../qna.html">
                                                 <ul>
                                                     <li>Q&A</li>
                                                     <li class="support-text">
@@ -145,7 +169,7 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
                     </li>
                     <!-- <li><a href="#">SIGN IN</a></li> -->
                 </ul>
-              <%if(sessionMember == null){ %>
+                <%if(sessionMember == null){ %>
                 <a href="/membership/sign_in">Sign in</a>
                 <%}else{ %>
                 <a href="/membership/mypage">My page</a>
@@ -158,175 +182,46 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
     <div id="container">
         
         <div class="banner">
-            <div class="mypage-section">
-                    <h2>마이페이지</h2>
-                    <h3>MY PAGE</h3>
+            <div class="notice-section">
+                    <h2>비밀번호수정</h2>
+                    <h3>Edit Password</h3>
                 </div>
         </div>
-        <div class="reservation clear">
-            <h3>예약현황<span class="title-sub">RESERVATION STATUS</span></h3>
-            <div class="reservation-status-left">
-                <table>
-                    <tr class="table-head">
-                        <th>예약 상품</th>
-                        <th>인원</th>
-                        <th>추가사항</th>
-                    </tr>
-                    <tr class="reserved">
-                        <td>NAMSAN POOL DELUX ROOM</td>
-                        <td class="participants">성인 x 2
-                            <br/>
-                            어린이 x 1
-                        </td>
-                        <td class="option">
-                            SPA
-                            <span class="option-select">- 추가사항 없음</span>
-                            침대 추가
-                            <span class="option-select">x 1</span>
-                            웰컴 와인 & 치즈
-                            <span class="option-select">x 1</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>TOTAL</td>
-                        <td class="price" colspan="2">1,000,000 WON</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="reservation-status-right">
-                <div class="my-info">
-                  <h4>
-  
-	<%=sessionMember.getF_name()%> <%=sessionMember.getL_name()%> 님<br/>
-	
-                      환영합니다 !
-                    </h4>
-                    <table>
-                        <tr>
-                            <td>회원등급</td>
+        <div class="notice">
+       
+            <div class="section-edit">
+               
+                <div class="edit-table">
+                    <div class="edit-table-right">
+                        <!-- <form method="POST"> -->
+                          <form name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/process.do" method="post">
+                          
+                            <div class="password">
                             
-                            <td><%=CodeUtil.getMgrade(sessionMember.getGrade())%></td>
-                        </tr> 
-                   
-                        <tr>
-                            <td>포인트</td>
-                            <td><%=sessionMember.getPoint()%> P</td>
-                            <%-- <th scope="row"><label for="">포인트</label></th>
-							<td colspan="3"><%=data.getPoint()%></td> --%>
-                        </tr>
-                    </table>
-                </div>
-                <ul class="my-info-list">
-                    <li><a href="edit_account">개인정보 수정</a></li>
-                    <li><a href="delete_account">회원탈퇴</a></li>
-                    
-                    <li><a href="/membership/logout">로그아웃</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="point">
-            <h3>포인트 내역<span class="title-sub">POINT</span></h3>
-            <div class="point-box">
-                <table>
-                    <tr>
-                        <td><span class="plus">+</span> 9,000P</td>
-                        <td>2019-06-29</td>
-                    </tr>
-                    <tr>
-                        <td><span class="plus">+</span> 10,000P</td>
-                        <td>2019-07-01</td>
-                    </tr>
-                    
-                </table>
-            </div>
-        </div>
-        <div class="my-question">
-            <h3>나의 질문<span class="title-sub">MY QUESTION</span></h3>
-            <div class="my-question-box">
-                <table>
-                    <tr>
-                            <td><a href="#"><span class="plus">┌</span>회원탈퇴에 대한 답변입니다.</a></td>
-                            <td>2019-06-29</td>
-                    </tr>
-                    <tr>
-                        <td><a href="../qna.html">회원탈퇴를 하고싶어요.</a></td>
-                        <td>2019-07-01</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="membership-benefit">
-                <h3>멤버십 등급별 특전<span class="title-sub">MEMBERSHIP CLASS BENEFIT</span></h3>
-            <div class="membership-benefit-box clear">
-                <div class="membership-benefit-box-center clear">
-                
-                <%if(sessionMember.getGrade() == 1) {%>
-                    <div class="classic on">   
-                    <div class="benefit-img">                 
-                            <p>CLASSIC</p>
-                        </div>
-                        <div class="benefit-text">
-                            <p>1번 투숙 또는 3박 이상 이용</p>
-                            <p>객실이용 금액 2% 적립</p>
-                        </div>
-                    </div>
-                    <%}else { %>                 
-                    <div class="classic"> 
-                        <div class="benefit-img">
+                                <label for="account-password">비밀번호</label>
+                                <input type="password" id="password" name="password" placeholder="영문 (소문자), 숫자 포함 8~12자리" maxlength="12">
+                            </div>
+                            <div class="password">
+                                <label for="check-password">비밀번호 확인</label>
+                                <input type="password" id="passwordCheck" name="password2" placeholder="비밀번호를 확인해 주세요." maxlength="12">
+                            </div>
+                            <input type="hidden" name="no" value="<%=r %>"/>
+                            <input type="hidden" name="cmd" value="find_pw_change">
+                            <input type="hidden" name="stype" id="stype" value="<%=param.getStype()%>"/>
+							<input type="hidden" name="sval" id="sval" value="<%=param.getSval()%>"/>
+							<%-- <input type="hidden" name="no" id="no" value="<%=sessionMember.getNo()%>"/> --%> 
+
+                            <div class="">
+                                    <!-- <input type="submit" value="수정하기" class="submit-button" onclick="goSave();"> -->
+                                    <input type='button' class="submit-button" href="#" onclick="goSave();" value="수정하기">
+                                    
+                                    
+                            </div> 
+                            
+                            
+                        </form>
                         
-                                                
-                            <p>CLASSIC</p>
-                        </div>
-                        <div class="benefit-text">
-                            <p>1번 투숙 또는 3박 이상 이용</p>
-                            <p>객실이용 금액 2% 적립</p>
-                        </div>
                     </div>
-                    <%} %>
-                    
-                    <%if(sessionMember.getGrade() == 2) {%>
-                    <div class="vip on">
-                            <div class="benefit-img">
-                                <p>VIP</p>
-                            </div>
-                            <div class="benefit-text">
-                                <p>3번 투숙 또는 6박 이상 이용</p>
-                                <p>객실이용 금액 5% 적립</p>
-                            </div>
-                    </div>
-                    <%}else { %> 
-                    <div class="vip">
-                            <div class="benefit-img">
-                                <p>VIP</p>
-                            </div>
-                            <div class="benefit-text">
-                                <p>3번 투숙 또는 6박 이상 이용</p>
-                                <p>객실이용 금액 5% 적립</p>
-                            </div>
-                    </div>
-                    <%} %>
-                    
-                    <%if(sessionMember.getGrade() == 3) {%>
-                    <div class="vvip on">
-                            <div class="benefit-img">
-                                <p>VVIP</p>
-                            </div>
-                            <div class="benefit-text">
-                                <p>7번 투숙 또는 12박 이상 이용</p>
-                                <p>객실이용 금액 7% 적립</p>
-                            </div>
-                    </div>
-                    <%}else{ %>
-                    <div class="vvip">
-                            <div class="benefit-img">
-                                <p>VVIP</p>
-                            </div>
-                            <div class="benefit-text">
-                                <p>7번 투숙 또는 12박 이상 이용</p>
-                                <p>객실이용 금액 7% 적립</p>
-                            </div>
-                    </div>
-                    <%} %>
                     
                 </div>
             </div>

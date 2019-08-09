@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
 
+import com.sun.org.apache.bcel.internal.generic.Select;
+
 import db.SqlMapClientDAOSupport;
 
 
@@ -60,6 +62,39 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 		return getSqlMapClient().update("member.password", vo);
 	}
 	
+	public boolean checkPassword(MemberVO vo) throws SQLException {
+		int cnt = (Integer)getSqlMapClient().queryForObject("member.checkPassword", vo);
+		if (cnt > 0) return true; else return false;
+	}
+	
+	public int delete_account(MemberVO vo) throws SQLException {
+		return getSqlMapClient().update("member.delete_account", vo);
+	}
+
+	public String find_email(MemberVO vo) throws SQLException{
+		return (String)getSqlMapClient().queryForObject("member.find_email", vo);
+
+	}
+	
+	public int checkInfo(MemberVO vo) throws SQLException{
+		return (Integer)getSqlMapClient().queryForObject("member.checkInfo",vo);
+	}
+	
+
+		
+	public int find_pw(MemberVO vo) throws SQLException{
+		return (Integer)getSqlMapClient().queryForObject("member.find_pw",vo);
+		
+	}
+	public int find_pw(int no) throws SQLException{
+		return (Integer)getSqlMapClient().queryForObject("member.find_pw",no);
+		
+	}
+	
+	public int find_pw_change(MemberVO vo) throws SQLException{
+		return getSqlMapClient().update("member.find_pw_change",vo);
+	}
+
 	/**
 	 * 관리자 삭제
 	 * 

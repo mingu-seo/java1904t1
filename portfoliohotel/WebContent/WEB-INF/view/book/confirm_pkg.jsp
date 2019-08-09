@@ -27,6 +27,10 @@ Pkg_resVO res_data = (Pkg_resVO) request.getAttribute("res_data");
 </head>
 <script>
 <%-- <% res_data.setTotal_price(res_data.getPkg_count() *res_data.getPkg_price()); %> --%>
+var total = <% res_data.getTotal_price();%>;
+system.print(total);
+
+var tax = total * 0.1;
 </script>
 
 <body>

@@ -57,6 +57,16 @@ function cal_price() {
 	var price = Number(pkg_price) * Number(pkg_count);
 	$("#total_price").val(price);
 }
+//전화번호칸에 입력받은 값이 숫자가 아닐경우
+<%-- <%
+if (guest_tel1 != ) {
+	alert('숫자만 입력해주세요');
+} else if(guest_tel2 != ) {
+	alert('숫자만 입력해주세요');
+} else if(guest_tel3 != ) {
+	alert('숫자만 입력해주세요');
+}
+%> --%>
 </script>
 <body>
     <jsp:include page="/header_menu" flush="true"/>
