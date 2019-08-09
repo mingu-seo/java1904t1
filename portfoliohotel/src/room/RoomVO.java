@@ -16,6 +16,7 @@ public class RoomVO extends Parameter{
 	private String location; //객실 위치
 	private String landscape; //객실 뷰
 	private String type; //객실 타입_방 개수
+	private String image;
 	
 	private String size;
 	
@@ -96,6 +97,12 @@ public class RoomVO extends Parameter{
 	}
 	public void setSize(String size) {
 		this.size = size;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 }

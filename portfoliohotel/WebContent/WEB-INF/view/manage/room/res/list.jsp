@@ -136,36 +136,52 @@ function goNext() {
 									%>
 									<td><%=data.get("room2") %></td>
 									<%
-									} else {
+									} else if(Integer.parseInt(String.valueOf(data.get("room2"))) < 10){
 									%>
 									<td class="exist"><%=data.get("room2") %></td>
+									<%
+									} else {
+									%>
+									<td class="full"><%=data.get("room2") %></td>
 									<%
 									}
 									if(Integer.parseInt(String.valueOf(data.get("room3"))) == 0) {
 									%>
 									<td><%=data.get("room3") %></td>
 									<%
-									} else {
+									} else if(Integer.parseInt(String.valueOf(data.get("room3"))) < 10){
 									%>
 									<td class="exist"><%=data.get("room3") %></td>
+									<%
+									} else {
+									%>
+									<td class="full"><%=data.get("room3") %></td>
 									<%
 									}
 									if(Integer.parseInt(String.valueOf(data.get("room4"))) == 0) {
 									%>
 									<td><%=data.get("room4") %></td>
 									<%
-									} else {
+									} else if(Integer.parseInt(String.valueOf(data.get("room4"))) < 10){
 									%>
 									<td class="exist"><%=data.get("room4") %></td>
+									<%
+									} else {
+									%>
+									<td class="full"><%=data.get("room4") %></td>
 									<%
 									}
 									if(Integer.parseInt(String.valueOf(data.get("room5"))) == 0) {
 									%>
 									<td><%=data.get("room5") %></td>
 									<%
-									} else {
+									} else if(Integer.parseInt(String.valueOf(data.get("room5"))) < 10){
 									%>
 									<td class="exist"><%=data.get("room5") %></td>
+									<%
+									} else {
+									%>
+									<td class="full"><%=data.get("room5") %></td>
 									<%
 									}
 									%>
