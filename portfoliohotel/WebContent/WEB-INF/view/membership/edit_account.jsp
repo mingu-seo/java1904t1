@@ -9,9 +9,6 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 MemberVO data = (MemberVO)request.getAttribute("data");
 %>
 <!DOCTYPE html>
-
-
-
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -27,10 +24,6 @@ MemberVO data = (MemberVO)request.getAttribute("data");
     <title>회원정보수정</title>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     <script>
-var oEditors; // 에디터 객체 담을 곳
-$(window).load(function() {
-	oEditors = setEditor("memo"); // 에디터 셋팅
-});
 
 /*  function goSave() {
 	// 비밀번호 유효성체크
@@ -39,52 +32,58 @@ $(window).load(function() {
 	oEditors.getById["memo"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
 	$("#frm").submit();
 }  */
-function goSave() {
-	
-	if ($("#fname").val() == "") {
+function goSave() {  
+	if ($("#f_name").val() == "") {
 		alert("성을 입력해주세요.");
-		$("#fname").focus();
+		$("#f_name").focus();
 		return false;
 	}
-	if ($("#lname").val() == "") {
+	if ($("#l_name").val() == "") {
 		alert("이름을 입력해주세요.");
-		$("#lname").focus();
+		$("#l_name").focus();
 		return false;
 	}
 	
-	if ($("#year").val() == "") {
+	if ($("#birthday_year").val() == "") {
 		alert("생년월일을 입력해주세요.");
-		$("#year").focus();
+		$("#birthday_year").focus();
 		return false;
 	}
-	if ($("#month").val() == "") {
-		alert("생년월일을 입력해주세요.");
-		$("#month").focus();
+	if ($("#birthday_month").val() == "") {
+		alert("월을 입력해주세요.");
+		$("#birthday_month").focus();
 		return false;
 	}
-	if ($("#day").val() == "") {
-		alert("생년월일을 입력해주세요.");
-		$("#day").focus();
+	if ($("#birthday_month").val().length < 2) {
+		alert("월은 2자리로 입력해주세요.");
+		$("#birthday_month").focus();
+		return false;
+	}
+	if ($("#birthday_day").val() == "") {
+		alert("일을 입력해주세요.");
+		$("#birthday_day").focus();
+		return false;
+	}
+	if ($("#birthday_day").val().length < 2) {
+		alert("일은 2자리로 입력해주세요.");
+		$("#birthday_day").focus();
 		return false;
 	}
 	
-	if ($("#tel1").val() == "") {
+	if ($("#f_tel").val() == "") {
 		alert("연락처를 입력해주세요.");
-		$("#tel1").focus();
-		return false;
-		
+		$("#f_tel").focus();
+		return false;		
 	}
-	if ($("#tel2").val() == "") {
+	if ($("#m_tel").val() == "") {
 		alert("연락처를 입력해주세요.");
-		$("#tel2").focus();
-		return false;
-		
+		$("#m_tel").focus();
+		return false;		
 	}
-	if ($("#tel3").val() == "") {
+	if ($("#l_tel").val() == "") {
 		alert("연락처를 입력해주세요.");
-		$("#tel3").focus();
-		return false;
-		
+		$("#l_tel").focus();
+		return false;		
 	}
 	if ($("#zipcode").val() == "") {
 		alert("우편번호를 입력해주세요.");
@@ -115,8 +114,8 @@ function goSave() {
 		return false;
 	} */
 
-
-	$("#frm").submit();  
+	return true;
+	//$("#frm").submit();  
 }
 
 
@@ -278,24 +277,24 @@ function goSave() {
                 <div class="edit-table">
                     <div class="edit-table-right">
                        <!--  <form method="POST"> -->
-                        <form name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/process.do" method="post">
+                        <form name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/process.do" method="post" onsubmit="return goSave();">
                         
                             <div class="name clear">
                                 <div class="name1">
                                     <label for="first-name">성</label>
-                                    <input type="text" name="f_name" id="fname" maxlength="2" value="<%=sessionMember.getF_name()%>">
+                                    <input type="text" name="f_name" id="f_name" maxlength="2" value="<%=sessionMember.getF_name()%>">
                                 </div>
                                 <div class="name2">
                                     <label for="middle-name">이름</label>
-                                    <input type="text" name="l_name" id="lname" maxlenght="10" value="<%=sessionMember.getL_name()%>">
+                                    <input type="text" name="l_name" id="l_name" maxlenght="10" value="<%=sessionMember.getL_name()%>">
                                 </div>
                             </div>
                         
                             <div class="birth">
                                 <label for="birth-y">생년월일</label>
-                                <input type="text" id="year" name="birthday_year" placeholder="년(4자)" maxlength="4" >
-                                <input type="text" id="month" name="birthday_month" placeholder="월" maxlength="2" minlength="2">
-                                <input type="text" id="day" name="birthday_day" placeholder="일" maxlength="2" minlength="2">
+                                <input type="text" id="birthday_year" name="birthday_year" placeholder="년(4자)" maxlength="4" >
+                                <input type="text" id="birthday_month" name="birthday_month" placeholder="월" maxlength="2" minlength="2">
+                                <input type="text" id="birthday_day" name="birthday_day" placeholder="일" maxlength="2" minlength="2">
                             </div>
                             <!-- <div class="email">
                                 <label for="email">이메일</label>
@@ -303,9 +302,9 @@ function goSave() {
                             </div> -->
                             <div class="tel">
                                 <label for="account-contact">연락처</label>
-                                <input type="text" id="tel1" name="f_tel"  maxlength="3">
-                                <input type="text" id="tel2" name="m_tel"  maxlength="4">
-                                <input type="text" id="tel3" name="l_tel"  maxlength="4">
+                                <input type="text" id="f_tel" name="f_tel"  maxlength="3">
+                                <input type="text" id="m_tel" name="m_tel"  maxlength="4">
+                                <input type="text" id="l_tel" name="l_tel"  maxlength="4">
                                 
                             </div>
 
@@ -323,7 +322,7 @@ function goSave() {
 
                             <div class="">
                                     <!-- <input type="submit" value="수정하기" class="submit-button" onclick="goSave();"> -->
-                                    <input type='button' class="submit-button" href="#" onclick="goSave();" value="수정하기">
+                                    <input type='button' class="submit-button" onclick="$('#frm').submit();" value="수정하기">
                                     
                             </div>
                             

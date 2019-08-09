@@ -4,7 +4,34 @@
 <%@ page import="util.*"%>
 <%
 MemberVO param = (MemberVO)request.getAttribute("vo");
+MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
+MemberVO data = (MemberVO)request.getAttribute("data");
+int r = (Integer)request.getAttribute("r");
 %>
+
+<script>
+
+function goSave() {
+
+if ($("#password").val() == "") {
+		alert("비밀번호를 입력해주세요.");
+		$("#password").focus();
+		return false;
+	}
+if ($("#passwordCheck").val() == "") {
+	alert("비밀번호확인을  입력해주세요.");
+	$("#passwordCheck").focus();
+	return false;
+}
+	
+if($("#password").val()!=$("#passwordCheck").val()){
+	alert("비밀번호가 다릅니다.");
+	$("#password").focus();
+	return false;
+}
+$("#frm").submit();
+}
+</script>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,68 +41,12 @@ MemberVO param = (MemberVO)request.getAttribute("vo");
     <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/default.css">
     <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/find-account.css">
+    <link rel="stylesheet" href="/css/edit_account.css">
     <link rel="stylesheet" href="/css/footer.css">
     <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="/js/gnb.js"></script>
-    <title>이메일찾기</title>
-    <script>
-
-function goSave() {
-	
-	if ($("#f_name").val() == "") {
-		alert("성을 입력해주세요.");
-		$("#f_name").focus();
-		return false;
-	}
-	if ($("#l_name").val() == "") {
-		alert("이름을 입력해주세요.");
-		$("#l_name").focus();
-		return false;
-	}
-	
-	if ($("#birthday_year").val() == "") {
-		alert("생년월일을 입력해주세요.");
-		$("#birthday_year").focus();
-		return false;
-	}
-	if ($("#birthday_month").val() == "") {
-		alert("월을 입력해주세요.");
-		$("#birthday_month").focus();
-		return false;
-	}
-	if ($("#birthday_day").val() == "") {
-		alert("일을 입력해주세요.");
-		$("#birthday_day").focus();
-		return false;
-	}
-	
-	if ($("#f_tel").val() == "") {
-		alert("연락처를 입력해주세요.");
-		$("#f_tel").focus();
-		return false;
-		
-	}
-	if ($("#m_tel").val() == "") {
-		alert("연락처를 입력해주세요.");
-		$("#m_tel").focus();
-		return false;
-		
-	}
-	if ($("#l_tel").val() == "") {
-		alert("연락처를 입력해주세요.");
-		$("#l_tel").focus();
-		return false;
-		
-	}
-	
-
-	$("#frm").submit();  
-}
-</script>
+    <title>비밀번호변경</title>
 </head>
-
-
 <body>
     <div id="header">
         <div class="header-center">
@@ -198,7 +169,11 @@ function goSave() {
                     </li>
                     <!-- <li><a href="#">SIGN IN</a></li> -->
                 </ul>
-                <a href="sign_in.do">SIGN IN</a>
+                <%if(sessionMember == null){ %>
+                <a href="/membership/sign_in">Sign in</a>
+                <%}else{ %>
+                <a href="/membership/mypage">My page</a>
+                <%} %>
             </div>
         </div>
     </div>
@@ -208,76 +183,44 @@ function goSave() {
         
         <div class="banner">
             <div class="notice-section">
-                    <h2>아이디/비밀번호 찾기</h2>
-                    <h3>Account</h3>
+                    <h2>비밀번호수정</h2>
+                    <h3>Edit Password</h3>
                 </div>
         </div>
         <div class="notice">
-            <div class="support-list">
-                <ul class="support-list-center">
-                    <li ><a href="find_email">이메일 찾기</a></li>
-                    <li class="on"><a href="find_pw">비밀번호 찾기</a></li>
-                </ul>
-            </div>
+       
             <div class="section-edit">
-
+               
                 <div class="edit-table">
-                        <h3>이메일을 잊으셨나요?</h3>
-                        <p>정보를 입력하시면 이메일을 확인하실 수 있습니다.</p>
                     <div class="edit-table-right">
                         <!-- <form method="POST"> -->
-                        <form name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/process.do" method="post">
-                        
+                          <form name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/process.do" method="post">
+                          
+                            <div class="password">
                             
-                            <ul class="name clear">
-                                <li>
-                                    <input type="text" id="f_name" name="f_name" placeholder="성" maxlength="2">
-                                </li>
-
-                                <li>
-                                    <input type="text" id="l_name" name="l_name" placeholder="이름" maxlength="12">
-                                </li>
-                                
-                            </ul>
-                            <ul class="birth clear">
-                                    <li>
-                                        <input type="text" id="birthday_year" name="birthday_year" placeholder="●●●●(생년)" maxlength="4">
-                                    </li>
-                                    <li>
-                                        <input type="text" id="birthday_month" name="birthday_month"  placeholder="●●(월)" maxlength="2">
-                                    </li>
-                                    <li>
-                                        <input type="text" id="birthday_day" name="birthday_day" placeholder="●●(일)" maxlength="2">
-                                    </li>
-    
-                                    
-                                    
-                            </ul>
-                            <ul class="birth clear">  
-                            <li>                                                                             
-                                <input type="text" id="f_tel" name="f_tel" placeholder="연락처" maxlength="3" >                             
-                                
-                                </li>
-                                
-                                <li>                               
-                                <input type="text" id="m_tel" name="m_tel"  maxlength="4" >
-                         		</li>
-                         		
-                         		<li>
-								<input type="text" id="l_tel" name="l_tel"  maxlength="4">
-								</li>
-                            </ul>
-                            
-                            <input type="hidden" name="cmd" value="find_email">
+                                <label for="account-password">비밀번호</label>
+                                <input type="password" id="password" name="password" placeholder="영문 (소문자), 숫자 포함 8~12자리" maxlength="12">
+                            </div>
+                            <div class="password">
+                                <label for="check-password">비밀번호 확인</label>
+                                <input type="password" id="passwordCheck" name="password2" placeholder="비밀번호를 확인해 주세요." maxlength="12">
+                            </div>
+                            <input type="hidden" name="no" value="<%=r %>"/>
+                            <input type="hidden" name="cmd" value="find_pw_change">
                             <input type="hidden" name="stype" id="stype" value="<%=param.getStype()%>"/>
 							<input type="hidden" name="sval" id="sval" value="<%=param.getSval()%>"/>
-							
-                     
+							<%-- <input type="hidden" name="no" id="no" value="<%=sessionMember.getNo()%>"/> --%> 
+
                             <div class="">
-                                    <!-- <input type="submit" value="이메일 찾기" class="submit-button" > -->
-                                    <input type='button' class="submit-button" href="#" onclick="goSave();" value="이메일 찾기">
-                            </div>
+                                    <!-- <input type="submit" value="수정하기" class="submit-button" onclick="goSave();"> -->
+                                    <input type='button' class="submit-button" href="#" onclick="goSave();" value="수정하기">
+                                    
+                                    
+                            </div> 
+                            
+                            
                         </form>
+                        
                     </div>
                     
                 </div>

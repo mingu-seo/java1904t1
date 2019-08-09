@@ -31,10 +31,11 @@ MemberVO data = (MemberVO)request.getAttribute("data");
     		$("#password").focus();
     		return false;
     	}
-    	if($("#password").val()=="password"){
-    		alert("비밀번호가 다릅니다.");
+    	if($("#secession_reason").val()==0){
+    		alert("탈퇴사유를 입력해주세요.");
     		return false;
     	}
+    
     	$("#frm").submit(); 
     }
     
@@ -213,14 +214,14 @@ MemberVO data = (MemberVO)request.getAttribute("data");
 
                 <div class="edit-table">
                     <div class="edit-table-right">
-                        <form method="POST">
-                       
+                        <!-- <form method="POST"> -->
+                       <form name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/process.do" method="post">
                             <div class="section01_del">
                                 <input type="password" id="password" name="password" placeholder="사용자 비밀번호 입력">
                             </div>
                             <div class="section02_del">
-                                <select>
-                                    <option>탈퇴사유</option>
+                                <select id="secession_reason" name="secession_reason">
+                                    <option value="0">탈퇴사유</option>
                                     <option value="1">더 이상 서비스를 사용하지 않음</option>
                                     <option value="2">서비스가 불편함</option>
                                     <option value="3">시스템 장애(속도 저조, 에러등)</option>
