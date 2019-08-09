@@ -199,25 +199,21 @@ function goSave() {
 									<col width="35%" />
 								</colgroup>
 								<tbody>
-								<%
-								String[] nameArr = data.getName().split(",");
-								String[] birthdayArr = data.getBirthday().split(",");
-								String[] telArr = data.getTel().split(",");
-								%>
+								
 									<tr>
 										
 										<th scope="row"><label for="">*이름</label></th>
 										<td >
-											성<input type="text" style="width:50px; height:20px;" id="fname" name="name" value="<%=nameArr[0]%>" title="관리자 이름을 입력해주세요." />	
-											이름<input type="text" style="width:80px; height:20px;" id="lname" name="name" value="<%=nameArr[1] %>" title="관리자 이름을 입력해주세요." />										
+											성<input type="text" style="width:50px; height:20px;" id="fname" name="name" value="<%=data.getF_name()%>" title="관리자 이름을 입력해주세요." />	
+											이름<input type="text" style="width:80px; height:20px;" id="lname" name="name" value="<%=data.getL_name() %>" title="관리자 이름을 입력해주세요." />										
 										</td>
 										
 									</tr>
 									<th scope="row"><label for="">생년월일</label></th>
 										<td colspan="3">
-											<input type="text" style="width:100px;height:20px;" id="year" name="birthday" value="<%=birthdayArr[0]%>" title="관리자 이름을 입력해주세요.">년</input>
-											<input type="text" style="width:50px; height:20px;" id="month" name="birthday" value="<%=birthdayArr[1]%>" title="관리자 이름을 입력해주세요.">월</input>
-											<input type="text" style="width:50px; height:20px;" id="day" name="birthday" value="<%=birthdayArr[2]%>" title="관리자 이름을 입력해주세요.">일</input>
+											<input type="text" style="width:100px;height:20px;" id="year" name="birthday" value="<%=data.getBirthday_year()%>" title="관리자 이름을 입력해주세요.">년</input>
+											<input type="text" style="width:50px; height:20px;" id="month" name="birthday" value="<%=data.getBirthday_month()%>" title="관리자 이름을 입력해주세요.">월</input>
+											<input type="text" style="width:50px; height:20px;" id="day" name="birthday" value="<%=data.getBirthday_day()%>" title="관리자 이름을 입력해주세요.">일</input>
 										</td>
 									
 									<tr>
@@ -230,9 +226,9 @@ function goSave() {
 									<tr>
 										<th scope="row"><label for="">*연락처</label></th>
 										<td>
-											<input type="text" style="width:60px;height:20px;" id="tel1" name="tel" value="<%=telArr[0]%>" > -</input>
-											<input type="text" style="width:80px;height:20px;" id="tel2" name="tel" value="<%=telArr[1]%>" > -</input>
-											<input type="text" style="width:80px;height:20px;" id="tel3" name="tel" value="<%=telArr[2]%>" ></input>
+											<input type="text" style="width:60px;height:20px;" id="tel1" name="tel" value="<%=data.getF_tel()%>" > -</input>
+											<input type="text" style="width:80px;height:20px;" id="tel2" name="tel" value="<%=data.getM_tel()%>" > -</input>
+											<input type="text" style="width:80px;height:20px;" id="tel3" name="tel" value="<%=data.getL_tel()%>" ></input>
 										</td>
 									</tr>
 									<tr>

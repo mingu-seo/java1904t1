@@ -43,6 +43,16 @@ public class Room_resService {
 		return list;
 	}
 	
+	public ArrayList<HashMap> check_pr(HashMap map) throws Exception {
+		ArrayList<HashMap> list = room_resDAO.check_pr(map);
+		return list;
+	}
+	
+	public ArrayList<HashMap> check_ds(HashMap map) throws Exception {
+		ArrayList<HashMap> list = room_resDAO.check_ds(map);
+		return list;
+	}
+	
 	public int insert(Room_resVO vo, Room_opt_resVO ovo, HttpServletRequest req) throws Exception {
 		int r = (Integer)room_resDAO.insert(vo);
 		
@@ -111,6 +121,11 @@ public class Room_resService {
 		rowPageCount[0] = rowCount;
 		rowPageCount[1] = pageCount;
 		return rowPageCount;
+	}
+	
+	public Room_resVO nonmember(Room_resVO vo) throws Exception {
+		Room_resVO data = room_resDAO.nonmember(vo);
+		return data;
 	}
 	
 	public ArrayList list_opt(int room_opt_pk) throws Exception {

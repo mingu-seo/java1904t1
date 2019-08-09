@@ -56,14 +56,10 @@ MemberVO data = (MemberVO)request.getAttribute("data");
 									<col width="35%" />
 								</colgroup>
 								<tbody>
-								<%
-								String[] nameArr = data.getName().split(",");
-								String[] birthdayArr = data.getBirthday().split(",");
-								String[] telArr = data.getTel().split(",");
-								%>
+								
 									<tr>
 										<th scope="row"><label for="">이름</label></th>
-										<td colspan="3"><%=nameArr[0]%> <%=nameArr[1] %></td>
+										<td colspan="3"><%=data.getF_name() %><%=data.getL_name()%></td>
 										
 									</tr>
 									<tr>
@@ -76,14 +72,14 @@ MemberVO data = (MemberVO)request.getAttribute("data");
 									</tr>
 									<tr>
 										<th scope="row"><label for="">생년월일</label></th>
-										<%-- <td colspan="3"><%=data.getBirthday()%></td> --%>
-										<td colspan="3"><%=birthdayArr[0]%>년 <%=birthdayArr[1] %>월 <%=birthdayArr[2]%>일</td>
+										<td colspan="3"><%=data.getBirthday_year()%>년<%=data.getBirthday_month()%>월<%=data.getBirthday_day()%>일</td> 
+										<td colspan="3"></td>
 									
 									</tr>
 									<tr>
 										<th scope="row"><label for="">연락처</label></th>
 										<%-- <td colspan="3"><%=data.getTel()%></td> --%>
-										<td colspan="3"><%=telArr[0]%> - <%=telArr[1] %> - <%=telArr[2]%></td>
+										<td colspan="3"><%=data.getF_tel()%>-<%=data.getM_tel()%>-<%=data.getL_tel()%></td>
 										
 									</tr>
 									<tr>

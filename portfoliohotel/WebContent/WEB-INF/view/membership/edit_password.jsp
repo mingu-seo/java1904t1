@@ -189,9 +189,9 @@ $("#frm").submit();
         <div class="notice">
             <div class="support-list">
                 <ul class="support-list-center">
-                    <li><a href="edit_account.do">회원정보 수정</a></li>
-                    <li class="on"><a href="edit_password.do">비밀번호 설정 및 변경</a></li>
-                    <li><a href="delete_account.do">탈퇴요청</a></li>
+                    <li><a href="edit_account">회원정보 수정</a></li>
+                    <li class="on"><a href="edit_password">비밀번호 설정 및 변경</a></li>
+                    <li><a href="delete_account">탈퇴요청</a></li>
                 </ul>
             </div>
             <div class="section-edit">

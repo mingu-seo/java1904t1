@@ -51,6 +51,8 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
                 minDate: "1D"
             });  
             
+            checkDate(<%=read.getNo()%>, $("#checkin").val(), $("#checkout").val());
+            
             $("#adult_select, #kid_select").change(function() {
             	$("#adult").val($("#adult_select option:selected").val());
             	$("#kid").val($("#kid_select option:selected").val());
@@ -70,8 +72,17 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
         		
         		var person_price = adult_add + kid_add;
         		$("#person_price").val(person_price);
-        		$("#adult_add").val($("#adult_select option:selected").val() - <%=read.getAdult()%>);
-        		$("#kid_add").val($("#kid_select option:selected").val() - <%=read.getKid()%>);
+        		
+        		var aac = $("#adult_select option:selected").val() - <%=read.getAdult()%>;
+        		if(aac < 0) {
+        			aac = 0;
+        		} 
+        		$("#adult_add").val(aac);
+        		var kac = $("#kid_select option:selected").val() - <%=read.getKid()%>;
+        		if(kac < 0) {
+        			kac = 0;
+        		} 
+        		$("#kid_add").val(kac);
             });
             
             $("#checkin, #checkout").change(function() {
@@ -82,9 +93,22 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
         		var day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
         		$("#day_stay").val(day_stay);
         		$("#room_price").val(<%=read.getPrice()%> * day_stay);
+        		
+        		checkDate(<%=read.getNo()%>, $("#checkin").val(), $("#checkout").val());
             });
             
         });
+        
+        function checkDate(no, checkin, checkout) {
+        	$.ajax({
+        		type : "GET",
+        		url : "/book/room/check_ds?no="+no+"&checkin="+checkin+"&checkout="+checkout, 
+        		async : false,
+        		success : function(data){
+        			$("#submit_btn_area").html(data);
+        		}
+        	});
+        }
         
         
     </script>
@@ -136,11 +160,11 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
 					<div class="direct-reservation">
 						<h2>RESERVATION</h2>
 						<div class="d-r-input clear">
-							<form action="/book/add_option" method="post">
+							<form action="/book/room/add_option" method="post">
 								<div class="d-r-input1">
-									<input type="text" name="checkin" id="checkin">
+									<input type="text" name="checkin" id="checkin" value="<%=DateUtil.getToday()%>">
 									<p>~</p>
-									<input type="text" name="checkout" id="checkout"> 
+									<input type="text" name="checkout" id="checkout" value="<%=DateUtil.getDayDateAdd(1, DateUtil.getToday())%>"> 
 									<select id="adult_select">
 										<option>성인</option>
 										<option value="1">1</option>
@@ -159,9 +183,10 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
 										<option value="5">5</option>
 									</select>
 								</div>
-								<div class="d-r-input2">
+								<span id="submit_btn_area"></span>
+								<!-- <div class="d-r-input2">
 									<input type="submit" value="객실 예약" />
-								</div>
+								</div> -->
 								<input type="hidden" name="room_name" id="room_name" value="<%=read.getName()%>"/>
 								<input type="hidden" name="adult" id="adult" value=""/>
 								<input type="hidden" name="kid" id="kid" value=""/>

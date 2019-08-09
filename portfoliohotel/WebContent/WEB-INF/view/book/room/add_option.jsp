@@ -13,12 +13,12 @@ ArrayList<Room_optVO> list_o = (ArrayList<Room_optVO>)request.getAttribute("list
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/default.css">
-    <link rel="stylesheet" href="../css/header-fixed.css">
-    <link rel="stylesheet" href="../css/add_option.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <script src="../js/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="../js/gnb.js"></script>
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/header-fixed.css">
+    <link rel="stylesheet" href="/css/add_option.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <script src="/js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/gnb.js"></script>
     <script>
     $(function(){
         //left-section 높이값 알아내서 right-section 높이값을 동일하게
@@ -98,7 +98,7 @@ ArrayList<Room_optVO> list_o = (ArrayList<Room_optVO>)request.getAttribute("list
                 <li><a href="/book/room/confirm_room"><span>></span> 예약완료</a></li>
             </ul>
             <!-- 폼태그 / summit 입력버튼 311번 -->
-            <form action="/book/personal_info" method="post">
+            <form action="/book/room/personal_info" method="post">
                 <div class="section-wrap clear">
                     <div class="left-section">
                         <div class="sec01-title">
@@ -136,10 +136,18 @@ ArrayList<Room_optVO> list_o = (ArrayList<Room_optVO>)request.getAttribute("list
 											<select name="option_num" class="option_num" >
 												<option value="0" data-option_price="0">선택</option>
 												<%
-												for(int j=0; j<=5; j++) {
+												if(i == 0 || i == 2) {
+													for(int j=0; j<=(Integer.parseInt(request.getParameter("adult")) + Integer.parseInt(request.getParameter("kid"))); j++) {
 												%>
-                                                <option value="<%=j %>" data-option_price="<%=list_o.get(i).getPrice() * j%>"><%=j %></option>
+												<option value="<%=j %>" data-option_price="<%=list_o.get(i).getPrice() * j%>"><%=j %> 인</option>	
+												<%
+													}
+												} else {
+													for(int j=0; j<=(Integer.parseInt(request.getParameter("day_stay"))); j++) {
+												%>
+                                                <option value="<%=j %>" data-option_price="<%=list_o.get(i).getPrice() * j%>"><%=j %> 대</option>
                                                	<%
+													}
 												}
                                                	%>
                                             </select>

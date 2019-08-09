@@ -19,6 +19,7 @@ import manage.admin.AdminVO;
 import property.SiteProperty;
 import room.RoomService;
 import room.RoomVO;
+import room.Room_imageVO;
 import room.Room_optVO;
 import util.DateUtil;
 import util.Function;
@@ -248,7 +249,7 @@ public class Room_resController {
 	}
 
 	@RequestMapping("/book/room/check_room")
-	public String check_room(Model model, RoomVO rvo) throws Exception {
+	public String check_room(Model model, RoomVO rvo, Room_imageVO rivo) throws Exception {
 		ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)roomService.list(rvo);
 		
 		model.addAttribute("list_r", list_r);
@@ -262,6 +263,44 @@ public class Room_resController {
 		model.addAttribute("list_rp", list_rp);
 		return "book/room/price_room";
 	}
+	
+	@RequestMapping("/book/room/check_cr")
+	public String check_cr(Model model, Room_resVO vo, HttpServletRequest req, RoomVO rvo) throws Exception {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("checkin", (String)req.getParameter("checkin"));
+		map.put("checkout", (String)req.getParameter("checkout"));
+		
+		ArrayList<HashMap> map_c = room_resService.check(map);
+		ArrayList<RoomVO> list_r = roomService.list(rvo);
+		model.addAttribute("map_c", map_c);
+		model.addAttribute("list_r", list_r);
+		return "book/room/check_cr";
+	}
+	
+	@RequestMapping("/book/room/check_pr")
+	public String check_pr(Model model, Room_resVO vo, HttpServletRequest req, RoomVO rvo) throws Exception {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("checkin", (String)req.getParameter("checkin"));
+		map.put("checkout", (String)req.getParameter("checkout"));
+		
+		ArrayList<HashMap> map_c = room_resService.check_pr(map);
+		ArrayList<RoomVO> list_rp = roomService.list_price(rvo);
+		model.addAttribute("map_c", map_c);
+		model.addAttribute("list_rp", list_rp);
+		return "book/room/check_pr";
+	}
+	
+	@RequestMapping("/book/room/check_ds")
+	public String check_ds(Model model, Room_resVO vo, HttpServletRequest req, RoomVO rvo) throws Exception {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("no", req.getParameter("no"));
+		map.put("checkin", (String)req.getParameter("checkin"));
+		map.put("checkout", (String)req.getParameter("checkout"));
+		
+		ArrayList<HashMap> map_c = room_resService.check_ds(map);
+		model.addAttribute("map_c", map_c);
+		return "book/room/check_ds";
+	}
 
 	@RequestMapping("/room/res/submit")
 	public String submit(Model model, Room_resVO vo, Room_opt_resVO orvo, HttpServletRequest req) throws Exception {
@@ -274,7 +313,20 @@ public class Room_resController {
 		model.addAttribute("day_stay", day_stay);
 		model.addAttribute("read", read);
 		model.addAttribute("list_o", list_o);
-		return "book/confirm_room";
+		return "book/room/confirm_room";
 	}
 	
+	@RequestMapping("/book/room/nonmember")
+	public String nonmember(Model model, Room_resVO vo) throws Exception {
+		
+		return "book/room/nonmember";
+	}
+	
+	@RequestMapping("/book/room/nonmember_res")
+	public String nonmember_res(Model model, Room_resVO vo) throws Exception {
+		Room_resVO mdata = room_resService.nonmember(vo);
+		
+		model.addAttribute("mdata", mdata);
+		return "book/room/nonmember_res";
+	}
 }
