@@ -326,7 +326,24 @@ public class Room_resController {
 	public String nonmember_res(Model model, Room_resVO vo) throws Exception {
 		Room_resVO mdata = room_resService.nonmember(vo);
 		
-		model.addAttribute("mdata", mdata);
-		return "book/room/nonmember_res";
+		if(mdata == null) {
+			model.addAttribute("code", "alertMessageUrl"); 
+			model.addAttribute("message", Function.message(1, "일치하는 정보가 존재하지 않습니다.", "삭제실패")); 
+			model.addAttribute("url", vo.getTargetURLParam("/book/room/nonmember", vo, 0));
+		} else {
+			ArrayList<Room_opt_resVO> odata = room_resService.list_opt(mdata.getNo());
+			model.addAttribute("mdata", mdata);
+			model.addAttribute("odata", odata);
+			
+			return "book/room/nonmember_res";
+		}
+		return "include/alert";
+	}
+	
+	@RequestMapping("/book/room/nonmember_res/cancel")
+	public String nonmember_cancel(Model model, Room_resVO vo) throws Exception {
+		int r = room_resService.cancel(vo.getNo());
+		model.addAttribute("value",r);
+		return "index";
 	}
 }

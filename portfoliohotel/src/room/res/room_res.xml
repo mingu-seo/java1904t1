@@ -152,7 +152,7 @@
 	<select id="nonmember" parameterClass="room_resVO" resultClass="room_resVO">
 		SELECT * 
 		FROM room_res
-		WHERE guest_email=#guest_email# AND no=#no#
+		WHERE guest_email=#guest_email# AND no=#no# AND res_state=1
 	</select>
 	
 	

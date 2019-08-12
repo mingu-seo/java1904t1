@@ -21,22 +21,22 @@
     <jsp:include page="/header_menu" flush="true" />
 
     <div id="container">
-        <div class="login-section">
+        <div class="nonmember-section">
             <h2>비회원 예약 조회 페이지</h2>
             <h3>NONMEMBER RESERVATION STATUS</h3>
-            <div class="login-box clear">
+            <div class="nonmember-box clear">
                 <!-- <form action="#" method="POST"> -->
                 <form name="frm" id="frm" method="post" action="/book/room/nonmember_res">
-                    <div class="login-box-logo"><img src="/img/header-logo.png"></div>
-                    <div class="login-board clear">
-                        <div class="login-box-left">
+                    <div class="nonmember-box-logo"><img src="/img/header-logo.png"></div>
+                    <div class="nonmember-board clear">
+                        <div class="nonmember-box-left">
                             <!-- email 구역 -->
                             <input type="text" id="guest_email" name="guest_email" placeholder="이메일">
                             <!-- 예약 번호 구역 -->
                             <input type="text" id="no" name="no" placeholder="예약 번호">
                         </div>
-                        <div class="login-board-right">
-                            <input type="submit" value ="예약 확인" class="loginBtn"/>
+                        <div class="nonmember-board-right">
+                            <input type="submit" value ="예약 확인" class="nonmemberBtn"/>
                         </div>
                     </div> 
                 </form>    

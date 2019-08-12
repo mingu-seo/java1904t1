@@ -5,6 +5,7 @@
 
 <%
 Room_resVO mdata = (Room_resVO)request.getAttribute("mdata");
+ArrayList<Room_opt_resVO> odata = (ArrayList<Room_opt_resVO>)request.getAttribute("odata");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -25,38 +26,63 @@ Room_resVO mdata = (Room_resVO)request.getAttribute("mdata");
     <jsp:include page="/header_menu" flush="true" />
 
     <div id="container">
-        <div class="login-section">
+        <div class="nonmember-section">
             <h2>비회원 예약 조회 페이지</h2>
             <h3>NONMEMBER RESERVATION STATUS</h3>
-            <div class="login-box clear">
-                <!-- <form action="#" method="POST"> -->
-                <form name="" id="" method="post" action="">
-                    <div class="login-box-logo"><img src="/img/header-logo.png"></div>
-                    <div class="login-board clear">
-                        <table class="reslist" style="width:80%;">
+            <div class="nonmember-box clear">
+                <form name="reslist" id="reslist" action="/book/room/nonmember_res/cancel" method="post">
+                    <div class="nonmember-box-logo"><img src="/img/header-logo.png"></div>
+                    <div class="nonmember-board clear">
+                        <table class="room">
                         	<colgroup>
                         		<col width="15%"/>
-                        		<col width="35%"/>
+                        		<col width="45%"/>
                         		<col width="15%"/>
-                        		<col width="35%"/>
+                        		<col width="25%"/>
                         	</colgroup>
                         	<tr>
                         		<th>객실명</th>
-                        		<td colspan="3"><%=mdata.getRoom_name() %></td>
+                        		<td><%=mdata.getRoom_name() %></td>
                         	</tr>
                         	<tr>
                         		<th>체크인</th>
-                        		<td><%=mdata.getCheckin() %></td>
+                        		<td><%=Function.toDateKorean(mdata.getCheckin()) %></td>
                         		<th>체크아웃</th>
-                        		<td><%=mdata.getCheckout() %></td>
+                        		<td><%=Function.toDateKorean(mdata.getCheckout()) %></td>
                         	</tr>
                         	<tr>
-                        		<th><%=mdata.getAdult() %></th>
-                        		<th><%=mdata.getKid() %></th>
+                        		<th>성인</th>
+                        		<td><%=mdata.getAdult() %> 명</td>
+                        		<th>어린이</th>
+                        		<td><%=mdata.getKid() %> 명</td>
                         	</tr>
                         </table>
+                        <br/>
+                        <br/>
+                        <table class="option">	
+                        	<colgroup>
+                        		<col width="60%"/>
+                        		<col width="40%"/>
+                        	</colgroup>
+                        	<%
+                        	for(int i=0; i<odata.size(); i++) {
+                        		if(odata.get(i).getCount() != 0) {
+                        	%>
+                        	<tr>
+                        		<th><%=odata.get(i).getName() %></th>
+                        		<td>[ <%=odata.get(i).getCount() %> ]</td>
+                        	</tr>
+                        	<%
+                        		}
+                        	}
+                        	%>
+                        </table>
                     </div> 
-                </form>    
+                    
+                    <div class="nonmember-board-right">
+                		<input type="submit" value="예약 취소" class="nonmember_cancelBtn"/>
+                	</div>
+                </form>  
             </div>    
         </div>
     </div>
