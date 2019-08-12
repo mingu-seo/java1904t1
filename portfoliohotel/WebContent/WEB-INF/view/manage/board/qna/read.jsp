@@ -91,11 +91,7 @@ function goSave() {
 									</colgroup>
 									<tbody>
 									
-									<% 
-									String[] emailArr= data.getEmail().split(",");
-									String[] nameArr= data.getName().split(",");
-									String[] telArr=data.getTel().split(",");
-									%>
+									
 									<tr>
 										<th scope="row"><label for="">공개여부</label></th>
 										<td>
@@ -110,13 +106,13 @@ function goSave() {
 									<tr>
 										<th scope="row"><label for="">이름</label></th>
 										<td >
-											<%=nameArr[0]%><%=nameArr[1]%>
+											<%=data.getLastName() %><%=data.getFirstName() %>
 											
 										</td>
 										
 										<th scope="row"><label for="">연락처</label></th>
 										<td colspan="4">
-											<%=telArr[0]%>-<%=telArr[1]%>-<%=telArr[2]%>
+											<%=data.getTel1()%><%=data.getTel2()%><%=data.getTel3()%>
 										</td>
 										
 									
@@ -124,7 +120,7 @@ function goSave() {
 									<tr>
 										<th scope="row"><label for="">이메일</label></th>
 										<td >
-											<%=emailArr[0]%><%=emailArr[1]%>
+											<%=data.getEmail() %>
 											
 											
 										</td>

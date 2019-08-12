@@ -36,6 +36,7 @@ function goRead(){
 		async:false,
 		success:function(data) {
 			$(".aaaa"+no).html(data);
+			$(".aaaaAll").hide();
 			$(".aaaa"+no).fadeIn();
 			
 		}
@@ -58,7 +59,7 @@ function goRead(){
 </head>
 <body>
 
-<jsp:include page="/header_menu" flush="true"/>
+
     
     
     <div id="container">
@@ -127,7 +128,7 @@ function goRead(){
                             
                             
                         </tr>
-                        <tr class="aaaa<%=list.get(i).getNo() %>" style="display:none;"></tr>
+                        <tr class="aaaaAll aaaa<%=list.get(i).getNo() %>" style="display:none;"></tr>
                        
                        
                         <%
