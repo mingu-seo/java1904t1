@@ -112,17 +112,13 @@ function goSearch() {
 								%>
 								
 									<tr <%=topClass%> bgcolor="<%=bgColor%>">
-										<% 
-										String[] emailArr= data.getEmail().split(",");
-										String[] nameArr= data.getName().split(",");
 										
-										%>
 										<td class="first"><input type="checkbox" name="no" id="no" value="<%=data.getNo()%>"/></td>
 										<%-- <td <%=targetUrl%>><%=totCount - ((param.getReqPageNo()-1)*param.getPageRows()) - i%></td>  --%>
 										<td <%=targetUrl%> class="no"><%=data.getNo() %></td>
-										<td <%=targetUrl%> class="category"><%=data.getCategory() %></td>
-										<td <%=targetUrl%> class="name"><%=nameArr[0]%><%=nameArr[1]%></td>
-										<td <%=targetUrl%> class="email"><%=emailArr[0]%><%=emailArr[1]%></td>
+										<td <%=targetUrl%> class="category"><%=CodeUtil.getCategory_name(data.getCategory()) %></td>
+										<td <%=targetUrl%> class="name"><%=data.getLastName()%><%=data.getFirstName()%></td>
+										<td <%=targetUrl%> class="email"><%=data.getEmail()%></td>
 										<td <%=targetUrl%> class="title"><%=data.getTitle() %></td>
 										<td <%=targetUrl%>><%=DateUtil.getDateFormat(data.getRegdate())%></td>
 										<td <%=targetUrl%>><%=CodeUtil.getReplyExist(data.getReply())%></td>

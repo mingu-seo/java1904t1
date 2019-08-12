@@ -14,16 +14,21 @@ QnaVO param = (QnaVO)request.getAttribute("vo");
 <script type="text/javascript">
 
 
-	var oEditors; // 에디터 객체 담을 곳
+	/* var oEditors; // 에디터 객체 담을 곳
 	jQuery(window).load(function(){
 		oEditors = setEditor("contents"); // 에디터 셋팅
 		initCal({id:"regdate",type:"day",today:"y",timeYN:"y"});
 	});
-	
+	 */
 	function goSave() {
 		if ($("#title").val() == "") {
 			alert('제목을 입력하세요.');
 			$("#title").focus();
+			return false;
+		}
+		if ($("#contents").val() == "") {
+			alert('제목을 입력하세요.');
+			$("#contents").focus();
 			return false;
 		}
 		if ($("#tel").val() == "") {
@@ -41,14 +46,14 @@ QnaVO param = (QnaVO)request.getAttribute("vo");
 			$("#password").focus();
 			return false;
 		}
-		var sHTML = oEditors.getById["contents"].getIR();
+		/* var sHTML = oEditors.getById["contents"].getIR();
 		if (sHTML == "" || sHTML == "<p><br></p>") {
 			alert('내용을 입력하세요.');
 			$("#contents").focus();
 			return false;
 		} else {
 			oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
-		}
+		} */
 		return true;
 		
 		//패스워드 유효성 체크
@@ -152,17 +157,17 @@ QnaVO param = (QnaVO)request.getAttribute("vo");
 									<tr>
 										<th scope="row"><label for="">이름</label></th>
 										<td >
-											<input type="text" style="width:50px;height:20px;"id="familyname" name="name" value="" title="성을 입력해주세요" placeholder="성"></input>	
-											<input type="text" style="width:100px;height:20px;"id="fistname" name="name" value="" title="이름을 입력해주세요" placeholder="이름"></input>
+											<input type="text" style="width:50px;height:20px;"id="familyname" name="lastName" value="" title="성을 입력해주세요" placeholder="성"></input>	
+											<input type="text" style="width:100px;height:20px;"id="fistname" name="firstName" value="" title="이름을 입력해주세요" placeholder="이름"></input>
 												
 											
 										</td>
 										
 										<th scope="row"><label for="">연락처</label></th>
 										<td colspan="4">
-											<input type="text" style="width:50px;height:20px;id="tel1" name="tel"  title="연락처를 입력해주세요" />	
-											<input type="text" style="width:50px;height:20px;id="tel2" name="tel"  title="연락처를 입력해주세요" />	
-											<input type="text" style="width:50px;height:20px;id="tel3" name="tel"  title="연락처를 입력해주세요" />	
+											<input type="text" style="width:50px;height:20px;id="tel1" name="tel1"  title="연락처를 입력해주세요" />	
+											<input type="text" style="width:50px;height:20px;id="tel2" name="tel2"  title="연락처를 입력해주세요" />	
+											<input type="text" style="width:50px;height:20px;id="tel3" name="tel3"  title="연락처를 입력해주세요" />	
 										</td>
 										
 									
@@ -170,19 +175,8 @@ QnaVO param = (QnaVO)request.getAttribute("vo");
 									<tr>
 										<th scope="row"><label for="">이메일</label></th>
 										<td colspan="4">
-											<input type="text" name="email" id="email" style="width:100px"> @ 
-											<input type="text" name="email" id="email2" style="width:100px;" disabled value="naver.com">
-											<select style="width:100px;margin-right:10px" name="email" id="selectEmail"> 
-												<option value="1">직접입력</option> 
-												<option value="@naver.com" selected>naver.com</option> 
-												<option value="@daum.net">hanmail.net</option>
-												<option value="@hanmail.net">hanmail.net</option>
-												<option value="@gmail.com">gmail.com</option>  
-												<option value="@hotmail.com">hotmail.com</option> 
-												<option value="@nate.com">nate.com</option> 
-												<option value="@dreamwiz.com">dreamwiz.com</option> 
+											<input type="text" name="email" id="email" style="width:300px"> 
 											
-											</select> 
 										</td>
 									</tr>
 									<tr>

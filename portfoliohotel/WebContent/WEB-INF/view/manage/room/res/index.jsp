@@ -16,6 +16,9 @@ int totPage = (Integer)request.getAttribute("totPage");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="/WEB-INF/view/manage/include/headHtml.jsp" %>
+<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="/css/jquery-ui.css">
 <style>
 .category, .search {
 	width: 1826.88px;
@@ -34,6 +37,34 @@ int totPage = (Integer)request.getAttribute("totPage");
 }
 </style>
 <script>
+$(function(){
+	 $("#scheckin").datepicker({
+         monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+         dateFormat: "yy-mm-dd",
+         yearRange: "2019:2019",
+         minDate: "0D",
+         prevText: "이전달",
+         nextText: "다음달",
+         onClose: function( selectedDate ) {
+         	$("#scheckout").datepicker( "option", "minDate", selectedDate );
+		 }
+     });
+     
+     $("#scheckout").datepicker({
+         monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+         dateFormat: "yy-mm-dd",
+         yearRange: "2019:2019",
+         minDate: "1D",
+         prevText: "이전달",
+         nextText: "다음달",
+         onClose: function( selectedDate ) {
+             $("#scheckin").datepicker( "option", "maxDate", selectedDate );
+         }
+     });
+});
+
 function groupDelete() {	
 	if ( isSeleted(document.frm.no) ){
 		if (confirm ('삭제하시겠습니까?')) {
@@ -89,7 +120,7 @@ function goReadRoom(no) {
 								<col width="20%"/>
 							</colgroup>
 							<tr>
-								<th <%=vo.getCategory() == 0 ? "style=\"background:#2D2F34;\"" : "" %>><a <%=vo.getCategory() == 0 ? "style=\"color:#ffffff;\"" : "" %> href="/manage/room/res/index">전체 예약</a></th>
+								<th <%=vo.getCategory() == 0 ? "style=\"background:#2D2F34;\"" : "" %>><a <%=vo.getCategory() == 0 ? "style=\"color:#ffffff;\"" : "" %> href="/manage/room/res/index?category=0">전체 예약</a></th>
 								<th <%=vo.getCategory() == 1 ? "style=\"background:#2D2F34;\"" : "" %>><a <%=vo.getCategory() == 1 ? "style=\"color:#ffffff;\"" : "" %> href="/manage/room/res/index?category=1">지난 예약</a></th>
 								<th <%=vo.getCategory() == 2 ? "style=\"background:#2D2F34;\"" : "" %>><a <%=vo.getCategory() == 2 ? "style=\"color:#ffffff;\"" : "" %> href="/manage/room/res/index?category=2">다가오는 예약</a></th>
 								<th <%=vo.getCategory() == 3 ? "style=\"background:#2D2F34;\"" : "" %>><a <%=vo.getCategory() == 3 ? "style=\"color:#ffffff;\"" : "" %> href="/manage/room/res/index?category=3">신청된 예약</a></th>
@@ -110,11 +141,11 @@ function goReadRoom(no) {
 								<%
 								if(vo.getScheckin() != null && vo.getScheckout() != null) {
 								%>
-								<td><input type="date" name="scheckin" id="scheckin" value="<%=vo.getScheckin()%>"></input> ~ <input type="date" name="scheckout" id="scheckout" value="<%=vo.getScheckout()%>"></input></td>
+								<td><input type="text" name="scheckin" id="scheckin" value="<%=vo.getScheckin()%>"></input> ~ <input type="text" name="scheckout" id="scheckout" value="<%=vo.getScheckout()%>"></input></td>
 								<%
 								} else {
 								%>
-								<td><input type="date" name="scheckin" id="scheckin"></input> ~ <input type="date" name="scheckout" id="scheckout"></input></td>
+								<td><input type="text" name="scheckin" id="scheckin"></input> ~ <input type="text" name="scheckout" id="scheckout"></input></td>
 								<%
 								}
 								%>
@@ -122,8 +153,8 @@ function goReadRoom(no) {
 								<td>
 									<select name="stype">
 										<option value="all" <%=vo.getStype().equals("all")? "selected" : "" %>>전체</option>
-										<option value="guest_lastname" <%=vo.getStype().equals("guest_lastname")? "selected" : "" %>>고객 한글명</option>
-										<option value="guest_firstname" <%=vo.getStype().equals("guest_firstname")? "selected" : "" %>>고객 영문명</option>
+										<option value="guest_lastname" <%=vo.getStype().equals("guest_lastname")? "selected" : "" %>>고객 성</option>
+										<option value="guest_firstname" <%=vo.getStype().equals("guest_firstname")? "selected" : "" %>>고객 이름</option>
 										<option value="guest_email" <%=vo.getStype().equals("guest_email")? "selected" : "" %>>고객 이메일</option>
 										<option value="room_name" <%=vo.getStype().equals("room_name")? "selected" : "" %>>객실명</option>
 									</select>

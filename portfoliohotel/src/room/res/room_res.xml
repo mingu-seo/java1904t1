@@ -5,6 +5,9 @@
 	<sql id="searchSql">
 		<dynamic prepend="WHERE">
 		1=1
+			<isEqual property="category" compareValue="0">
+				AND (res_state=1 OR res_state=0)
+			</isEqual>
 			<isEqual property="category" compareValue="1">
 				<![CDATA[AND checkout < NOW()]]>
 			</isEqual>

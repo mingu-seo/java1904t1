@@ -94,13 +94,13 @@ QnaVO data = (QnaVO)request.getAttribute("data");
 									<tr>
 										<th scope="row"><label for="">이름</label></th>
 										<td >
-											<input type="text" id="name" name="name" class="w50" title="이름을 입력해주세요" value="<%=Function.checkNull(data.getName())%>"  />	
+											<input type="text" id="name" name="name" class="w50" title="이름을 입력해주세요" value="<%=Function.checkNull(data.getLastName())%><%=Function.checkNull(data.getFirstName())%>"  />	
 											
 										</td>
 										
 										<th scope="row"><label for="">연락처</label></th>
 										<td colspan="4">
-											<input type="text" id="tel" name="tel" class="w50" title="연락처를 입력해주세요"  value="<%=Function.checkNull(data.getTel())%>" />	
+											<input type="text" id="tel" name="tel" class="w50" title="연락처를 입력해주세요"  value="<%=Function.checkNull(data.getTel1())%><%=Function.checkNull(data.getTel2())%><%=Function.checkNull(data.getTel3())%>" />	
 										</td>
 										
 									

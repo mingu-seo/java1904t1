@@ -40,7 +40,12 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
                 dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
                 dateFormat: "yy-mm-dd",
                 yearRange: "2019:2019",
-                minDate: "0D"
+                minDate: "0D",
+                prevText: "이전달",
+                nextText: "다음달",
+                onClose: function( selectedDate ) {
+                	$("#checkout").datepicker( "option", "minDate", selectedDate );
+       		 	}
                 
             });
             $("#checkout").datepicker({
@@ -48,7 +53,12 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
                 dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
                 dateFormat: "yy-mm-dd",
                 yearRange: "2019:2019",
-                minDate: "1D"
+                minDate: "1D",
+                prevText: "이전달",
+                nextText: "다음달",
+                onClose: function( selectedDate ) {
+                    $("#checkin").datepicker( "option", "maxDate", selectedDate );
+                }
             });  
             
             checkDate(<%=read.getNo()%>, $("#checkin").val(), $("#checkout").val());

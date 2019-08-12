@@ -17,14 +17,14 @@ QnaVO qdata = (QnaVO) request.getAttribute("qdata");
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/function.js"></script> 
 <script type="text/javascript">
 function goPassword(){
-	$("#editBtn1").click(function(){
+	$(".editBtn1").click(function(){
 		$("#PwCheckBtn").show()	// 비밀번호 입력칸 보이기
 		$("#editBtn2").show()	// 값 넘기는 버튼 생성
 		$("#editBtn1").hide()	// 비밀번호 입력칸 보이게 하는 버튼 사라짐
 		$("#password").focus();	
 	});	
 	
-	$("#deleteBtn1").click(function(){
+	$(".deleteBtn1").click(function(){
 		$("#PwCheckBtn").show()	// 비밀번호 입력칸 보이기
 		$("#deleteBtn2").show()	// 값 넘기는 버튼 생성
 		$("#deleteBtn1").hide()	// 비밀번호 입력칸 보이게 하는 버튼 사라짐
@@ -194,16 +194,22 @@ function goSave() {
                         <ul class="base_info clear">
                             <li>
                         	<div class="btnLeft" id="editBtn1">
-                        		<input type="submit" class="editBtn" onclick="goPassword();" value="수정">
+                        		<input type="submit" class="editBtn1" onclick="goPassword();" value="수정" style="float:left;">
+                        		<!-- <input type="submit" class="deleteBtn1" onclick="goPassword();" value="삭제" style="float:right;">
+                        		<input type="submit" class="editBtn2" href="javascript:$('#frm').submit();" value="수정" style="display:none;"></a>
+                        		<input type="submit" class="deleteBtn2" href="javascript:$('#frm').submit();" value="삭제" style="display:none;"></a> -->
+                        	</div>
+                        	<div>
+                        	
                         	</div>
                         	<div class="btnLeft" id="editBtn2" style="display:none; ">
-                        		<input type="submit" class="editBtn" href="javascript:$('#frm').submit();" value="수정"></a>
+                        		<input type="submit" class="editBtn" href="javascript:$('#frm').submit();" value="수정"  style="width:140px; height:50px; display:block; margin:0 auto; margin-top:70px; background-color:#0e693f; color:#fff;"></a>
                         	</div>
                         	<div class="btnRight" id="deleteBtn1">
-                        		<input type="submit" class="deleteBtn" onclick="goPassword();" value="삭제">
+                        		<input type="submit" class="deleteBtn" onclick="goPassword();" value="삭제" style="width:140px; height:50px; display:block; margin:0 auto; margin-top:70px; background-color:#0e693f; color:#fff;">
                         	</div>
                         	<div class="btnRight" id="deleteBtn2" style="display:none; ">
-                        		<input type="submit" class="deleteBtn" href="javascript:$('#frm').submit();" value="삭제"></a>
+                        		<input type="submit" class="deleteBtn" href="javascript:$('#frm').submit();" value="삭제" style="width:140px; height:50px; display:block; margin:0 auto; margin-top:70px; background-color:#0e693f; color:#fff;"></a>
                         	</div>
                         	
                        		</li>
