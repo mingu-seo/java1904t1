@@ -6,6 +6,7 @@
 <%
 PkgVO pkg_param = (PkgVO) request.getAttribute("pkg_param");
 PkgVO prdata = (PkgVO) request.getAttribute("prdata");
+/* Pkg_resVO prparam = (Pkg_resVO) request.getAttribute("prparam"); */
 %>
 <%
 MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
@@ -67,6 +68,16 @@ if (guest_tel1 != ) {
 	alert('숫자만 입력해주세요');
 }
 %> --%>
+$(function(){
+	<%
+	if(memberInfo != null) {%>
+		$("#member_pk").val(<%=memberInfo.getNo()%>);
+	<%} else {%>
+		$("#member_pk").val(0);
+	<%}%>
+	
+});
+
 </script>
 <body>
     <jsp:include page="/header_menu" flush="true"/>
@@ -82,7 +93,7 @@ if (guest_tel1 != ) {
         <div class="option_channel clear">
             
             <!-- 폼태그 / summit 입력버튼 311번 -->
-            <form name="frm" id="frm" action="/book/confirm_pkg/process" method="POST" onsubmit="return goSave()">
+            <form name="frm" id="frm" action="/book/confirm_pkg/process?" method="POST" onsubmit="return goSave()">
                 <div class="section-wrap clear">
 
                     <!-- 왼쪽 정보 입력 박스 구역 -->
@@ -271,6 +282,8 @@ if (guest_tel1 != ) {
                 </div>
                 <input type="hidden" name="cmd" value="write" />
                 <input type="hidden" name="pkg_pk" value="<%=prdata.getNo() %>"/>
+                <input type="hidden" id="member_pk" name="member_pk" value=""/>
+                <!-- <input type="hidden" name="rv_num" value=""/> -->
                 <%-- <input type="hidden" name="total_price" value="<%=res_data.getPkg_count()*res_data.getPkg_price() %>"/> --%>
             </form> 
         </div>

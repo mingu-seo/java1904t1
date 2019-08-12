@@ -56,6 +56,10 @@ position: relative; top:7px;}
                             font-size:22px;
                             font-weight:400;
                             }
+.d-r-input2 .none {width:260px; height:70px;background-color:#0e693f;border:none; border-radius:10px;color:#fff; position: relative;top:-38px;font-family: 'Noto Sans KR', sans-serif;
+                            font-size:22px;
+                            font-weight:400; text-align:center;
+                            }
 
 /* 객실 날짜 선택 및 예약버튼 */
 .d-r-input1 {position:relative;}

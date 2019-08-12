@@ -203,20 +203,15 @@ $(function(){
                     <p>SNS 계정을 통해 간편 가입이 가능합니다.</p>
 
                     <ul class="snsJoin clear">
+                   
                         <li>
-                            <button class="facebook"><p>페이스북으로 회원가입</p></button>
+                            <button class="naver"  onclick="naver_id_login"><p>네이버로 회원가입</p></button>
                         </li>
 
                         <li>
-                            <button class="google"><p>구글로 회원가입</p></button>
-                        </li>
-
-                        <li>
-                            <button class="naver"><p>네이버로 회원가입</p></button>
-                        </li>
-
-                        <li>
-                            <button class="kakao"><p>카카오로 회원가입</p></button>
+                            <button class="kakao" onclick="loginWithKakao()"><p>카카오로 회원가입</p></button>
+                           
+                            
                         </li>
                     </ul>
                 
@@ -259,4 +254,101 @@ $(function(){
         </div>
     </div>
 </body>
+
+  
+    <!-- <a id="kakao-login-btn"></a>
+    <a href="http://developers.kakao.com/logout">로그아웃</a> -->
+    <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+   <script type='text/javascript'>
+      //<![CDATA[
+        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('4d081a510a22bd9e6626b30d9311132e');
+        // 카카오 로그인 버튼을 생성합니다.
+        Kakao.Auth.createLoginButton({
+          container: '#kakao-login-btn',
+          success: function(authObj) {
+            /* alert(JSON.stringify(authObj)); */
+             alert("로그인 되었습니다.");
+             Kakao.API.request({
+                  url: '/v2/user/me',
+                  success: function(res) {
+                    /* alert(JSON.stringify(res)); */
+                    console.log(JSON.stringify(res));
+                    console.log('email:'+res.kakao_account.email);
+                    console.log('name:'+res.properties.nickname);
+                    console.log('id:'+res.id);
+                    
+                    
+                    $.ajax({
+                       url : "/membership/choice_join",
+                       data : {
+                          "id":res.id,
+                          "email":res.kakao_account.email
+                       },
+                       dataType: "HTML",
+                       success : function(data) {
+                          if(data.trim() == "ok"){
+                             
+                          }
+                       }
+                    })
+                    // 로그인 하는 경우
+                    // ajax member 테이블에 카카오계정을 회원가입한 데이터가
+                    // 있으면 ajax 로그인
+                    // 없으면 alert('회원가입해라')
+                    
+                    // 회원가입 하는 경우
+                    // ajax member 테이블에 카카오계정을 회원가입한 데이터가
+                    // 있으면 alert('이미 가입됌')
+                    // 없으면 ajax DB insert
+                    
+                    
+                  },
+                  fail: function(error) {
+                    alert(JSON.stringify(error));
+                  }
+                });
+          },
+          fail: function(err) {
+             alert(JSON.stringify(err));
+          }
+        });
+      //]]>
+      
+      
+        function loginWithKakao() {
+            // 로그인 창을 띄웁니다.
+            Kakao.Auth.login({
+              success: function(authObj) {
+                alert(JSON.stringify(authObj));
+              },
+              fail: function(err) {
+                alert(JSON.stringify(err));
+              }
+            });
+          };
+          
+       /*  $(function(){
+           $("src='kakao.png'").click(function(){
+              loginWithKakao();
+           });
+        });   */
+    </script>
+
+   <!-- <img src="kakao.png" onclick="loginWithKaKao();"> -->
+   
+   <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <script type="text/javascript">
+  	var naver_id_login = new naver_id_login("yyt5qpvTbPa5tqyLB0Td", "http://localhost:8080/login/naverCallback.jsp");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setDomain("http://localhost:8080");
+  	naver_id_login.setState(state);
+  	naver_id_login.setPopup();
+  	naver_id_login.init_naver_id_login();
+  </script>
+
 </html>

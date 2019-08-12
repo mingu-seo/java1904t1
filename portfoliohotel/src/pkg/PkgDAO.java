@@ -33,6 +33,10 @@ public class PkgDAO extends SqlMapClientDAOSupport{
 		return (ArrayList)getSqlMapClient().queryForList("pkg.list", vo);
 	}
 	
+	public ArrayList list2(PkgVO vo) throws SQLException {
+		return (ArrayList)getSqlMapClient().queryForList("pkg.list2", vo);
+	}
+	
 	/**
 	 * 게시글 저장 [게시글 저장 후 게시글의 번호를 가져옴]
 	 * @param vo NoticeVO

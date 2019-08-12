@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +31,9 @@ public class MainController {
 		if (memberService.loginCheck(vo)) {
 			
 			MemberVO memberInfo = memberService.getLoginSessionInfo(vo);
+			
 			memberInfo.setIp(vo.getIp());
+			
 //			memberService.insertLoginHistory(memberInfo);		// 로그인히스토리 저장
 			session.setAttribute("memberInfo", memberInfo);	// 세션 저장
 			String redirectUrl = SiteProperty.INDEX_PAGE; // 시작페이지

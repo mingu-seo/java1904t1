@@ -98,7 +98,6 @@ public class RoomDAO extends SqlMapClientDAOSupport {
 	}
 	
 	
-	
 	/**
 	 * 객실 옵션 목록 조회
 	 * @param vo

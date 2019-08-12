@@ -100,13 +100,11 @@ function groupDelete() {
 								%>
 								
 									<tr>
-									<%
-									String[] nameArr = list.get(i).getName().split(",");								
-									%>
+									
 										<td class="first"><input type="checkbox" name="no" id="no" value="<%=list.get(i).getNo()%>"/></td>
 										<td <%=targetUrl%>><%=list.get(i).getNo()%></td>
 										<td <%=targetUrl%>><%=list.get(i).getEmail()%></td>										
-										<td <%=targetUrl%>><%=nameArr[0]%> <%=nameArr[1] %></td>
+										<td <%=targetUrl%>><%=list.get(i).getF_name() %><%=list.get(i).getL_name() %></td>
 										<td <%=targetUrl%>><%=CodeUtil.getGender(list.get(i).getGender())%></td>										
 										<td <%=targetUrl%>><%=CodeUtil.getMgrade(list.get(i).getGrade())%></td>	 
 										<td <%=targetUrl%>><%=list.get(i).getLogindate()%></td>																		

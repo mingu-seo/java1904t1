@@ -13,12 +13,12 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Noto+Sans+KR:100,300,400,500,700,900&display=swap"	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/default.css">
-<link rel="stylesheet" href="../css/header-fixed.css">
-<link rel="stylesheet" href="../css/personal_info.css">
-<link rel="stylesheet" href="../css/footer.css">
-<script src="../js/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="../js/gnb.js"></script>
+<link rel="stylesheet" href="/css/default.css">
+<link rel="stylesheet" href="/css/header-fixed.css">
+<link rel="stylesheet" href="/css/personal_info.css">
+<link rel="stylesheet" href="/css/footer.css">
+<script src="/js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/js/gnb.js"></script>
 <script>
 $(function(){
     //left-section 높이값 알아내서 right-section 높이값을 동일하게
@@ -95,6 +95,31 @@ function goCheck() {
 function maxLengthCheck(object) {
 	if(object.value.length > object.maxLength) {
 		object.value = object.value.slice(0, object.maxLength);
+	}
+}
+
+function goPay(method, state) {
+	$("#pay_method").val(method);
+	$("#pay_state").val(state);
+	
+	if(method == 1) {
+		document.getElementById("card").style.backgroundColor = "#0e693f";
+		document.getElementById("card").style.color = "#ffffff";
+		document.getElementById("deposit").style.backgroundColor = "#e8e8e8";
+		document.getElementById("deposit").style.color = "#000000";
+		
+		$("#account_span").remove();
+		
+		$("#paydate").val('<%=DateUtil.getToday()%>');
+	} else {
+		document.getElementById("deposit").style.backgroundColor = "#0e693f";
+		document.getElementById("deposit").style.color = "#ffffff";
+		document.getElementById("card").style.backgroundColor = "#e8e8e8";
+		document.getElementById("card").style.color = "#000000";
+		
+		$("#account_span").text("더조은은행 190812-13-131430");
+		
+		$("#paydate").val("-");
 	}
 }
 </script>
@@ -230,18 +255,18 @@ function maxLengthCheck(object) {
 							</table>
 						</div>
 
-						<div class="add01 card">
+						<div class="add01 pay">
 							<div class="sec01-title">
 								<p>결제 방식 선택</p>
 							</div>
 
-							<div class="cardType">
-								<label for="name_ko">결제 방식<span>＊</span></label>
-								<button>무통장입급</button>
-								<button>카드결제</button>
+							<div class="payType">
+								<label for="pay_method">결제 방식<span>＊</span></label>
+								<button type="button" id="deposit" onclick="goPay(0,0);">무통장입급</button>
+								<button type="button" id="card" onclick="goPay(1,1);">카드결제</button> <br/>
 							</div>
+							<span id="account_span"></span>
 						</div>
-
 					</div>
 
 					<!-- 오른쪽 금액 추가 및 결제버튼 구역 -->

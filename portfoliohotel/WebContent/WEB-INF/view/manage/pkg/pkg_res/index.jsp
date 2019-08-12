@@ -157,9 +157,10 @@ function goSearch() {
 									</select> --%>
 									<select name="stype" title="검색을 선택해주세요">
 										<option value="all" <%=Function.getSelected(param.getStype(), "all") %>>전체</option>
-										<option value="guest_name2" <%=Function.getSelected(param.getStype(), "guest_name2") %>>예약자명</option>
-										<option value="pkg_name" <%=Function.getSelected(param.getStype(), "pkg_name") %>>패키지명</option>
-										<option value="use_date" <%=Function.getSelected(param.getStype(), "use_date") %>>수령일자</option>
+										<option value="guest_name1" <%=Function.getSelected(param.getStype(), "guest_name1") %>>예약자명 성</option>
+										<option value="guest_name2" <%=Function.getSelected(param.getStype(), "guest_name2") %>>예약자명 이름</option>
+										<option value="pkg_name" <%=Function.getSelected(param.getStype(), "pkg_name") %>>패키지 이름</option>
+										<option value="use_date" <%=Function.getSelected(param.getStype(), "use_date") %>>수령일</option>
 									</select>
 									<input type="text" name="sval" value="<%=param.getSval()%>" title="검색할 내용을 입력해주세요" />
 									<input type="image" src="/manage/img/btn_search.gif" class="sbtn" alt="검색" />
