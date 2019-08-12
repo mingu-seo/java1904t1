@@ -19,7 +19,7 @@
 		    </isNotEqual> -->    		    
 			<isNotEqual property="sval" compareValue="">
 				<isEqual property="stype" compareValue="all" prepend="and">
-					and ( (guest_name2 like '%$sval$%' ) or (pkg_name like '%$sval$%' ) or (use_date like '%$sval$%')) 					
+					and ( guest_name1 like '%$sval$%' ) or ( guest_name2 like '%$sval$%' ) or (pkg_name like '%$sval$%' ) or (use_date like '%$sval$%')) 					
 				</isEqual>
 				<isNotEqual property="stype" compareValue="all" prepend="and">
 					and ($stype$ like '%$sval$%' )
@@ -42,13 +42,20 @@
 		
     </select>
     
+	<select id="list2" parameterClass="pkg_res_vo" resultClass="pkg_res_vo">
+        select *
+        from pkg_res
+		ORDER BY purchase_date DESC LIMIT $startPageNo$, $pageRows$
+		
+    </select>
+    
 	<!-- 해당 테이블에 게시글 작성 -->
     <insert id="insert" parameterClass="pkg_res_vo">
         INSERT INTO pkg_res (
-        	pkg_name, use_date, guest_name1, guest_name2, purchase_date, pkg_pk,
+        	pkg_name, use_date, guest_name1, guest_name2, purchase_date, pkg_pk, member_pk,
         	guest_tel1, guest_tel2, guest_tel3, email, pkg_price, pkg_count, total_price
         ) VALUES (
-        	#pkg_name#, #use_date#, #guest_name1#, #guest_name2#, now(), #pkg_pk#,
+        	#pkg_name#, #use_date#, #guest_name1#, #guest_name2#, now(), #pkg_pk#, #member_pk#,
         	#guest_tel1#, #guest_tel2#, #guest_tel3#, #email#, #pkg_price#, #pkg_count#, #total_price#
         )
         <selectKey keyProperty="no" resultClass="Integer">

@@ -35,6 +35,11 @@ public class PkgService {
 	public ArrayList list(PkgVO vo) throws Exception {
 		ArrayList list = pkgDao.list(vo);
 		return list;
+	}
+
+	public ArrayList list2(PkgVO vo) throws Exception {
+		ArrayList list = pkgDao.list2(vo);
+		return list;
 	}	
 	
 	public int insert(PkgVO vo, HttpServletRequest request) throws SQLException, IOException {
