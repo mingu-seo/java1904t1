@@ -265,7 +265,10 @@ public class MemberController {
 	public String mypage(Model model, MemberVO param, Pkg_resVO prparam, HttpSession session) throws Exception {
 		MemberVO data = memberService.read(param.getNo());
 		MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
-		Pkg_resVO prdata = pkg_resService.read(prparam.getMember_pk());
+		
+		prparam.setMember_pk(memberInfo.getNo());
+		int[] rowPageCount = pkg_resService.count(prparam);
+		ArrayList<Pkg_resVO> plist = pkg_resService.list(prparam);
 		
 		model.addAttribute("data", data);
 		model.addAttribute("vo", param);
@@ -273,7 +276,10 @@ public class MemberController {
 		model.addAttribute("memberInfo", memberInfo);
 		
 		model.addAttribute("prparam",prparam);
-		model.addAttribute("prdata",prdata);
+		
+		model.addAttribute("ptotCount", rowPageCount[0]);
+		model.addAttribute("ptotPage", rowPageCount[1]);
+		model.addAttribute("plist",plist);
 
 		return "membership/mypage";
 	}

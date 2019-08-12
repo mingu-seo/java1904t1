@@ -9,8 +9,12 @@ MemberVO data = (MemberVO)request.getAttribute("data");
 MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 %>
 <%
+ArrayList<Pkg_resVO> plist = (ArrayList<Pkg_resVO>)request.getAttribute("plist");
+int ptotCount = (Integer)request.getAttribute("ptotCount");
+int ptotPage = (Integer)request.getAttribute("ptotPage");
+%>
+<%
 Pkg_resVO prparam = (Pkg_resVO)request.getAttribute("prvo");
-Pkg_resVO prdata = (Pkg_resVO)request.getAttribute("prdata");
 %>
 <%-- <%
 MemberVO sessionPkg_res = (MemberVO)session.getAttribute("memberInfo");
@@ -76,29 +80,82 @@ if(sessionPkg_res != null) {
                             <span class="option-select">x 1</span>
                         </td>
                     </tr>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td class="price" colspan="2">1,000,000 WON</td>
+                    </tr>                   
                     <tr class="table-head">
                         <th>패키지 예약 상품</th>
                         <th>수량</th>
                         <th>수령일</th>
                     </tr>
                     <tr class="reserved">
-                        <td><%-- <%=prdata.getPkg_name()%> --%></td>
-                        <td class="participants">성인 x 2
-                            <br/>
-                            어린이 x 1
+                        <td>
+                        <%
+                        	if (ptotCount == 0) {
+                        %>
+                        	<ul>
+                        		<li class="first">예약한 상품이 없습니다.</li>
+                        	</ul>
+                        <%
+                        	} else {
+                        		Pkg_resVO prdata;
+                        		for (int i=0; i<plist.size(); i++) {
+                        			prdata = plist.get(i);
+                        %>
+                        	<li><%=prdata.getPkg_name()%></li>
+                        	<br><br>
+                        <%
+                        		}
+                        	}
+                        %>
                         </td>
-                        <td class="option">
-                            SPA
-                            <span class="option-select">- 추가사항 없음</span>
-                            침대 추가
-                            <span class="option-select">x 1</span>
-                            웰컴 와인 & 치즈
-                            <span class="option-select">x 1</span>
+                        <td class="participants">
+                        <%
+                        	if (ptotCount == 0) {
+                        %>
+                        	<ul>
+                        		<li class="first">예약한 상품이 없습니다.</li>
+                        	</ul>
+                        <%
+                        	} else {
+                        		Pkg_resVO prdata;
+                        		for (int i=0; i<plist.size(); i++) {
+                        			prdata = plist.get(i);
+                        %>
+                        	<li><%=prdata.getPkg_count()%></li>
+                        <%
+                        		}
+                        	}
+                        %>                        
+                        </td>
+                        <td class="participants">
+                        <%
+                        	int totalPrice = 0;
+                        	if (ptotCount == 0) {
+                        %>
+                        	<ul>
+                        		<li class="first">예약한 상품이 없습니다.</li>
+                        	</ul>
+                        <%
+                        	} else {
+                        		Pkg_resVO prdata;
+                        		for (int i=0; i<plist.size(); i++) {
+                        			prdata = plist.get(i);
+                        			totalPrice += prdata.getTotal_price();
+                        %>
+                        	<li><%=prdata.getUse_date()%></li>
+                        <%
+                        		}
+                        	}
+                        %>                              
                         </td>
                     </tr>                                                                             
                     <tr>
                         <td>TOTAL</td>
-                        <td class="price" colspan="2">1,000,000 WON</td>
+                        <td class="price" colspan="2">
+                        	<%=totalPrice%> WON
+						</td>
                     </tr>
                 </table>
             </div>

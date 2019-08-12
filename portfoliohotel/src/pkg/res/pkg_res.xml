@@ -14,9 +14,10 @@
 		    <isNotEqual property="display" compareValue="0">
 		    	and display = #display#
 		    </isNotEqual>
-		    <isNotEqual property="top" compareValue="0">
-		    	and top = #top#
-		    </isNotEqual> -->    		    
+		     -->   
+		    <isNotEqual property="member_pk" compareValue="0">
+		    	and member_pk = #member_pk#
+		    </isNotEqual> 		    
 			<isNotEqual property="sval" compareValue="">
 				<isEqual property="stype" compareValue="all" prepend="and">
 					and ( guest_name1 like '%$sval$%' ) or ( guest_name2 like '%$sval$%' ) or (pkg_name like '%$sval$%' ) or (use_date like '%$sval$%')) 					
