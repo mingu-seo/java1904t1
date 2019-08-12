@@ -61,20 +61,30 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                         }
                 });
 
-                $("#checkin").datepicker({
+                $("#checkin_select").datepicker({
                     monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
                     dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
                     dateFormat: "yy-mm-dd",
                     yearRange: "2019:2019",
-                    minDate: "0D" 
+                    minDate: "0D",
+                    prevText: "이전달",
+                    nextText: "다음달",
+                    onClose: function( selectedDate ) {
+                    	$("#checkout_select").datepicker( "option", "minDate", selectedDate );
+					}                
                 });
                 
-                $("#checkout").datepicker({
+                $("#checkout_select").datepicker({
                     monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
                     dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
                     dateFormat: "yy-mm-dd",
                     yearRange: "2019:2019",
-                    minDate: "1D" 
+                    minDate: "1D",
+                    prevText: "이전달",
+                    nextText: "다음달",
+                    onClose: function( selectedDate ) {
+                        $("#checkin_select").datepicker( "option", "maxDate", selectedDate );
+                    }   
                 });
                 
                 calculate();

@@ -91,6 +91,15 @@ public class Room_resController {
 		return "manage/room/res/list";
 	}
 	
+	/**
+	 * 미예약 객실 수량 체크 (객실당 최대 10)
+	 * @param model
+	 * @param vo
+	 * @param req
+	 * @param rvo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/manage/room/res/check")
 	public String check(Model model, Room_resVO vo, HttpServletRequest req, RoomVO rvo) throws Exception {
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -222,7 +231,13 @@ public class Room_resController {
 		return "include/alert";
 	}
 	
-	
+	/**
+	 * 객실 예약 - 추가 옵션
+	 * @param model
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/book/room/add_option")
 	public String add_option(Model model, Room_optVO vo) throws Exception {
 		ArrayList<Room_optVO> list_o = roomService.list_opt(vo);
@@ -231,6 +246,15 @@ public class Room_resController {
 		return "book/room/add_option";
 	}
 	
+	/**
+	 * 객실 예약 - 숙박 고객 정보 등록
+	 * @param model
+	 * @param vo
+	 * @param mvo
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/book/room/personal_info")
 	public String personal_info(Model model, Room_optVO vo, MemberVO mvo, HttpSession session) throws Exception {
 		if (memberService.loginCheck(mvo)) {
@@ -242,12 +266,27 @@ public class Room_resController {
 		return "book/room/personal_info";
 	}
 	
+	/**
+	 * 객실 예약 - 예약 확정
+	 * @param model
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/book/room/confirm_room")
 	public String confirm_room(Model model, Room_optVO vo) throws Exception {
 
 		return "book/room/confirm_room";
 	}
 
+	/**
+	 * 객실 검색 - 객실별 조회
+	 * @param model
+	 * @param rvo
+	 * @param rivo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/book/room/check_room")
 	public String check_room(Model model, RoomVO rvo, Room_imageVO rivo) throws Exception {
 		ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)roomService.list(rvo);
@@ -256,6 +295,13 @@ public class Room_resController {
 		return "book/room/check_room";
 	}
 
+	/**
+	 * 객실 검색 - 요금별 조회
+	 * @param model
+	 * @param rvo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/book/room/price_room")
 	public String price_room(Model model, RoomVO rvo) throws Exception {
 		ArrayList<RoomVO> list_rp = (ArrayList<RoomVO>)roomService.list_price(rvo);
@@ -264,6 +310,15 @@ public class Room_resController {
 		return "book/room/price_room";
 	}
 	
+	/**
+	 * 객실 검색 - 객실별 조회 - 미예약 객실 수량 체크
+	 * @param model
+	 * @param vo
+	 * @param req
+	 * @param rvo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/book/room/check_cr")
 	public String check_cr(Model model, Room_resVO vo, HttpServletRequest req, RoomVO rvo) throws Exception {
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -277,6 +332,15 @@ public class Room_resController {
 		return "book/room/check_cr";
 	}
 	
+	/**
+	 * 객실 검색 - 요금별 조회 - 미예약 객실 수량 체크
+	 * @param model
+	 * @param vo
+	 * @param req
+	 * @param rvo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/book/room/check_pr")
 	public String check_pr(Model model, Room_resVO vo, HttpServletRequest req, RoomVO rvo) throws Exception {
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -290,6 +354,15 @@ public class Room_resController {
 		return "book/room/check_pr";
 	}
 	
+	/**
+	 * detail_sub에서 객실 검색 시, 미예약 객실 수량 체크
+	 * @param model
+	 * @param vo
+	 * @param req
+	 * @param rvo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/book/room/check_ds")
 	public String check_ds(Model model, Room_resVO vo, HttpServletRequest req, RoomVO rvo) throws Exception {
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -302,6 +375,15 @@ public class Room_resController {
 		return "book/room/check_ds";
 	}
 
+	/**
+	 * 객실 예약 등록
+	 * @param model
+	 * @param vo
+	 * @param orvo
+	 * @param req
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/room/res/submit")
 	public String submit(Model model, Room_resVO vo, Room_opt_resVO orvo, HttpServletRequest req) throws Exception {
 		int day_stay = Integer.parseInt(req.getParameter("day_stay"));
@@ -316,12 +398,26 @@ public class Room_resController {
 		return "book/room/confirm_room";
 	}
 	
+	/**
+	 * 비회원 객실 예약 검색
+	 * @param model
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/book/room/nonmember")
 	public String nonmember(Model model, Room_resVO vo) throws Exception {
 		
 		return "book/room/nonmember";
 	}
 	
+	/**
+	 * 비회원 객실 예약 조회
+	 * @param model
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/book/room/nonmember_res")
 	public String nonmember_res(Model model, Room_resVO vo) throws Exception {
 		Room_resVO mdata = room_resService.nonmember(vo);
@@ -340,6 +436,13 @@ public class Room_resController {
 		return "include/alert";
 	}
 	
+	/**
+	 * 비회원 객실 예약 취소
+	 * @param model
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/book/room/nonmember_res/cancel")
 	public String nonmember_cancel(Model model, Room_resVO vo) throws Exception {
 		int r = room_resService.cancel(vo.getNo());
