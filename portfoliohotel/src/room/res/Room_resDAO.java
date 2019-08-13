@@ -109,6 +109,10 @@ public class Room_resDAO extends SqlMapClientDAOSupport {
 		return (HashMap<Integer, Integer>)getSqlMapClient().queryForObject("room_res.count_use", member_pk);
 	}
 	
+	public int count_res(int member_pk) throws SQLException {
+		return (Integer)getSqlMapClient().queryForObject("room_res.count_res", member_pk);
+	}
+	
 	/**
 	 * 객실 추가 옵션 예약
 	 * @param vo

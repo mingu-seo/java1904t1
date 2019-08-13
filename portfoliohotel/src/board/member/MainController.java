@@ -40,23 +40,25 @@ public class MainController {
 			session.setAttribute("memberInfo", memberInfo);	// 세션 저장
 			String redirectUrl = SiteProperty.INDEX_PAGE; // 시작페이지
 			
-			HashMap map_m = room_resService.count_use(memberInfo.getNo());
-			int useN = Integer.parseInt(String.valueOf(map_m.get("useNumber")));			
-			int dayS = Integer.parseInt(String.valueOf(map_m.get("dayStay")));
-			int grade = 0;
-			
-			if((useN >= 1 && useN < 3) || (dayS >= 3 && dayS < 6)) {
-				grade = 1;
-			} else if((useN >= 3 && useN < 7) || (dayS >= 6 && dayS < 12)) {
-				grade = 2;
-			} else if(useN >= 7 || dayS >= 12) {
-				grade = 3;
+			if(room_resService.count_res(memberInfo.getNo()) > 0) {
+				HashMap map_m = room_resService.count_use(memberInfo.getNo());
+				int useN = Integer.parseInt(String.valueOf(map_m.get("useNumber")));			
+				int dayS = Integer.parseInt(String.valueOf(map_m.get("dayStay")));
+				int grade = 0;
+				
+				if((useN >= 1 && useN < 3) || (dayS >= 3 && dayS < 6)) {
+					grade = 1;
+				} else if((useN >= 3 && useN < 7) || (dayS >= 6 && dayS < 12)) {
+					grade = 2;
+				} else if(useN >= 7 || dayS >= 12) {
+					grade = 3;
+				}
+				
+				MemberVO mvo = new MemberVO();
+				mvo.setGrade(grade);
+				mvo.setNo(memberInfo.getNo());
+				memberService.grade(mvo);
 			}
-			
-			MemberVO mvo = new MemberVO();
-			mvo.setGrade(grade);
-			mvo.setNo(memberInfo.getNo());
-			memberService.grade(mvo);
 			
 			// 로그인 이전페이지 존재하는 경우
 			if(login_url != null && !"".equals(login_url)) {
