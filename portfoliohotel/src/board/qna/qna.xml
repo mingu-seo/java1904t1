@@ -43,13 +43,11 @@
 		ORDER BY regdate DESC LIMIT $startPageNo$, $pageRows$
     </select>
     
-    <!-- <select id="Mylist" parameterClass="qna_vo" resultClass="qna_vo">
-        select 
-   			*
-        from qna
-        where no = #no#
+    <select id="Mylist" parameterClass="qna_vo" resultClass="qna_vo">
+        select * from qna
+        WHERE member_pk=#member_pk#
 		ORDER BY regdate DESC LIMIT $startPageNo$, $pageRows$
-    </select> -->
+    </select>
     
   <!--   <select id="Mycount" parameterClass="qna_vo" resultClass="Integer">
         select count(*) from qna

@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="pkg.res.*" %>
 <%@ page import="room.res.*" %>
+<%@ page import="board.qna.*" %>
 <%
 MemberVO param = (MemberVO)request.getAttribute("vo");
 MemberVO data = (MemberVO)request.getAttribute("data");
@@ -17,6 +18,10 @@ Pkg_resVO prparam = (Pkg_resVO)request.getAttribute("prvo");
 
 ArrayList<Room_resVO> mdata = (ArrayList<Room_resVO>)request.getAttribute("mdata");
 ArrayList<ArrayList<Room_opt_resVO>> modata = (ArrayList<ArrayList<Room_opt_resVO>>)request.getAttribute("modata");
+
+ArrayList<QnaVO> qdata = (ArrayList<QnaVO>)request.getAttribute("qlist");
+int qtotCount = (Integer)request.getAttribute("qtotCount");
+int qtotPage = (Integer)request.getAttribute("qtotPage");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -222,14 +227,33 @@ $(function(){
             <h3>나의 질문<span class="title-sub">MY QUESTION</span></h3>
             <div class="my-question-box">
                 <table>
+                	 	<%
+							if (qtotCount == 0) {
+						%>
+						<tr>
+								<td class="first" colspan="8">등록된 글이 없습니다.</td>
+						</tr>
+						<% 
+							} else {
+								String targetUrl = "";
+								String topClass = "";
+								QnaVO qnadata;
+								String bgColor ="";
+															
+								for (int i=0; i<qdata.size(); i++) {
+											qnadata = qdata.get(i);
+											/* targetUrl = "style='cursor:pointer;' onclick=\"location.href='"+qdata.getTargetURLParam("qna_read", qdata, qnadata.getNo())+"'\""; */
+											bgColor = (qnadata.getReply()==0)?"#ffffff":"#e8e8e8";
+																
+						%>
                     <tr>
-                            <td><a href="#"><span class="plus">┌</span>회원탈퇴에 대한 답변입니다.</a></td>
-                            <td>2019-06-29</td>
+                            <td <%=targetUrl%>class="title"><a href="#"><%=qnadata.getTitle() %></a></td>
+                            <td><a href="#"><%=DateUtil.getDateFormat(qnadata.getRegdate())%></a></td> 
                     </tr>
-                    <tr>
-                        <td><a href="../qna.html">회원탈퇴를 하고싶어요.</a></td>
-                        <td>2019-07-01</td>
-                    </tr>
+                     <%
+									}
+								 }
+					%>
                 </table>
             </div>
         </div>
