@@ -1,6 +1,7 @@
 package board.member;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -294,6 +295,8 @@ public class MemberController {
 			modata.add(odata);
 		}
 		
+		ArrayList<HashMap> pdata = room_resService.point(memberInfo.getNo());
+		
 		// ============= qna ======================== 
 		qparam.setMember_pk(memberInfo.getNo());
 		int[] qrowPageCount = qnaService.count(qparam);
@@ -313,6 +316,8 @@ public class MemberController {
 		
 		model.addAttribute("mdata", mdata);
 		model.addAttribute("modata", modata);
+
+		model.addAttribute("pdata", pdata);
 		
 		// ============= qna ======================== 
 		model.addAttribute("qtotCount", qrowPageCount[0]);

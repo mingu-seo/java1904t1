@@ -176,6 +176,12 @@
 		WHERE member_pk=#member_pk#
 	</select>
 	
+	<select id="point" parameterClass="Integer" resultClass="java.util.HashMap">
+		SELECT TRUNCATE((total_price*0.01),0) AS point, (DATE_ADD(checkout, INTERVAL 1 DAY)) AS savingdate, no 
+		FROM room_res 
+		WHERE member_pk=#member_pk# AND <![CDATA[checkout<=NOW()]]>;
+	</select>
+	
 	<typeAlias alias="room_opt_resVO" type="room.res.Room_opt_resVO"/>
 	
 	<insert id="insert_opt" parameterClass="room_opt_resVO">
