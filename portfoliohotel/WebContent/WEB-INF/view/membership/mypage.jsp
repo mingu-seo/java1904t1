@@ -18,6 +18,7 @@ Pkg_resVO prparam = (Pkg_resVO)request.getAttribute("prvo");
 
 ArrayList<Room_resVO> mdata = (ArrayList<Room_resVO>)request.getAttribute("mdata");
 ArrayList<ArrayList<Room_opt_resVO>> modata = (ArrayList<ArrayList<Room_opt_resVO>>)request.getAttribute("modata");
+ArrayList<HashMap> pdata = (ArrayList<HashMap>)request.getAttribute("pdata");
 
 ArrayList<QnaVO> qdata = (ArrayList<QnaVO>)request.getAttribute("qlist");
 int qtotCount = (Integer)request.getAttribute("qtotCount");
@@ -67,7 +68,7 @@ $(function(){
             <div class="reservation-status-left">
                 <table>
                     <tr class="table-head">
-                        <th>예약 상품</th>
+                        <th>객실 예약 상품</th>
                         <th>숙박 기간</th>
                         <th>결제 금액</th>
                     </tr>
@@ -80,7 +81,7 @@ $(function(){
                         <td class="price"><%=Function.toPriceComma(mdata.get(i).getTotal_price()) %> 원</td>
                     </tr>
                     <tr class="reserved_detail">
-                    	<td></td>
+                    	<td>예약번호 <%=mdata.get(i).getNo() %> </td>
                     	<td class="participants">
                         	성인 x <%=mdata.get(i).getAdult() %><br/>
                            	어린이 x <%=mdata.get(i).getKid() %>
@@ -211,15 +212,16 @@ $(function(){
             <h3>포인트 내역<span class="title-sub">POINT</span></h3>
             <div class="point-box">
                 <table>
+                	<%
+                	for(int i=0; i<pdata.size(); i++) {
+                	%>
                     <tr>
-                        <td><span class="plus">+</span> 9,000P</td>
-                        <td>2019-06-29</td>
+                        <td><span class="plus">+</span> <%=pdata.get(i).get("point") %>P [예약번호 <%=pdata.get(i).get("no") %> ]</td>
+                        <td><%=pdata.get(i).get("savingdate") %></td>
                     </tr>
-                    <tr>
-                        <td><span class="plus">+</span> 10,000P</td>
-                        <td>2019-07-01</td>
-                    </tr>
-                    
+                    <%
+                	}
+                    %>
                 </table>
             </div>
         </div>

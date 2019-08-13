@@ -143,6 +143,12 @@ public class Room_resService {
 		return r;
 	}
 	
+	public ArrayList<HashMap> point(int member_pk) throws Exception {
+		ArrayList<HashMap> map = room_resDAO.point(member_pk);
+		return map;
+	}
+	
+	
 	public ArrayList list_opt(int room_opt_pk) throws Exception {
 		ArrayList list = room_resDAO.list_opt(room_opt_pk);
 		return list;
