@@ -25,6 +25,7 @@ public class MainController {
 
 		return "membership";
 	}
+
 	
 	@RequestMapping("/membership/login")
 	public String login(Model model, @RequestParam(value="login_url", required=false) String login_url, @RequestParam(value="login_param", required=false) String login_param, MemberVO vo, HttpSession session) throws Exception {

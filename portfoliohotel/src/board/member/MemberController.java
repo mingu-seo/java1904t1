@@ -307,11 +307,8 @@ public class MemberController {
 
 	
 	@RequestMapping("/membership/join")
-	public String join(Model model, MemberVO param ) throws Exception {
-		
-		model.addAttribute("vo", param);
-
-		
+	public String join(Model model, MemberVO param ) throws Exception {		
+		model.addAttribute("vo", param);	
 		return "/membership/join";
 	}
 	
@@ -346,9 +343,22 @@ public class MemberController {
 	
 		return "redirect:/membership/join_complete";
 	}
+	
+	@RequestMapping("/login/naver")
+	public String naver(Model model, MemberVO param) throws Exception {
+		
+		model.addAttribute("vo", param);	
+		return "/login/naver";
+	}
+	
+	@RequestMapping("/login/naverCallback")
+	public String naverCallback(Model model, MemberVO param) throws Exception {
+		MemberVO data = memberService.read(param.getNo());
+		model.addAttribute("data", data);
+		model.addAttribute("vo", param);	
+		return "/login/naverCallback";
+	}
 
-	
-	
 	/**
 	 * 등록, 수정, 삭제 cmd값으로 구분해서 처리
 	 * 
@@ -412,12 +422,6 @@ public class MemberController {
 			session.invalidate();
 			model.addAttribute("url", param.getTargetURLParam("/index", param, 0));
 
-//		}else if ("groupDelete".equals(param.getCmd())) {
-//			int r = memberService.groupDelete(request);
-//			model.addAttribute("code", "alertMessageUrl");
-//			model.addAttribute("message", Function.message(r, "총 " + r + "건이 삭제되었습니다.", "삭제실패"));
-//			model.addAttribute("url", param.getTargetURLParam("index", param, 0));
-
 		} else if ("delete_account".equals(param.getCmd())) {
 			
 			int r = memberService.delete_account(param);
@@ -474,30 +478,7 @@ public class MemberController {
 			model.addAttribute("message", Function.message(r, "정상적으로 수정되었습니다. 다시 로그인 해주세요.", "수정실패"));
 			model.addAttribute("url", param.getTargetURLParam("sign_in", param, 0));
 		}
-//			else if("find_pw".equals(param.getCmd())) {
-//			int r =memberService.find_pw(param);  
-//			
-//			if(r>0) {
-//				model.addAttribute("url","/find_pw_change");
-//			}else {
-//				model.addAttribute("code", "alertMessageBack");
-//				model.addAttribute("message","존재하지 않는 정보입니다.");
-//			}
-//			
-//		}
-		
-//			else if("find_email".equals(param.getCmd())) {
-//			int r = memberService.find_email(param);
-//			
-//			if (r > 0) {			
-//				model.addAttribute("code", "alertMessageUrl");
-//				model.addAttribute("message", "당신의 이메일은["+param.getEmail()+"]입니다.");				
-//				model.addAttribute("url", "/sign_in");
-//			} else {
-//				model.addAttribute("code", "alertMessageBack");
-//				model.addAttribute("message", "이메일이 없습니다.");
-//			}
-//		}
+
 
 		return returnJsp;
 	}

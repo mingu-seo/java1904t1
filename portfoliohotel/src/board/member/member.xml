@@ -47,6 +47,9 @@
 		</selectKey>
     </insert>
     
+    
+
+    
 
    
     <update id="update" parameterClass="membervo">
