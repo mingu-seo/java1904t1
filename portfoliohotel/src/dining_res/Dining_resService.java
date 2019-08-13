@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dining.DiningVO;
-import manage.admin.AdminVO;
 import util.Page;
 
 @Service
@@ -32,7 +30,7 @@ public class Dining_resService {
 		return list;
 	}
 	
-	public int insert(Dining_resVO vo) throws SQLException {
+	public int insert(Dining_resVO vo, HttpServletRequest request) throws SQLException {
 		int no = dining_resDao.insert(vo);
 		return no;
 	}
@@ -52,6 +50,7 @@ public class Dining_resService {
 		int r = 0;
 		for (int i = 0; i < no.length; i++) {
 			int nos = Integer.parseInt(no[i]);
+			r += dining_resDao.delete(nos);
 		}
 		return r;
 	}

@@ -2,13 +2,14 @@
 <%@ page import="dining_res.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="board.member.*" %>
+<%@ page import="util.*" %>
 <%
 Dining_resVO param = (Dining_resVO) request.getAttribute("vo");
 Dining_resVO data = (Dining_resVO) request.getAttribute("data");
 MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,8 +27,36 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
     <script type="text/javascript" src="../js/datepicker.js"></script>
     <title>정보입력</title>
 </head>
+
+
 <script>
+
+/* function submit_value() {
+	var a=document.price_exec;
+	opened=window.open('','test','width=300,height=300');
+	opened.document.writeln('<pre>총 가격 : '+a.exec_price.value+'<br>성인 :'+a.adult.value+'<br>어린이 :'+a.kid.value');
+}
+
+function change_price(value){
+	var a=document.price_exec;
+	original_price=parseInt(a.total_price.value);
+} */
+ 
+ 
 $(function() {
+	
+	$( "#d_day" ).datepicker({
+        monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+        dateFormat: "yy-mm-dd",
+        yearRange: "2019:2019",
+        minDate: "0D" 
+    });
+	
+	$("#d_day").change(function(){ 
+		    console.log($('#d_day').val());
+	});
+	
 	
 	if($("#hideEmailOpt").val() == "@") {
 	$("#hideEmailOpt").hide();
@@ -48,8 +77,17 @@ $(function() {
 		         } 
 		    }); 
 	});
+	
+	
+	/* $("#telselect").change(function(){
+		$("#guest_tel1").val($("#telselect option:selected").val());
+		console.log($("#guest_tel1").val());
+		console.log($("#guest_tel2").val());
+		console.log($("#guest_tel3").val());
+	});  */
 });
 </script>
+
 
 <body>
     
@@ -190,16 +228,16 @@ $(function() {
         <div class="option_channel clear">
         	
         	<%
-         	String F_name = "";
         	String L_name = "";
+         	String F_name = "";
         	String email1 = "";
         	String F_tel = "";
         	String M_tel = "";
         	String L_tel = "";
         	
         	if(member_vo != null) {
-        		F_name = member_vo.getF_name();
         		L_name = member_vo.getL_name();
+        		F_name = member_vo.getF_name();
         		email1 = member_vo.getEmail();
         		F_tel = member_vo.getF_tel();
         		M_tel = member_vo.getM_tel();
@@ -208,7 +246,9 @@ $(function() {
         	%>
             
             <!-- 폼태그 / summit 입력버튼 311번 -->
-            <form action="#" method="GET">
+            <!-- <form action="/book/confirm_dining" method="post" id="frm"> -->
+            <form method="POST" name="frm" id="frm" action="/book/confirm_dining/process1" enctype="multipart/form-data" >
+            
                 <div class="section-wrap clear">
 
                     <!-- 왼쪽 정보 입력 박스 구역 -->
@@ -221,8 +261,8 @@ $(function() {
 
                             <div class="name_ko">
                                     <label for="name_ko">성명 (한글)＊</label>
-                                    <input type="text" id="name_ko" placeholder="성" value="<%=member_vo.getF_name()%>">
-                                    <input type="text" id="name_ko" placeholder="이름" value="<%=member_vo.getL_name()%>">
+                                    <input type="text" id="name_ko" name="guest_lname" placeholder="성" value="<%=member_vo.getF_name()%>">
+                                    <input type="text" id="name_ko" name="guest_fname"placeholder="이름" value="<%=member_vo.getL_name()%>">
                             </div>
 
                            <!-- <div class="name_en clear">
@@ -243,15 +283,15 @@ $(function() {
 
                             <div class="phoneNumber">
                                     <label for="phoneNumber">연락처＊</label>
-                                    <select>
-                                    	<option value="<%=F_tel%>" id="hideEmailOpt"><%=F_tel%></option>
+                                    <select id= "telselect" name="guest_tel1">
+                                    	
                                         <option value="1">선택</option>
                                         <option value="010" <%="010".equals(F_tel) ? "selected":""%>>010</option>
-                                        <option value="011" <%="011".equals(M_tel) ? "selected":""%>>011</option>
-                                        <option value="017" <%="017".equals(L_tel) ? "selected":""%>>017</option>
+                                        <option value="011" <%="011".equals(F_tel) ? "selected":""%>>011</option>
+                                        <option value="017" <%="017".equals(F_tel) ? "selected":""%>>017</option>
                                     </select>
-                                    <input type="text" id="number" placeholder="숫자만 입력가능" value="<%=M_tel%>">
-                                    <input type="text" id="number" placeholder="숫자만 입력가능" value="<%=L_tel%>">
+                                    <input type="text" id="guest_tel2" name="guest_tel2" placeholder="숫자만 입력가능" value="<%=M_tel%>">
+                                    <input type="text" id="guest_tel3" name="guest_tel3" placeholder="숫자만 입력가능" value="<%=L_tel%>">
                             </div>
 
                             <div class="email">
@@ -283,36 +323,36 @@ $(function() {
 
                             <div class="cardType">
                                     <label for="name_ko">예약 상품<span>＊</span></label>
-                                    <select>
-                                        <option>더 페스트</option>
-                                        <option>그라넘 다이닝 라운지</option>
-                                        <option>문바</option>
-                                        <option selected>더 오아시스 아웃도어 키친</option>
+                                    <select name="dining_name" onChange='change_price();'>
+                                        <option value="더 페스트">더 페스트</option>
+                                        <option value="그라넘 다이닝 라운지">그라넘 다이닝 라운지</option>
+                                        <option value="문바">문바</option>
+                                        <option value="더 오아시스 아웃도어 키친" selected>더 오아시스 아웃도어 키친</option>
                                     </select>
                             </div>
                             
                             <div class="cardType">
                                     <label for="name_ko">예약 날짜<span>＊</span></label>
-                                    <input type="text" id="start-date" placeholder="클릭하시면 날짜를 선택할 수 있습니다.">
+                                    <input type="text" name= "d_day" id="d_day" placeholder="클릭하시면 날짜를 선택할 수 있습니다.">
                                    
                             </div>
 
                             <div class="cardType">
                                 <label for="name_ko">예약 시간<span>＊</span></label>
-                                <select>
+                                <select name="d_time">
                                     <option>시간대를 선택해 주세요.</option>
-                                    <option>12:00</option>
-                                    <option>12:30</option>
-                                    <option>13:00</option>
-                                    <option>13:30</option>
-                                    <option>14:00</option>
-                                    <option>17:00</option>
-                                    <option>17:30</option>
-                                    <option>18:00</option>
-                                    <option>18:30</option>
-                                    <option>19:00</option>
-                                    <option>19:30</option>
-                                    <option>20:00</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                   	<option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="17:30">17:30</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="19:30">19:30</option>
+                                    <option value="20:00">20:00</option>
                                 </select>
                             </div>
 
@@ -321,34 +361,36 @@ $(function() {
                                     <ul class="adult clear">
                                        <li class="per">어른</li>
                                        <li>
-                                           <select>
-                                                <option>1명</option>
-                                                <option>2명</option>
-                                                <option>3명</option>
-                                                <option>4명</option>
-                                                <option>5명</option>
-                                                <option>6명</option>
-                                                <option>7명</option>
-                                                <option>8명</option>
-                                                <option>9명</option>
-                                                <option>10명</option>
+                                           <select name="adult" onChange='change_price();'>
+                                           		<option value="0">0명</option>
+                                                <option value="1">1명</option>
+                                                <option value="2">2명</option>
+                                                <option value="3">3명</option>
+                                                <option value="4">4명</option>
+                                                <option value="5">5명</option>
+                                                <option value="6">6명</option>
+                                                <option value="7">7명</option>
+                                                <option value="8">8명</option>
+                                                <option value="9">9명</option>
+                                                <option value="10">10명</option>
                                             </select>
                                         </li>
                                     </ul>
                                     <ul class="child clear">
                                             <li class="per">어린이</li>
                                             <li>
-                                                <select>
-                                                     <option>1명</option>
-                                                     <option>2명</option>
-                                                     <option>3명</option>
-                                                     <option>4명</option>
-                                                     <option>5명</option>
-                                                     <option>6명</option>
-                                                     <option>7명</option>
-                                                     <option>8명</option>
-                                                     <option>9명</option>
-                                                     <option>10명</option>
+                                                <select name="kid" onChange='change_price();'>
+                                                	 <option value="0">0명</option>
+                                                     <option value="1">1명</option>
+                                                     <option value="2">2명</option>
+                                                     <option value="3">3명</option>
+                                                     <option value="4">4명</option>
+                                                     <option value="5">5명</option>
+                                                     <option value="6">6명</option>
+                                                     <option value="7">7명</option>
+                                                     <option value="8">8명</option>
+                                                     <option value="9">9명</option>
+                                                     <option value="10">10명</option>
                                                  </select>
                                              </li>
                                              <p>(36개월 ~ 12세 미만)</p>        
@@ -368,7 +410,7 @@ $(function() {
                                 <div class="content-area03 area clear">
                                     
                                 <div class="next-but">
-                                    <input type="button" id="countsubmit" type="url" onClick="location.href='/book/confirm_dining'" value="예약 신청">
+                                    <input type="button" id="countsubmit" type="url" onClick="$('#frm').submit();" value="예약 신청">
                                 </div>
                                     
                                     <h4><span></span>예약 안내</h4>
@@ -382,7 +424,9 @@ $(function() {
                                 
                         </div>
                     </div>
-                </div>   
+                </div>  
+                <input type="hidden" name="total_price" id="total_price" value="0"/>
+                <input type="hidden" name="cmd" value="write" />
             </form> 
         </div>
     </div>

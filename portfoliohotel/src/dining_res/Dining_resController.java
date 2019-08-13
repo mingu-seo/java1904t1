@@ -63,28 +63,30 @@ public class Dining_resController {
 	@RequestMapping("/dining/dining_origin_book")
 	public String dining_origin_book(Model model, Dining_resVO param, HttpSession session) throws Exception {
 		MemberVO vo = (MemberVO)session.getAttribute("memberInfo");
-		
+	
 		model.addAttribute("vo", param);
 		
 		return "dining/dining_origin_book";
 	}
 	
 	@RequestMapping("/book/confirm_dining")
-	public String confirm_dining(Model model, Dining_resVO param, HttpSession session) throws Exception {
+	public String confirm_dining(Model model, Dining_resVO param, HttpSession session, HttpServletRequest request) throws Exception {
 		MemberVO vo = (MemberVO)session.getAttribute("memberInfo");
-		
-		model.addAttribute("vo", param);
+		int no = Integer.parseInt(request.getParameter("no")); 
+		Dining_resVO read = dining_resService.read(no);
+		model.addAttribute("read",read);
 		
 		return "book/confirm_dining";
 	}
 		
+	// 관리자
 	
-	@RequestMapping("/manage/dining_res/process.do")
+	@RequestMapping("/manage/dining_res/process")
 	public String process(Model model, Dining_resVO param, HttpServletRequest request) throws Exception {
-		model.addAttribute("vo", param);
+		model.addAttribute("param", param);
 
 		if ("write".equals(param.getCmd())) {
-			int r = dining_resService.insert(param);
+			int r = dining_resService.insert(param, request);
 			model.addAttribute("code", "alertMessageUrl");
 			model.addAttribute("message", Function.message(r, "정상적으로 등록되었습니다.", "등록실패"));
 			model.addAttribute("url", "index");
@@ -107,4 +109,36 @@ public class Dining_resController {
 		
 		return "include/alert";
 	}
+	
+	/// 사용자
+	
+	@RequestMapping("/book/confirm_dining/process1")
+	public String process1(Model model, Dining_resVO param, HttpServletRequest request) throws Exception {
+		model.addAttribute("param", param);
+
+		if ("write".equals(param.getCmd())) {
+			int r = dining_resService.insert(param, request);
+			model.addAttribute("code", "alertMessageUrl");
+			model.addAttribute("message", Function.message(r, "정상적으로 등록되었습니다.", "등록실패"));
+			model.addAttribute("url", "/book/confirm_dining?no="+r);
+		} else if ("edit".equals(param.getCmd())) {
+			int r = dining_resService.update(param);
+			model.addAttribute("code", "alertMessageUrl");
+			model.addAttribute("message", Function.message(r, "정상적으로 수정되었습니다.", "수정실패"));
+			model.addAttribute("url", param.getTargetURLParam("index", param, 0));
+		} else if ("groupDelete".equals(param.getCmd())) {
+			int r = dining_resService.groupDelete(request);
+			model.addAttribute("code", "alertMessageUrl");
+			model.addAttribute("message", Function.message(r, "총 "+r+"건이 삭제되었습니다.", "삭제실패"));
+			model.addAttribute("url", param.getTargetURLParam("index", param, 0));
+		} else if ("delete".equals(param.getCmd())) {
+			int r = dining_resService.delete(param.getNo());
+			model.addAttribute("code", "alertMessageUrl");
+			model.addAttribute("message", Function.message(r, "정상적으로 삭제되었습니다.", "삭제실패"));
+			model.addAttribute("url", param.getTargetURLParam("index", param, 0));
+		} 
+		
+		return "include/alert";
+	}
 }
+        
