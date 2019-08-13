@@ -247,7 +247,7 @@ $(function(){
 																
 						%>
                     <tr>
-                            <td <%=targetUrl%>class="title"><a href="#"><%=qnadata.getTitle() %></a></td>
+                            <td class="title"><a href="/support/qna/qna_read?no=<%=qnadata.getNo() %>"><%=qnadata.getTitle() %></a></td>
                             <td><a href="#"><%=DateUtil.getDateFormat(qnadata.getRegdate())%></a></td> 
                     </tr>
                      <%
