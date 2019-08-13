@@ -230,6 +230,8 @@ public class Room_resController {
 		}
 		return "include/alert";
 	}
+
+	
 	
 	/**
 	 * 객실 예약 - 추가 옵션
