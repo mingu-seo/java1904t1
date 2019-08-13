@@ -21,6 +21,8 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
 		oEditors = setEditor("contents"); // 에디터 셋팅
 		initCal({id:"regdate",type:"day",today:"y",timeYN:"y"});
 	}); */
+	var chknum = /[0-9]/;
+	var chkat = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 	
 	function goSave() {
 		if ($("#fisrtName").val() ==""){
@@ -69,27 +71,33 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
 			$("#password").focus();
 			return false;
 		}
+		if($("#tel1").val()=="" || !chknum.test($("#tel1").val())){
+			alert("숫자만 입력해 주세요");
+			$("#tel1").focus();
+			return false;
+		}
+		if($("#tel2").val()=="" || !chknum.test($("#tel2").val())){
+			alert("숫자만 입력해 주세요");
+			$("#tel2").focus();
+			return false;
+		}
+		if($("#tel3").val()=="" || !chknum.test($("#tel3").val())){
+			alert("숫자만 입력해 주세요");
+			$("#tel3").focus();
+			return false;
+		}
+		if($("#email").val()=="" || !chkat.test($("#email").val())){
+			alert("이메일 주소를 확인해주세요")
+			$("#guest_email").focus();
+			return false;
+		
+		}
 		
 		
-		/* if(!/^[a-zA-Z0-9!,@,#,$,%,^,&,*,?,_,~]{6,12}$/.test($("password").val())){
-			alert("비밀번호는 6~12자리를 사용해야 합니다.");
-			$("#password").focus();
-			return false;
-		}   */
-		/* var sHTML = oEditors.getById["contents"].getIR();
-		if (sHTML == "" || sHTML == "<p><br></p>") {
-			alert('내용을 입력하세요.');
-			$("#contents").focus();
-			return false;
-		} else {
-			oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
-		} */
 		return true;
-		/* $("#frm").submit(); */
-		//패스워드 유효성 체크
-		
 		
 	}
+	
 	
 	
 /* 	
@@ -257,7 +265,7 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
                         <input type="hidden" name="cmd" value="write" />
 						<input type="hidden" name="reply" value="0" />
 						<input type="hidden" name="send_email" value="0" />
-						
+						<input type="hidden" name="member_pk" value="<%=member_vo.getNo() %>" />
                     </form>
                 </div>
             </div>

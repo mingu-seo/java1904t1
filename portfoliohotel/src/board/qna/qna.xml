@@ -42,15 +42,28 @@
         <include refid="searchSql" />
 		ORDER BY regdate DESC LIMIT $startPageNo$, $pageRows$
     </select>
+    
+    <!-- <select id="Mylist" parameterClass="qna_vo" resultClass="qna_vo">
+        select 
+   			*
+        from qna
+        where no = #no#
+		ORDER BY regdate DESC LIMIT $startPageNo$, $pageRows$
+    </select> -->
+    
+  <!--   <select id="Mycount" parameterClass="qna_vo" resultClass="Integer">
+        select count(*) from qna
+        where no = #no#
+    </select> -->
 	
 	<!-- 해당 테이블에 게시글 작성 -->
     <insert id="insert" parameterClass="qna_vo">
         INSERT INTO qna (
         	category, email, firstName, lastName, tel1, tel2, tel3, password, title, contents,
-        	regdate, file_org, file, filesize, open, reply, send_email
+        	regdate, file_org, file, filesize, open, reply, send_email, member_pk
         ) VALUES (
         	#category#, #email#, #firstName#, #lastName#, #tel1#, #tel2#, #tel3#, #password#, #title#, #contents#, 
-        	now(), #file_org#, #file#, #filesize#, #open#, #reply#, #send_email#
+        	now(), #file_org#, #file#, #filesize#, #open#, #reply#, #send_email#, #member_pk#
         )
         <selectKey keyProperty="no" resultClass="Integer">
         	SELECT LAST_INSERT_ID()
@@ -69,7 +82,7 @@
     <update id="update" parameterClass="qna_vo">
         UPDATE qna SET
         	category=#category#, email=#email#, firstName=#firstName#, lastName=#lastName#, tel1=#tel1#, tel2=#tel2#, tel3=#tel3#, password=#password#, title=#title#, contents=#contents#,
-        	
+        	file=#file#, file_org=#file_org#, filesize=#filesize#, regdate = #regdate#
          <isNotEqual property="regdate" compareValue="">
        	    regdate = #regdate#,
        	</isNotEqual>

@@ -29,6 +29,7 @@ public class QnaVO extends Parameter {
 	private Timestamp	reply_regdate;		// 답변 등록일
 	private int 		send_email;			// 이메일 전송여부 (미전송 :0 / 전송:1)
 	private String 		file_chk;
+	
 	//검색조건(페이지) 추가
 	private int display;
 	
@@ -91,9 +92,13 @@ public class QnaVO extends Parameter {
 	}
 
 	
-	public int getMember_pk() { return member_pk; }
+	public int getMember_pk() { 
+		return member_pk; 
+	}
 	 
-	public void setMember_pk(int member_pk) { this.member_pk = member_pk; }
+	public void setMember_pk(int member_pk) { 
+		this.member_pk = member_pk; 
+	}
 	
 
 	public String getTitle() {
