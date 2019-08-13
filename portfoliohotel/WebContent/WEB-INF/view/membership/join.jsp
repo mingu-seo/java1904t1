@@ -74,27 +74,57 @@ function goSave() {
 	}
 	
 	
-	if ($("#fname").val() == "") {
+	if ($("#f_name").val() == "") {
 		alert("성을 입력해주세요.");
-		$("#fname").focus();
+		$("#f_name").focus();
 		return false;
 	}
-	if ($("#lname").val() == "") {
+	if ($("#l_name").val() == "") {
 		alert("이름을 입력해주세요.");
-		$("#lname").focus();
+		$("#l_name").focus();
 		return false;
 	}
 	
 
-	if ($("#birthday").val() == "") {
+	if ($("#birthday_year").val() == "") {
 		alert("생년월일을 입력해주세요.");
-		$("#birthday").focus();
+		$("#birthday_year").focus();
+		return false;
+	}
+	if ($("#birthday_month").val() == "") {
+		alert("월을 입력해주세요.");
+		$("#birthday_month").focus();
+		return false;
+	}
+	if ($("#birthday_month").val().length < 2) {
+		alert("월은 2자리로 입력해주세요.");
+		$("#birthday_month").focus();
+		return false;
+	}
+	if ($("#birthday_day").val() == "") {
+		alert("일을 입력해주세요.");
+		$("#birthday_day").focus();
+		return false;
+	}
+	if ($("#birthday_day").val().length < 2) {
+		alert("일은 2자리로 입력해주세요.");
+		$("#birthday_day").focus();
 		return false;
 	}
 
-	if ($("#tel").val() == "") {
+	if ($("#f_tel").val() == "") {
 		alert("연락처를 입력해주세요.");
-		$("#tel").focus();
+		$("#f_tel").focus();
+		return false;		
+	}
+	if ($("#m_tel").val() == "") {
+		alert("연락처를 입력해주세요.");
+		$("#m_tel").focus();
+		return false;		
+	}
+	if ($("#l_tel").val() == "") {
+		alert("연락처를 입력해주세요.");
+		$("#l_tel").focus();
 		return false;		
 	}
 	
@@ -323,11 +353,11 @@ function goSave() {
                             <div class="account-name">
                                 <div class="first-name">
                                     <label for="first-name">성</label>
-                                    <input type="text" name="f_name" id="fname" placeholder="성">
+                                    <input type="text" name="f_name" id="f_name" placeholder="성">
                                 </div>
                                 <div class="middle-name">
                                     <label for="middle-name">이름</label>
-                                    <input type="text" name="l_name" id="lname" placeholder="이름">
+                                    <input type="text" name="l_name" id="l_name" placeholder="이름">
                                 </div>
                             </div>
                             <div class="account-sex">
@@ -339,13 +369,13 @@ function goSave() {
                             <div class="account-birthday clear">
                                 <div class="birth-form">
                                     <label for="birth-y">생년월일</label>
-                                    <input type="text" name="birthday_year" id="year" placeholder="년 (4자)" maxlength="4">
+                                    <input type="text" name="birthday_year" id="birthday_year" placeholder="년 (4자)" maxlength="4">
                                 </div>
                                 <div class="birth-form">
-                                    <input type="text" name="birthday_month" id="month" placeholder="월" maxlength="2" minlength="2">
+                                    <input type="text" name="birthday_month" id="birthday_month" placeholder="월" maxlength="2" >
                                 </div>
                                 <div class="birth-form">
-                                    <input type="text" name="birthday_day" id="day" placeholder="일" maxlength="2" minlength="2">
+                                    <input type="text" name="birthday_day" id="birthday_day" placeholder="일" maxlength="2" >
                                 </div>                                
                             </div>
                         </div>
@@ -356,13 +386,13 @@ function goSave() {
                             <div class="account-contact clear">
                             <div class="tel-form">
                                 <label for="account-contact">연락처</label>                                
-                                <input type="text" name="f_tel" id="tel1"  maxlength="3">
+                                <input type="text" name="f_tel" id="f_tel"  maxlength="3">
                           	</div>
                           	<div class="tel-form">
-                                <input type="text" name="m_tel" id="tel2"  maxlength="4">
+                                <input type="text" name="m_tel" id="m_tel"  maxlength="4">
                             </div>
                             <div class="tel-form">
-                                <input type="text" name="l_tel" id="tel3"  maxlength="4">
+                                <input type="text" name="l_tel" id="l_tel"  maxlength="4">
                             </div>
                               
                             </div>

@@ -47,6 +47,9 @@
 		</selectKey>
     </insert>
     
+    
+
+    
 
    
     <update id="update" parameterClass="membervo">
@@ -66,7 +69,35 @@
         	password=md5(#password#) where no=#no#
     </update> 
     
+    <update id="delete_account" parameterClass="membervo">
+        update member set
+        	secession=1, secession_reason=#secession_reason# where no=#no#
+    </update> 
     
+    <select id="find_email" parameterClass="membervo" resultClass="String">
+    	select email from member where f_name=#f_name# and l_name=#l_name# and 
+    				birthday_year=#birthday_year# and birthday_month=#birthday_month# and birthday_day=#birthday_day#
+    				and f_tel=#f_tel# and m_tel=#m_tel# and l_tel=#l_tel# 
+    </select>
+    
+    <select id="checkInfo" parameterClass="membervo" resultClass="Integer">
+    	select ifnull((select ifnull(no,0) from member where email=#email# and f_name=#f_name# and l_name=#l_name# and 
+    				birthday_year=#birthday_year# and birthday_month=#birthday_month# and birthday_day=#birthday_day#
+    				and f_tel=#f_tel# and m_tel=#m_tel# and l_tel=#l_tel# ),0) as cnt
+    
+    </select>
+    
+    <update id="find_pw_change" parameterClass="membervo">
+    	update member set password = md5(#password#) where no=#no# 
+    
+    </update>
+    
+   
+    
+    
+    <select id="checkPassword" parameterClass="membervo" resultClass="Integer">
+    	select count(*) from member where no=#no# and password=md5(#password#)
+    </select>
    
     
       <!-- <update id="memberEdit" parameterClass="membervo">
@@ -102,11 +133,11 @@
     </select>
     
     <select id="loginCheck" parameterClass="membervo" resultClass="Integer">
-        select count(*) as cnt from member where email=#email# and password=md5(#password#)
+        select count(*) as cnt from member where email=#email# and password=md5(#password#) and secession=0
     </select>
     
     <select id="loginSessionInfo" parameterClass="membervo" resultClass="membervo">
-        select * from member where email=#email# and password=md5(#password#)
+        select * from member where email=#email# and password=md5(#password#) and secession=0
     </select>
     
      <select id="emailSrc" parameterClass="membervo" resultClass="Integer">
@@ -148,4 +179,9 @@
         	(#id#, #name#, now(), #ip#)
     </insert> -->
     
+    
+    <update id="grade" parameterClass="membervo">
+    	UPDATE member SET grade=$grade$ 
+    	WHERE no=$no$
+    </update>
 </sqlMap>

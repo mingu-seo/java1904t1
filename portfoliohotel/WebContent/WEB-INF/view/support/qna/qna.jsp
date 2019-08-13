@@ -14,21 +14,34 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 <!DOCTYPE html>
 <html lang="ko">
 <script type="text/javascript">
-function goPassword(){
-	$("#editBtn1").click(function(){
+function goPwCheck(no){
+	$("#ppp").click(function(){
 		$("#PwCheckBtn").show()
 		$("#editBtn2").show()
-		$("#editBtn1").hide()
 		$("#password").focus();
 	});	
 }
-function goEdit(){
+function goRead(){
 	if($("#password").val()==""){
 		alert("비밀번호를 입력해주세요")
 		$("#password").focus();
 		return false;
 	} 
 }
+ function goRead(no) {
+	$.ajax ({
+		type:'GET',
+		url:"/support/qna/pwForRead?no="+no,
+		data: { "no" : no},
+		async:false,
+		success:function(data) {
+			$(".aaaa"+no).html(data);
+			$(".aaaaAll").hide();
+			$(".aaaa"+no).fadeIn();
+			
+		}
+	});
+} 
 
 </script>
 <head>
@@ -46,8 +59,8 @@ function goEdit(){
 </head>
 <body>
 
-<jsp:include page="/header_menu" flush="true"/>
-    
+
+  <jsp:include page="/header_menu" flush="true"/>  
     
     <div id="container">
         
@@ -62,8 +75,8 @@ function goEdit(){
         <div class="qna">
             <div class="support-list">
                 <ul class="support-list-center">
-                    <li><a href="notice.html">공지사항</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="/support/notice/notice">공지사항</a></li>
+                    <li><a href="/support/faq/faq">FAQ</a></li>
                     <li class="on"><a href="qna">Q&A</a></li>
                 </ul>
             </div>
@@ -98,18 +111,25 @@ function goEdit(){
 																	
 								%>
                         <tr>
-                        	<% 
                         	
-							String[] nameArr= data.getName().split(",");		
-							%>
-                            <td <%=targetUrl%>class="title"><a href="#"><%=data.getTitle() %></a></td>
+                          <%--  <td <%=targetUrl%>class="title"><a href="#"><%=data.getTitle() %></a></td>
                             <td <%=targetUrl%> class="table-date"><%=CodeUtil.getReplyExist(data.getReply())%></td>
-                            <td <%=targetUrl%> class="name"><a href="#"><%=nameArr[0]%><%=nameArr[1]%></a></td>
-                            <td><a href="#"><%=DateUtil.getDateFormat(data.getRegdate())%></a></td>
-                            
+                            <td <%=targetUrl%> class="name"><a href="#"><%=data.getLastName()%><%=data.getFirstName()%></a></td>
+                            <td><a href="#"><%=DateUtil.getDateFormat(data.getRegdate())%></a></td>  --%>
+							<% if(list.get(i).getOpen() == 1){%>
+							 <td <%=targetUrl%>class="title"><a href="#"><%=data.getTitle() %></a></td>
+							<%} else { %>
+							 <td class="title" id="ppp" onclick="goRead(<%=list.get(i).getNo() %>)"><a href="javascript:;"><%=data.getTitle() %></a></td>
+							<%} %>                           
+                           
+                            <td <%=targetUrl%> class="table-date"><%=CodeUtil.getReplyExist(data.getReply())%></td>
+                            <td <%=targetUrl%> class="name"><a href="#"><%=data.getLastName()%><%=data.getFirstName()%></a></td>
+                            <td><a href="#"><%=DateUtil.getDateFormat(data.getRegdate())%></a></td> 
                             
                             
                         </tr>
+                        <tr class="aaaaAll aaaa<%=list.get(i).getNo() %>" style="display:none;"></tr>
+                       
                        
                         <%
 									}
@@ -122,6 +142,8 @@ function goEdit(){
 						<input type="hidden" name="no" id="no" value="<%=param.getNo() %>"/>
 						<input type="hidden" name="email" id="email" value="<%=param.getEmail() %>"/>
 						
+						
+					
                     <!-- 검색창 구역 -->
                     <form name="searchForm" id="searchForm" action="qna" method="post">
                     <div class="search">
@@ -133,7 +155,7 @@ function goEdit(){
                             </select>
                             <input type="text" name="sval" value="<%=param.getSval()%>" id="text" placeholder="text">
                             <button class="sbtn" alt="검색" >검색</button>
-                            <input onclick="goIdentification()" type="button" value="팝업">
+               
                     </div>
                     </form>
                 </div>
@@ -151,6 +173,10 @@ function goEdit(){
             </div>
         </div>
     </div>
+    
+    <div class="pwdiv">
+            
+            </div>
     <div id="footer">
         <!-- <div class="footer-logo"><img src="img/footer_logo.png"></div> -->
         
@@ -183,6 +209,7 @@ function goEdit(){
                     <li><img src="/img/footericon4.png"></li>
                 </ul>
             </div>
+            
         </div>
     </div>
 </body>

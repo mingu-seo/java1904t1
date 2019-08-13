@@ -27,7 +27,7 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                     <tr>
                         <td class="left">등급</td>
                         <td class="right"><%=CodeUtil.getMgrade(sessionMember.getGrade())%></td>
-                    </tr>
+                    </tr
                     <tr>
                         <td class="left">포인트</td>
                         <td class="right"><%=sessionMember.getPoint()%> P</td>
@@ -137,7 +137,7 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                                     <div class="pc-sub-center center clear">
                                             <div class="pc-sub-box">
                                                 <h2 class="no-line">Support</h2>
-                                                <a href="/membership/notice" class="notice-a">
+                                                <a href="/support/notice/notice" class="notice-a">
                                                 <ul>
                                                     <li>Notice</li>
                                                     <li class="support-text">
@@ -149,7 +149,7 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                                                 </a>
                                             </div>
                                             <div class="pc-sub-box mtop">
-                                                <a href="/membership/faq">
+                                                <a href="/support/faq/faq">
                                                 <ul>
                                                     <li>FAQ</li>
                                                     <li class="support-text">
@@ -175,13 +175,18 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                             </div>
                     </li>
                     <!-- <li><a href="#">SIGN IN</a></li> -->
+                    <li>
+		                <%if(sessionMember == null){ %>
+		                <a href="/membership/sign_in">Sign in</a>
+		                <%}else{ %>
+		                <a href="/membership/mypage">My page</a>
+		                <%} %>
+	                </li>
+	                <li>
+	                	<a href="/book/room/nonmember">Nonmember</a>
+	                </li>
                 </ul>
                 <!-- <a href="/membership/sign_in">Sign In</a> -->
-                <%if(sessionMember == null){ %>
-                <a href="/membership/sign_in">Sign in</a>
-                <%}else{ %>
-                <a href="/membership/mypage">My page</a>
-                <%} %>
             </div>
         </div>
     </div>

@@ -9,16 +9,18 @@ public class Pkg_resVO extends Parameter {
 	private int no; //pk
 	private int pkg_pk; // 패키지 pk
 	private String pkg_name; // 패키지명
-	private int member_pk; // 회원 pk
-	private Timestamp purchase_date; // 구매일
+	private int member_pk; // 회원가입할때 받은 no
+	private Timestamp purchase_date; // 예약일
 	private String use_date; // 사용일
-	private String guest_kname; // 고객 한글명
-	private int guest_tel; // 고객 연락처
+	private String guest_name1; // 고객명1
+	private String guest_name2; // 고객명2
+	private String guest_tel1; // 고객 연락처1
+	private String guest_tel2; // 고객 연락처2
+	private String guest_tel3; // 고객 연락처3
 	private String email; // 고객 이메일
 	private int pkg_price; // 패키지 가격
 	private int pkg_count; // 패키지 수량
 	private int total_price; // 총 가격
-	private String gender; // 고객 성별
 	
 	
 	public Pkg_resVO(int pageRows) {
@@ -63,18 +65,6 @@ public class Pkg_resVO extends Parameter {
 	public void setUse_date(String use_date) {
 		this.use_date = use_date;
 	}
-	public String getGuest_kname() {
-		return guest_kname;
-	}
-	public void setGuest_kname(String guest_kname) {
-		this.guest_kname = guest_kname;
-	}
-	public int getGuest_tel() {
-		return guest_tel;
-	}
-	public void setGuest_tel(int guest_tel) {
-		this.guest_tel = guest_tel;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -99,11 +89,35 @@ public class Pkg_resVO extends Parameter {
 	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
-	public String getGender() {
-		return gender;
+	public String getGuest_name1() {
+		return guest_name1;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setGuest_name1(String guest_name1) {
+		this.guest_name1 = guest_name1;
+	}
+	public String getGuest_name2() {
+		return guest_name2;
+	}
+	public void setGuest_name2(String guest_name2) {
+		this.guest_name2 = guest_name2;
+	}
+	public String getGuest_tel1() {
+		return guest_tel1;
+	}
+	public void setGuest_tel1(String guest_tel1) {
+		this.guest_tel1 = guest_tel1;
+	}
+	public String getGuest_tel2() {
+		return guest_tel2;
+	}
+	public void setGuest_tel2(String guest_tel2) {
+		this.guest_tel2 = guest_tel2;
+	}
+	public String getGuest_tel3() {
+		return guest_tel3;
+	}
+	public void setGuest_tel3(String guest_tel3) {
+		this.guest_tel3 = guest_tel3;
 	}
 	
 }

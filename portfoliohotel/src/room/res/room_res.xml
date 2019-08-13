@@ -5,6 +5,9 @@
 	<sql id="searchSql">
 		<dynamic prepend="WHERE">
 		1=1
+			<isEqual property="category" compareValue="0">
+				AND (res_state=1 OR res_state=0)
+			</isEqual>
 			<isEqual property="category" compareValue="1">
 				<![CDATA[AND checkout < NOW()]]>
 			</isEqual>
@@ -76,6 +79,33 @@
 			) as res_count 
 		from room
 	</select>
+	
+	<select id="check_pr" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+		SELECT no, name, 
+			(
+				SELECT count(*) 
+				FROM room_res 
+		        WHERE room_res.room_pk=room.no 
+		        AND (
+					<![CDATA[(checkin  < '$checkout$') AND (checkout  >  '$checkin$')]]>
+				)
+			) AS res_count 
+		FROM room 
+		ORDER BY price DESC
+	</select>
+	
+	<select id="check_ds" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+		SELECT no, name, 
+			(
+				SELECT count(*) from room_res 
+		        WHERE room_res.room_pk=room.no 
+		        AND (
+					<![CDATA[(checkin  < '$checkout$') AND (checkout  >  '$checkin$')]]>
+				)
+			) AS res_count 
+		FROM room
+		WHERE no=$no$
+	</select>
 		
 	<insert id="insert" parameterClass="room_resVO">
 		INSERT INTO room_res 
@@ -106,6 +136,12 @@
 		WHERE no=#no#
 	</select>
 	
+	<select id="read_list" parameterClass="Integer" resultClass="room_resVO">
+		SELECT * FROM room_res
+		WHERE member_pk=#member_pk#
+		ORDER BY checkin asc, checkout asc
+	</select>
+	
 	<update	id="cancel" parameterClass="Integer">
 		UPDATE room_res SET
 			res_state=0
@@ -122,7 +158,17 @@
 		<include refid="searchSql" />
 	</select>
 	
+	<select id="nonmember" parameterClass="room_resVO" resultClass="room_resVO">
+		SELECT * 
+		FROM room_res
+		WHERE guest_email=#guest_email# AND no=#no# AND res_state=1
+	</select>
 	
+	<select id="count_use" parameterClass="Integer" resultClass="java.util.HashMap">
+		SELECT count(*) AS useNumber, SUM(TIMESTAMPDIFF(DAY, checkin, checkout)) AS dayStay 
+		FROM room_res 
+		WHERE member_pk=#member_pk# AND <![CDATA[checkout<=NOW()]]>;
+	</select>
 	
 	
 	<typeAlias alias="room_opt_resVO" type="room.res.Room_opt_resVO"/>

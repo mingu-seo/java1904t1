@@ -23,7 +23,7 @@ public class Header_menuController {
 	public String header_menu(Model model, PkgVO param) throws Exception {
 		param.setTablename("pkg");
 		int[] rowPageCount = pkgService.count(param);
-		ArrayList<PkgVO> plist = pkgService.list(param);
+		ArrayList<PkgVO> plist = pkgService.list2(param);
 		
 		model.addAttribute("ptotCount", rowPageCount[0]);
 		model.addAttribute("ptotPage", rowPageCount[1]);

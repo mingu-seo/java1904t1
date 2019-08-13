@@ -1,8 +1,8 @@
 package board.member;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
-
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,30 +10,53 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import board.member.MemberService;
-import board.member.MemberVO;
 import property.SiteProperty;
+import room.res.Room_resService;
 
 @Controller
 public class MainController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	Room_resService room_resService;
 
 	@RequestMapping("/membership")
 	public String main(Model model) throws Exception {
 
 		return "membership";
 	}
+
 	
 	@RequestMapping("/membership/login")
 	public String login(Model model, @RequestParam(value="login_url", required=false) String login_url, @RequestParam(value="login_param", required=false) String login_param, MemberVO vo, HttpSession session) throws Exception {
 		if (memberService.loginCheck(vo)) {
 			
 			MemberVO memberInfo = memberService.getLoginSessionInfo(vo);
+			
 			memberInfo.setIp(vo.getIp());
+			
 //			memberService.insertLoginHistory(memberInfo);		// 로그인히스토리 저장
 			session.setAttribute("memberInfo", memberInfo);	// 세션 저장
 			String redirectUrl = SiteProperty.INDEX_PAGE; // 시작페이지
+			
+			HashMap map_m = room_resService.count_use(memberInfo.getNo());
+			int useN = Integer.parseInt(String.valueOf(map_m.get("useNumber")));			
+			int dayS = Integer.parseInt(String.valueOf(map_m.get("dayStay")));
+			int grade = 0;
+			
+			if((useN >= 1 && useN < 3) || (dayS >= 3 && dayS < 6)) {
+				grade = 1;
+			} else if((useN >= 3 && useN < 7) || (dayS >= 6 && dayS < 12)) {
+				grade = 2;
+			} else if(useN >= 7 || dayS >= 12) {
+				grade = 3;
+			}
+			
+			MemberVO mvo = new MemberVO();
+			mvo.setGrade(grade);
+			mvo.setNo(memberInfo.getNo());
+			memberService.grade(mvo);
 			
 			// 로그인 이전페이지 존재하는 경우
 			if(login_url != null && !"".equals(login_url)) {

@@ -1,14 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
 <%@ page import="java.util.*" %>
 <%@ page import="board.member.*" %>
 <%@ page import="util.*" %>
+
+
+
+
 <%
 MemberVO param = (MemberVO)request.getAttribute("vo");
 ArrayList<MemberVO> list = (ArrayList)request.getAttribute("list");
 MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 MemberVO data = (MemberVO)request.getAttribute("data");
 %>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -61,25 +68,55 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                         }
                 });
 
+                $("#checkin_select").datepicker({
+                    monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+                    dateFormat: "yy-mm-dd",
+                    yearRange: "2019:2019",
+                    minDate: "0D",
+                    prevText: "이전달",
+                    nextText: "다음달",
+                    onClose: function( selectedDate ) {
+                    	$("#checkout_select").datepicker( "option", "minDate", selectedDate );
+					}                
+                });
+                
+                $("#checkout_select").datepicker({
+                    monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+                    dateFormat: "yy-mm-dd",
+                    yearRange: "2019:2019",
+                    minDate: "1D",
+                    prevText: "이전달",
+                    nextText: "다음달",
+                    onClose: function( selectedDate ) {
+                        $("#checkin_select").datepicker( "option", "maxDate", selectedDate );
+                    }   
+                });
+                
+                calculate();
+        		$("#day_stay").val(day_stay);
+        		$("#checkin").val($("#checkin_select").val());
+        		$("#checkout").val($("#checkout_select").val());
+                 
                 //메인페이지 객실예약 선택 달력플러그인 사용
-                $( "#start-date" ).datepicker({
-                    monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-                    dateFormat: "yy-mm-dd",
-                    yearRange: "2019:2019",
-                    minDate: "0D" 
-                });
-
-                $("#end-date").datepicker({
-                    monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-                    dateFormat: "yy-mm-dd",
-                    yearRange: "2019:2019",
-                    minDate: "0D" 
-                });
+                $("#checkin_select, #checkout_select").change(function() {
+            		calculate();
+            		$("#day_stay").val(day_stay);
+            		$("#checkin").val($("#checkin_select").val());
+            		$("#checkout").val($("#checkout_select").val());
+				});
             });
+            
+            function calculate() {
+            	arr_in = $("#checkin_select").val().split("-");
+            	arr_out = $("#checkout_select").val().split("-");
+            	time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
+            	time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
+            	day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
+            }
         </script>
-    <title>테스트</title>
+    <title>Portfolio Hotel</title>
 </head>
 
 <body>
@@ -108,7 +145,7 @@ MemberVO data = (MemberVO)request.getAttribute("data");
             </div>      
         </div>  
     <%} %>
-        
+   
     <jsp:include page="/header_menu" flush="true"/>
     
     
@@ -142,11 +179,11 @@ MemberVO data = (MemberVO)request.getAttribute("data");
             <div class="direct-reservation">
                 <h2>RESERVATION</h2>
                 <div class="d-r-input clear"><!-- direct-reservation 단어 너무길어서 d-r 로 줄임 -->
-                        <form>
+                        <form name="frm" id="frm" action="/book/room/check_room/" method="post">
                             <div class="d-r-input1">
-                                <input type="text" id="start-date">
+                                <input type="text" name="checkin_select" id="checkin_select" value="<%=DateUtil.getToday()%>">
                                 <p>~</p>
-                                <input type="text" id="end-date"> 
+                                <input type="text" name="checkout_select" id="checkout_select" value="<%=DateUtil.getDayDateAdd(1, DateUtil.getToday())%>"> 
                                 <select name="adult">
                                     <option>성인</option>
                                     <option value="1">1</option>
@@ -154,23 +191,27 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
                                 </select> 
-                                <select name="child">
+                                <select name="kid">
                                     <option>어린이</option>
+                                    <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
                                 </select> 
                             </div>
                             <div class="d-r-input2">
                                 <!-- <input type="submit" value="예약 조회"> -->
-                                <a href="/book/check_room">예약조회</a>
+                                
+                                <input type="hidden" name="checkin" id="checkin" value=""/>
+                                <input type="hidden" name="checkout" id="checkout" value=""/>
+                                <input type="hidden" name="day_stay" id="day_stay" value=""/>
+                                <input type="hidden" name="adult" id="adult" value=""/>
+                                <input type="hidden" name="kid" id="kid" value=""/>
+                                
+                                <a onclick="javascript:$('#frm').submit();">예약조회</a>
                             </div>
                         </form>
                 </div>

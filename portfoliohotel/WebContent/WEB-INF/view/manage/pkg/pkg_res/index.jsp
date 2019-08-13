@@ -63,16 +63,26 @@ function goSearch() {
 								<colgroup>
 									<col class="w3"/>
 									<col class="w3"/>
+									<col class="w10"/>
 									<col class="w20" />
+									<col class="w5"/>
+									<col class="w10"/>
+									<col class="w10"/>
 									<col class="w10" />
+									<col class="w10"/>
 									<col class="w4" />
 								</colgroup>
 								<thead>
 									<tr>
 										<th scope="col" class="first"><input type="checkbox" name="allChk" id="allChk" onClick="check(this, document.frm.no)"/></th>
 										<th scope="col">번호</th>
+										<th scope="col">예약자명</th>
 										<th scope="col">패키지 이름</th>
-										<th scope="col">구매일</th> 
+										<th scope="col">예약 수량</th>
+										<th scope="col">패키지 금액</th>
+										<th scope="col">총 결제 금액</th>
+										<th scope="col">예약일</th>
+										<th scope="col">수령일</th> 
 										<th scope="col" class="last">삭제</th>
 									</tr>
 								</thead>
@@ -95,8 +105,13 @@ function goSearch() {
 									<tr <%=topClass%>>
 										<td class="first"><input type="checkbox" name="no" id="no" value="<%=data.getNo()%>"/></td>
 										<td <%=targetUrl%>><%=totCount - ((param.getReqPageNo()-1)*param.getPageRows()) - i%></td>
+										<td <%=targetUrl%>><%=data.getGuest_name1()%><%=data.getGuest_name2()%></td>
 										<td <%=targetUrl%>><%=data.getPkg_name() %></td>
+										<td <%=targetUrl%>><%=data.getPkg_count()%></td>
+										<td <%=targetUrl%>><%=data.getPkg_price()%></td>
+										<td <%=targetUrl%>><%=data.getTotal_price()%></td>
 										<td <%=targetUrl%>><%=DateUtil.getDateFormat(data.getPurchase_date())%></td>
+										<td <%=targetUrl%>><%=data.getUse_date()%></td>
 										<td class="last"><input type="button" value="삭제" onclick="goDelete(<%=data.getNo()%>);"/></td>
 									</tr>
 								<%
@@ -121,11 +136,11 @@ function goSearch() {
 							</div>
 							<!--//btn-->
 							<!-- 페이징 처리 -->
-							<%-- <%=Page.indexList(param.getReqPageNo(), totPage, request)%>
+							<%=Page.indexList(param.getReqPageNo(), totPage, request)%>
 							<!-- //페이징 처리 -->
 							<form name="searchForm" id="searchForm" action="index" method="post">
 								<div class="search">
-									<select name="member" onchange="$('#searchForm').submit();">
+									<%-- <select name="member" onchange="$('#searchForm').submit();">
 										<option value="0" <%=Function.getSelected(param.getMember(), 0)%>>전체</option>
 										<option value="1" <%=Function.getSelected(param.getMember(), 1)%>>공개</option>
 										<option value="2" <%=Function.getSelected(param.getMember(), 2)%>>비공개</option>
@@ -139,16 +154,18 @@ function goSearch() {
 										<option value="0" <%=Function.getSelected(param.getTop(), 0)%>>전체</option>
 										<option value="1" <%=Function.getSelected(param.getTop(), 1)%>>상단미노출</option>
 										<option value="2" <%=Function.getSelected(param.getTop(), 2)%>>상단노출</option>
-									</select>
+									</select> --%>
 									<select name="stype" title="검색을 선택해주세요">
 										<option value="all" <%=Function.getSelected(param.getStype(), "all") %>>전체</option>
-										<option value="title" <%=Function.getSelected(param.getStype(), "title") %>>제목</option>
-										<option value="contents" <%=Function.getSelected(param.getStype(), "contents") %>>상세정보</option>
+										<option value="guest_name1" <%=Function.getSelected(param.getStype(), "guest_name1") %>>예약자명 성</option>
+										<option value="guest_name2" <%=Function.getSelected(param.getStype(), "guest_name2") %>>예약자명 이름</option>
+										<option value="pkg_name" <%=Function.getSelected(param.getStype(), "pkg_name") %>>패키지 이름</option>
+										<option value="use_date" <%=Function.getSelected(param.getStype(), "use_date") %>>수령일</option>
 									</select>
 									<input type="text" name="sval" value="<%=param.getSval()%>" title="검색할 내용을 입력해주세요" />
 									<input type="image" src="/manage/img/btn_search.gif" class="sbtn" alt="검색" />
 								</div>
-							</form> --%>
+							</form>
 							<!-- //search --> 
 						</div>
 						<!-- //blist -->

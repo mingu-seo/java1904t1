@@ -26,7 +26,11 @@ Pkg_resVO res_data = (Pkg_resVO) request.getAttribute("res_data");
     <title>객실 예약 완료</title>
 </head>
 <script>
-<% res_data.setTotal_price(res_data.getPkg_count() *res_data.getPkg_price()); %>
+<%-- <% res_data.setTotal_price(res_data.getPkg_count() *res_data.getPkg_price()); %> --%>
+var total = <% res_data.getTotal_price();%>;
+system.print(total);
+
+var tax = total * 0.1;
 </script>
 
 <body>
@@ -46,24 +50,28 @@ Pkg_resVO res_data = (Pkg_resVO) request.getAttribute("res_data");
                 <h1>* 패키지 예약 확정 *</h1>
                 <div class="completion-form">
                     <!-- 이름 - p span 태그 이용 -->
-                    <h3><span>백앤드</span>님의 예약이 확정되었습니다.</h3>
+                    <h3><span><%=res_data.getGuest_name1()%><%=res_data.getGuest_name2()%></span>님의 예약이 확정되었습니다.</h3>
 
                     <ul class="guest clear">
-                            <li>투숙객 이름</li>
-                            <li class="second"><%=res_data.getGuest_kname() %></li>
+                            <li>예약자 이름</li>
+                            <li class="second"><%=res_data.getGuest_name1()%><%=res_data.getGuest_name2()%></li>
                     </ul>
                     <ul class="reservation_number clear">
-                            <li>예약변호</li>
+                            <li>예약번호</li>
                             <li class="second">000000000000</li>
                     </ul>
-                    <!-- <ul class="room_number clear">
-                        <li>객실수 및 숙박일수</li>
-                        <li class="second">객실 0개 0박</li>
-                    </ul> -->
                     <ul class="room_name clear">
                             <li>패키지 이름</li>
                             <li class="second"><%=res_data.getPkg_name() %></li>
                     </ul>
+                    <ul class="room_name clear">
+                            <li>패키지 가격</li>
+                            <li class="second"><%=res_data.getPkg_price() %></li>
+                    </ul>                    
+                    <ul class="room_number clear">
+                        <li>예약일시</li>
+                        <li class="second"><%=res_data.getPurchase_date()%></li>
+                    </ul>                    
                     <ul class="check_in clear">
                             <li>패키지 수령 날짜</li>
                             <li class="second"><%=res_data.getUse_date() %></li>
@@ -78,18 +86,18 @@ Pkg_resVO res_data = (Pkg_resVO) request.getAttribute("res_data");
                     </ul>
 
                     <div class="option">
-                        <h3>* 추가옵션</h3>
+                        <h3>* 예약자 정보</h3>
                         <ul class="option-form clear">
-                                <li>패키지 수량</li>
-                                <li class="second">[0]</li>
+                                <li>성함</li>
+                                <li  class="second"><%=res_data.getGuest_name1()%><%=res_data.getGuest_name2()%></li>
+                        </ul>                        
+                        <ul class="option-form clear">
+                                <li>전화번호</li>
+                                <li class="second"><%=res_data.getGuest_tel1()%>-<%=res_data.getGuest_tel2()%>-<%=res_data.getGuest_tel3()%></li>
                         </ul>
                         <ul class="option-form clear">
-                            <li>침대추가</li>
-                            <li class="second">[0]</li>
-                        </ul>
-                        <ul class="option-form clear">
-                                <li>Welcome Wine & Chocolate</li>
-                                <li  class="second">[0]</li>
+                            <li>이메일</li>
+                            <li class="second"><%=res_data.getEmail()%></li>
                         </ul>
                     </div>
 

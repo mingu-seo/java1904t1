@@ -1,6 +1,7 @@
 package board.member;
 
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +48,39 @@ public class MemberService {
 		return cnt;
 	}
 	
+	public int delete_account(MemberVO vo) throws SQLException {
+		int cnt = 0;
+		if (memberDao.checkPassword(vo)) {
+			cnt = memberDao.delete_account(vo);
+		}
+		return cnt;
+	}
 	
+	public String find_email(MemberVO vo) throws SQLException {
+		String cnt = memberDao.find_email(vo);
+		return cnt;
+	}
+	
+	public int find_pw(MemberVO vo) throws SQLException {
+		int cnt = memberDao.checkInfo(vo);
+		
+		return cnt;
+	}
+	
+	public int find_pw_change(MemberVO vo)throws SQLException{
+		int no = memberDao.find_pw_change(vo);
+		return no;
+	}
+	
+	public int naverCallback(MemberVO vo)throws SQLException{
+		int cnt = memberDao.insert(vo);
+		return cnt;
+	}
+
+
+
+	
+
 	public int delete(int no) throws SQLException {
 		int cnt = memberDao.delete(no);
 		return cnt;
@@ -136,6 +169,10 @@ public class MemberService {
 			r += memberDao.delete(nos);
 		}
 		return r;
+	}
+
+	public void grade(MemberVO vo) throws SQLException {
+		memberDao.grade(vo);
 	}
 	
 }

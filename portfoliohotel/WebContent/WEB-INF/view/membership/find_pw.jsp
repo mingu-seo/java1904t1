@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="board.member.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="util.*"%>
 <%
 MemberVO param = (MemberVO)request.getAttribute("vo");
 %>
 <!DOCTYPE html>
 <html lang="ko">
+
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +21,66 @@ MemberVO param = (MemberVO)request.getAttribute("vo");
     <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="/js/gnb.js"></script>
     <title>비밀번호찾기</title>
+    <script>
+
+function goSave() {
+	
+	if ($("#email").val() == "") {
+		alert("이메일을 입력해주세요.");
+		$("#email").focus();
+		return false;
+	}
+	
+	if ($("#f_name").val() == "") {
+		alert("성을 입력해주세요.");
+		$("#f_name").focus();
+		return false;
+	}
+	if ($("#l_name").val() == "") {
+		alert("이름을 입력해주세요.");
+		$("#l_name").focus();
+		return false;
+	}
+	
+	if ($("#birthday_year").val() == "") {
+		alert("생년월일을 입력해주세요.");
+		$("#birthday_year").focus();
+		return false;
+	}
+	if ($("#birthday_month").val() == "") {
+		alert("월을 입력해주세요.");
+		$("#birthday_month").focus();
+		return false;
+	}
+	if ($("#birthday_day").val() == "") {
+		alert("일을 입력해주세요.");
+		$("#birthday_day").focus();
+		return false;
+	}
+	
+	if ($("#f_tel").val() == "") {
+		alert("연락처를 입력해주세요.");
+		$("#f_tel").focus();
+		return false;
+		
+	}
+	if ($("#m_tel").val() == "") {
+		alert("연락처를 입력해주세요.");
+		$("#m_tel").focus();
+		return false;
+		
+	}
+	if ($("#l_tel").val() == "") {
+		alert("연락처를 입력해주세요.");
+		$("#l_tel").focus();
+		return false;
+		
+	}
+	
+
+	$("#frm").submit();  
+}
+</script>
 </head>
 <body>
     <div id="header">
@@ -158,97 +221,63 @@ MemberVO param = (MemberVO)request.getAttribute("vo");
         <div class="notice">
             <div class="support-list">
                 <ul class="support-list-center">
-                    <li><a href="find_id.html">아이디 찾기</a></li>
-                    <li class="on"><a href="find_pw.html">비밀번호 찾기</a></li>
+                    <li class="on"><a href="find_email">이메일 찾기</a></li>
+                    <li ><a href="find_pw">비밀번호 찾기</a></li>
                 </ul>
             </div>
             <div class="section-edit">
 
                 <div class="edit-table">
                         <h3>비밀번호를 잊으셨나요?</h3>
-                        <p>가입하신 이메일 인증을 통해 재설정 하실 수 있습니다.</p>
+                        <p>정보를 입력하시고 비밀번호를 재설정 하실 수 있습니다.</p>
                     <div class="edit-table-right">
-                        <form method="POST">
+                        <!-- <form method="POST"> -->
+                        <form name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/process.do" method="post">
                             <div class="email">
                                 <input type="text" id="email" name="email" placeholder="이메일" maxlength="40">
                             </div>
 
                             <ul class="name clear">
                                 <li>
-                                    <input type="text" id="first_name" name="first_name" placeholder="성" maxlength="2">
+                                    <input type="text" id="f_name" name="f_name" placeholder="성" maxlength="2">
                                 </li>
 
                                 <li>
-                                    <input type="text" id="name" name="name" placeholder="이름" maxlength="12">
+                                    <input type="text" id="l_name" name="l_name" placeholder="이름" maxlength="12">
                                 </li>
                                 
                             </ul>
                             <ul class="birth clear">
                                     <li>
-                                        <input type="text" id="birth" name="birth" placeholder="●●●●(생년)" maxlength="4">
-                                    </li>
-    
-                                    <li>
-                                        <select>
-                                            <option>월</option>
-                                            <option>01</option>
-                                            <option>02</option>
-                                            <option>03</option>
-                                            <option>04</option>
-                                            <option>05</option>
-                                            <option>06</option>
-                                            <option>07</option>
-                                            <option>08</option>
-                                            <option>09</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
-                                        </select>
+                                        <input type="text" id="birthday_year" name="birthday_year" placeholder="●●●●(생년)" maxlength="4">
                                     </li>
                                     <li>
-                                        <select>
-                                            <option>일</option>
-                                            <option>01</option>
-                                            <option>02</option>
-                                            <option>03</option>
-                                            <option>04</option>
-                                            <option>05</option>
-                                            <option>06</option>
-                                            <option>07</option>
-                                            <option>08</option>
-                                            <option>09</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
-                                            <option>13</option>
-                                            <option>14</option>
-                                            <option>15</option>
-                                            <option>16</option>
-                                            <option>17</option>
-                                            <option>18</option>
-                                            <option>19</option>
-                                            <option>20</option>
-                                            <option>21</option>
-                                            <option>22</option>
-                                            <option>23</option>
-                                            <option>24</option>
-                                            <option>25</option>
-                                            <option>26</option>
-                                            <option>27</option>
-                                            <option>28</option>
-                                            <option>29</option>
-                                            <option>30</option>
-                                            <option>31</option>
-                                        </select>
+                                        <input type="text" id="birthday_month" name="birthday_month"  placeholder="●●(월)" maxlength="2">
                                     </li>
-                                    
+                                    <li>
+                                        <input type="text" id="birthday_day" name="birthday_day" placeholder="●●(일)" maxlength="2">
+                                    </li>                                                                       
                             </ul>
-                            <div class="email">
-                                <input type="text" id="email" name="email" placeholder="연락처" maxlength="40">
-                            </div>
+                            <ul class="birth clear">  
+                            <li>                                                                             
+                                <input type="text" id="f_tel" name="f_tel" placeholder="연락처" maxlength="3" >                             
+                                
+                                </li>
+                                
+                                <li>                               
+                                <input type="text" id="m_tel" name="m_tel"  maxlength="4" >
+                         		</li>
+                         		
+                         		<li>
+								<input type="text" id="l_tel" name="l_tel"  maxlength="4">
+								</li>
+                            </ul>
+                            <input type="hidden" name="cmd" value="find_pw">
+                            <input type="hidden" name="stype" id="stype" value="<%=param.getStype()%>"/>
+							<input type="hidden" name="sval" id="sval" value="<%=param.getSval()%>"/>
 
-                            <div class="submit">
-                                    <input type="submit" value="비밀번호 찾기" class="submit-button">
+                            <div class="">
+                                    <input type="button" class="submit-button" href="#" onclick="goSave();" value="비밀번호 찾기" >
                             </div>
                         </form>
                     </div>

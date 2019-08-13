@@ -20,14 +20,15 @@
 .reservation h3 span {font-weight:300; color:#0e693f; font-size:16px; margin-left:10px;}
 .reservation-status-left {width:955px;}
 .reservation-status-left table {width:100%; border:1px solid #bcbcbc; text-align:left;}
-.reservation-status-left table td {font-weight:200; padding:20px; color:#454545;}
-.reservation-status-left table tr {border-bottom:1px solid #bcbcbc;}
-.reservation-status-left table tr.table-head th {height:45px; background-color:#454545; 
+.reservation-status-left table td {font-weight:200; padding:20px; color:#454545; line-height:50px;}
+.reservation-status-left table tr.reserved {border-top:1px solid #bcbcbc;}
+.reservation-status-left table td.reserved_detail {font-weight:200; padding:20px; color:#454545; line-height:50px;}
+.reservation-status-left table tr.table-head th {width: 310px; height:45px; background-color:#454545; 
                                             color:#fff; font-weight:200; line-height:45px; text-indent:20px;}
 .reservation-status-left table tr td.participants {line-height:50px;}
 .reservation-status-left table tr td.option span {display:block; padding-top:10px; padding-bottom:40px;}
-.reservation-status-left table tr.reserved td { border-right:1px solid #bcbcbc;}
-.reservation-status-left table .price {text-align:right; font-weight:400; color:#0e693f;}
+/* .reservation-status-left table tr.reserved td { border-right:1px solid #bcbcbc;} */
+.reservation-status-left table .price {text-align:right; font-weight:400; color:#0e693f;} 
 
 /* 내정보칸 */
 .reservation-status-right {width:225px; border:1px solid #bcbcbc; margin-left:20px; border-bottom:none;}

@@ -15,11 +15,11 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_i");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="/WEB-INF/view/manage/include/headHtml.jsp" %>
 <script>
-var oEditors; // 에디터 객체 담을 곳
+/* var oEditors; // 에디터 객체 담을 곳
 jQuery(window).load(function(){
 	oEditors = setEditor("instruction"); // 에디터 셋팅
 });
-
+ */
 function groupDelete() {	
 	if ( isSeleted(document.frm.no) ){
 		if (confirm ('삭제하시겠습니까?')) {
@@ -37,14 +37,14 @@ function goDelete(v) {
 }
 
 function goSave() {	
-	var sHTML = oEditors.getById["instruction"].getIR();
+	/* var sHTML = oEditors.getById["instruction"].getIR();
 	if (sHTML == "" || sHTML == "<p><br></p>") {
 		alert('제품 정보를 입력하세요.');
 		$("#instruction").focus();
 		return false;
 	} else {
 		oEditors.getById["instruction"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
-	}
+	} */
 	
 	return true;
 	/* $("#frm").submit(); */
@@ -146,7 +146,7 @@ function delTr_i(cls, no, imagename) {
 									</tr>
 									<tr>
 										<th>객실 소개</th>
-										<td><textarea id="instruction" name="instruction" style="width:100%;"><%=read.getInstruction() %></textarea></td>
+										<td><textarea id="instruction" name="instruction" style="width:100%;" rows="20"><%=read.getInstruction() %></textarea></td>
 										<th>객실 이미지</th>
 										<td>
 											<table>
@@ -204,7 +204,9 @@ function delTr_i(cls, no, imagename) {
 									</tr>
 									<tr>
 										<th>객실 위치</th>
-										<td colspan="3"><input type="text" id="location" name="location" class="w50" value="<%=read.getLocation() %>"/></td>
+										<td><input type="text" id="location" name="location" class="w50" value="<%=read.getLocation() %>"/></td>
+										<th>객실 크기</th>
+										<td><input type="text" id="size" name="size" class="w25" value="<%=read.getSize() %>"/></td>
 									</tr>
 									<tr>
 										<th>객실 전망</th>

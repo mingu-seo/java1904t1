@@ -20,6 +20,7 @@ ArrayList<Room_optVO> list_o = (ArrayList<Room_optVO>)request.getAttribute("list
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="/css/jquery-ui.css">
 <script>
 function goSave() {
 	if($("#checkin").val() == ""){
@@ -87,15 +88,31 @@ function calculate() {
 }
 
 $(function(){	
-	$("#checkin, #checkout").datepicker({
-		dayNames: ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'],
-        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
-        monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-        nextText: '다음달',
-        prevText: '이전달' ,
-        dateFormat: 'yy-mm-dd'  
-	});
+	$("#checkin").datepicker({
+        monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+        dateFormat: "yy-mm-dd",
+        yearRange: "2019:2019",
+        minDate: "0D", 
+        prevText: "이전달",
+        nextText: "다음달",
+        onClose: function( selectedDate ) {
+        	$("#checkout").datepicker( "option", "minDate", selectedDate );
+		}                
+    });
+    
+    $("#checkout").datepicker({
+        monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+        dateFormat: "yy-mm-dd",
+        yearRange: "2019:2019",
+        minDate: "1D",
+        prevText: "이전달",
+        nextText: "다음달",
+        onClose: function( selectedDate ) {
+            $("#checkin").datepicker( "option", "maxDate", selectedDate );
+        }   
+    });
 	
 	$(".price_opt").change(function() {
 		price_opt = 0;

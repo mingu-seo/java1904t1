@@ -31,7 +31,7 @@ public class FaqController {
 		return "manage/board/faq/index";
 	}	
 	
-	@RequestMapping("/membership/faq")
+	@RequestMapping("/support/faq/faq")
 	public String Findex(Model model, FaqVO param) throws Exception {
 		int[] rowPageCount = faqService.count(param);
 		ArrayList<FaqVO> list = faqService.list(param);
@@ -41,7 +41,7 @@ public class FaqController {
 		model.addAttribute("list", list);
 		model.addAttribute("vo", param);
 		
-		return "membership/faq";
+		return "support/faq/faq";
 	}	
 	
 	@RequestMapping("/manage/board/faq/read")

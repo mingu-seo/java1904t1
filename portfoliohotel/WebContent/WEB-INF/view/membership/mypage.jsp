@@ -2,12 +2,27 @@
 <%@ page import="board.member.*" %>
 <%@ page import="util.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="pkg.res.*" %>
+<%@ page import="room.res.*" %>
+<%@ page import="board.qna.*" %>
 <%
 MemberVO param = (MemberVO)request.getAttribute("vo");
 MemberVO data = (MemberVO)request.getAttribute("data");
 MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
-%>
 
+ArrayList<Pkg_resVO> plist = (ArrayList<Pkg_resVO>)request.getAttribute("plist");
+int ptotCount = (Integer)request.getAttribute("ptotCount");
+int ptotPage = (Integer)request.getAttribute("ptotPage");
+
+Pkg_resVO prparam = (Pkg_resVO)request.getAttribute("prvo");
+
+ArrayList<Room_resVO> mdata = (ArrayList<Room_resVO>)request.getAttribute("mdata");
+ArrayList<ArrayList<Room_opt_resVO>> modata = (ArrayList<ArrayList<Room_opt_resVO>>)request.getAttribute("modata");
+
+ArrayList<QnaVO> qdata = (ArrayList<QnaVO>)request.getAttribute("qlist");
+int qtotCount = (Integer)request.getAttribute("qtotCount");
+int qtotPage = (Integer)request.getAttribute("qtotPage");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,137 +38,21 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
     <script type="text/javascript" src="/js/gnb.js"></script>
     <title>마이페이지</title>
 </head>
+<script>
+$(function(){
+	$(".reserved_detail").css("display", "none");
+	
+	$(".reserved").click(function() {
+		if($(this).next(".reserved_detail").css("display") == "none") {
+			$(this).next(".reserved_detail").css("display", "");
+		} else {
+			$(this).next(".reserved_detail").css("display", "none");
+		}
+	});
+});
+</script>
 <body>
-    <div id="header">
-        <div class="header-center">
-            <div class="pc-header">
-                <h1 class="logo"><a href="/index"><img src="../img/header-logo.png"></a></h1>
-                <ul class="pc-gnb">
-                    <li>
-                        <a href="#">BOOK</a>
-                            <div class="pc-sub">
-                                    <div class="pc-sub-center">
-                                        <div class="pc-sub-box">
-                                            <h2><a href="../special_promotion.html">Promotion</a></h2>
-                                            <ul class="offer">
-                                                <li><a href="../room_offer.html">Room Package</a></li>
-                                                <li><a href="../room_offer.html">Dining Package</a></li>
-                                                <li><a href="../room_offer.html">Events & Gift</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="pc-sub-box">
-                                            <h2>Rooms</h2>
-                                            <ul class="Rooms">
-                                                <li><a href="../room-detail-subpage.html">Namsan Pool Deluxe Room</a></li>
-                                                <li><a href="../room-detail-subpage.html">Namsan Pool Premier Suite</a></li>
-                                                <li><a href="../room-detail-subpage.html">Namsan Presidential Suite</a></li>
-                                                <li><a href="../room-detail-subpage.html">Spa Sanctuary Suite</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="pc-sub-box">
-                                            <h2>Dining</h2>
-                                            <ul class="Dining">
-                                                <li><a href="#">The Festa</a></li>
-                                                <li><a href="#">Granum Dining Lounge</a></li>
-                                                <li><a href="#">Moon Bar</a></li>
-                                                <li><a href="#">The Oasis Outdoor Kitchen</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="pc-sub-box">
-                                            <h2>Meeting & Wedding</h2>
-                                            <ul class="Meeting & Wedding">
-                                                <li><a href="#">Meeting</li>
-                                                <li><a href="#">Wedding</a></li>
-                                                <li><a href="#">Family Party</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                            </div>
-                    </li>
-                    <li class="facilities">
-                        <a href="#">Facilities</a>
-                            <div class="pc-sub">
-                                    <div class="pc-sub-center center clear">
-                                            <div class="pc-sub-box facil-left">
-                                                <h2 class="no-line">Facilities</h2>
-                                                <ul>
-                                                    <li><a href="../facilities.html#f1">The Oasis</a></li>
-                                                    <li><a href="../facilities.html#f2">Indoor Swimming Pool</a></li>
-                                                    
-                                                </ul>
-                                            </div>
-                                            <div class="pc-sub-box mtop">
-                
-                                                <ul class="Rooms">
-                                                        <li><a href="../facilities.html#f3">Fitness Centre</a></li>
-                                                        <li><a href="../facilities.html#f4">Sauna</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pc-sub-box mtop facil-right">
-                                                
-                                                <ul class="Dining">
-                                                    <li><a href="#">Troon Golf Academy</a></li>
-                                                    <li><a href="#">Foresta Beauty Salon</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                            </div>
-                        
-                    </li>
-                    <li>
-                        <a href="#">Support</a>
-                            <div class="pc-sub">
-                                    <div class="pc-sub-center center clear">
-                                            <div class="pc-sub-box">
-                                                <h2 class="no-line">Support</h2>
-                                                <a href="../notice.html" class="notice-a">
-                                                <ul>
-                                                    <li>Notice</li>
-                                                    <li class="support-text">
-                                                        반얀트리 공지사항과<br/>
-                                                        놓칠 수 없는 이벤트 정보를 알려드립니다.
-                                                    </li>
-                                                    <li class="support-icon"><img src="../img/notice-icon.png"></li>
-                                                </ul>
-                                                </a>
-                                            </div>
-                                            <div class="pc-sub-box mtop">
-                                                <a href="../faq.html">
-                                                <ul>
-                                                    <li>FAQ</li>
-                                                    <li class="support-text">
-                                                        반얀트리에 대한<br/>
-                                                        자주 묻는 질문입니다.
-                                                    </li>
-                                                    <li class="support-icon"><img src="../img/faq-icon.png"></li>
-                                                </ul>
-                                                </a>
-                                            </div>
-                                            <div class="pc-sub-box mtop">
-                                                <a href="../qna.html">
-                                                <ul>
-                                                    <li>Q&A</li>
-                                                    <li class="support-text">
-                                                        반얀트리에 관한질문 사항이나 궁금한 점을<br/> 
-                                                        남겨 주시면 신속하게 답변을 드리겠습니다.
-                                                    </li>
-                                                    <li class="support-icon"><img src="../img/qna-icon.png"></li>
-                                                </ul>
-                                                </a>
-                                        </div>
-                            </div>
-                    </li>
-                    <!-- <li><a href="#">SIGN IN</a></li> -->
-                </ul>
-              <%if(sessionMember == null){ %>
-                <a href="/membership/sign_in">Sign in</a>
-                <%}else{ %>
-                <a href="/membership/mypage">My page</a>
-                <%} %>
-            </div>
-        </div>
-    </div>
-    
+    <jsp:include page="/header_menu" flush="true"/>
     
     <div id="container">
         
@@ -169,27 +68,111 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
                 <table>
                     <tr class="table-head">
                         <th>예약 상품</th>
-                        <th>인원</th>
-                        <th>추가사항</th>
+                        <th>숙박 기간</th>
+                        <th>결제 금액</th>
                     </tr>
-                    <tr class="reserved">
-                        <td>NAMSAN POOL DELUX ROOM</td>
-                        <td class="participants">성인 x 2
-                            <br/>
-                            어린이 x 1
+                    <%
+                    for(int i=0; i<mdata.size(); i++) {
+                    %>
+					<tr class="reserved">
+                        <td><%=mdata.get(i).getRoom_name() %></td>
+                        <td><%=Function.toDateKorean(mdata.get(i).getCheckin()) %> ~ <%=Function.toDateKorean(mdata.get(i).getCheckout()) %></td>
+                        <td class="price"><%=Function.toPriceComma(mdata.get(i).getTotal_price()) %> 원</td>
+                    </tr>
+                    <tr class="reserved_detail">
+                    	<td></td>
+                    	<td class="participants">
+                        	성인 x <%=mdata.get(i).getAdult() %><br/>
+                           	어린이 x <%=mdata.get(i).getKid() %>
                         </td>
                         <td class="option">
-                            SPA
-                            <span class="option-select">- 추가사항 없음</span>
-                            침대 추가
-                            <span class="option-select">x 1</span>
-                            웰컴 와인 & 치즈
-                            <span class="option-select">x 1</span>
+                        <%
+                        for(int j=0; j<modata.get(i).size(); j++) {
+                        %>
+                        <%=modata.get(i).get(j).getName() %> x <%=modata.get(i).get(j).getCount() %><br/>
+                        <%
+                        }
+                        %>
                         </td>
+                    </tr>	
+                    <%	
+                    }
+                    %>
+                    </table>
+                    <br/>
+                    <table>
+                    <tr class="table-head">
+                        <th>패키지 예약 상품</th>
+                        <th>수량</th>
+                        <th>수령일</th>
                     </tr>
+                    <tr class="reserved">
+                        <td>
+                        <%
+                        	if (ptotCount == 0) {
+                        %>
+                        	<ul>
+                        		<li class="first">예약한 상품이 없습니다.</li>
+                        	</ul>
+                        <%
+                        	} else {
+                        		Pkg_resVO prdata;
+                        		for (int i=0; i<plist.size(); i++) {
+                        			prdata = plist.get(i);
+                        %>
+                        	<li><%=prdata.getPkg_name()%></li>
+                        	<br><br>
+                        <%
+                        		}
+                        	}
+                        %>
+                        </td>
+                        <td class="participants">
+                        <%
+                        	if (ptotCount == 0) {
+                        %>
+                        	<ul>
+                        		<li class="first">예약한 상품이 없습니다.</li>
+                        	</ul>
+                        <%
+                        	} else {
+                        		Pkg_resVO prdata;
+                        		for (int i=0; i<plist.size(); i++) {
+                        			prdata = plist.get(i);
+                        %>
+                        	<li><%=prdata.getPkg_count()%></li>
+                        <%
+                        		}
+                        	}
+                        %>                        
+                        </td>
+                        <td class="participants">
+                        <%
+                        	int totalPrice = 0;
+                        	if (ptotCount == 0) {
+                        %>
+                        	<ul>
+                        		<li class="first">예약한 상품이 없습니다.</li>
+                        	</ul>
+                        <%
+                        	} else {
+                        		Pkg_resVO prdata;
+                        		for (int i=0; i<plist.size(); i++) {
+                        			prdata = plist.get(i);
+                        			totalPrice += prdata.getTotal_price();
+                        %>
+                        	<li><%=prdata.getUse_date()%></li>
+                        <%
+                        		}
+                        	}
+                        %>                              
+                        </td>
+                    </tr>                                                                             
                     <tr>
                         <td>TOTAL</td>
-                        <td class="price" colspan="2">1,000,000 WON</td>
+                        <td class="price" colspan="2">
+                        	<%=totalPrice%> WON
+						</td>
                     </tr>
                 </table>
             </div>
@@ -244,14 +227,33 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
             <h3>나의 질문<span class="title-sub">MY QUESTION</span></h3>
             <div class="my-question-box">
                 <table>
+                	 	<%
+							if (qtotCount == 0) {
+						%>
+						<tr>
+								<td class="first" colspan="8">등록된 글이 없습니다.</td>
+						</tr>
+						<% 
+							} else {
+								String targetUrl = "";
+								String topClass = "";
+								QnaVO qnadata;
+								String bgColor ="";
+															
+								for (int i=0; i<qdata.size(); i++) {
+											qnadata = qdata.get(i);
+											/* targetUrl = "style='cursor:pointer;' onclick=\"location.href='"+qdata.getTargetURLParam("qna_read", qdata, qnadata.getNo())+"'\""; */
+											bgColor = (qnadata.getReply()==0)?"#ffffff":"#e8e8e8";
+																
+						%>
                     <tr>
-                            <td><a href="#"><span class="plus">┌</span>회원탈퇴에 대한 답변입니다.</a></td>
-                            <td>2019-06-29</td>
+                            <td class="title"><a href="/support/qna/qna_read?no=<%=qnadata.getNo() %>"><%=qnadata.getTitle() %></a></td>
+                            <td><a href="#"><%=DateUtil.getDateFormat(qnadata.getRegdate())%></a></td> 
                     </tr>
-                    <tr>
-                        <td><a href="../qna.html">회원탈퇴를 하고싶어요.</a></td>
-                        <td>2019-07-01</td>
-                    </tr>
+                     <%
+									}
+								 }
+					%>
                 </table>
             </div>
         </div>

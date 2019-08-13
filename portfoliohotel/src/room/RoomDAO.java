@@ -23,6 +23,16 @@ public class RoomDAO extends SqlMapClientDAOSupport {
 	}
 	
 	/**
+	 * 객실 목록 가격 내림차순
+	 * @param vo
+	 * @return
+	 * @throws SQLException
+	 */
+	public ArrayList list_price(RoomVO vo) throws SQLException {
+		return (ArrayList)getSqlMapClient().queryForList("room.list_price", vo);
+	}
+	
+	/**
 	 * 객실 등록
 	 * @param vo
 	 * @return
@@ -86,7 +96,6 @@ public class RoomDAO extends SqlMapClientDAOSupport {
 	public ArrayList list_image(int room_pk) throws SQLException {
 		return (ArrayList)getSqlMapClient().queryForList("room.list_image", room_pk);
 	}
-	
 	
 	
 	/**

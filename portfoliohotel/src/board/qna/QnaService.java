@@ -34,12 +34,23 @@ public class QnaService {
 		rowPageCount[1] = pageCount;
 		return rowPageCount;
 	}
-
+	
 	public ArrayList list(QnaVO vo) throws Exception {
 		ArrayList list = qnaDao.list(vo);
 		return list;
 	}
-
+	
+	
+	/*
+	 * public int[] Mycount(QnaVO vo) throws Exception { int rowCount =
+	 * qnaDao.count(vo); int[] rowPageCount = new int[2]; int pageCount =
+	 * Page.getPageCount(vo.getPageRows(), rowCount); rowPageCount[0] = rowCount;
+	 * rowPageCount[1] = pageCount; return rowPageCount; }
+	 * 
+	 * public ArrayList Mylist(QnaVO vo) throws Exception { ArrayList list =
+	 * qnaDao.list(vo); return list; }
+	 */
+	
 	public int insert(QnaVO vo, HttpServletRequest request) throws Exception {
 		
 		FileUtil fu = new FileUtil();
@@ -89,17 +100,23 @@ public class QnaService {
 	/*	관리자  쓰기 , 수정*/
 	public int updateReply(QnaVO vo)throws SQLException, Exception { 
 		 QnaVO read = qnaDao.read(vo);
-		 String[] emailArr = read.getEmail().split(",");
-		 String[] nameArr= read.getName().split(",");
+		/*
+		 * String[] emailArr = read.getEmail().split(","); String[] nameArr=
+		 * read.getName().split(",");
+		 * 
+		 * String emailAdress = emailArr[0]+ emailArr[1]; String NametoSend =
+		 * nameArr[0]+ nameArr[1];
+		 */
+		 System.out.println("===================================");
+		 System.out.println(read.getEmail());
+		 System.out.println("===================================");
 		 
-		 String emailAdress = emailArr[0]+ emailArr[1];
-		 String NametoSend = nameArr[0]+ nameArr[1];
 		 String ReplyContents = vo.getReply_contents();
 		
 		 int no = qnaDao.updateReply(vo); 
 		 if(vo.getSend_email()==1) {
-			 SendMail.sendEmail("joonoh94@naver.com", emailAdress, 
-					 			"[Portfolio HOTEL]"+NametoSend+"님 질문에 답변이 달렸습니다.", 
+			 SendMail.sendEmail("joonoh94@naver.com", read.getEmail(), 
+					 			"[Portfolio HOTEL]"+read.getLastName()+read.getFirstName()+"님 질문에 답변이 달렸습니다.", 
 					 			"답변 : " + ReplyContents ); 
 		 }
 		 return no; 
