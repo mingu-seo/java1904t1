@@ -300,7 +300,7 @@ public class MemberController {
 		// ============= qna ======================== 
 		qparam.setMember_pk(memberInfo.getNo());
 		int[] qrowPageCount = qnaService.count(qparam);
-		ArrayList<QnaVO> qlist = qnaService.list(qparam);
+		ArrayList<QnaVO> qlist = qnaService.Mylist(qparam);
 		// ============= qna ======================== 
 		
 		model.addAttribute("data", data);

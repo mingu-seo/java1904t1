@@ -248,7 +248,7 @@ $(function(){
 											bgColor = (qnadata.getReply()==0)?"#ffffff":"#e8e8e8";
 																
 						%>
-                    <tr>
+                    <tr onclick="location.href='http://localhost:8080/support/qna/qna_read?no=<%=qnadata.getNo() %>'" style="cursor:hand" >
                             <td class="title"><a href="/support/qna/qna_read?no=<%=qnadata.getNo() %>"><%=qnadata.getTitle() %></a></td>
                             <td><a href="#"><%=DateUtil.getDateFormat(qnadata.getRegdate())%></a></td> 
                     </tr>
