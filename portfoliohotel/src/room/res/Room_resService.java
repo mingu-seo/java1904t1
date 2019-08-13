@@ -78,6 +78,11 @@ public class Room_resService {
 		return read;
 	}
 	
+	public ArrayList read_list(int member_pk) throws Exception{
+		ArrayList list = room_resDAO.read_list(member_pk);
+		return list;
+	}
+	
 	public int update(Room_resVO vo) throws Exception {
 		Room_resVO read = room_resDAO.read(vo);
 		int r = room_resDAO.update(vo);

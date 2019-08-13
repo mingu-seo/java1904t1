@@ -27,7 +27,7 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                     <tr>
                         <td class="left">등급</td>
                         <td class="right"><%=CodeUtil.getMgrade(sessionMember.getGrade())%></td>
-                    </tr>
+                    </tr
                     <tr>
                         <td class="left">포인트</td>
                         <td class="right"><%=sessionMember.getPoint()%> P</td>

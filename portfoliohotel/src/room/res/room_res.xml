@@ -136,6 +136,12 @@
 		WHERE no=#no#
 	</select>
 	
+	<select id="read_list" parameterClass="Integer" resultClass="room_resVO">
+		SELECT * FROM room_res
+		WHERE member_pk=#member_pk#
+		ORDER BY checkin asc, checkout asc
+	</select>
+	
 	<update	id="cancel" parameterClass="Integer">
 		UPDATE room_res SET
 			res_state=0
