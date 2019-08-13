@@ -3,22 +3,21 @@
 <%@ page import="util.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="pkg.res.*" %>
+<%@ page import="room.res.*" %>
 <%
 MemberVO param = (MemberVO)request.getAttribute("vo");
 MemberVO data = (MemberVO)request.getAttribute("data");
 MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
-%>
-<%
+
 ArrayList<Pkg_resVO> plist = (ArrayList<Pkg_resVO>)request.getAttribute("plist");
 int ptotCount = (Integer)request.getAttribute("ptotCount");
 int ptotPage = (Integer)request.getAttribute("ptotPage");
-%>
-<%
+
 Pkg_resVO prparam = (Pkg_resVO)request.getAttribute("prvo");
+
+ArrayList<Room_resVO> mdata = (ArrayList<Room_resVO>)request.getAttribute("mdata");
+ArrayList<ArrayList<Room_opt_resVO>> modata = (ArrayList<ArrayList<Room_opt_resVO>>)request.getAttribute("modata");
 %>
-<%-- <%
-MemberVO sessionPkg_res = (MemberVO)session.getAttribute("memberInfo");
-%> --%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -35,18 +34,20 @@ MemberVO sessionPkg_res = (MemberVO)session.getAttribute("memberInfo");
     <title>마이페이지</title>
 </head>
 <script>
-/* String pkg_name = "";
-Int pkg_count = "";
-String use_date = "";
-if(sessionPkg_res != null) {
+$(function(){
+	$(".reserved_detail").css("display", "none");
 	
-} else {
-	
-} */
+	$(".reserved").click(function() {
+		if($(this).next(".reserved_detail").css("display") == "none") {
+			$(this).next(".reserved_detail").css("display", "");
+		} else {
+			$(this).next(".reserved_detail").css("display", "none");
+		}
+	});
+});
 </script>
 <body>
     <jsp:include page="/header_menu" flush="true"/>
-    
     
     <div id="container">
         
@@ -62,28 +63,39 @@ if(sessionPkg_res != null) {
                 <table>
                     <tr class="table-head">
                         <th>예약 상품</th>
-                        <th>인원</th>
-                        <th>추가사항</th>
+                        <th>숙박 기간</th>
+                        <th>결제 금액</th>
                     </tr>
-                    <tr class="reserved">
-                        <td>NAMSAN POOL DELUX ROOM</td>
-                        <td class="participants">성인 x 2
-                            <br/>
-                            어린이 x 1
+                    <%
+                    for(int i=0; i<mdata.size(); i++) {
+                    %>
+					<tr class="reserved">
+                        <td><%=mdata.get(i).getRoom_name() %></td>
+                        <td><%=Function.toDateKorean(mdata.get(i).getCheckin()) %> ~ <%=Function.toDateKorean(mdata.get(i).getCheckout()) %></td>
+                        <td class="price"><%=Function.toPriceComma(mdata.get(i).getTotal_price()) %> 원</td>
+                    </tr>
+                    <tr class="reserved_detail">
+                    	<td></td>
+                    	<td class="participants">
+                        	성인 x <%=mdata.get(i).getAdult() %><br/>
+                           	어린이 x <%=mdata.get(i).getKid() %>
                         </td>
                         <td class="option">
-                            SPA
-                            <span class="option-select">- 추가사항 없음</span>
-                            침대 추가
-                            <span class="option-select">x 1</span>
-                            웰컴 와인 & 치즈
-                            <span class="option-select">x 1</span>
+                        <%
+                        for(int j=0; j<modata.get(i).size(); j++) {
+                        %>
+                        <%=modata.get(i).get(j).getName() %> x <%=modata.get(i).get(j).getCount() %><br/>
+                        <%
+                        }
+                        %>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>TOTAL</td>
-                        <td class="price" colspan="2">1,000,000 WON</td>
-                    </tr>                   
+                    </tr>	
+                    <%	
+                    }
+                    %>
+                    </table>
+                    <br/>
+                    <table>
                     <tr class="table-head">
                         <th>패키지 예약 상품</th>
                         <th>수량</th>

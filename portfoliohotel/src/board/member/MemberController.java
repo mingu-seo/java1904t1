@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import pkg.res.Pkg_resService;
 import pkg.res.Pkg_resVO;
+import room.res.Room_opt_resVO;
+import room.res.Room_resService;
+import room.res.Room_resVO;
 import util.Function;
 
 @Controller
@@ -22,6 +25,9 @@ public class MemberController {
 	
 	@Autowired
 	private Pkg_resService pkg_resService;
+	
+	@Autowired
+	private Room_resService room_resService;
 	
 	
 	//========================================관리자===================================================
@@ -262,13 +268,26 @@ public class MemberController {
 
 	
 	@RequestMapping("/membership/mypage")
-	public String mypage(Model model, MemberVO param, Pkg_resVO prparam, HttpSession session) throws Exception {
+	public String mypage(Model model, MemberVO param, Pkg_resVO prparam, Room_resVO rvo, HttpSession session) throws Exception {
 		MemberVO data = memberService.read(param.getNo());
 		MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
 		
 		prparam.setMember_pk(memberInfo.getNo());
 		int[] rowPageCount = pkg_resService.count(prparam);
 		ArrayList<Pkg_resVO> plist = pkg_resService.list(prparam);
+		
+		ArrayList<Room_resVO> mdata = room_resService.read_list(memberInfo.getNo());
+		ArrayList<ArrayList<Room_opt_resVO>> modata = new ArrayList<ArrayList<Room_opt_resVO>>();
+		
+		for(int i=0; i<mdata.size(); i++) {
+			ArrayList odata = new ArrayList();
+			ArrayList<Room_opt_resVO> olist = room_resService.list_opt(mdata.get(i).getNo());
+			
+			for(int j=0; j<olist.size(); j++) {
+				odata.add(olist.get(j));
+			}
+			modata.add(odata);
+		}
 		
 		model.addAttribute("data", data);
 		model.addAttribute("vo", param);
@@ -280,8 +299,17 @@ public class MemberController {
 		model.addAttribute("ptotCount", rowPageCount[0]);
 		model.addAttribute("ptotPage", rowPageCount[1]);
 		model.addAttribute("plist",plist);
+		
+		model.addAttribute("mdata", mdata);
+		model.addAttribute("modata", modata);
 
 		return "membership/mypage";
+	}
+	
+	@RequestMapping("/membership/mypage_resList")
+	public String mypage_resList(Model model) throws Exception {
+		
+		return "membership/mypage_resList";
 	}
 	
 	@RequestMapping("/membership/edit_account")

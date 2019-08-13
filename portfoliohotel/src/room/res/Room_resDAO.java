@@ -57,6 +57,10 @@ public class Room_resDAO extends SqlMapClientDAOSupport {
 		return (Room_resVO)getSqlMapClient().queryForObject("room_res.read", vo);
 	}
 	
+	public ArrayList read_list(int member_pk) throws SQLException {
+		return (ArrayList<Room_resVO>)getSqlMapClient().queryForList("room_res.read_list", member_pk);
+	}
+	
 	/**
 	 * 객실 예약 수정
 	 * @param vo
