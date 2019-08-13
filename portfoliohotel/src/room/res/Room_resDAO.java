@@ -29,6 +29,14 @@ public class Room_resDAO extends SqlMapClientDAOSupport {
 		return (ArrayList<HashMap>)getSqlMapClient().queryForList("room_res.check", map);
 	}
 	
+	public ArrayList<HashMap> check_pr(HashMap map) throws SQLException {
+		return (ArrayList<HashMap>)getSqlMapClient().queryForList("room_res.check_pr", map);
+	}
+	
+	public ArrayList<HashMap> check_ds(HashMap map) throws SQLException {
+		return (ArrayList<HashMap>)getSqlMapClient().queryForList("room_res.check_ds", map);
+	}
+	
 	/**
 	 * 객실 예약 등록
 	 * @param vo
@@ -47,6 +55,10 @@ public class Room_resDAO extends SqlMapClientDAOSupport {
 	 */
 	public Room_resVO read(Room_resVO vo) throws SQLException {
 		return (Room_resVO)getSqlMapClient().queryForObject("room_res.read", vo);
+	}
+	
+	public ArrayList read_list(int member_pk) throws SQLException {
+		return (ArrayList<Room_resVO>)getSqlMapClient().queryForList("room_res.read_list", member_pk);
 	}
 	
 	/**
@@ -89,6 +101,10 @@ public class Room_resDAO extends SqlMapClientDAOSupport {
 		return (Integer)getSqlMapClient().queryForObject("room_res.count", vo);
 	}
 	
+	public Room_resVO nonmember(Room_resVO vo) throws SQLException {
+		return (Room_resVO)getSqlMapClient().queryForObject("room_res.nonmember", vo);
+	}
+	
 	/**
 	 * 객실 추가 옵션 예약
 	 * @param vo
@@ -117,7 +133,8 @@ public class Room_resDAO extends SqlMapClientDAOSupport {
 //		hm.put("checkout", "2019-07-04");
 //		dao.check(hm);
 //		vo.setCategory(1);
-		
-		dao.insert(vo);
+		vo.setGuest_email("sooya@email.com");
+		vo.setNo(107);
+		dao.nonmember(vo);
 	}
 }

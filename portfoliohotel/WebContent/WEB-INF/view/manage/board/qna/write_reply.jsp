@@ -68,13 +68,13 @@ function goSave(){
 									<tr>
 										<th scope="row"><label for="">이름</label></th>
 										<td >
-											<%=data.getName()%>
+											<%=data.getLastName() %><%=data.getFirstName() %>
 											
 										</td>
 										
 										<th scope="row"><label for="">연락처</label></th>
 										<td colspan="4">
-											<%=data.getTel()%>
+											<%=data.getTel1()%><%=data.getTel2()%><%=data.getTel3()%>
 										</td>
 										
 									

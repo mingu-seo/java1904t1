@@ -33,8 +33,17 @@ var adult_add;
 var kid_add;
 var person_price;
 
+/* day_stay 계산 함수 */
+function calculate() {
+	arr_in = $("#checkin_select").val().split("-");
+	arr_out = $("#checkout_select").val().split("-");
+	time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
+	time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
+	day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
+}
+
 $(function() {
-	$("#checkin_select, #checkout_select").datepicker({
+	$("#checkin_select").datepicker({
         monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
         dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
         dateFormat: "yy-mm-dd",
@@ -42,80 +51,36 @@ $(function() {
         minDate: "0D" 
     });
 	
-	arr_in = $("#checkin_select").val().split("-");
-	arr_out = $("#checkout_select").val().split("-");
-	time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
-	time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
-	day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
-	$("#day_stay"+no).val(day_stay);
-	$("#room_price"+no).val(Number($("#price_span"+no).html()) * day_stay);
-	$("#checkin"+no).val($("checkin_select").val());
-	$("#checkout"+no).val($("checkout_select").val());
+	$("#checkout_select").datepicker({
+        monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+        dateFormat: "yy-mm-dd",
+        yearRange: "2019:2019",
+        minDate: "1D" 
+    });
 	
-	$("#scheckin").val($("checkin_select").val());
-	$("#scheckout").val($("checkout_select").val());
-	$("#sday_stay").val(day_stay);
+	calculate();
+	$("#checkin").val($("#checkin_select").val());
+	$("#checkout").val($("#checkout_select").val());
+	$("#day_stay").val(day_stay);
+	$("#adult").val($("#adult_select option:selected").val());
+	$("#kid").val($("#kid_select option:selected").val());
+
+	checkDate($("#checkin_select").val(), $("#checkout_select").val()); 
 	
-	/* $("#checkin_select, #checkout_select").change(function() {
-		var arr_in = $("#checkin_select").val().split("-");
-		var arr_out = $("#checkout_select").val().split("-");
-		var time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
-		var time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
-		var day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
-		$("#day_stay"+no).val(day_stay);
-		$("#room_price"+no).val(Number($("#price_span"+no).html()) * day_stay);
-		$("#checkin"+no).val($("checkin_select").val());
-		$("#checkout"+no).val($("checkout_select").val());
+	$("#checkin_select, #checkout_select").change(function() {
+		calculate();
+		$("#day_stay").val(day_stay);
+		$("#checkin").val($("#checkin_select").val());
+		$("#checkout").val($("#checkout_select").val());
 		
-		$("#scheckin").val($("checkin_select").val());
-		$("#scheckout").val($("checkout_select").val());
-		$("#sday_stay").val(day_stay);
-	}); */
+		checkDate($("#checkin_select").val(), $("#checkout_select").val()); 
+	});
 	
-	adult_add = 0;
-	kid_add = 0;
-	if($("#adult_select option:selected").val() > $("#adult_basic"+no).val()){
-		adult_add = ($("#adult_select option:selected").val() - $("#adult_basic"+no).val())*100000;
-	} else { 
-		adult_add = 0;
-	}
-	if($("#kid_select option:selected").val() > $("#kid_basic"+no).val()){
-		kid_add = ($("#kid_select option:selected").val() - $("#kid_basic"+no).val())*(100000*0.7);
-	} else {
-		kid_add = 0;
-	}
-	
-	person_price = adult_add + kid_add;
-	$("#person_price"+no).val(person_price);
-	$("#adult_add"+no).val($("#adult_select option:selected").val() - $("#adult_basic"+no).val());
-	$("#kid_add"+no).val($("#kid_select option:selected").val() - $("#kid_basic"+no).val());
-	
-	/* $("#adult_select, #kid_select").change(function() {
-		$("#adult"+no).val($("#adult_select option:selected").val());
-		$("#kid"+no).val($("#kid_select option:selected").val());
-			
-		$("#sadult").val($("#adult_select option:selected").val());
-		$("#skid").val($("#kid_select option:selected").val());
-		
-		var adult_add = 0;
-		var kid_add = 0;
-		if($("#adult_select option:selected").val() > $("#adult_basic"+no).val()){
-			adult_add = ($("#adult_select option:selected").val() - $("#adult_basic"+no).val())*100000;
-		} else { 
-			adult_add = 0;
-		}
-		if($("#kid_select option:selected").val() > $("#kid_basic"+no).val()){
-			kid_add = ($("#kid_select option:selected").val() - $("#kid_basic"+no).val())*(100000*0.7);
-		} else {
-			kid_add = 0;
-		}
-		
-		var person_price = adult_add + kid_add;
-		$("#person_price"+no).val(person_price);
-		$("#adult_add"+no).val($("#adult_select option:selected").val() - $("#adult_basic"+no).val());
-		$("#kid_add"+no).val($("#kid_select option:selected").val() - $("#kid_basic"+no).val());
-	});	 */
-	
+	$("#adult_select, #kid_select").change(function() {
+		$("#adult").val($("#adult_select option:selected").val());
+		$("#kid").val($("#kid_select option:selected").val());
+	});
 });
 
 function goSubmit(no) {
@@ -140,34 +105,47 @@ function goSubmit(no) {
 	} else {
 		kid_add = 0;
 	}
-	
 	person_price = adult_add + kid_add;
 	$("#person_price"+no).val(person_price);
-	$("#adult_add"+no).val($("#adult_select option:selected").val() - $("#adult_basic"+no).val());
-	$("#kid_add"+no).val($("#kid_select option:selected").val() - $("#kid_basic"+no).val());
 	
-	arr_in = $("#checkin_select").val().split("-");
-	arr_out = $("#checkout_select").val().split("-");
-	time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
-	time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
-	day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
+	var aac = $("#adult_select option:selected").val() - $("#adult_basic"+no).val();
+	if(aac < 0) {
+		aac = 0;
+	} 
+	$("#adult_add"+no).val(aac);
+	
+	var kac = $("#kid_select option:selected").val() - $("#kid_basic"+no).val();
+	if(kac < 0) {
+		kac = 0;
+	} 
+	$("#kid_add"+no).val(kac);
+	
+	calculate();
 	$("#day_stay"+no).val(day_stay);
 	$("#room_price"+no).val(Number($("#price_span"+no).html()) * day_stay);
 }
 
 function goPrice() {
-	$("#sadult").val(<%=request.getParameter("adult")%>);
-	$("#skid").val(<%=request.getParameter("kid")%>);
-	$("#scheckin").val('<%=request.getParameter("checkin")%>');
-	$("#scheckout").val('<%=request.getParameter("checkout")%>');
-	$("#sday_stay").val(day_stay);
-	
-	document.room_search.submit();
+	$("#searchFrm").attr("action", "/book/room/price_room");
+	$("#searchFrm").submit();
 }
 
-function goRescan() {
-	
+function goSearch() {
+	$("#searchFrm").attr("action", "/book/room/check_room");
+	$("#searchFrm").submit();
 }
+
+function checkDate(checkin, checkout) {
+	$.ajax({
+		type : "GET",
+		url : "/book/room/check_cr?checkin="+checkin+"&checkout="+checkout, 
+		async : false,
+		success : function(data){
+			$("#check_cr_area").html(data);
+		}
+	});
+}
+
 </script>
 <title>객실검색</title>
 </head>
@@ -186,15 +164,15 @@ function goRescan() {
 			
 			<!-- 객실 검색 박스 -->
 			<div class="select-info-box">
-				<form class="room-search" name="room_search" action="/book/room/check_room" method="post">
+				<form class="room-search" id="searchFrm">
 					<div class="period after">
 						<label for="period">숙박기간</label>
 					</div>
 
 					<div class="checkInOut">
-						<input type="text" name="checkin_select" id="checkin_select" class="InDate" maxlength="10" placeholder="체크인"
+						<input type="text" name="checkin" id="checkin_select" class="InDate" maxlength="10" placeholder="체크인"
 							value="<%=request.getParameter("checkin") %>" readonly>~ 
-						<input type="text" name="checkout_select" id="checkout_select" class="OutDate" maxlength="10" placeholder="체크아웃"
+						<input type="text" name="checkout" id="checkout_select" class="OutDate" maxlength="10" placeholder="체크아웃"
 							value="<%=request.getParameter("checkout") %>" readonly>
 					</div>
 					<div class="days"><%=request.getParameter("day_stay")%>	박</div>
@@ -240,37 +218,42 @@ function goRescan() {
 						</select>
 					</div>
 					<div class="re-try">
-						<button class="re-check-btn" onclick="return goRescan();">재검색</button>
+						<button class="re-check-btn">재검색</button>
 					</div>
+					
+					<input type="hidden" name="checkin" id="checkin" value=""/>
+					<input type="hidden" name="checkout" id="checkout" value=""/>
+					<input type="hidden" name="adult" id="adult" value=""/>
+					<input type="hidden" name="kid" id="kid" value=""/>
+					<input type="hidden" name="day_stay" id="day_stay" value=""/>
 				</form>
 			</div>
 		</div>
 
 		<!-- 탭메뉴 객실/요금으로 보기 -->
 		<div class="room-info">
-			<form name="goPrice_room" id="goPrice_room" action="/book/room/price_room" method="post">
-				<ul class="tabMenu clear">
-					<li class="on"><a href="#">객실로 보기</a></li>
-					<li><a href="#" onclick="goPrice();">요금으로 보기</a></li>
-				</ul>
+			<ul class="tabMenu clear">
+				<li class="on"><a href="#">객실로 보기</a></li>
+				<li><a href="#" onclick="goPrice();">요금으로 보기</a></li>
+			</ul>
 				
-				<input type="hidden" name="scheckin" id="scheckin" value=""/>
-				<input type="hidden" name="scheckout" id="scheckout" value=""/>
-				<input type="hidden" name="sday_stay" id="sday_stay" value=""/>
-				<input type="hidden" name="sadult" id="sadult" value=""/>
-				<input type="hidden" name="skid" id="skid" value=""/>
-			</form>
-
-			<%
+			<input type="hidden" name="checkin" id="checkin" value=""/>
+			<input type="hidden" name="checkout" id="checkout" value=""/>
+			<input type="hidden" name="day_stay" id="day_stay" value=""/>
+			<input type="hidden" name="adult" id="adult" value=""/>
+			<input type="hidden" name="kid" id="kid" value=""/>	
+			
+			<span id="check_cr_area"></span>
+			<%-- <%
 			for(int i=0; i<list_r.size(); i++) {
 			%>
 			<form action="/book/room/add_option" method="post" id="frm<%=i%>">
 			<!--예약 가능한 객실 조회 결과 나오는 영역 -->
 			<div class="roomResult-area clear">
 				<ul>
-					<li class="photo roomtype01">
+					<li class="photo roomtype01" style="background-image: url('/upload/room/<%=list_r.get(i).getImage()%>');">
 						<h1 class="camera">
-							<a href="/room/detail_sub<%=i %>" target="_blank"><img src="/img/ico_photo.png"></a>
+							<a href="/room/detail_sub<%=i+1 %>" target="_blank"><img src="/img/ico_photo.png"></a>
 						</h1>
 					</li>		
 					<li>
@@ -335,7 +318,7 @@ function goRescan() {
 			</form>
 			<%
 			}
-			%>
+			%> --%>
 		</div>
 		<!-- room-info 영역 끝 -->
 	</div>

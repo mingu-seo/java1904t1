@@ -17,10 +17,4 @@ public class UserMainController {
 		return "index";
 	}
 	
-	@RequestMapping("/pkg/special_promotion")
-	public String pkg_special(Model model, AdminVO param) throws Exception {
-		
-		return "dining/moon-bar";
-	}
-	
 }

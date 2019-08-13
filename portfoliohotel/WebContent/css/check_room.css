@@ -17,7 +17,7 @@
 .after {padding:0 18px;}
 .after:after {content:""; display:inline-block; width:1px; height:18px; background-color:#898989; position:relative; left:18px; top:3px;}
 
-.checkInOut input[type="text"] {width:155px; padding:0 10px;}
+.checkInOut input[type="text"] {width:155px; padding:0 35px;}
 
 .days {width:70px; padding-left:10px;}
 .days:before {content:""; display:inline-block; width:1px; height:18px; background-color:#898989; position:relative; left:-18px; top:3px;}

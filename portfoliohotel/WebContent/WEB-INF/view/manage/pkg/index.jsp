@@ -125,7 +125,7 @@ function goSearch() {
 									<a class="wbtn" href="write"><strong>등록</strong> </a>
 								</div>
 								<!-- 페이징 처리 -->
-								<%=Page.indexList(param.getReqPageNo(), totPage, request)%>
+								<%-- <%=Page.indexList(param.getReqPageNo(), totPage, request)%> --%>
 								<!-- 페이징 처리 -->
 							</div>
 							<!--//btn-->

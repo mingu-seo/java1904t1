@@ -68,17 +68,53 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                         }
                 });
 
+                $("#checkin_select").datepicker({
+                    monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+                    dateFormat: "yy-mm-dd",
+                    yearRange: "2019:2019",
+                    minDate: "0D",
+                    prevText: "이전달",
+                    nextText: "다음달",
+                    onClose: function( selectedDate ) {
+                    	$("#checkout_select").datepicker( "option", "minDate", selectedDate );
+					}                
+                });
+                
+                $("#checkout_select").datepicker({
+                    monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                    dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+                    dateFormat: "yy-mm-dd",
+                    yearRange: "2019:2019",
+                    minDate: "1D",
+                    prevText: "이전달",
+                    nextText: "다음달",
+                    onClose: function( selectedDate ) {
+                        $("#checkin_select").datepicker( "option", "maxDate", selectedDate );
+                    }   
+                });
+                
+                calculate();
+        		$("#day_stay").val(day_stay);
+        		$("#checkin").val($("#checkin_select").val());
+        		$("#checkout").val($("#checkout_select").val());
+                 
                 //메인페이지 객실예약 선택 달력플러그인 사용
-                $("#checkin, #checkout").change(function() {
-            		var arr_in = $("#checkin").val().split("-");
-            		var arr_out = $("#checkout").val().split("-");
-            		var time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
-            		var time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
-            		day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
+                $("#checkin_select, #checkout_select").change(function() {
+            		calculate();
             		$("#day_stay").val(day_stay);
-            		console.log($("#day_stay").val());
+            		$("#checkin").val($("#checkin_select").val());
+            		$("#checkout").val($("#checkout_select").val());
 				});
             });
+            
+            function calculate() {
+            	arr_in = $("#checkin_select").val().split("-");
+            	arr_out = $("#checkout_select").val().split("-");
+            	time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
+            	time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
+            	day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
+            }
         </script>
     <title>Portfolio Hotel</title>
 </head>
@@ -145,9 +181,9 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                 <div class="d-r-input clear"><!-- direct-reservation 단어 너무길어서 d-r 로 줄임 -->
                         <form name="frm" id="frm" action="/book/room/check_room/" method="post">
                             <div class="d-r-input1">
-                                <input type="text" id="start-date">
+                                <input type="text" name="checkin_select" id="checkin_select" value="<%=DateUtil.getToday()%>">
                                 <p>~</p>
-                                <input type="text" id="end-date"> 
+                                <input type="text" name="checkout_select" id="checkout_select" value="<%=DateUtil.getDayDateAdd(1, DateUtil.getToday())%>"> 
                                 <select name="adult">
                                     <option>성인</option>
                                     <option value="1">1</option>
@@ -155,18 +191,15 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
                                 </select> 
-                                <select name="child">
+                                <select name="kid">
                                     <option>어린이</option>
+                                    <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                     <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
                                 </select> 
                             </div>
                             <div class="d-r-input2">

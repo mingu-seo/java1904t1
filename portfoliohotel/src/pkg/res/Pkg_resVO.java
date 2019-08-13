@@ -9,7 +9,7 @@ public class Pkg_resVO extends Parameter {
 	private int no; //pk
 	private int pkg_pk; // 패키지 pk
 	private String pkg_name; // 패키지명
-	private int member_pk; // 회원 pk
+	private int member_pk; // 회원가입할때 받은 no
 	private Timestamp purchase_date; // 예약일
 	private String use_date; // 사용일
 	private String guest_name1; // 고객명1
