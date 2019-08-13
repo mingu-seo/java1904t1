@@ -164,6 +164,12 @@
 		WHERE guest_email=#guest_email# AND no=#no# AND res_state=1
 	</select>
 	
+	<select id="count_use" parameterClass="Integer" resultClass="java.util.HashMap">
+		SELECT count(*) AS useNumber, SUM(TIMESTAMPDIFF(DAY, checkin, checkout)) AS dayStay 
+		FROM room_res 
+		WHERE member_pk=#member_pk# AND <![CDATA[checkout<=NOW()]]>;
+	</select>
+	
 	
 	<typeAlias alias="room_opt_resVO" type="room.res.Room_opt_resVO"/>
 	

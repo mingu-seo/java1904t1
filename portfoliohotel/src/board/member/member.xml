@@ -179,4 +179,9 @@
         	(#id#, #name#, now(), #ip#)
     </insert> -->
     
+    
+    <update id="grade" parameterClass="membervo">
+    	UPDATE member SET grade=$grade$ 
+    	WHERE no=$no$
+    </update>
 </sqlMap>
