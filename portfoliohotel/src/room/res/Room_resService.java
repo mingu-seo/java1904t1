@@ -138,6 +138,11 @@ public class Room_resService {
 		return map;
 	}
 	
+	public int count_res(int member_pk) throws Exception {
+		int r = room_resDAO.count_res(member_pk);
+		return r;
+	}
+	
 	public ArrayList list_opt(int room_opt_pk) throws Exception {
 		ArrayList list = room_resDAO.list_opt(room_opt_pk);
 		return list;
