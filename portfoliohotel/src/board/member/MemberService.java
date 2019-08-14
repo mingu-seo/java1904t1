@@ -71,12 +71,14 @@ public class MemberService {
 		int no = memberDao.find_pw_change(vo);
 		return no;
 	}
+	
+	public int naverCallback(MemberVO vo)throws SQLException{
+		int cnt = memberDao.insert(vo);
+		return cnt;
+	}
 
 
-//	public int find_pw(MemberVO vo) throws SQLException{
-//		int cnt = memberDao.find_pw(vo);
-//		return cnt;
-//	}
+
 	
 
 	public int delete(int no) throws SQLException {
@@ -169,6 +171,8 @@ public class MemberService {
 		return r;
 	}
 
-	
+	public void grade(MemberVO vo) throws SQLException {
+		memberDao.grade(vo);
+	}
 	
 }

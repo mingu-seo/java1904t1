@@ -78,6 +78,11 @@ public class Room_resService {
 		return read;
 	}
 	
+	public ArrayList read_list(int member_pk) throws Exception{
+		ArrayList list = room_resDAO.read_list(member_pk);
+		return list;
+	}
+	
 	public int update(Room_resVO vo) throws Exception {
 		Room_resVO read = room_resDAO.read(vo);
 		int r = room_resDAO.update(vo);
@@ -127,6 +132,22 @@ public class Room_resService {
 		Room_resVO data = room_resDAO.nonmember(vo);
 		return data;
 	}
+	
+	public HashMap count_use(int member_pk) throws Exception {
+		HashMap map = room_resDAO.count_use(member_pk);
+		return map;
+	}
+	
+	public int count_res(int member_pk) throws Exception {
+		int r = room_resDAO.count_res(member_pk);
+		return r;
+	}
+	
+	public ArrayList<HashMap> point(int member_pk) throws Exception {
+		ArrayList<HashMap> map = room_resDAO.point(member_pk);
+		return map;
+	}
+	
 	
 	public ArrayList list_opt(int room_opt_pk) throws Exception {
 		ArrayList list = room_resDAO.list_opt(room_opt_pk);

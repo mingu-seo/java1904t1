@@ -229,7 +229,7 @@ function goSave() {
 
                 <div class="edit-table">
                         <h3>비밀번호를 잊으셨나요?</h3>
-                        <p>가입하신 이메일 인증을 통해 재설정 하실 수 있습니다.</p>
+                        <p>정보를 입력하시고 비밀번호를 재설정 하실 수 있습니다.</p>
                     <div class="edit-table-right">
                         <!-- <form method="POST"> -->
                         <form name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/process.do" method="post">

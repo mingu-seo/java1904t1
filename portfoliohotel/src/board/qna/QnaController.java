@@ -87,6 +87,19 @@ public class QnaController {
 		/* return "/membership/popup"; */
 	}
 	
+	/*
+	 * @RequestMapping("/membership/mypage") public String myQna(Model model, QnaVO
+	 * param) throws Exception { int[] rowPageCount = qnaService.Mycount(param);
+	 * ArrayList<QnaVO> list = qnaService.Mylist(param);
+	 * 
+	 * model.addAttribute("qtotCount", rowPageCount[0]);
+	 * model.addAttribute("qtotPage", rowPageCount[1]); model.addAttribute("qlist",
+	 * list); model.addAttribute("qvo", param);
+	 * 
+	 * return "membership/mypage"; }
+	 */
+	
+	
 	@RequestMapping("/support/qna/processU")
 	public String processU(Model model, QnaVO param, HttpServletRequest request) throws Exception {
 		model.addAttribute("param", param);

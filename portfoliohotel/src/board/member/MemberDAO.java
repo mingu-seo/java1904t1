@@ -78,9 +78,7 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 	
 	public int checkInfo(MemberVO vo) throws SQLException{
 		return (Integer)getSqlMapClient().queryForObject("member.checkInfo",vo);
-	}
-	
-
+	}	
 		
 	public int find_pw(MemberVO vo) throws SQLException{
 		return (Integer)getSqlMapClient().queryForObject("member.find_pw",vo);
@@ -94,6 +92,12 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 	public int find_pw_change(MemberVO vo) throws SQLException{
 		return getSqlMapClient().update("member.find_pw_change",vo);
 	}
+	
+	public int naver(MemberVO vo) throws SQLException{
+		return (Integer)getSqlMapClient().queryForObject("member.naver",vo);
+	}
+	
+
 
 	/**
 	 * 관리자 삭제
@@ -169,7 +173,9 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 	
 	/*-------------------------------------------------------------------------*/
 	
-	
+	public void grade(MemberVO vo) throws SQLException {
+		getSqlMapClient().update("member.grade", vo);
+	}
 
 	
 
@@ -184,6 +190,7 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 //		av.setName("하희철");
 //		int no =ad.insert(av);
 //		System.out.println(no);
+	
 
 	}
 

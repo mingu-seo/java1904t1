@@ -34,12 +34,28 @@ public class QnaService {
 		rowPageCount[1] = pageCount;
 		return rowPageCount;
 	}
-
+	
 	public ArrayList list(QnaVO vo) throws Exception {
 		ArrayList list = qnaDao.list(vo);
 		return list;
 	}
-
+	
+	public ArrayList Mylist(QnaVO vo) throws Exception {
+		ArrayList Mylist = qnaDao.Mylist(vo);
+		return Mylist;
+	}
+	
+	
+	/*
+	 * public int[] Mycount(QnaVO vo) throws Exception { int rowCount =
+	 * qnaDao.count(vo); int[] rowPageCount = new int[2]; int pageCount =
+	 * Page.getPageCount(vo.getPageRows(), rowCount); rowPageCount[0] = rowCount;
+	 * rowPageCount[1] = pageCount; return rowPageCount; }
+	 * 
+	 * public ArrayList Mylist(QnaVO vo) throws Exception { ArrayList list =
+	 * qnaDao.list(vo); return list; }
+	 */
+	
 	public int insert(QnaVO vo, HttpServletRequest request) throws Exception {
 		
 		FileUtil fu = new FileUtil();

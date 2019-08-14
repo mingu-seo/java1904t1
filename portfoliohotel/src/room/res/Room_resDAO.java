@@ -57,6 +57,10 @@ public class Room_resDAO extends SqlMapClientDAOSupport {
 		return (Room_resVO)getSqlMapClient().queryForObject("room_res.read", vo);
 	}
 	
+	public ArrayList read_list(int member_pk) throws SQLException {
+		return (ArrayList<Room_resVO>)getSqlMapClient().queryForList("room_res.read_list", member_pk);
+	}
+	
 	/**
 	 * 객실 예약 수정
 	 * @param vo
@@ -99,6 +103,18 @@ public class Room_resDAO extends SqlMapClientDAOSupport {
 	
 	public Room_resVO nonmember(Room_resVO vo) throws SQLException {
 		return (Room_resVO)getSqlMapClient().queryForObject("room_res.nonmember", vo);
+	}
+	
+	public HashMap<Integer, Integer> count_use(int member_pk) throws SQLException {
+		return (HashMap<Integer, Integer>)getSqlMapClient().queryForObject("room_res.count_use", member_pk);
+	}
+	
+	public int count_res(int member_pk) throws SQLException {
+		return (Integer)getSqlMapClient().queryForObject("room_res.count_res", member_pk);
+	}
+	
+	public ArrayList<HashMap> point (int member_pk) throws SQLException {
+		return (ArrayList<HashMap>)getSqlMapClient().queryForList("room_res.point", member_pk);
 	}
 	
 	/**

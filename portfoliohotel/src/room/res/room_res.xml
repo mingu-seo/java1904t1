@@ -136,6 +136,12 @@
 		WHERE no=#no#
 	</select>
 	
+	<select id="read_list" parameterClass="Integer" resultClass="room_resVO">
+		SELECT * FROM room_res
+		WHERE member_pk=#member_pk#
+		ORDER BY checkin asc, checkout asc
+	</select>
+	
 	<update	id="cancel" parameterClass="Integer">
 		UPDATE room_res SET
 			res_state=0
@@ -158,6 +164,23 @@
 		WHERE guest_email=#guest_email# AND no=#no# AND res_state=1
 	</select>
 	
+	<select id="count_use" parameterClass="Integer" resultClass="java.util.HashMap">
+		SELECT count(*) AS useNumber, SUM(TIMESTAMPDIFF(DAY, checkin, checkout)) AS dayStay 
+		FROM room_res 
+		WHERE member_pk=#member_pk# AND <![CDATA[checkout<=NOW()]]>;
+	</select>
+	
+	<select id="count_res" parameterClass="Integer" resultClass="Integer">
+		SELECT count(*)
+		FROM room_res
+		WHERE member_pk=#member_pk#
+	</select>
+	
+	<select id="point" parameterClass="Integer" resultClass="java.util.HashMap">
+		SELECT TRUNCATE((total_price*0.01),0) AS point, (DATE_ADD(checkout, INTERVAL 1 DAY)) AS savingdate, no 
+		FROM room_res 
+		WHERE member_pk=#member_pk# AND <![CDATA[checkout<=NOW()]]>;
+	</select>
 	
 	<typeAlias alias="room_opt_resVO" type="room.res.Room_opt_resVO"/>
 	

@@ -8,6 +8,22 @@
 	MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 %>
 
+
+<%@ page import="java.security.SecureRandom"  %>
+<%@ page import="java.math.BigInteger"  %>
+<%@ page import="java.net.URLEncoder"  %>
+<%
+String client_id = "yyt5qpvTbPa5tqyLB0Td";   //수정할 시 클라이언트 아이디 수정
+String redirectURI = URLEncoder.encode("http://localhost:8080/login/naverCallback.jsp"); //수정할 시 콜백url 수정
+SecureRandom random = new SecureRandom();
+String state = new BigInteger(130, random).toString(32);
+session.setAttribute("state", state);
+
+String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id="+client_id+"&redirect_uri="+redirectURI+"&state="+state;
+%>
+
+
+
 <script>
 
 
@@ -194,9 +210,9 @@ function CookieVal(cookieName) {
                                         </div>
                             </div>
                     </li>
-                    <!-- <li><a href="#">SIGN IN</a></li> -->
+                  <li><a href="/membership/sign_in">Sign in</a></li>
                 </ul>
-                <a href="/membership/sign_in">Sign in</a>
+               
             </div>
         </div>
     </div>
@@ -245,8 +261,17 @@ function CookieVal(cookieName) {
                     <ul class="snsLogin clear">
                      
                         <li>
-                            <button class="naver" onclick=""><p>네이버로 로그인</p></button>
-                              <div class="naver" id="naver_id_login"></div>
+                        <!-- <div id="naver_id_login" class="naver" ><p>네이버로 로그인</p></div> -->
+                         
+                        <button class="naver" href="#;" id="naverBtn"><p>네이버로 로그인</p></button>
+       			<script>
+			    		$(function() {
+			    			$("#naverBtn").click(function() {
+			    				window.open('<%=apiURL%>', '_blank', 'width=400, height=400,scrollbar=no,status=no');
+			    			});
+			    		});
+    
+    			</script>
                         </li>
 
                         <li>
@@ -382,25 +407,6 @@ function CookieVal(cookieName) {
            });
         });   */
     </script>
-    
-    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-
-  <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-
-  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
-  <!-- <script type="text/javascript"> -->
-  <script>
-  	var naver_id_login = new naver_id_login("yyt5qpvTbPa5tqyLB0Td", "http://localhost:8080/login/naverCallback.jsp");
-  	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("white", 2,40);
-  	naver_id_login.setDomain("http://localhost:8080");
-  	naver_id_login.setState(state);
-  	naver_id_login.setPopup();
-  	naver_id_login.init_naver_id_login();
-  </script>
-</html>
     
 
    <!-- <img src="kakao.png" onclick="loginWithKaKao();"> -->

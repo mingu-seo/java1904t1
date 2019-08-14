@@ -1,14 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
 <%@ page import="java.util.*" %>
 <%@ page import="board.member.*" %>
 <%@ page import="util.*" %>
+
+
+
+
 <%
 MemberVO param = (MemberVO)request.getAttribute("vo");
 ArrayList<MemberVO> list = (ArrayList)request.getAttribute("list");
 MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 MemberVO data = (MemberVO)request.getAttribute("data");
 %>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -138,7 +145,7 @@ MemberVO data = (MemberVO)request.getAttribute("data");
             </div>      
         </div>  
     <%} %>
-        
+   
     <jsp:include page="/header_menu" flush="true"/>
     
     
