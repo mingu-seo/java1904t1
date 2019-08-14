@@ -93,7 +93,11 @@ NoticeVO data = (NoticeVO) request.getAttribute("data");
 										<tr>
 											<th scope="row"><label for="">첨부파일</label></th>
 											<td colspan="5">
+											<% if(data.getFile_org() != null && data.getFile_org() != "") {%>
 											<a href="<%= Function.downloadUrl(SiteProperty.NOTICE_UPLOAD_PATH, java.net.URLEncoder.encode(data.getFile_org(), "UTF-8"), data.getFile()) %>" target="_blank"><%=data.getFile_org()%></a></td>
+											<%
+											}
+											%>
 										</tr>
 										<tr>
 											<th scope="row"><label for="">상세정보</label></th>

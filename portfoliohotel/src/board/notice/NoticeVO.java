@@ -47,11 +47,11 @@ public class NoticeVO extends Parameter {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+	public String getName() { 
+		  return name; 
+	} 
+	 public void setName(String name) {
+		 this.name = name; 
 	}
 	public String getTitle() {
 		return title;

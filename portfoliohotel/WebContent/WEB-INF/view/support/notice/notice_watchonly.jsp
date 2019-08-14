@@ -63,7 +63,12 @@ NoticeVO notice_data = (NoticeVO)request.getAttribute("notice_data");
                         <h1>내용</h1>
                         <div class="notice-cont"><%=notice_data.getContents() %></div>
                         <h1>첨부파일</h1>
-                        <div class="notice-title"><a href="<%= Function.downloadUrl(SiteProperty.NOTICE_UPLOAD_PATH, java.net.URLEncoder.encode(notice_data.getFile_org(), "UTF-8"), notice_data.getFile()) %>" target="_blank"><%=notice_data.getFile_org()%></a></div>
+                        <div class="notice-title">
+                        <% if(notice_data.getFile_org() != null && notice_data.getFile_org() != "")  { %>
+                        <a href="<%= Function.downloadUrl(SiteProperty.NOTICE_UPLOAD_PATH, java.net.URLEncoder.encode(notice_data.getFile_org(), "UTF-8"), notice_data.getFile()) %>" target="_blank"><%=notice_data.getFile_org()%></a></div>
+                        <%
+                        }
+                        %>
                         <input type="submit" value="목록">
                   </form>
                 </div>

@@ -157,13 +157,13 @@ function goSave() {
 									<tr>										
 										<th scope="row"><label for="">이벤트</label></th>
 										<td colspan="3">
-											<input type="text" id="event" name="event" value="<%=data.getEvent() %>"/>
+											<textarea id="event" name="event" style="width:50%" ><%=data.getEvent() %></textarea>
 										</td>
 									</tr>		
 									<tr>										
 										<th scope="row"><label for="">안내</label></th>
 										<td colspan="3">
-											<input type="text" id="guide" name="guide" value="<%=data.getGuide() %>"/>
+											<textarea id="guide" name="guide" style="width:50%"><%=data.getGuide() %></textarea>
 										</td>
 									</tr>															
 								</tbody>

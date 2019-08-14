@@ -71,7 +71,7 @@ int totPage = (Integer)request.getAttribute("totPage");
 							for (int i=0; i<list.size(); i++) {
 					%>
 						<tr class="faq-q">
-							<td><a href="#"><%=list.get(i).getTitle() %></a></td>
+							<td><a href="#">Q. <%=list.get(i).getTitle() %></a></td>
 						</tr>
 						<tr class="faq-answer">
 							<td><a href="#"><%=list.get(i).getContents() %></a></td>

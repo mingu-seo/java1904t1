@@ -26,11 +26,8 @@ Pkg_resVO res_data = (Pkg_resVO) request.getAttribute("res_data");
     <title>객실 예약 완료</title>
 </head>
 <script>
-<%-- <% res_data.setTotal_price(res_data.getPkg_count() *res_data.getPkg_price()); %> --%>
-var total = <% res_data.getTotal_price();%>;
-system.print(total);
-
-var tax = total * 0.1;
+int tax = 0;
+<%=res_data.getTotal_price()%> * 0.1 = tax;
 </script>
 
 <body>
@@ -58,7 +55,7 @@ var tax = total * 0.1;
                     </ul>
                     <ul class="reservation_number clear">
                             <li>예약번호</li>
-                            <li class="second">000000000000</li>
+                            <li class="second"><%=res_data.getRsv_num()%></li>
                     </ul>
                     <ul class="room_name clear">
                             <li>패키지 이름</li>
@@ -102,9 +99,13 @@ var tax = total * 0.1;
                     </div>
 
                     <ul class="payment clear">
+                    <%
+                    int tax = 0;
+					tax += res_data.getTotal_price() * 0.1;
+					%>
                         <h3>* 총 결재금액</h3>
                         <li>KRW <%=res_data.getTotal_price() %>원</li>
-                        <li class="second">세금 및 봉사료 KRW 000,000원 포함</li>
+                        <li class="second">세금 및 봉사료<%=tax %>원 포함</li>
                     </ul>
                 </div>
             </div>

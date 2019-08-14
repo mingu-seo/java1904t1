@@ -283,6 +283,7 @@ $(function(){
                 <input type="hidden" name="cmd" value="write" />
                 <input type="hidden" name="pkg_pk" value="<%=prdata.getNo() %>"/>
                 <input type="hidden" id="member_pk" name="member_pk" value=""/>
+                <%-- <input type="hidden" id="rsv_num" name="rsv_num" value="<%=res_data.getUse_date()%>"/> --%>
                 <!-- <input type="hidden" name="rv_num" value=""/> -->
                 <%-- <input type="hidden" name="total_price" value="<%=res_data.getPkg_count()*res_data.getPkg_price() %>"/> --%>
             </form> 
