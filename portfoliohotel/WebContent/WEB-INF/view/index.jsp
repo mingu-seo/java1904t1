@@ -185,7 +185,7 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                                 <p>~</p>
                                 <input type="text" name="checkout_select" id="checkout_select" value="<%=DateUtil.getDayDateAdd(1, DateUtil.getToday())%>"> 
                                 <select name="adult">
-                                    <option>성인</option>
+                                    <option value="2" selected>성인</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -193,7 +193,7 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                                     <option value="5">5</option>
                                 </select> 
                                 <select name="kid">
-                                    <option>어린이</option>
+                                    <option value="0" selected>어린이</option>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
