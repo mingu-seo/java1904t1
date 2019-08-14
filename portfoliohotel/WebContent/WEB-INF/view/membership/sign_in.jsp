@@ -210,9 +210,9 @@ function CookieVal(cookieName) {
                                         </div>
                             </div>
                     </li>
-                    <!-- <li><a href="#">SIGN IN</a></li> -->
+                  <li><a href="/membership/sign_in">Sign in</a></li>
                 </ul>
-                <a href="/membership/sign_in">Sign in</a>
+               
             </div>
         </div>
     </div>
