@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -1314,6 +1316,18 @@ public class Function {
 		arr[2] = yearmonthday.substring(8,10);
 		
 		return arr[0]+"년 "+arr[1]+"월 "+arr[2]+"일"; 
+	}
+	
+	public static long diffOfDate(String begin, String end) throws Exception {
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+
+	    Date beginDate = formatter.parse(begin);
+	    Date endDate = formatter.parse(end);
+
+	    long diff = endDate.getTime() - beginDate.getTime();
+	    long diffDays = diff / (24 * 60 * 60 * 1000);
+	   
+	    return diffDays;
 	}
 	
 		
