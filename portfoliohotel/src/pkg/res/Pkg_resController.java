@@ -47,8 +47,14 @@ public class Pkg_resController {
 	/* [관리자] pkg_res 글쓰기 */
 	
 	 @RequestMapping("/manage/pkg/pkg_res/write") 
-	 public String insertReview(Model model, Pkg_resVO param, HttpServletRequest request) throws Exception { 
-	  model.addAttribute("vo", param); 
+	 public String insertReview(Model model, Pkg_resVO param, PkgVO pparam, HttpServletRequest request) throws Exception { 
+		 int[] rowPageCount = pkgService.count(pparam);
+		 ArrayList<PkgVO> nlist = pkgService.list(pparam);
+		 
+		 model.addAttribute("vo", param);
+		 model.addAttribute("nlist", nlist);
+		 model.addAttribute("ntotCount", rowPageCount[0]);
+		 model.addAttribute("ntotPage", rowPageCount[1]);
 		  
 		 return "manage/pkg/pkg_res/write"; 
 	}

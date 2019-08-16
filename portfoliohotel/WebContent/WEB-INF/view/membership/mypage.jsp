@@ -122,7 +122,6 @@ $(function(){
                         			prdata = plist.get(i);
                         %>
                         	<li><%=prdata.getPkg_name()%></li>
-                        	<br><br>
                         <%
                         		}
                         	}
@@ -169,12 +168,12 @@ $(function(){
                         %>                              
                         </td>
                     </tr>                                                                             
-                    <tr>
+                    <%-- <tr>
                         <td>TOTAL</td>
                         <td class="price" colspan="2">
                         	<%=totalPrice%> WON
 						</td>
-                    </tr>
+                    </tr> --%>
                 </table>
             </div>
             <div class="reservation-status-right">

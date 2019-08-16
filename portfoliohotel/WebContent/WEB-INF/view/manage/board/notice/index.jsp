@@ -77,7 +77,7 @@ function goSearch() {
 										<th scope="col">번호</th>
 										<th scope="col">제목</th>
 										<th scope="col">등록일</th> 
-										<th scope="col">비밀글</th>
+										<!-- <th scope="col">비밀글</th> -->
 										<th scope="col">상단노출</th>
 										<th scope="col">노출</th>
 										<th scope="col">조회수</th>
@@ -105,7 +105,7 @@ function goSearch() {
 										<td <%=targetUrl%>><%=totCount - ((param.getReqPageNo()-1)*param.getPageRows()) - i%></td>
 										<td <%=targetUrl%> class="title"><%=data.getTitle() %></td>
 										<td <%=targetUrl%>><%=DateUtil.getDateFormat(data.getRegdate())%></td>
-										<td <%=targetUrl%>><%=CodeUtil.getMemberName(data.getMember())%></td>
+										<%-- <td <%=targetUrl%>><%=CodeUtil.getMemberName(data.getMember())%></td> --%>
 										<td <%=targetUrl%>><%=CodeUtil.getTopName(data.getTop())%></td>
 										<td <%=targetUrl%>><%=CodeUtil.getDisplayName(data.getDisplay())%></td>
 										<td <%=targetUrl%>><%=data.getReadno()%></td>
@@ -137,11 +137,11 @@ function goSearch() {
 							<!-- //페이징 처리 -->
 							<form name="searchForm" id="searchForm" action="index" method="post">
 								<div class="search">
-									<select name="member" onchange="$('#searchForm').submit();">
+									<%-- <select name="member" onchange="$('#searchForm').submit();">
 										<option value="0" <%=Function.getSelected(param.getMember(), 0)%>>전체</option>
 										<option value="1" <%=Function.getSelected(param.getMember(), 1)%>>공개</option>
 										<option value="2" <%=Function.getSelected(param.getMember(), 2)%>>비공개</option>
-									</select>									
+									</select> --%>									
 									<select name="display" onchange="$('#searchForm').submit();">
 										<option value="0" <%=Function.getSelected(param.getDisplay(), 0)%>>전체</option>
 										<option value="1" <%=Function.getSelected(param.getDisplay(), 1)%>>노출</option>

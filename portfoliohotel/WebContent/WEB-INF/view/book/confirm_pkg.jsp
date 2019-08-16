@@ -53,10 +53,10 @@ int tax = 0;
                             <li>예약자 이름</li>
                             <li class="second"><%=res_data.getGuest_name1()%><%=res_data.getGuest_name2()%></li>
                     </ul>
-                    <ul class="reservation_number clear">
+                    <%-- <ul class="reservation_number clear">
                             <li>예약번호</li>
                             <li class="second"><%=res_data.getRsv_num()%></li>
-                    </ul>
+                    </ul> --%>
                     <ul class="room_name clear">
                             <li>패키지 이름</li>
                             <li class="second"><%=res_data.getPkg_name() %></li>
@@ -64,23 +64,24 @@ int tax = 0;
                     <ul class="room_name clear">
                             <li>패키지 가격</li>
                             <li class="second"><%=res_data.getPkg_price() %></li>
-                    </ul>                    
-                    <ul class="room_number clear">
-                        <li>예약일시</li>
-                        <li class="second"><%=res_data.getPurchase_date()%></li>
-                    </ul>                    
-                    <ul class="check_in clear">
-                            <li>패키지 수령 날짜</li>
-                            <li class="second"><%=res_data.getUse_date() %></li>
-                    </ul>
-                    <!-- <ul class="check_out clear">
-                            <li>체크아웃 날짜</li>
-                            <li class="second">0000년 0월 0일 요일</li>
-                    </ul> -->
+                    </ul> 
                     <ul class="check_out clear">
                             <li>패키지 수량</li>
                             <li class="second"><%=res_data.getPkg_count() %></li>
                     </ul>
+                    <ul class="check_in clear">
+                            <li>패키지 수령 날짜</li>
+                            <li class="second"><%=res_data.getUse_date() %></li>
+                    </ul>                                                           
+                    <ul class="room_number clear">
+                        <li>예약일시</li>
+                        <li class="second"><%=res_data.getPurchase_date()%></li>
+                    </ul>                    
+
+                    <!-- <ul class="check_out clear">
+                            <li>체크아웃 날짜</li>
+                            <li class="second">0000년 0월 0일 요일</li>
+                    </ul> -->
 
                     <div class="option">
                         <h3>* 예약자 정보</h3>

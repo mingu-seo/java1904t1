@@ -115,7 +115,7 @@ function goSave() {
 										</td>
 									</tr>
 									<tr>
-										<th scope="row"><label for="">사용일</label></th>
+										<th scope="row"><label for="">결제일</label></th>
 										<td>
 										<input type="text" id="use_date" name="use_date" class="inputTitle" value="<%=res_data.getUse_date()%>"/>&nbsp;
 											<span id="CalstartdateIcon">
