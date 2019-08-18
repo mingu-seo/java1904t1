@@ -18,7 +18,6 @@ public class NoticeVO extends Parameter {
 	private int display; // 노출
 	private int top; // 상단노출
 	private int readno; // 조회수
-	private int member; // 비밀글
 	
 	private String file_chk; // 첨부파일 체크
 	
@@ -36,7 +35,6 @@ public class NoticeVO extends Parameter {
 
 	public NoticeVO() {
 		super.setPageRows(10);
-		this.member = 0;
 		this.display=0;
 		this.top=0;
 	}
@@ -100,11 +98,5 @@ public class NoticeVO extends Parameter {
 	}
 	public void setReadno(int readno) {
 		this.readno = readno;
-	}
-	public int getMember() {
-		return member;
-	}
-	public void setMember(int member) {
-		this.member = member;
 	}
 }

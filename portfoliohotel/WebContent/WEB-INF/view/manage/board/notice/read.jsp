@@ -59,7 +59,7 @@ NoticeVO data = (NoticeVO) request.getAttribute("data");
 			<div id="container">
 				<div id="content">
 					<div class="con_tit">
-						<h2>관리자관리 - [상세]</h2>
+						<h2>공지사항관리 - [상세]</h2>
 					</div>
 					<!-- //con_tit -->
 					<div class="con">
@@ -96,9 +96,9 @@ NoticeVO data = (NoticeVO) request.getAttribute("data");
 											<% if(data.getFile_org() != null && data.getFile_org() != "") {%>
 											<td colspan="3"><a href="<%= Function.downloadUrl(SiteProperty.NOTICE_UPLOAD_PATH, java.net.URLEncoder.encode(data.getFile_org(), "UTF-8"), data.getFile()) %>" target="_blank"><%=data.getFile_org()%></a></td>
 											<%
-											}
+											} else if(data.getFile_org() == null) {
 											%>
-											<% if(data.getFile_org() == null) {%>
+											<%-- <% if(data.getFile_org() == null) {%> --%>
 											<td colspan="3">첨부된 파일이 없습니다.</td>
 											<%
 											}

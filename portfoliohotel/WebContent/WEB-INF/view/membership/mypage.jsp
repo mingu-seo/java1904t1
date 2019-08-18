@@ -148,7 +148,6 @@ $(function(){
                         </td>
                         <td class="participants">
                         <%
-                        	int totalPrice = 0;
                         	if (ptotCount == 0) {
                         %>
                         	<ul>
@@ -159,7 +158,6 @@ $(function(){
                         		Pkg_resVO prdata;
                         		for (int i=0; i<plist.size(); i++) {
                         			prdata = plist.get(i);
-                        			totalPrice += prdata.getTotal_price();
                         %>
                         	<li><%=prdata.getUse_date()%></li>
                         <%
@@ -168,12 +166,6 @@ $(function(){
                         %>                              
                         </td>
                     </tr>                                                                             
-                    <%-- <tr>
-                        <td>TOTAL</td>
-                        <td class="price" colspan="2">
-                        	<%=totalPrice%> WON
-						</td>
-                    </tr> --%>
                 </table>
             </div>
             <div class="reservation-status-right">

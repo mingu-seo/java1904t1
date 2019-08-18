@@ -91,14 +91,14 @@ function goSave() {
 		<div id="container">
 			<div id="content">
 				<div class="con_tit">
-					<h2>공지사항관리 - [수정]</h2>
+					<h2>패키지관리 - [수정]</h2>
 				</div>
 				<!-- //con_tit -->
 				<div class="con">
 					<!-- 내용 : s -->
 					<div id="bbs">
 						<div id="bread">
-							<h3>공지사항 기본 정보</h3>
+							<h3>패키지 예약 기본 정보</h3>
 							<form name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/process.do" method="post" enctype="multipart/form-data">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" summary="관리자 관리 기본내용입니다.">
 								<colgroup>
@@ -117,14 +117,16 @@ function goSave() {
 									<tr>
 										<th scope="row"><label for="">결제일</label></th>
 										<td>
-										<input type="text" id="use_date" name="use_date" class="inputTitle" value="<%=res_data.getUse_date()%>"/>&nbsp;
+										<input type="text" id="use_date" name="use_date" class="inputTitle" value="<%=res_data.getUse_date()%>"
+										style="width:50%"/>&nbsp;
 											<span id="CalstartdateIcon">
 										<img src="/manage/img/calendar_icon.png" id="CalstartdateIconImg" style="cursor:pointer;"/>
 											</span>
 										</td>
 										<th scope="row"><label for="">예약일</label></th>
 										<td>
-										<input type="text" id="purchase_date" name="purchase_date" class="inputTitle" value="<%=res_data.getPurchase_date()%>"/>&nbsp;
+										<input type="text" id="purchase_date" name="purchase_date" class="inputTitle" value="<%=res_data.getPurchase_date()%>"
+										style="width:50%"/>&nbsp;
 											<span id="CalstartdateIcon">
 										<img src="/manage/img/calendar_icon.png" id="CalstartdateIconImg" style="cursor:pointer;"/>
 											</span>
@@ -139,22 +141,22 @@ function goSave() {
 									<tr>
 										<th scope="row"><label for="">고객 연락처</label></th>
 										<td>
-											<input type="text" id="guest_tel" name="guest_tel" style="width:100%" 
+											<input type="text" id="guest_tel" name="guest_tel" style="width:50%" 
 											value="<%=res_data.getGuest_tel1()%>-<%=res_data.getGuest_tel2()%>-<%=res_data.getGuest_tel3()%>"/>
 										</td>
 										<th scope="row"><label for="">고객 이메일</label></th>
 										<td>
-											<input type="text" id="email" name="email" style="width:100%" value="<%=res_data.getEmail()%>"/>
+											<input type="text" id="email" name="email" style="width:50%" value="<%=res_data.getEmail()%>"/>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row"><label for="">패키지 금액</label></th>
 										<td>
-											<input type="text" id="pkg_price" name="pkg_price" style="width:100%" value="<%=res_data.getPkg_price()%>"/>
+											<input type="text" id="pkg_price" name="pkg_price" style="width:50%" value="<%=res_data.getPkg_price()%>"/>
 										</td>
 										<th scope="row"><label for="">구매 수량</label></th>
 										<td>
-											<input type="text" id="pkg_count" name="pkg_count" style="width:100%" value="<%=res_data.getPkg_count()%>"/>
+											<input type="text" id="pkg_count" name="pkg_count" style="width:50%" value="<%=res_data.getPkg_count()%>"/>
 										</td>
 									</tr>																												
 									<tr>										

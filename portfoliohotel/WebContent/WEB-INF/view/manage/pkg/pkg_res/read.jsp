@@ -58,7 +58,7 @@ Pkg_resVO res_param = (Pkg_resVO) request.getAttribute("res_param");
 			<div id="container">
 				<div id="content">
 					<div class="con_tit">
-						<h2>관리자관리 - [상세]</h2>
+						<h2>패키지관리 - [상세]</h2>
 					</div>
 					<!-- //con_tit -->
 					<div class="con">
