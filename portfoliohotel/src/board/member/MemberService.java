@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import manage.admin.AdminVO;
 import util.Page;
 
 @Service
@@ -128,7 +128,9 @@ public class MemberService {
 		vo.setIp(param.getIp());	// 아이피 추가
 		return vo;
 	}
-//
+	
+
+
 //	public int[] countLoginHistory(MemberVO param) throws SQLException {
 //		int rowCount = memberDao.countLoginHistory(param);
 //		int[] rowPageCount = new int[2];
