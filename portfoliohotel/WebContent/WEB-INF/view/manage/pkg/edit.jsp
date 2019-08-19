@@ -91,14 +91,14 @@ function goSave() {
 		<div id="container">
 			<div id="content">
 				<div class="con_tit">
-					<h2>공지사항관리 - [수정]</h2>
+					<h2>패키지관리 - [수정]</h2>
 				</div>
 				<!-- //con_tit -->
 				<div class="con">
 					<!-- 내용 : s -->
 					<div id="bbs">
 						<div id="bread">
-							<h3>공지사항 기본 정보</h3>
+							<h3>패키지 기본 정보</h3>
 							<form name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/process.do" method="post" enctype="multipart/form-data">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" summary="관리자 관리 기본내용입니다.">
 								<colgroup>
@@ -121,11 +121,11 @@ function goSave() {
 									<tr>
 										<th scope="row"><label for="">패키지 소개</label></th>
 										<td>
-											<input type="text" id="intro" name="intro" value="<%=data.getIntro()%>"/>
+											<textarea id="intro" name="intro" style="width:100%" rows="5"><%=data.getIntro()%></textarea>
 										</td>
 										<th scope="row"><label for="">패키지 상세 소개</label></th>
 										<td>
-											<input type="text" id="intro_detail" name="intro_detail" value="<%=data.getIntro_detail()%>"/>
+											<textarea id="intro_detail" name="intro_detail" style="width:100%" rows="5"><%=data.getIntro_detail()%></textarea>
 										</td>
 									</tr>
 									<tr>
@@ -157,13 +157,13 @@ function goSave() {
 									<tr>										
 										<th scope="row"><label for="">이벤트</label></th>
 										<td colspan="3">
-											<input type="text" id="event" name="event" value="<%=data.getEvent() %>"/>
+											<textarea id="event" name="event" style="width:50%" rows="5"><%=data.getEvent() %></textarea>
 										</td>
 									</tr>		
 									<tr>										
 										<th scope="row"><label for="">안내</label></th>
 										<td colspan="3">
-											<input type="text" id="guide" name="guide" value="<%=data.getGuide() %>"/>
+											<textarea id="guide" name="guide" style="width:50%" rows="5"><%=data.getGuide() %></textarea>
 										</td>
 									</tr>															
 								</tbody>

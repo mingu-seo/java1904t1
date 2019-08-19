@@ -79,9 +79,38 @@ try {
 }
 
 JSONObject resJson = (JSONObject) obj.get("response");
+
+
 %>
+<!-- 
 이름 : <%=(String)resJson.get("name")%><br/>
 이메일 : <%=(String)resJson.get("email")%><br/>
 ID : <%=(String)resJson.get("id")%><br/>
 성별 : <%=(String)resJson.get("gender")%><br/>
 생일 : <%=(String)resJson.get("birthday")%><br/>
+ -->
+<script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+<script>
+$(function() {
+	$.ajax({
+		url : "/member/snsCheck.do",
+		data : {
+			email : "<%=(String)resJson.get("email")%>",
+			sns_key : "<%=(String)resJson.get("id")%>",
+			sns_type : "1"
+		},
+		dataType : "HTML",
+		success : function(data) {
+			if (data.trim() == "ok") {
+				opener.location.href="/index";
+			} else {
+				alert("가입되지 않은 계정입니다. 먼저 가입해주세요");
+			}
+			window.close();
+		},
+		error : function () {
+			
+		}
+	});
+});
+</script>

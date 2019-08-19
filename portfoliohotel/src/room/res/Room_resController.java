@@ -1,6 +1,7 @@
 package room.res;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -276,8 +277,27 @@ public class Room_resController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/book/room/confirm_room")
-	public String confirm_room(Model model, Room_optVO vo) throws Exception {
-
+	public String confirm_room(Model model, Room_resVO vo, HttpServletRequest req) throws Exception {
+		int r = Integer.parseInt(req.getParameter("r"));
+		vo.setNo(r);
+		Room_resVO read = room_resService.read(vo);
+		ArrayList<Room_opt_resVO> list_o = room_resService.list_opt(r);
+		
+		String[] start = read.getCheckin().split("-");
+		String[] end = read.getCheckout().split("-");
+		String checkin = "";
+		String checkout = "";
+		
+		for(int i=0; i<start.length; i++) {
+			checkin += start[i];
+			checkout += end[i];
+		}
+		
+		int day_stay = Integer.parseInt(String.valueOf(Function.diffOfDate(checkin, checkout)));
+		
+		model.addAttribute("day_stay", day_stay);
+		model.addAttribute("read", read);
+		model.addAttribute("list_o", list_o);
 		return "book/room/confirm_room";
 	}
 
@@ -388,16 +408,10 @@ public class Room_resController {
 	 */
 	@RequestMapping("/room/res/submit")
 	public String submit(Model model, Room_resVO vo, Room_opt_resVO orvo, HttpServletRequest req) throws Exception {
-		int day_stay = Integer.parseInt(req.getParameter("day_stay"));
-		int r = room_resService.insert(vo, orvo, req);
-		vo.setNo(r);
-		Room_resVO read = room_resService.read(vo);
-		ArrayList<Room_opt_resVO> list_o = room_resService.list_opt(r);
 		
-		model.addAttribute("day_stay", day_stay);
-		model.addAttribute("read", read);
-		model.addAttribute("list_o", list_o);
-		return "book/room/confirm_room";
+		int r = room_resService.insert(vo, orvo, req);
+		
+		return "redirect:/book/room/confirm_room?r="+r;
 	}
 	
 	/**
@@ -451,4 +465,5 @@ public class Room_resController {
 		model.addAttribute("value",r);
 		return "index";
 	}
+
 }

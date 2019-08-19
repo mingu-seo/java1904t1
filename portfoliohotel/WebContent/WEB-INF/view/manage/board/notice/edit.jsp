@@ -104,28 +104,28 @@ function goSave() {
 									<tr>
 										<th scope="row"><label for="">제목</label></th>
 										<td colspan="3">
-											<input type="text" id="title" name="title" value="<%=data.getTitle()%>"/>
+											<input type="text" id="title" name="title" value="<%=data.getTitle()%>" class="w40"/>
 										</td>
 									</tr>
 									<tr>
-										<th scope="row"><label for="">비밀글</label></th>
+										<%-- <th scope="row"><label for="">비밀글</label></th>
 										<td>
 										<select name="member">
 											<option value="1" ${data.member == 1 ? "selected" : "" }
-											<%-- <%
+											<%
 											if(data.getMember() == 1) {
 												out.print("selected");}
-											 %> --%>
+											 %>
 											>공개</option>
 											<option value="2" ${data.member == 2 ? "selected" : "" }
-											<%-- <% 
+											<% 
 											if(data.getMember() == 2) {
 												out.print("selected");}
-											%> --%>
+											%>
 											>비공개</option>
 										</select>
-										</td>
-										<th scope="row"><label for="">노출, 상단노출</label></th>
+										</td> --%>
+										<th scope="row"><label for="">노출</label></th>
 										<td>
 										<select name="display">
 											<option value="1" ${data.display == 1 ? "selected" : "" }
@@ -133,6 +133,9 @@ function goSave() {
 											<option value="2" ${data.display == 2 ? "selected" : "" }
 											>미노출</option>
 										</select>
+										</td>
+										<th scope="row"><label for="">상단노출</label></th>
+										<td>
 										<select name="top">
 											<option value="1" ${data.top == 1 ? "selected" : "" }
 											>상단미노출</option>

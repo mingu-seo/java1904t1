@@ -8,9 +8,9 @@
 		<!-- WHERE 절 검색 -->
 		<dynamic prepend="where"> <!-- prepend:자동으로 ""안의 문자가 앞에 붙게끔 -->
 			1=1
-		    <isNotEqual property="member" compareValue="0">
+		    <!-- <isNotEqual property="member" compareValue="0">
 		    	and member = #member#
-		    </isNotEqual>			
+		    </isNotEqual> -->			
 		    <isNotEqual property="display" compareValue="0">
 		    	and display = #display#
 		    </isNotEqual>
@@ -44,10 +44,10 @@
 	<!-- 해당 테이블에 게시글 작성 -->
     <insert id="insert" parameterClass="notice_vo">
         INSERT INTO notice (
-        	title, member, top, display, contents, 
+        	title, top, display, contents, 
         	regdate, readno, file_org, file
         ) VALUES (
-        	#title#, #member#, #top#, #display#, #contents#, 
+        	#title#, #top#, #display#, #contents#, 
         	now(), 0, #file_org#, #file#
         )
         <selectKey keyProperty="no" resultClass="Integer">
@@ -57,7 +57,7 @@
     
     <update id="update" parameterClass="notice_vo">
         update notice set
-        	title=#title#, member=#member#, top=#top#, display=#display#,  	
+        	title=#title#, top=#top#, display=#display#,  	
         <isEqual property="file_chk" compareValue="1">
         	file='', file_org='',
         </isEqual>       	

@@ -82,7 +82,7 @@ function goSearch() {
 										<th scope="col">패키지 금액</th>
 										<th scope="col">총 결제 금액</th>
 										<th scope="col">예약일</th>
-										<th scope="col">수령일</th> 
+										<th scope="col">결제일</th> 
 										<th scope="col" class="last">삭제</th>
 									</tr>
 								</thead>
