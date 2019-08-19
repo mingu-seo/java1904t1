@@ -245,12 +245,14 @@ function goSave() {
                             </div>
                     </li>
                     <!-- <li><a href="#">SIGN IN</a></li> -->
-                </ul>
-               <%if(sessionMember == null){ %>
-                <a href="/membership/sign_in">Sign in</a>
+                    <%if(sessionMember == null){ %>
+                 <li><a href="/membership/sign_in">Sign in</a> </li>
+                
                 <%}else{ %>
-                <a href="/membership/mypage">My page</a>
+                 <li><a href="/membership/mypage">My page</a> </li>
                 <%} %>
+                </ul>
+              
             </div>
         </div>
     </div>
@@ -282,11 +284,11 @@ function goSave() {
                             <div class="name clear">
                                 <div class="name1">
                                     <label for="first-name">성</label>
-                                    <input type="text" name="f_name" id="f_name" maxlength="2" value="<%=sessionMember.getF_name()%>">
+                                    <input type="text" name="f_name" id="f_name" maxlength="2" >
                                 </div>
                                 <div class="name2">
                                     <label for="middle-name">이름</label>
-                                    <input type="text" name="l_name" id="l_name" maxlenght="10" value="<%=sessionMember.getL_name()%>">
+                                    <input type="text" name="l_name" id="l_name" maxlenght="10" >
                                 </div>
                             </div>
                         

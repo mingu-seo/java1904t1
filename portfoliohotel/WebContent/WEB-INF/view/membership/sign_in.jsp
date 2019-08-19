@@ -14,7 +14,7 @@
 <%@ page import="java.net.URLEncoder"  %>
 <%
 String client_id = "yyt5qpvTbPa5tqyLB0Td";   //수정할 시 클라이언트 아이디 수정
-String redirectURI = URLEncoder.encode("http://localhost:8080/login/naverCallback.jsp"); //수정할 시 콜백url 수정
+String redirectURI = URLEncoder.encode("http://localhost:8080/sns/login/naverCallback.jsp"); //수정할 시 콜백url 수정
 SecureRandom random = new SecureRandom();
 String state = new BigInteger(130, random).toString(32);
 session.setAttribute("state", state);
@@ -73,6 +73,9 @@ function CookieVal(cookieName) {
 	}
 	return "null" ;
 }
+
+
+
 
 </script>
 <!DOCTYPE html>
@@ -210,9 +213,9 @@ function CookieVal(cookieName) {
                                         </div>
                             </div>
                     </li>
-                    <!-- <li><a href="#">SIGN IN</a></li> -->
+                    <li> <a href="/membership/sign_in">Sign in</a></li> 
                 </ul>
-                <a href="/membership/sign_in">Sign in</a>
+               
             </div>
         </div>
     </div>

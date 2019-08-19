@@ -39,6 +39,10 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 	public int insert(MemberVO vo) throws SQLException {
 		return (Integer) getSqlMapClient().insert("member.insert", vo);
 	}
+	
+	public int insertSns(MemberVO vo) throws SQLException {
+		return (Integer) getSqlMapClient().insert("member.insertSns", vo);
+	}
 
 	
 //	  public int insert(Member_serviceVO vo) throws SQLException { return (Integer)
@@ -67,6 +71,10 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 		if (cnt > 0) return true; else return false;
 	}
 	
+	public int logindate(MemberVO vo) throws SQLException{
+		return getSqlMapClient().update("member.logindate", vo);
+	}
+	
 	public int delete_account(MemberVO vo) throws SQLException {
 		return getSqlMapClient().update("member.delete_account", vo);
 	}
@@ -93,8 +101,10 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 		return getSqlMapClient().update("member.find_pw_change",vo);
 	}
 	
-	public int naver(MemberVO vo) throws SQLException{
-		return (Integer)getSqlMapClient().queryForObject("member.naver",vo);
+	
+	public MemberVO snsCheck(MemberVO vo) throws SQLException{
+		return (MemberVO)getSqlMapClient().queryForObject("member.snsCheck",vo);
+		
 	}
 	
 

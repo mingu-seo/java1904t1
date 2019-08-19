@@ -175,7 +175,7 @@ $(function(){
                 <div class="my-info">
                   <h4>
   
-	<%=sessionMember.getF_name()%> <%=sessionMember.getL_name()%> 님<br/>
+	<%=Function.checkNull(sessionMember.getF_name())%> <%=sessionMember.getL_name()%> 님<br/>
 	
                       환영합니다 !
                     </h4>
