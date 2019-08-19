@@ -133,6 +133,22 @@ public class Room_resService {
 		return data;
 	}
 	
+	public HashMap count_use(int member_pk) throws Exception {
+		HashMap map = room_resDAO.count_use(member_pk);
+		return map;
+	}
+	
+	public int count_res(int member_pk) throws Exception {
+		int r = room_resDAO.count_res(member_pk);
+		return r;
+	}
+	
+	public ArrayList<HashMap> point(int member_pk) throws Exception {
+		ArrayList<HashMap> map = room_resDAO.point(member_pk);
+		return map;
+	}
+	
+	
 	public ArrayList list_opt(int room_opt_pk) throws Exception {
 		ArrayList list = room_resDAO.list_opt(room_opt_pk);
 		return list;

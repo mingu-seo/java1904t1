@@ -105,6 +105,18 @@ public class Room_resDAO extends SqlMapClientDAOSupport {
 		return (Room_resVO)getSqlMapClient().queryForObject("room_res.nonmember", vo);
 	}
 	
+	public HashMap<Integer, Integer> count_use(int member_pk) throws SQLException {
+		return (HashMap<Integer, Integer>)getSqlMapClient().queryForObject("room_res.count_use", member_pk);
+	}
+	
+	public int count_res(int member_pk) throws SQLException {
+		return (Integer)getSqlMapClient().queryForObject("room_res.count_res", member_pk);
+	}
+	
+	public ArrayList<HashMap> point (int member_pk) throws SQLException {
+		return (ArrayList<HashMap>)getSqlMapClient().queryForList("room_res.point", member_pk);
+	}
+	
 	/**
 	 * 객실 추가 옵션 예약
 	 * @param vo
@@ -127,14 +139,14 @@ public class Room_resDAO extends SqlMapClientDAOSupport {
 	
 	public static void main(String[] args) throws Exception {
 		Room_resDAO dao = new Room_resDAO();
-		Room_resVO vo = new Room_resVO();
+		Room_resVO rvo = new Room_resVO();
 //		HashMap hm = new HashMap();
 //		hm.put("checkin", "2019-07-01");
 //		hm.put("checkout", "2019-07-04");
 //		dao.check(hm);
 //		vo.setCategory(1);
-		vo.setGuest_email("sooya@email.com");
-		vo.setNo(107);
-		dao.nonmember(vo);
+//		vo.setGuest_email("sooya@email.com");
+//		vo.setNo(107);
+//		dao.nonmember(vo);
 	}
 }

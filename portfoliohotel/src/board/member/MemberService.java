@@ -182,6 +182,8 @@ public class MemberService {
 		return r;
 	}
 
-	
+	public void grade(MemberVO vo) throws SQLException {
+		memberDao.grade(vo);
+	}
 	
 }

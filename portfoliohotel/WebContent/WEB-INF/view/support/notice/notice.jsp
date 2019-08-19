@@ -76,10 +76,16 @@ function goSearch() {
                         		targetUrl = "style='cursor:pointer; background-color:#bebebe', onclick=\"location.href='"+nparam.getTargetURLParam("notice_watchonly", nparam, nlist.get(i).getNo())+"'\"";
                         	}
                         %>
+                        <%
+                        	if (nlist.get(i).getDisplay() == 1) {
+                        %>
                         	<tr>
 								<td <%=targetUrl%>> <a href="#"><%=nlist.get(i).getTitle() %></a></td>
 								<td <%=targetUrl%> class="table-date"><%=DateUtil.getDateFormat(nlist.get(i).getRegdate()) %></td>
 							</tr>
+						<%
+                        	}
+						%>
 						<%
 								}
                         	}

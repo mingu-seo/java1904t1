@@ -59,7 +59,7 @@
 					<!-- 내용 : s -->
 					<div id="bbs">
 						<div id="bread">
-						<h3>공지사항 작성</h3>
+						<h3>FAQ 작성</h3>
 							<form method="post" name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/process.do" enctype="multipart/form-data">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" summary="관리자 관리 기본내용입니다.">
 								<colgroup>
@@ -93,21 +93,6 @@
 											<input type="text" id="title" name="title" class="w50" title="질문을 입력해주세요"/>
 										</td>
 									</tr>						
-									<%-- <tr> 
-										<th scope="row"><label for="">상태</label></th>
-										<td>
-											<select name="display">
-												<%=CodeUtil.getDisplayOption(0) %>
-											</select>
-										</td>
-										<th scope="row"><label for="">등록일</label></th>
-										<td>
-											<input type="text" id="regdate" name="regdate" class="inputTitle" value="<%=DateUtil.getFullToday()%>" title="등록일을 입력해주세요" />&nbsp;
-											<span id="CalregistdateIcon">
-												<img src="/manage/img/calendar_icon.png" id="CalregistdateIconImg" style="cursor:pointer;"/>
-											</span>
-										</td>
-									</tr> --%>
 									<tr>
 										<th scope="row"><label for="">답변</label></th>
 										<td colspan="4">

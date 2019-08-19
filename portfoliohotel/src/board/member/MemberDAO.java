@@ -183,7 +183,9 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 	
 	/*-------------------------------------------------------------------------*/
 	
-	
+	public void grade(MemberVO vo) throws SQLException {
+		getSqlMapClient().update("member.grade", vo);
+	}
 
 	
 
@@ -198,6 +200,7 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 //		av.setName("하희철");
 //		int no =ad.insert(av);
 //		System.out.println(no);
+	
 
 	}
 

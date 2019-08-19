@@ -47,13 +47,13 @@ ArrayList<Room_optVO> list_o = (ArrayList<Room_optVO>)request.getAttribute("list
             }
         });
         
+        
         $(".option_num").change(function() {
     		price_opt = 0;
     		$(".option_num").each(function(idx) {
     			if ($(".option_num").eq(idx).find("option:selected").val() != "") {
     				price_opt += $(".option_num").eq(idx).find("option:selected").data("option_price");
     			}
-    			//$("#count").val($(".option_num").eq(idx).find("option:selected").val()); //추가옵션 수량
     			$("input[name='count']").eq(idx).val(Number($(".option_num").eq(idx).val())); //추가옵션 수량
     		});
     		$("#option_price").val(Number(price_opt));

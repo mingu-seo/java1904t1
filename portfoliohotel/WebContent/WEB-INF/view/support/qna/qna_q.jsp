@@ -175,6 +175,7 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
                 	String FName = "";
                 	String LName = "";
                 	
+                	
                 	if(member_vo != null) {
                 		String Email= member_vo.getEmail();
                 		email1 = Email;
@@ -188,7 +189,9 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
                 		String NameF = member_vo.getF_name();
                 		FName = NameL;
                 		LName = NameF;
-                	}
+                		int Memberpk = member_vo.getNo();
+                		
+                	} 
                 	%>
            
 						<form method="POST"name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/processU" enctype="multipart/form-data" onsubmit="return goSave();" >
@@ -265,7 +268,12 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
                         <input type="hidden" name="cmd" value="write" />
 						<input type="hidden" name="reply" value="0" />
 						<input type="hidden" name="send_email" value="0" />
+						
+						<% if(member_vo == null){ %>
+						<input type="hidden" name="member_pk" value="0" />
+						<% } else { %>
 						<input type="hidden" name="member_pk" value="<%=member_vo.getNo() %>" />
+						<% } %>
                     </form>
                 </div>
             </div>

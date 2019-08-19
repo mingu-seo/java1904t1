@@ -89,7 +89,7 @@ FaqVO data = (FaqVO) request.getAttribute("data");
 										</tr>
 										<tr>
 											<th scope="row"><label for="">답변</label></th>
-											<td colspan="5">A.<%=data.getContents() %></td>
+											<td colspan="5"><%=data.getContents() %></td>
 										</tr>
 										<tr>
 											<th scope="row"><label for="">등록일</label></th>

@@ -1,6 +1,7 @@
 package board.member;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import board.qna.QnaService;
+import board.qna.QnaVO;
 import pkg.res.Pkg_resService;
 import pkg.res.Pkg_resVO;
 import room.res.Room_opt_resVO;
@@ -28,6 +31,9 @@ public class MemberController {
 	
 	@Autowired
 	private Room_resService room_resService;
+	
+	@Autowired
+	private QnaService qnaService;
 	
 	
 	//========================================관리자===================================================
@@ -268,7 +274,7 @@ public class MemberController {
 
 	
 	@RequestMapping("/membership/mypage")
-	public String mypage(Model model, MemberVO param, Pkg_resVO prparam, Room_resVO rvo, HttpSession session) throws Exception {
+	public String mypage(Model model, MemberVO param, Pkg_resVO prparam, Room_resVO rvo, QnaVO qparam, HttpSession session) throws Exception {
 		MemberVO data = memberService.read(param.getNo());
 		MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
 		
@@ -289,6 +295,14 @@ public class MemberController {
 			modata.add(odata);
 		}
 		
+		ArrayList<HashMap> pdata = room_resService.point(memberInfo.getNo());
+		
+		// ============= qna ======================== 
+		qparam.setMember_pk(memberInfo.getNo());
+		int[] qrowPageCount = qnaService.count(qparam);
+		ArrayList<QnaVO> qlist = qnaService.Mylist(qparam);
+		// ============= qna ======================== 
+		
 		model.addAttribute("data", data);
 		model.addAttribute("vo", param);
 		
@@ -303,6 +317,14 @@ public class MemberController {
 		model.addAttribute("mdata", mdata);
 		model.addAttribute("modata", modata);
 
+		model.addAttribute("pdata", pdata);
+		
+		// ============= qna ======================== 
+		model.addAttribute("qtotCount", qrowPageCount[0]);
+		model.addAttribute("qtotPage", qrowPageCount[1]);
+		model.addAttribute("qlist",qlist);
+		// ============= qna ======================== 
+		
 		return "membership/mypage";
 	}
 	

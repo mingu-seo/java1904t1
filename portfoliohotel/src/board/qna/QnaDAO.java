@@ -36,6 +36,10 @@ public class QnaDAO extends SqlMapClientDAOSupport {
 		return (ArrayList)getSqlMapClient().queryForList("qna.list", vo);
 	}
 	
+	public ArrayList Mylist(QnaVO vo) throws SQLException {
+		return (ArrayList)getSqlMapClient().queryForList("qna.Mylist", vo);
+	}
+	
 	/**
 	 * 게시글 저장 [게시글 저장 후 게시글의 번호를 가져옴]
 	 * @param vo NoticeVO
