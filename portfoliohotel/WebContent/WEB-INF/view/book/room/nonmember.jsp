@@ -27,7 +27,7 @@
             <div class="nonmember-box clear">
                 <!-- <form action="#" method="POST"> -->
                 <form name="frm" id="frm" method="post" action="/book/room/nonmember_res">
-                    <div class="nonmember-box-logo"><img src="/img/header-logo.png"></div>
+                    <div class="nonmember-box-logo"><img src="/img/header-logo.png"></div> 
                     <div class="nonmember-board clear">
                         <div class="nonmember-box-left">
                             <!-- email 구역 -->

@@ -35,6 +35,7 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
             $(".book-close > a").click(function(){
                 $(".book-wrap").hide();
             });
+            
             $("#checkin").datepicker({
                 monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
                 dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
@@ -46,7 +47,6 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
                 onClose: function( selectedDate ) {
                 	$("#checkout").datepicker( "option", "minDate", selectedDate );
        		 	}
-                
             });
             $("#checkout").datepicker({
                 monthNames:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
@@ -63,44 +63,22 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
             
             checkDate(<%=read.getNo()%>, $("#checkin").val(), $("#checkout").val());
             
+            calculate();
+    		$("#day_stay").val(day_stay);
+    		$("#room_price").val(<%=read.getPrice()%> * day_stay);
+    		
+            $("#adult").val($("#adult_select option:selected").val());
+        	$("#kid").val($("#kid_select option:selected").val());
+        	person_calculate();
+            
             $("#adult_select, #kid_select").change(function() {
             	$("#adult").val($("#adult_select option:selected").val());
             	$("#kid").val($("#kid_select option:selected").val());
-            	
-            	var adult_add = 0;
-        		var kid_add = 0;
-        		if($("#adult_select option:selected").val() > <%=read.getAdult()%>){
-        			adult_add = ($("#adult_select option:selected").val() - <%=read.getAdult()%>)*100000;
-        		} else { 
-        			adult_add = 0;
-        		}
-        		if($("#kid_select option:selected").val() > <%=read.getKid()%>){
-        			kid_add = ($("#kid_select option:selected").val() - <%=read.getKid()%>)*(100000*0.7);
-        		} else {
-        			kid_add = 0;
-        		}
-        		
-        		var person_price = adult_add + kid_add;
-        		$("#person_price").val(person_price);
-        		
-        		var aac = $("#adult_select option:selected").val() - <%=read.getAdult()%>;
-        		if(aac < 0) {
-        			aac = 0;
-        		} 
-        		$("#adult_add").val(aac);
-        		var kac = $("#kid_select option:selected").val() - <%=read.getKid()%>;
-        		if(kac < 0) {
-        			kac = 0;
-        		} 
-        		$("#kid_add").val(kac);
+            	person_calculate();
             });
             
             $("#checkin, #checkout").change(function() {
-            	var arr_in = $("#checkin").val().split("-");
-        		var arr_out = $("#checkout").val().split("-");
-        		var time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
-        		var time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
-        		var day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
+            	calculate();
         		$("#day_stay").val(day_stay);
         		$("#room_price").val(<%=read.getPrice()%> * day_stay);
         		
@@ -120,6 +98,53 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
         	});
         }
         
+        var arr_in;
+        var arr_out;
+        var time_in;
+        var time_out;
+        var day_stay;
+        var adult_add;
+        var kid_add;
+        var person_price;
+        var acc;
+        var kac;
+        
+        function calculate() {
+        	arr_in = $("#checkin").val().split("-");
+    		arr_out = $("#checkout").val().split("-");
+    		time_in = new Date(arr_in[0], arr_in[1], arr_in[2]);
+    		time_out = new Date(arr_out[0], arr_out[1], arr_out[2]);
+    		day_stay = (time_out.getTime() - time_in.getTime())/(1000*60*60*24);
+        }
+        
+        function person_calculate() {
+        	adult_add = 0;
+    		kid_add = 0;
+    		if($("#adult_select option:selected").val() > <%=read.getAdult()%>){
+    			adult_add = ($("#adult_select option:selected").val() - <%=read.getAdult()%>)*100000;
+    		} else { 
+    			adult_add = 0;
+    		}
+    		if($("#kid_select option:selected").val() > <%=read.getKid()%>){
+    			kid_add = ($("#kid_select option:selected").val() - <%=read.getKid()%>)*(100000*0.7);
+    		} else {
+    			kid_add = 0;
+    		}
+    		
+    		person_price = adult_add + kid_add;
+    		$("#person_price").val(person_price);
+    		
+    		aac = $("#adult_select option:selected").val() - <%=read.getAdult()%>;
+    		if(aac < 0) {
+    			aac = 0;
+    		} 
+    		$("#adult_add").val(aac);
+    		kac = $("#kid_select option:selected").val() - <%=read.getKid()%>;
+    		if(kac < 0) {
+    			kac = 0;
+    		} 
+    		$("#kid_add").val(kac);
+        }
         
     </script>
     <title>객실 상세</title>
@@ -175,17 +200,17 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
 									<input type="text" name="checkin" id="checkin" value="<%=DateUtil.getToday()%>">
 									<p>~</p>
 									<input type="text" name="checkout" id="checkout" value="<%=DateUtil.getDayDateAdd(1, DateUtil.getToday())%>"> 
+									<span class="d-r-span">성인</span>
 									<select id="adult_select">
-										<option>성인</option>
 										<option value="1">1</option>
-										<option value="2">2</option>
+										<option value="2" selected>2</option>
 										<option value="3">3</option>
 										<option value="4">4</option>
 										<option value="5">5</option>
 									</select> 
+									<span class="d-r-span">어린이</span>
 									<select id="kid_select">
-										<option>어린이</option>
-										<option value="0">0</option>
+										<option value="0" selected>0</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
@@ -194,9 +219,7 @@ ArrayList<HashMap> list_i = (ArrayList<HashMap>)request.getAttribute("list_image
 									</select>
 								</div>
 								<span id="submit_btn_area"></span>
-								<!-- <div class="d-r-input2">
-									<input type="submit" value="객실 예약" />
-								</div> -->
+								
 								<input type="hidden" name="room_name" id="room_name" value="<%=read.getName()%>"/>
 								<input type="hidden" name="adult" id="adult" value=""/>
 								<input type="hidden" name="kid" id="kid" value=""/>

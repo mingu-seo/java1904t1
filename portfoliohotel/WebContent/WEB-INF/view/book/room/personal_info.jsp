@@ -61,13 +61,12 @@ $(function(){
     	$("#buyr_mail").val($("#guest_email").val());
     });
     
-    $("#guest_tel1, #guest_tel2, #guest_tel3").change(function() {
-    	$("#buyr_tel1").val($("#guest_tel1").val() + $("#guest_tel2").val() + $("#guest_tel3").val());
-    	$("#buyr_tel2").val($("#guest_tel1").val() + $("#guest_tel2").val() + $("#guest_tel3").val());
-    });
+    $("#guest_tel2").keyup(function(){ $(this).val($(this).val().replace(/[^0-9]/gi,"") ); }); //숫자만
+    $("#guest_tel3").keyup(function(){ $(this).val($(this).val().replace(/[^0-9]/gi,"") ); }); //숫자만
+    
 });        
 
-var chknum = /[0-9]/g;
+var chknum = /[0-9]/;
 var chkat = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
 function goCheck() {
@@ -109,7 +108,6 @@ function goCheck() {
 		$("#order_info").submit();
 	} else {
 		$("#order_info").attr("action", "/pg/sample/pp_cli_hub.jsp");
-		console.log(1);
 		jsf__pay(document.order_info);
 	}
 	
@@ -143,6 +141,7 @@ function goPay(method, state) {
 		$("#pay_method").val(method);
 		$("#pay_state").val(state);
 		$("#paydate").val("-");
+		
 	}
 }
 </script>
@@ -202,13 +201,11 @@ function init_orderid()
     if(parseInt(month) < 10) {
         month = "0" + month;
     }
-
     if(parseInt(date) < 10) {
         date = "0" + date;
     }
 
     var order_idxx = "TEST" + year + "" + month + "" + date + "" + time;
-
     document.order_info.ordr_idxx.value = order_idxx;            
 }
 

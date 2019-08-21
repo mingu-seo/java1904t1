@@ -47,6 +47,32 @@ ArrayList<Room_optVO> list_o = (ArrayList<Room_optVO>)request.getAttribute("list
             }
         });
         
+        var day_stay = <%=request.getParameter("day_stay")%>; //숙박일수
+        var price_stay = <%=request.getParameter("room_price")%>; //숙박일수 금액
+        var price_opt = 0; //추가옵션 금액
+        var price_person = <%=request.getParameter("person_price")%>; //추가인원 금액
+
+        function calculate() {
+        	var price_sum = price_stay + price_opt + price_person;
+        	var price_charge = price_sum * 0.1;
+        	var price_total = price_sum + price_charge;
+        	
+        	$("#charge_price_span").text(numberWithCommas(price_charge));
+        	$("#charge_price").val(Number(price_charge));
+        	$("#total_price_span").text(numberWithCommas(price_total));
+        	$("#total_price").val(Number(price_total));
+        }
+        
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
+        $(".option_num").each(function(idx) {
+        	$("input[name='count']").eq(idx).val(Number($(".option_num").eq(idx).val()));
+        	$("#option_price").val(Number(price_opt));
+        	$("#option_price_span").text(numberWithCommas(price_opt));
+        	calculate();
+        });
         
         $(".option_num").change(function() {
     		price_opt = 0;
@@ -61,27 +87,6 @@ ArrayList<Room_optVO> list_o = (ArrayList<Room_optVO>)request.getAttribute("list
     		calculate();
     	});
     });   
-    
-    
-    var day_stay = <%=request.getParameter("day_stay")%>; //숙박일수
-    var price_stay = <%=request.getParameter("room_price")%>; //숙박일수 금액
-    var price_opt = 0; //추가옵션 금액
-    var price_person = <%=request.getParameter("person_price")%>; //추가인원 금액
-
-    function calculate() {
-    	var price_sum = price_stay + price_opt + price_person;
-    	var price_charge = price_sum * 0.1;
-    	var price_total = price_sum + price_charge;
-    	
-    	$("#charge_price_span").text(numberWithCommas(price_charge));
-    	$("#charge_price").val(Number(price_charge));
-    	$("#total_price_span").text(numberWithCommas(price_total));
-    	$("#total_price").val(Number(price_total));
-    }
-    
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
     </script>
     <title>객실예약</title>
 </head>
