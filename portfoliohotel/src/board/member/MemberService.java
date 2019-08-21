@@ -122,7 +122,7 @@ public class MemberService {
 		}
 		return result;
 	}
-	
+
 	public int idcheck(MemberVO param) throws SQLException {
 		return memberDao.idcheck(param);
 	}
@@ -134,7 +134,7 @@ public class MemberService {
 	public MemberVO getLoginSessionInfo(MemberVO param) throws SQLException {
 		MemberVO vo = memberDao.getLoginSessionInfo(param);
 		vo.setIp(param.getIp());	// 아이피 추가
-		vo.setLogindate(param.getLogindate());
+		//vo.setLogindate(param.getLogindate());
 		return vo;
 	}
 	

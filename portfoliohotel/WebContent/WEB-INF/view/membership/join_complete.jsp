@@ -141,7 +141,7 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
                                         </div>
                             </div>
                     </li>
-                  <li><a href="#">SIGN IN</a></li>
+                  <li> <a href="/membership/sign_in">Sign in</a></li>
                 </ul>
                 
             </div>

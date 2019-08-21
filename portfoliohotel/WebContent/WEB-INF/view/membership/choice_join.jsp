@@ -151,7 +151,7 @@ String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&cli
                                         </div>
                             </div>
                     </li>
-                   <li><a href="#">SIGN IN</a></li>
+                   <li><a href="/membership/sign_in">Sign in</a></li>
                 </ul>
                 
             </div>
