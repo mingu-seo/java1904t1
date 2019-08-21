@@ -54,6 +54,7 @@
 <title>테스트</title>
 </head>
 <body>
+
 	<jsp:include page="/header_menu" flush="true" />
 	<div id="container">
 		<div class="banner">
@@ -377,5 +378,6 @@
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

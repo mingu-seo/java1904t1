@@ -109,8 +109,8 @@ $(function(){
         <div class="qna_q">
             <div class="support-list">
                 <ul class="support-list-center">
-                    <li><a href="notice">공지사항</a></li>
-                    <li><a href="faq">FAQ</a></li>
+                    <li><a href="/support/notice/notice">공지사항</a></li>
+                    <li><a href="/support/faq/faq">FAQ</a></li>
                     <li class="on"><a href="qna">Q&A</a></li>
                 </ul>
             </div>

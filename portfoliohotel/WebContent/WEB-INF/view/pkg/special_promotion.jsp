@@ -102,7 +102,11 @@ ArrayList<PkgVO> plist = (ArrayList<PkgVO>)request.getAttribute("plist");
 					
                     <div class="promotion_list clear">
                         <div class="promo_list">
+<<<<<<< HEAD
+                            <a href="/pkg/room/oasis">
+=======
                             <a href="/pkg/detail_page/pkg_detail_page?no=12">
+>>>>>>> branch 'master' of https://github.com/mingu-seo/java1904t1.git
                                 <div class="promo-bg">
                                     <div class="promo-text">
                                         <p>자세히보기</p>
@@ -118,7 +122,7 @@ ArrayList<PkgVO> plist = (ArrayList<PkgVO>)request.getAttribute("plist");
                             </a>
                         </div>
                         <div class="promo_list">
-                            <a href="bbq.html">
+                            <a href="/pkg/room/bbq">
                                 <div class="promo-bg">
                                         <div class="promo-text">
                                                 <p>자세히보기</p>
@@ -134,7 +138,7 @@ ArrayList<PkgVO> plist = (ArrayList<PkgVO>)request.getAttribute("plist");
                             </a>
                         </div>
                         <div class="promo_list">
-                            <a href="senseof.html">
+                            <a href="/pkg/room/senseof">
                                 <div class="promo-bg">
                                         <div class="promo-text">
                                                 <p>자세히보기</p>
@@ -150,7 +154,7 @@ ArrayList<PkgVO> plist = (ArrayList<PkgVO>)request.getAttribute("plist");
                             </a>
                         </div>
                         <div class="promo_list">
-                            <a href="oasis.html">
+                            <a href="/pkg/room/oasis">
                                 <div class="promo-bg">
                                     <div class="promo-text">
                                         <p>자세히보기</p>
@@ -211,7 +215,7 @@ ArrayList<PkgVO> plist = (ArrayList<PkgVO>)request.getAttribute("plist");
 
                         <div class="promotion_list clear">
                             <div>
-                                <a href="reasonable.html">
+                                <a href="/pkg/room/reasonable">
                                         <div class="promo-bg">
                                                 <div class="promo-text">
                                                     <p>자세히보기</p>
