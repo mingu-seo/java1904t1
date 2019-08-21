@@ -22,7 +22,7 @@
 
 </head>
 <body>
-    <%@ include file="../header_menu.jsp" %>
+    <jsp:include page="/header_menu" flush="true"/>
     
     <div id="container">
         <div class="container">
@@ -48,7 +48,7 @@
 
                     <div class="promotion_list clear">
                         <div class="promo_list">
-                            <a href="oasis.html">
+                            <a href="/pkg/room/oasis">
                                 <div class="promo-bg">
                                     <div class="promo-text">
                                         <p>자세히보기</p>
@@ -64,7 +64,7 @@
                             </a>
                         </div>
                         <div class="promo_list">
-                            <a href="bbq.html">
+                            <a href="/pkg/room/bbq">
                                 <div class="promo-bg">
                                         <div class="promo-text">
                                                 <p>자세히보기</p>
@@ -80,7 +80,7 @@
                             </a>
                         </div>
                         <div class="promo_list">
-                            <a href="senseof.html">
+                            <a href="/pkg/room/senseof">
                                 <div class="promo-bg">
                                         <div class="promo-text">
                                                 <p>자세히보기</p>
@@ -96,7 +96,7 @@
                             </a>
                         </div>
                         <div class="promo_list">
-                            <a href="oasis.html">
+                            <a href="/pkg/room/oasis">
                                 <div class="promo-bg">
                                     <div class="promo-text">
                                         <p>자세히보기</p>
@@ -158,7 +158,7 @@
 
                         <div class="promotion_list clear">
                             <div>
-                                <a href="reasonable.html">
+                                <a href="/pkg/room/reasonable">
                                         <div class="promo-bg">
                                                 <div class="promo-text">
                                                     <p>자세히보기</p>

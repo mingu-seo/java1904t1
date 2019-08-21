@@ -180,4 +180,14 @@ public class PkgController {
 		return "pkg/room/oasis";
 	}
 	
+	@RequestMapping("/pkg/special_promotion")
+	public String special_promotion(Model model) throws Exception {
+		return "pkg/special_promotion";
+	}
+	
+	@RequestMapping("/facilities")
+	public String facilities(Model model) throws Exception {
+		return "facilities";
+	}	
+	
 }
