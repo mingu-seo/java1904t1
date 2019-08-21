@@ -293,125 +293,124 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
 
             <div class="special_promotion">
                 <!-- 제목 -->
-                <h2>SPECIAL PROMOTION</h2>
+                <h2>DINING</h2>
 
                 <!-- 슬라이드 구역 -->
                 <div class="promotion_panel">
                     <div class="promotion_list clear">
                         <div class="pro_list1 pro_list">
                             <a href="/pkg/room/oasis">
-                                <img src="img/promotion1.jpg">
+                                <img src="/img/dining/p_festa.jpg"> 
                                 <div class="promotion_text">
-                                    <p>The Oasis Summer Package</p>
-                                    <h6>반얀트리 서울의 오아시스 야외 수영장에서
-                                        도심 속 완벽한 휴식을 즐겨보세요.
+                                    <p>Festa by mingoo</p>
+                                    <h6>총괄 셰프인 강민구 셰프의 터치로 완성되는 자유분방하면서도 정성이 담긴 유러피안 캐주얼 푸드를 경험해보세요.
                                     </h6>
-                                    <p class="pro_price">420,000원 부터</p>
+                                    <p class="pro_price">50000원 부터</p>
                                 </div>
                                 <div class="pro-top-box">
-                                    <p>Room package</p>
+                                    <p>Dining</p>
                                 </div>
                             </a>
                         </div>
 
                         <div class="pro_list2 pro_list">
                                 <a href="/pkg/room/bbq">
-                                    <img src="img/promotion2.jpg">
+                                    <img src="/img/dining/p_rooftop.jpg">
                                     <div class="promotion_text">
-                                        <p>The Oasis BBQ Package</p>
-                                        <h6>반얀트리 서울만의 특별한 풀사이드 바비큐<br/>
-                                            에메랄드 빛의 야외 수영장에서 즐겨보세요.<br/>
+                                        <p>Festa Rooftop Bar</p>
+                                        <h6>트로피컬 무드의 루프탑 바에서 장르를 넘나드는 신나는 공연과 라이브 퍼포먼스, 화려한 조명이 더해진 이색적인 공간에서 나른한 일상 속 즐거움을 일깨워보시기 바랍니다.
+										<br/>
                                         </h6>
-                                        <p class="pro_price">600,000원 부터</p>
+                                        <p class="pro_price">50000원 부터</p>
                                     </div>
                                     <div class="pro-top-box">
-                                            <p>Room package</p>
+                                            <p>Dining</p>
                                     </div>
                                 </a>
                         </div>
 
                         <div class="pro_list1 pro_list">
                                 <a href="#">
-                                    <img src="img/promotion3.jpg">
+                                    <img src="/img/dining/p_granum.jpg">
                                     <div class="promotion_text">
-                                        <p>The Oasis Summer Package</p>
+                                        <p>Granum Dining Lounge</p>
                                         <h6>더욱 여유롭고 프라이빗한 휴식을 오아시스<br/>
                                             카바나에서 즐겨보세요.<br/>
                                         </h6>
-                                        <p class="pro_price">700,000원 부터</p>
+                                        <p class="pro_price">50000원 부터</p>
                                     </div>
                                     <div class="pro-top-box">
-                                            <p>Promotion</p>
+                                            <p>Dining</p>
                                     </div>
                                 </a>
                         </div>
 
                         <div class="pro_list2 pro_list">
                                 <a href="/pkg/room/senseof">
-                                    <img src="img/promotion4.jpg">
+                                    <img src="/img/dining/p_moonbar.jpg">
                                     <div class="promotion_text">
-                                        <p>Sense of Romance</p>
+                                        <p>Moon Bar</p>
                                         <h6>도심 속에서 즐기는 로맨틱한 여행, ‘센스<br/>
                                             오브 로맨스’ 패키지를 소개합니다.
                                         </h6>
-                                        <p class="pro_price">760,000원 부터</p>
+                                        <p class="pro_price">50000원 부터</p>
                                     </div>
                                     <div class="pro-top-box">
-                                            <p>Room package</p>
+                                            <p>Dining</p>
                                     </div>
-                                </a>
+                                </a> 
                         </div>
 
-                        <div class="pro_list1 pro_list">
+                       <!--  <div class="pro_list1 pro_list">
                                 <a href="#">
-                                    <img src="img/promotion5.jpg">
+                                    <img src="/img/dining/p_outdoor.jpg">
                                     <div class="promotion_text">
                                         <p>‘For My Parents’ & ‘For my Fiance’</p>
                                         <h6>서울의 야경이 펼쳐진 문 바에서<br/>
                                             커플들을 위한 프로포즈 & 기념일<br/>
                                             패키지를 선보입니다.
                                         </h6>
-                                        <p class="pro_price">380,000원 부터</p>
+                                        <p class="pro_price">50000원 부터</p>
                                     </div>
                                     <div class="pro-top-box">
-                                            <p>Promotion</p>
+                                            <p>Dining</p>
                                     </div>
                                 </a>
                         </div>
 
                         <div class="pro_list2 pro_list">
                                 <a href="#">
-                                    <img src="img/promotion6.jpg">
+                                    <img src="/img/dining/p_club.jpg">
                                     <div class="promotion_text">
                                         <p>The Reasonable</p>
                                         <h6>싱글 몰트 위스키와 함께 서울의 야경처럼<br/>
                                             반짝이는 밤을 즐겨보시기 바랍니다.<br/>
                                         </h6>
-                                        <p class="pro_price">374,000원 부터</p>
+                                        <p class="pro_price">50000원 부터</p>
                                     </div>
                                     <div class="pro-top-box">
-                                            <p>Room package</p>
+                                            <p>Dining</p>
                                     </div>
                                 </a>
                         </div>
 
                         <div class="pro_list1 pro_list">
                                 <a href="#">
-                                    <img src="img/promotion7.jpg">
+                                    <img src="/img/dining/p_montst.jpg">
                                     <div class="promotion_text">
                                         <p>Petit Ibiza width Moonlight</p>
                                         <h6>환상적인 서울 야경이 펼쳐지는 문 바 야외<br/>
                                             테라스에서 프라이빗 파티를 계획해보세요.<br/>
                                         </h6>
-                                        <p class="pro_price">370,000원(4인기준)</p>
+                                        <p class="pro_price">50000원 부터</p>
                                     </div>
                                     <div class="pro-top-box">
-                                            <p>Promotion</p>
+                                            <p>Dining</p>
                                     </div>
                                 </a>
-                        </div>
+                        </div> -->
 
-                        <div class="pro_list2 pro_list">
+                         <!-- <div class="pro_list2 pro_list">
                                 <a href="#">
                                     <img src="img/promotion8.jpg">
                                     <div class="promotion_text">
@@ -423,9 +422,9 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                                     </div>
                                     <div class="pro-top-box">
                                             <p>Promotion</p>
-                                    </div>
+                                    </div> 
                                 </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

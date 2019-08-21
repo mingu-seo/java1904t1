@@ -3,7 +3,9 @@
 <%@ page import="property.SiteProperty"%>
 <%@ page import="util.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="board.member.*" %>
 <%
+	MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
 	Dining_resVO param = (Dining_resVO) request.getAttribute("vo");
 	ArrayList<Dining_resVO> list = (ArrayList) request.getAttribute("list");
 	int totCount = (Integer) request.getAttribute("totCount");
@@ -120,11 +122,10 @@ function goSearch() {
 																+ param.getTargetURLParam("read", param, data.getNo()) + "'\"";
 											%>
 											<tr <%=topClass%>>
-												<td class="first"><input type="checkbox" name="no"
-													id="no" value="<%=data.getNo()%>" /></td>
-												<td <%=targetUrl%>><%=totCount - ((param.getReqPageNo() - 1) * param.getPageRows()) - i%></td>
+												<td class="first"><input type="checkbox" name="no" id="no" value="<%=data.getNo()%>" /></td>
+												<td <%=targetUrl%>><%=data.getNo()%></td>
 												<td <%=targetUrl%> class="d_day"><%=data.getD_day()%></td>
-												<td <%=targetUrl%> class="member_name"><%=data.getMember_name()%></td>
+												<td <%=targetUrl%> class="member_name"><%=data.getGuest_lname()%><%=data.getGuest_fname()%></td>
 												<td <%=targetUrl%> class="dining_name"><%=data.getDining_name()%></td>
 												<td <%=targetUrl%> class="adult"><%=data.getAdult()%></td>
 												<td <%=targetUrl%> class="kid"><%=data.getKid()%></td>
@@ -147,8 +148,7 @@ function goSearch() {
 								</form>
 								<div class="btn">
 									<div class="btnLeft">
-										<a class="btns" href="#" onclick="groupDelete();"><strong>삭제</strong>
-										</a>
+										<a class="btns" href="#" onclick="groupDelete();"><strong>삭제</strong></a>
 									</div>
 									<div class="btnRight">
 										<a class="wbtn" href="write"><strong>등록</strong> </a>
@@ -161,7 +161,8 @@ function goSearch() {
 								<div class="search">
 									<select name="stype" title="검색을 선택해주세요">
 										<option value="all" <%=Function.getSelected(param.getStype(), "all") %>>전체</option>
-										<option value="member_name" <%=Function.getSelected(param.getStype(), "member_name") %>>회원명</option>
+										<option value="guest_lname" <%=Function.getSelected(param.getStype(), "guest_lname") %>>성</option>
+										<option value="guest_fname" <%=Function.getSelected(param.getStype(), "guest_fname") %>>이름</option>
 										<option value="dining_name" <%=Function.getSelected(param.getStype(), "dining_name") %>>다이닝명</option>
 									</select>
 									<input type="text" name="sval" value="<%=param.getSval()%>" />

@@ -24,7 +24,7 @@
 	</select>
 
 	<select id="list" parameterClass="dining_resvo" resultClass="dining_resvo">
-		select no, member_name, dining_name, d_day, d_time, adult, kid, guest_lname, guest_fname
+		select no, dining_name, d_day, d_time, adult, kid, guest_lname, guest_fname
 		, guest_tel1, guest_tel2, guest_tel3 guest_email, regdate from dining_res
 		<include refid="searchSql" />
 		ORDER BY
@@ -44,10 +44,10 @@
 	
 	<insert id="insert" parameterClass="dining_resvo">
 		insert into dining_res (
-		d_day, d_time, adult, kid, guest_lname, guest_fname, guest_tel1, guest_tel2, guest_tel3, guest_email, regdate, price) 
+		d_day, d_time, dining_name, adult, kid, guest_lname, guest_fname, guest_tel1, guest_tel2, guest_tel3, guest_email, regdate, price, total_price) 
 		values (
-		#d_day#, #d_time#, #adult#, #kid#, #guest_lname#, #guest_fname#, #guest_tel1#, #guest_tel2#, #guest_tel3#, #guest_email#, 
-		now(), #price#)
+		#d_day#, #d_time#, #dining_name#, #adult#, #kid#, #guest_lname#, #guest_fname#, #guest_tel1#, #guest_tel2#, #guest_tel3#, #guest_email#, 
+		now(), #price#, #total_price#)
 		<selectKey keyProperty="no" resultClass="Integer">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
@@ -62,7 +62,7 @@
     </update>
     
     <select id="read" parameterClass="Integer" resultClass="dining_resvo">
-		select no, d_day, member_name, guest_tel1, guest_tel2, guest_tel3, dining_name, adult, kid, regdate, price
+		select no, d_day, d_time, guest_lname, guest_fname, guest_tel1, guest_tel2, guest_tel3, dining_name, adult, kid, regdate, total_price
 		from dining_res where no=#no#
 	</select>
     
