@@ -2,21 +2,15 @@
 <%@ page import="java.util.*" %>
 <%@ page import="board.member.*" %>
 <%@ page import="util.*" %>
-
-
-
-
+<%@ page import="room.*" %>
 <%
 MemberVO param = (MemberVO)request.getAttribute("vo");
 ArrayList<MemberVO> list = (ArrayList)request.getAttribute("list");
 MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 MemberVO data = (MemberVO)request.getAttribute("data");
+
+ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
 %>
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -125,7 +119,7 @@ MemberVO data = (MemberVO)request.getAttribute("data");
           <div id="logined">
             <div class="logined-box">
                 <h2 class="close-btn"><a href="#">x</a></h2>
-                <h3><%=sessionMember.getF_name()%> <%=sessionMember.getL_name()%><span>님 안녕하세요.</span></h3>
+                <h3><%=Function.checkNull(sessionMember.getF_name())%> <%=sessionMember.getL_name()%><span>님 안녕하세요.</span></h3>
                 <p class="mypage"><a href="/membership/mypage">마이페이지 <img src="img/white-arrow.png" class="white-arrow"></a></p>
                 <table>
                
@@ -184,22 +178,22 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                                 <input type="text" name="checkin_select" id="checkin_select" value="<%=DateUtil.getToday()%>">
                                 <p>~</p>
                                 <input type="text" name="checkout_select" id="checkout_select" value="<%=DateUtil.getDayDateAdd(1, DateUtil.getToday())%>"> 
+                                <span class="d-r-span">성인</span>
                                 <select name="adult">
-                                    <option>성인</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    <option value="1">1명</option>
+                                    <option value="2" selected>2명</option>
+                                    <option value="3">3명</option>
+                                    <option value="4">4명</option>
+                                    <option value="5">5명</option>
                                 </select> 
+                                <span class="d-r-span">어린이</span>
                                 <select name="kid">
-                                    <option>어린이</option>
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    <option value="0" selected>0명</option>
+                                    <option value="1">1명</option>
+                                    <option value="2">2명</option>
+                                    <option value="3">3명</option>
+                                    <option value="4">4명</option>
+                                    <option value="5">5명</option>
                                 </select> 
                             </div>
                             <div class="d-r-input2">
@@ -228,11 +222,11 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                     </li>
 
                     <li class="special_offer">
-                        <p>SPECIAL OFFERS</p>
+                        <p>PACKAGE</p>
                         <div class="bg">
                                 <a href="/pkg/special_promotion">
                                     <div class="hover-box">
-                                        <p>SPECIAL OFFER</p>
+                                        <p>PACKAGE</p>
                                         <img src="img/ico_arrow.png">
                                     </div>
                                 </a>
@@ -241,11 +235,11 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                     </li>
 
                     <li class="fitness">
-                        <p>FACILITIES</p>
+                        <p>MEETING</p>
                         <div class="bg">
-                                <a href="/facilites">
+                                <a href="/meeting_wedding/meeting">
                                         <div class="hover-box">
-                                            <p>FACILITIES</p>
+                                            <p>MEETING</p>
                                             <img src="img/ico_arrow.png">
                                         </div>
                                 </a>
@@ -253,11 +247,11 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                     </li>
 
                     <li class="spa_relax">
-                        <p>MEETING & WEDDING</p>
+                        <p>WEDDING</p>
                         <div class="bg">
-                                <a href="#">
+                                <a href="/meeting_wedding/wedding">
                                         <div class="hover-box">
-                                            <p>MEETING & WEDDING</p>
+                                            <p>WEDDING</p>
                                             <img src="img/ico_arrow.png">
                                         </div>
                                 </a>
@@ -277,11 +271,11 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                     </li>
 
                     <li class="event_gift">
-                        <p>EVENT & GIFT</p>
+                        <p>FACILITIES</p>
                         <div class="bg">
-                                <a href="#">
+                                <a href="/facilities">
                                         <div class="hover-box">
-                                            <p>EVENT & GIFT</p>
+                                            <p>FACILITIES</p>
                                             <img src="img/ico_arrow.png">
                                         </div>
                                 </a>
@@ -433,18 +427,7 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                         </div> -->
                     </div>
                 </div>
-
-                <!-- <div class="pro-prev"></div>
-                <div class="pro-next"></div>
-                <ul class="pro-btn-group">
-                    <li class="on"></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul> -->
             </div>
-
         </div>
 
        <!-- 04객실 소개 슬라이드 구역  -->
@@ -476,82 +459,24 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                     </div>
                     <!--객실 소개 내용과 예약버튼 들어갈 구역-->
                     <div class="room-intro-wrap">
-                        <div class="room_intro">
-                            <h3>Namsan Pool Deluxe Room</h3>
-                            <p>릴렉세이션 풀에서 스파를 즐기며<br/>
-                            아름다운 서울의 전경을 바라보는 시간은<br/>
-                            몸과 마음을 채우는 특별한 휴식을 선사합니다.</p>
-                            <h6>전화 <span>02-2250-8074</span></h6>
-                            <h6>이메일 <span>ClubSpaSeoul@ABC.com</span></h6>
+                    	<%
+                    	for(int i=0; i<list_r.size(); i++) {
+                    	%>
+                    	<div class="room_intro">
+                            <h3><%=list_r.get(i).getName() %></h3>
+                            <p><%=list_r.get(i).getInstruction() %>
+                            <h6 class="tel">전화 <span>02-1234-5678</span></h6>
+                            <h6 class="email">이메일 <span>support@portfoliohotel.com</span></h6>
                     
                             <!-- 객실 자세히 보기/ 객실조회 버튼 -->
                             <ul class="green-box clear">
-                                <li class="room_more"><a href="/room/room-detail-subpage">MORE</a></li>
-                                <li class="room_book"><a href="/book/check_room">RESERVATION</a></li>
+                                <li class="room_more"><a href="/room/detail_sub<%=i+1%>">MORE</a></li>
+                               <!--  <li class="room_book"><a href="/book/room/check_room">RESERVATION</a></li> -->   
                             </ul>
                         </div>  
-                        <div class="room_intro">
-                            <h3>Namsan Pool Premier Suite</h3>
-                            <p>서울의 전경과 남산을 감상하며 <br/>
-                            더욱 로맨틱하게 만들어줄 아늑한 객실과<br/>
-                            릴렉세이션 풀에서 보내는 프라이빗한 시간을<br/>
-                            만끽하세요.</p>
-                            <h6>전화 <span>02-2250-8074</span></h6>
-                            <h6>이메일 <span>ClubSpaSeoul@ABC.com</span></h6>
-
-                            <!-- 객실 자세히 보기/ 객실조회 버튼 -->
-                            <ul class="green-box clear">
-                                <li class="room_more"><a href="#">MORE</a></li>
-                                <li class="room_book"><a href="#">RESERVATION</a></li>
-                            </ul>
-                        </div>
-                        <div class="room_intro">
-                            <h3>Namsan Presidentail Suite</h3>
-                            <p>반얀트리 서울의 객실 중 가장 높은<br/>
-                            층에 위치한 남산 프레지덴셜 스위트에서는<br/>
-                            릴렉세이션 풀과 여유로운 분위기의 다이닝 룸,<br/>
-                            두개의 침실과 욕실로 구성되어 보다 여유롭고</br>
-                            품격 있는 휴식을 즐기시길 바랍니다.</p>
-                            <h6>전화 <span>02-2250-8074</span></h6>
-                            <h6>이메일 <span>ClubSpaSeoul@ABC.com</span></h6>
-                    
-                             <!-- 객실 자세히 보기/ 객실조회 버튼 -->
-                            <ul class="green-box clear">
-                                <li class="room_more"><a href="#">MORE</a></li>
-                                <li class="room_book"><a href="#">RESERVATION</a></li>
-                            </ul>
-                        </div>
-                        <div class="room_intro">
-                            <h3>Spa Sanctuary Suite</h3>
-                            <p>특별한 경험을 선사하는 스파 생츄어리 스위트는<br/>
-                            여행의 피로를 녹여줄 웰컴 풋마사지와<br/>
-                            스파 테라피를 투숙 기간 동안 무제한으로<br/>
-                            즐기실 수 있으며 서울 전경과 남산의 전경을<br/>
-                            객실에서 편안한 휴식을 경험해보십시오.</p>
-                            <h6>전화 <span>02-2250-8074</span></h6>
-                            <h6>이메일 <span>ClubSpaSeoul@ABC.com</span></h6>
-                    
-                             <!-- 객실 자세히 보기/ 객실조회 버튼 -->
-                            <ul class="green-box clear">
-                                <li class="room_more"><a href="#">MORE</a></li>
-                                <li class="room_book"><a href="#">RESERVATION</a></li>
-                            </ul>
-                        </div>
-                        <div class="room_intro">
-                            <h3>Banyan Pool Presidential Suite</h3>
-                            <p>279㎡의 복층 구조로 1층에는 도심의<br/>
-                            화려한 전망이 펼쳐진 쾌적한 다이닝 룸 그리고<br/>
-                            2층에는 2개의 품격있는 객실과 넓은 욕실이</br>
-                            준비되어 있습니다.</p>
-                            <h6>전화 <span>02-2250-8074</span></h6>
-                            <h6>이메일 <span>ClubSpaSeoul@ABC.com</span></h6>
-                    
-                             <!-- 객실 자세히 보기/ 객실조회 버튼 -->
-                            <ul class="green-box clear">
-                                <li class="room_more"><a href="#">MORE</a></li>
-                                <li class="room_book"><a href="#">RESERVATION</a></li>
-                            </ul>
-                        </div>
+                    	<%	
+                    	}
+                    	%>
                     </div>
 
                     <!-- 객실화면 좌우로 넘어가기 위한 버튼 구역-->

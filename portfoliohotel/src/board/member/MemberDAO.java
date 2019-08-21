@@ -17,43 +17,19 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 		return (Integer) getSqlMapClient().queryForObject("member.count", param);
 	}
 
-	/**
-	 * 관리자 목록 조회
-	 * 
-	 * @param param
-	 * @return ArrayList<AdminVO>
-	 * @throws SQLException
-	 */
 
 	public ArrayList list(MemberVO param) throws SQLException {
 		return (ArrayList) getSqlMapClient().queryForList("member.list", param);
 	}
 
-	/**
-	 * 관리자 등록
-	 * 
-	 * @param vo
-	 * @return no 마지막 등록된 no
-	 * @throws SQLException
-	 */
 	public int insert(MemberVO vo) throws SQLException {
 		return (Integer) getSqlMapClient().insert("member.insert", vo);
 	}
-
 	
-//	  public int insert(Member_serviceVO vo) throws SQLException { return (Integer)
-//	  getSqlMapClient().insert("member_service.insert", vo); }
-//	  
-//	  public int insert(Member_loginVO vo) throws SQLException { return (Integer)
-//	  getSqlMapClient().insert("member_login.insert", vo); }
-	 
+	public int insertSns(MemberVO vo) throws SQLException {
+		return (Integer) getSqlMapClient().insert("member.insertSns", vo);
+	}
 
-	/**
-	 * 관리자 수정
-	 * 
-	 * @param vo
-	 * @throws SQLException
-	 */
 	public int update(MemberVO vo) throws SQLException {
 		return getSqlMapClient().update("member.update", vo);
 	}
@@ -65,6 +41,10 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 	public boolean checkPassword(MemberVO vo) throws SQLException {
 		int cnt = (Integer)getSqlMapClient().queryForObject("member.checkPassword", vo);
 		if (cnt > 0) return true; else return false;
+	}
+	
+	public int logindate(MemberVO vo) throws SQLException{
+		return getSqlMapClient().update("member.logindate", vo);
 	}
 	
 	public int delete_account(MemberVO vo) throws SQLException {
@@ -93,8 +73,10 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 		return getSqlMapClient().update("member.find_pw_change",vo);
 	}
 	
-	public int naver(MemberVO vo) throws SQLException{
-		return (Integer)getSqlMapClient().queryForObject("member.naver",vo);
+	
+	public MemberVO snsCheck(MemberVO vo) throws SQLException{
+		return (MemberVO)getSqlMapClient().queryForObject("member.snsCheck",vo);
+		
 	}
 	
 

@@ -40,6 +40,11 @@ public class QnaService {
 		return list;
 	}
 	
+	public ArrayList Mylist(QnaVO vo) throws Exception {
+		ArrayList Mylist = qnaDao.Mylist(vo);
+		return Mylist;
+	}
+	
 	
 	/*
 	 * public int[] Mycount(QnaVO vo) throws Exception { int rowCount =

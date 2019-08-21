@@ -1,6 +1,7 @@
 package board.member;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -179,6 +180,8 @@ public class MemberController {
 	
 	
 	
+	
+	
 //	@RequestMapping("/manage/member/loginCheck")
 //	public String loginCheck(Model model, MemberVO param, HttpSession session) throws Exception {
 //		boolean result = memberService.loginCheck(param,session);
@@ -294,10 +297,12 @@ public class MemberController {
 			modata.add(odata);
 		}
 		
+		ArrayList<HashMap> pdata = room_resService.point(memberInfo.getNo());
+		
 		// ============= qna ======================== 
 		qparam.setMember_pk(memberInfo.getNo());
 		int[] qrowPageCount = qnaService.count(qparam);
-		ArrayList<QnaVO> qlist = qnaService.list(qparam);
+		ArrayList<QnaVO> qlist = qnaService.Mylist(qparam);
 		// ============= qna ======================== 
 		
 		model.addAttribute("data", data);
@@ -313,6 +318,8 @@ public class MemberController {
 		
 		model.addAttribute("mdata", mdata);
 		model.addAttribute("modata", modata);
+
+		model.addAttribute("pdata", pdata);
 		
 		// ============= qna ======================== 
 		model.addAttribute("qtotCount", qrowPageCount[0]);
@@ -385,6 +392,15 @@ public class MemberController {
 		return "include/return";
 	}
 	
+//	@RequestMapping("/membership/logindate")
+//	public String logindate(Model model, MemberVO param, HttpSession session) throws Exception {
+//		MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
+//		MemberVO data = memberService.read(memberInfo.getNo());
+//		model.addAttribute("data", data);
+//		model.addAttribute("vo", param);
+//	
+//		return "membership/logindate";
+//	}
 	
 	
 	@RequestMapping("/membership/join_complete")
@@ -545,6 +561,26 @@ public class MemberController {
 		return returnJsp;
 	}
 
+	@RequestMapping("/member/insertSns.do")
+	public String insertSns(Model model, MemberVO param, HttpServletRequest request) throws Exception {
+		int value = memberService.insertSns(param);
+		model.addAttribute("value", value);
+		return "include/return";
+	}
+	
+	@RequestMapping("/member/snsCheck.do")
+	public String snsCheck(Model model, MemberVO param, HttpServletRequest request, HttpSession session) throws Exception {
+		MemberVO data = memberService.snsCheck(param);
+		String value = "";
+		if (data != null) {
+			session.setAttribute("memberInfo", data);
+			value = "ok";
+		} else {
+			value = "fail";
+		}
+		model.addAttribute("value", value);
+		return "include/return";
+	}
 	
 	
 	

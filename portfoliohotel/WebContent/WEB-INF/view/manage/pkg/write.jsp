@@ -120,12 +120,12 @@
 									<tr>
 										<th scope="row"><label for="">이벤트</lavel></th>
 										<td colspan="3">
-											<input type="text" id="event" name="event" class="w40"/>
+											<textarea id="event" name="event" style="width:50%"> </textarea>
 										</td>
 									<tr>
 										<th scope="row"><label for="">안내</label></th>
 										<td colspan="3">
-											<input type="text" id="guide" name="guide" class="w40"/>
+											<textarea id="guide" name="guide" style="width:50%"></textarea>
 										</td>
 									</tr>
 									

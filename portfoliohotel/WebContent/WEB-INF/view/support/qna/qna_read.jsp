@@ -62,24 +62,18 @@ function goSave() {
 	}
 }
 	
-		
-	<%-- function goDelete() {
-		var del = confirm ('삭제하시겠습니까?');
-		if (del){
-			document.location.href = "/manage/board/qna/process?no=<%=data.getNo()%>&cmd=delete";
-			} else {
-				return false;
-			}
-		}
-	function goDelete_reply() {
-		var del = confirm ('삭제하시겠습니까?');
-		if (del){
-			document.location.href = "/manage/board/qna/process?no=<%=data.getNo()%>&cmd=delete_reply";
-			} else {
-				return false;
-			}
-		} --%>
-	
+$(function(){
+		if($("#Rcontents").val == null){
+			$('#ReplyBtn').hide();
+		} else {
+	 		$('#ReplyBtn').click(function(){
+	 			$('#Rcontents').show();
+	 		});
+		}	
+	  });
+
+
+
 	
 	
 	
@@ -115,8 +109,8 @@ function goSave() {
         <div class="qna_q">
             <div class="support-list">
                 <ul class="support-list-center">
-                    <li><a href="notice">공지사항</a></li>
-                    <li><a href="faq">FAQ</a></li>
+                    <li><a href="/support/notice/notice">공지사항</a></li>
+                    <li><a href="/support/faq/faq">FAQ</a></li>
                     <li class="on"><a href="qna">Q&A</a></li>
                 </ul>
             </div>
@@ -126,45 +120,16 @@ function goSave() {
                 	
 						<form method="POST"name="frm" id="frm" action="<%=Function.getSslCheckUrl(request.getRequestURL())%>/processU" enctype="multipart/form-data" onsubmit="return goEdit();" >
                    
-                    	<%-- <ul class="base_info clear">
-                            <li>
-                                <label for="">카테고리</label>
-                                <input type="text" style="width:100px;height:30px;" id="category" name="category" value="<%=CodeUtil.getCategory_name(data.getCategory()) %>" title="성을 입력해주세요" placeholder="성" readonly></input>	
-                               
-                            </li>
-                            <li>
-                                <label for="">공개여부</label>
-                                <input type="text" style="width:100px;height:30px;" id="open" name="open" value="<%=CodeUtil.getOpenName(data.getOpen()) %>" title="성을 입력해주세요" placeholder="성" readonly></input>
 								
-                            </li>
-                        </ul> --%>
-                        <ul class="base_info clear">
-                            <li>
-                                <label for="qna-title">이름</label>
-                               		<input type="text" style="width:100px;height:45px;" id="familyname" name="LastName" value="<%=qdata.getLastName()%>" title="성을 입력해주세요" placeholder="성" readonly></input>	
-									<input type="text" style="width:150px;height:45px;" id="firstname" name="FirstName" value="<%=qdata.getFirstName()%>" title="이름을 입력해주세요" placeholder="이름" readonly></input>
-                                 
-                            </li>
-                            <li>
-                                <label for="qna-title">연락처</label>
-                                <input type="text" style="width:100px;height:45px;" id="tel1" name="tel1"  title="연락처를 입력해주세요" value="<%=qdata.getTel1()%>" readonly/>	
-								<input type="text" style="width:100px;height:45px;" id="tel2" name="tel2"  title="연락처를 입력해주세요" value="<%=qdata.getTel2()%>" readonly/>	
-								<input type="text" style="width:100px;height:45px;" id="tel3" name="tel3"  title="연락처를 입력해주세요" value="<%=qdata.getTel3()%>" readonly/>	
-                            </li>
-                        </ul>
-                        <label for="">이메일</label>
-                       		<input type="text" name="email" id="email" style="width:200px" value="<%=qdata.getEmail()%>"> 
-							
-							
 						<label for="">제목</label>
                        		<input type="text" id="title" name="title" style="width:894px;height:45px;border: 2px solid #eee;" title="제목을 입력해주세요" value="<%=qdata.getTitle()%>" readonly/>	
-								
+						
                         <label for="">내용</label>
                        		<!-- <textarea name="qna-cont" id="qna-cont"></textarea> -->
                         	<!-- <textarea id="contents" name="contents" title="내용을 입력해주세요" style="width:100%; height:300px;"></textarea> -->
                         	<textarea name="contents" id="contents" 
                         			style="resize: none; width: 100%;height: 400px;padding: 10px 10px; border: 2px solid #eee;font-size: 14px;
-    								color: #454545;font-family: 'Noto Sans KR', sans-serif;font-weight: 300;letter-spacing: 0.5px;" readonly><%=qdata.getContents()%></textarea>
+    								color: #454545;font-family: 'Noto Sans KR', sans-serif;font-weight: 300;letter-spacing: 0.5px; " readonly><%=qdata.getContents()%></textarea>
                         <label for="">첨부파일</label>
                         	<!-- <input type="file" id="filename_tmp" name="filename_tmp" style="width:894px;height:45px;border: 2px solid #eee;" title="첨부파일을 업로드 해주세요." /> -->
                         	<% if (qdata.getFile() == null) { %>
@@ -174,21 +139,14 @@ function goSave() {
 									<p>기존파일 : <a href="<%= Function.downloadUrl(SiteProperty.QNA_UPLOAD_PATH, java.net.URLEncoder.encode(qdata.getFile_org(), "UTF-8"), qdata.getFile()) %>" target="_blank"><%= Function.checkNull(qdata.getFile_org()) %> </a><br />				
 									</p>
 											
-							<% } %>			
-                       <!--  <ul class="base_info clear">
-                            <li>
-                                <label for="qna-title">작성자 이름</label>
-                                <input type="text" id="qna-title" name="qna-title">
-                            </li>
-                            <li>
-                                <label for="qna-title">비밀번호</label>
-                                <input type="text" id="qna-title" name="qna-title">
-                            </li>
-                        </ul>
-                        <label for="qna-title">이메일</label>
-                        <input type="text" id="email" name="email" placeholder="회원님의 질문을 이메일로 발송해드립니다.">-->
-                        <!-- <input type="submit" value="질문하기" class="btns" href="javascript:$('#frm').submit();"> --> 
-                        
+							<% } %>	
+							</br>
+							
+                    		<input type="button" class="ReplyBtn" id="ReplyBtn" value="답변확인">
+                    		<textarea name="Rcontents" id="Rcontents" 
+                        			style="resize: none; width: 100%;height: 400px;padding: 10px 10px; border: 2px solid #eee;font-size: 14px;
+    								color: #454545;font-family: 'Noto Sans KR', sans-serif;font-weight: 300;letter-spacing: 0.5px; display: none;" readonly><%=qdata.getReply_contents()%>
+    						</textarea>
                         <div class="pwCheck" id="PwCheckBtn" hidden>
                         	<label for="qna-title" >비밀번호 확인</label>
                         	<input type="password" name="password" id="password" style="    width: 300px; height: 45px; border: 2px solid #eee;"/>
@@ -223,6 +181,7 @@ function goSave() {
 						<input type="hidden" name="send_email" value="0" />
 						<input type="hidden" name="no" value="<%=qdata.getNo() %>" />
                     </form>
+                    
                 </div>
             </div>
         </div>

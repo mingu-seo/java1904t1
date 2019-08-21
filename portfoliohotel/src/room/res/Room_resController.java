@@ -1,6 +1,7 @@
 package room.res;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -276,8 +277,27 @@ public class Room_resController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/book/room/confirm_room")
-	public String confirm_room(Model model, Room_optVO vo) throws Exception {
-
+	public String confirm_room(Model model, Room_resVO vo, HttpServletRequest req) throws Exception {
+		int r = Integer.parseInt(req.getParameter("r"));
+		vo.setNo(r);
+		Room_resVO read = room_resService.read(vo);
+		ArrayList<Room_opt_resVO> list_o = room_resService.list_opt(r);
+		
+		String[] start = read.getCheckin().split("-");
+		String[] end = read.getCheckout().split("-");
+		String checkin = "";
+		String checkout = "";
+		
+		for(int i=0; i<start.length; i++) {
+			checkin += start[i];
+			checkout += end[i];
+		}
+		
+		int day_stay = Integer.parseInt(String.valueOf(Function.diffOfDate(checkin, checkout)));
+		
+		model.addAttribute("day_stay", day_stay);
+		model.addAttribute("read", read);
+		model.addAttribute("list_o", list_o);
 		return "book/room/confirm_room";
 	}
 
@@ -388,16 +408,10 @@ public class Room_resController {
 	 */
 	@RequestMapping("/room/res/submit")
 	public String submit(Model model, Room_resVO vo, Room_opt_resVO orvo, HttpServletRequest req) throws Exception {
-		int day_stay = Integer.parseInt(req.getParameter("day_stay"));
-		int r = room_resService.insert(vo, orvo, req);
-		vo.setNo(r);
-		Room_resVO read = room_resService.read(vo);
-		ArrayList<Room_opt_resVO> list_o = room_resService.list_opt(r);
 		
-		model.addAttribute("day_stay", day_stay);
-		model.addAttribute("read", read);
-		model.addAttribute("list_o", list_o);
-		return "book/room/confirm_room";
+		int r = room_resService.insert(vo, orvo, req);
+		
+		return "redirect:/book/room/confirm_room?r="+r;
 	}
 	
 	/**
@@ -407,10 +421,10 @@ public class Room_resController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/book/room/nonmember")
-	public String nonmember(Model model, Room_resVO vo) throws Exception {
+	@RequestMapping("/book/room/guest")
+	public String guest(Model model, Room_resVO vo) throws Exception {
 		
-		return "book/room/nonmember";
+		return "book/room/guest";
 	}
 	
 	/**
@@ -420,20 +434,20 @@ public class Room_resController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/book/room/nonmember_res")
-	public String nonmember_res(Model model, Room_resVO vo) throws Exception {
+	@RequestMapping("/book/room/guest_res")
+	public String guest_res(Model model, Room_resVO vo) throws Exception {
 		Room_resVO mdata = room_resService.nonmember(vo);
 		
 		if(mdata == null) {
 			model.addAttribute("code", "alertMessageUrl"); 
 			model.addAttribute("message", Function.message(1, "일치하는 정보가 존재하지 않습니다.", "삭제실패")); 
-			model.addAttribute("url", vo.getTargetURLParam("/book/room/nonmember", vo, 0));
+			model.addAttribute("url", vo.getTargetURLParam("/book/room/guest", vo, 0));
 		} else {
 			ArrayList<Room_opt_resVO> odata = room_resService.list_opt(mdata.getNo());
 			model.addAttribute("mdata", mdata);
 			model.addAttribute("odata", odata);
 			
-			return "book/room/nonmember_res";
+			return "book/room/guest_res";
 		}
 		return "include/alert";
 	}
@@ -445,10 +459,11 @@ public class Room_resController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("/book/room/nonmember_res/cancel")
-	public String nonmember_cancel(Model model, Room_resVO vo) throws Exception {
+	@RequestMapping("/book/room/guest_res/cancel")
+	public String guest_cancel(Model model, Room_resVO vo) throws Exception {
 		int r = room_resService.cancel(vo.getNo());
 		model.addAttribute("value",r);
 		return "index";
 	}
+
 }

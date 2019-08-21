@@ -109,33 +109,10 @@ $(function(){
                                     <input type="text" id="guest_name1" name="guest_name1" placeholder="성" value="<% if(memberInfo!=null) out.print(memberInfo.getF_name());%>" style="color:#000000">
                                     <input type="text" id="guest_name2" name="guest_name2" placeholder="이름" value="<% if(memberInfo!=null) out.print(memberInfo.getL_name());%>" style="color:#000000">
                             </div>
-
-                            <!-- <div class="name_en clear">
-                                    <div class="name_en_title">
-                                        <label for="name_en">성명 (영문)＊</label>
-                                    </div>
-                                    <div class="name_en_area">
-                                        <select>
-                                            <option>선택안함</option>
-                                            <option>Ms.</option>
-                                            <option>Mr.</option>
-                                        </select>
-                                        <input type="text" id="guest_ename" placeholder="Family Name">
-                                        <input type="text" id="guest_ename" placeholder="First Name">
-                                        <p>* 여권에 기재된 영문 성명과 동일하게 기입해 주십시오.</p>
-                                    </div>
-                            </div> -->
-
+                            
                             <div class="phoneNumber">
                                     <label for="phoneNumber">연락처＊</label>
-                                    <%-- <select id="guest_tel1" name="guest_tel1" value="<% if(memberInfo!=null) out.print(memberInfo.getF_tel());%>">
-                                        <option>선택</option>
-                                        <option value="010">010</option>
-                                        <option value="011">011</option>
-                                        <option value="017">017</option>
-                                    </select> --%>
                                     <input type="text" id="guest_tel1" name="guest_tel1" value="<% if(memberInfo!=null) out.print(memberInfo.getF_tel());%>" placeholder="숫자만 입력가능" style="color:#000000">
-                                    <!-- <input type="text" id="guest_tel1" name="guest_tel1" placeholder="숫자만 입력가능"> -->
                                     <input type="text" id="guest_tel2" name="guest_tel2" value="<% if(memberInfo!=null) out.print(memberInfo.getM_tel());%>" placeholder="숫자만 입력가능" style="color:#000000">
                                     <input type="text" id="guest_tel3" name="guest_tel3" value="<% if(memberInfo!=null) out.print(memberInfo.getL_tel());%>" placeholder="숫자만 입력가능" style="color:#000000">
                             </div>
@@ -149,20 +126,6 @@ $(function(){
                                         <li>
                                             <input type="text" id="email" name="email" value="<% if(memberInfo!=null) out.print(memberInfo.getEmail()); %>" title="이메일 아이디 입력" maxlength="40" style="color:#000000">
                                         </li>
-
-                                        <!-- <li class="at">@</li>
-
-                                        <li>
-                                            <input type="text" id="email" name="email" value title="이메일 주소 입력" maxlength="40">
-                                        </li>
-                                        <li class="adress">
-                                                <select>
-                                                        <option>직접입력</option>
-                                                        <option>naver.com</option>
-                                                        <option>hanmail.net</option>
-                                                        <option>google.com</option>
-                                                </select>
-                                        </li> -->
                                     </ul>
                             </div>
                         </div>
@@ -208,52 +171,6 @@ $(function(){
                                     <label for="name_ko">총 가격 &nbsp &nbsp<span>＊</span></label>
                                     <input type="text" id="total_price" name="total_price" value="" style="color:#000000;">
                             </div>                            
-                            
-                            <!-- <div class="cardType">
-                                    <label for="name_ko">총 가격 &nbsp &nbsp<span>＊</span></label>
-                                    <input type="text" id="total_price" name="total_price" value="" style="color:#000000;" readonly>
-                            </div>   -->                         
-
-                            <!-- <div class="person clear">
-                                    <label for="name_ko">인원<span>＊</span></label>
-                                    <ul class="adult clear">
-                                       <li class="per">어른</li>
-                                       <li>
-                                           <select>
-                                                <option>1명</option>
-                                                <option>2명</option>
-                                                <option>3명</option>
-                                                <option>4명</option>
-                                                <option>5명</option>
-                                                <option>6명</option>
-                                                <option>7명</option>
-                                                <option>8명</option>
-                                                <option>9명</option>
-                                                <option>10명</option>
-                                            </select>
-                                        </li>
-                                    </ul>
-                                    <ul class="child clear">
-                                            <li class="per">어린이</li>
-                                            <li>
-                                                <select>
-                                                     <option>1명</option>
-                                                     <option>2명</option>
-                                                     <option>3명</option>
-                                                     <option>4명</option>
-                                                     <option>5명</option>
-                                                     <option>6명</option>
-                                                     <option>7명</option>
-                                                     <option>8명</option>
-                                                     <option>9명</option>
-                                                     <option>10명</option>
-                                                 </select>
-                                             </li>
-                                             <p>(36개월 ~ 12세 미만)</p>        
-                                    </ul>
-                                    
-                            </div> -->
-                            
                         </div>
                                                      
                     </div>
@@ -283,8 +200,6 @@ $(function(){
                 <input type="hidden" name="cmd" value="write" />
                 <input type="hidden" name="pkg_pk" value="<%=prdata.getNo() %>"/>
                 <input type="hidden" id="member_pk" name="member_pk" value=""/>
-                <!-- <input type="hidden" name="rv_num" value=""/> -->
-                <%-- <input type="hidden" name="total_price" value="<%=res_data.getPkg_count()*res_data.getPkg_price() %>"/> --%>
             </form> 
         </div>
     </div>

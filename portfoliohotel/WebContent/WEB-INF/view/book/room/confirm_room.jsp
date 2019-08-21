@@ -81,14 +81,6 @@ ArrayList<Room_opt_resVO> list_o = (ArrayList<Room_opt_resVO>)request.getAttribu
                         <%
                         }
                         %>
-                        <!-- <ul class="option-form clear">
-                            <li>침대추가</li>
-                            <li class="second">[0]</li>
-                        </ul>
-                        <ul class="option-form clear">
-                                <li>Welcome Wine & Chocolate</li>
-                                <li  class="second">[0]</li>
-                        </ul> -->
                     </div>
 
                     <ul class="payment clear">

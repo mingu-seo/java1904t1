@@ -180,4 +180,11 @@ public class PkgController {
 		return "pkg/room/oasis";
 	}
 	
+	@RequestMapping("/pkg/special_promotion")
+	public String special_promotion(Model model, PkgVO vo) throws Exception {
+		ArrayList<PkgVO> plist = (ArrayList<PkgVO>)pkgService.list2(vo);
+		model.addAttribute("plist", plist);
+		return "pkg/special_promotion";
+	}
+	
 }

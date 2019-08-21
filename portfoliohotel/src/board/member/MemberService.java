@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import manage.admin.AdminVO;
 import util.Page;
 
 @Service
@@ -37,6 +37,11 @@ public class MemberService {
 		int no = memberDao.insert(vo);
 		return no;
 	}
+	
+	public int insertSns(MemberVO vo) throws SQLException {
+		int no = memberDao.insertSns(vo);
+		return no;
+	}
 
 	public int update(MemberVO vo) throws SQLException {
 		int cnt = memberDao.update(vo);
@@ -45,6 +50,11 @@ public class MemberService {
 	
 	public int password(MemberVO vo) throws SQLException {
 		int cnt = memberDao.password(vo);
+		return cnt;
+	}
+	
+	public int logindate(MemberVO vo) throws SQLException{
+		int cnt = memberDao.logindate(vo);
 		return cnt;
 	}
 	
@@ -72,14 +82,12 @@ public class MemberService {
 		return no;
 	}
 	
-	public int naverCallback(MemberVO vo)throws SQLException{
-		int cnt = memberDao.insert(vo);
-		return cnt;
+	
+	public MemberVO snsCheck(MemberVO vo)throws SQLException{
+		MemberVO no = memberDao.snsCheck(vo);
+		return no;
 	}
 
-
-
-	
 
 	public int delete(int no) throws SQLException {
 		int cnt = memberDao.delete(no);
@@ -114,7 +122,7 @@ public class MemberService {
 		}
 		return result;
 	}
-	
+
 	public int idcheck(MemberVO param) throws SQLException {
 		return memberDao.idcheck(param);
 	}
@@ -126,9 +134,11 @@ public class MemberService {
 	public MemberVO getLoginSessionInfo(MemberVO param) throws SQLException {
 		MemberVO vo = memberDao.getLoginSessionInfo(param);
 		vo.setIp(param.getIp());	// 아이피 추가
+		//vo.setLogindate(param.getLogindate());
 		return vo;
 	}
-//
+	
+
 //	public int[] countLoginHistory(MemberVO param) throws SQLException {
 //		int rowCount = memberDao.countLoginHistory(param);
 //		int[] rowPageCount = new int[2];

@@ -132,7 +132,7 @@ function goSave() {
 									</tr>
 										<th scope="row"><label for="">질문</label></th>
 										<td colspan="3">
-											<input type="text" id="title" name="title" value="<%=data.getTitle()%>"/>
+											<input type="text" id="title" name="title" value="<%=data.getTitle()%>" class="w50"/>
 										</td>
 									</tr>									
 									<tr>

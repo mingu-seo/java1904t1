@@ -19,6 +19,8 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 <link rel="stylesheet" href="/css/footer.css">
 <script src="/js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="/js/gnb.js"></script>
+<%@ include file="/pg/cfg/site_conf_inc.jsp" %>
+<script type="text/javascript" src="<%= g_conf_js_url %>"></script>
 <script>
 $(function(){
     //left-section 높이값 알아내서 right-section 높이값을 동일하게
@@ -50,9 +52,21 @@ $(function(){
     $("#guest_tel1_select").change(function() {
     	$("#guest_tel1").val($("#guest_tel1_select option:selected").val());
     });
+    
+    $("#guest_lastname, #guest_firstname").change(function() {
+    	$("#buyr_name").val($("#guest_lastname").val() + $("#guest_firstname").val());
+    });
+    
+    $("#guest_email").change(function() {
+    	$("#buyr_mail").val($("#guest_email").val());
+    });
+    
+    $("#guest_tel2").keyup(function(){ $(this).val($(this).val().replace(/[^0-9]/gi,"") ); }); //숫자만
+    $("#guest_tel3").keyup(function(){ $(this).val($(this).val().replace(/[^0-9]/gi,"") ); }); //숫자만
+    
 });        
 
-var chknum = /[0-9]/g;
+var chknum = /[0-9]/;
 var chkat = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
 function goCheck() {
@@ -89,7 +103,14 @@ function goCheck() {
 		$("#email_span").remove();
 	}
 	
-	return true;
+	if($("#pay_method").val() == 0) {
+		$("#order_info").attr("action", "/room/res/submit");
+		$("#order_info").submit();
+	} else {
+		$("#order_info").attr("action", "/pg/sample/pp_cli_hub.jsp");
+		jsf__pay(document.order_info);
+	}
+	
 }
 
 function maxLengthCheck(object) {
@@ -99,9 +120,6 @@ function maxLengthCheck(object) {
 }
 
 function goPay(method, state) {
-	$("#pay_method").val(method);
-	$("#pay_state").val(state);
-	
 	if(method == 1) {
 		document.getElementById("card").style.backgroundColor = "#0e693f";
 		document.getElementById("card").style.color = "#ffffff";
@@ -109,8 +127,10 @@ function goPay(method, state) {
 		document.getElementById("deposit").style.color = "#000000";
 		
 		$("#account_span").remove();
-		
+		$("#pay_method").val("100000000000");
+		$("#pay_state").val(state);
 		$("#paydate").val('<%=DateUtil.getToday()%>');
+
 	} else {
 		document.getElementById("deposit").style.backgroundColor = "#0e693f";
 		document.getElementById("deposit").style.color = "#ffffff";
@@ -118,14 +138,85 @@ function goPay(method, state) {
 		document.getElementById("card").style.color = "#000000";
 		
 		$("#account_span").text("더조은은행 190812-13-131430");
-		
+		$("#pay_method").val(method);
+		$("#pay_state").val(state);
 		$("#paydate").val("-");
+		
 	}
 }
 </script>
+
+
+<script type="text/javascript">
+function m_Completepayment( FormOrJson, closeEvent ) 
+{
+    var frm = document.order_info; 
+ 
+    /********************************************************************/
+    /* FormOrJson은 가맹점 임의 활용 금지                               */
+    /* frm 값에 FormOrJson 값이 설정 됨 frm 값으로 활용 하셔야 됩니다.  */
+    /* FormOrJson 값을 활용 하시려면 기술지원팀으로 문의바랍니다.       */
+    /********************************************************************/
+    GetField( frm, FormOrJson ); 
+
+    
+    if( frm.res_cd.value == "0000" )
+    {
+	    alert("결제 승인 요청 전,\n\n반드시 결제창에서 고객님이 결제 인증 완료 후\n\n리턴 받은 ordr_chk 와 업체 측 주문정보를\n\n다시 한번 검증 후 결제 승인 요청하시기 바랍니다."); //업체 연동 시 필수 확인 사항.
+        /*
+            가맹점 리턴값 처리 영역
+        */
+     
+        frm.submit(); 
+    }
+    else
+    {
+        alert( "[" + frm.res_cd.value + "] " + frm.res_msg.value );
+        
+        closeEvent();
+    }
+}
+
+function jsf__pay( form )
+{
+    try
+    {
+        KCP_Pay_Execute( form ); 
+    }
+    catch (e)
+    {
+        /* IE 에서 결제 정상종료시 throw로 스크립트 종료 */ 
+    }
+}             
+
+/* 주문번호 생성 예제 */
+function init_orderid()
+{
+    var today = new Date();
+    var year  = today.getFullYear();
+    var month = today.getMonth() + 1;
+    var date  = today.getDate();
+    var time  = today.getTime();
+
+    if(parseInt(month) < 10) {
+        month = "0" + month;
+    }
+    if(parseInt(date) < 10) {
+        date = "0" + date;
+    }
+
+    var order_idxx = "TEST" + year + "" + month + "" + date + "" + time;
+    document.order_info.ordr_idxx.value = order_idxx;            
+}
+
+function goSubmit() {
+	
+}
+
+</script>
 <title>정보입력</title>
 </head>
-<body>
+<body onload="init_orderid();">
 	<jsp:include page="/header_menu" flush="true" />
 
 	<div id="container">
@@ -141,7 +232,7 @@ function goPay(method, state) {
 			</ul>
 
 			<!-- 폼태그 / summit 입력버튼 311번 -->
-			<form action="/room/res/submit" method="post" onsubmit="return goCheck();">
+			<form name="order_info" id="order_info" method="post"> 
 				<div class="section-wrap clear">
 					<!-- 왼쪽 정보 입력 박스 구역 -->
 					<div class="left-section">
@@ -305,7 +396,7 @@ function goPay(method, state) {
 								<p>(투숙기간. 객실 수. 옵션 포함, 세금 및 수수료 각 10%포함)</p>
 
 								<div class="next-but">
-									<input id="countsubmit" type="submit" value="예약 완료" href="/book/room/confirm_room">
+									<input id="countsubmit" type="button" value="예약 완료" onclick="goCheck();">
 								</div>
 
 								<h4>
@@ -355,7 +446,45 @@ function goPay(method, state) {
 				<input type="hidden" name="pay_method" id="pay_method" value="0"/>
 				<input type="hidden" name="pay_state" id="pay_state" value="0"/>
 				<input type="hidden" name="paydate" id="paydate" value="-"/>
+				
+				
+				<!-- NHN KCP -->
+				<input type="hidden" name="ordr_idxx" class="w200" value="" maxlength="40"/> <!-- 주문번호 -->
+				<input type="hidden" name="good_name" class="w100" value="<%=request.getParameter("room_name")%>"/><!-- 상품명 -->
+				<input type="hidden" name="good_mny" class="w100" value="<%=request.getParameter("total_price")%>" maxlength="9"/><!-- 결제금액 -->
+				<input type="hidden" name="buyr_name" class="w100" value=""/><!-- 주문자명 -->
+				<input type="hidden" name="buyr_mail" class="w200" value="" maxlength="30" /><!-- 주문자 이메일 -->
+				<input type="hidden" name="buyr_tel1" class="w100" value=""/><!-- 주문자 연락처1 -->
+				<input type="hidden" name="buyr_tel2" class="w100" value=""/><!-- 주문자 연락처2 -->
+				
+				<input type="hidden" name="req_tx"          value="pay" />
+    			<input type="hidden" name="site_cd"         value="<%= g_conf_site_cd   %>" />
+    			<input type="hidden" name="site_name"       value="<%= g_conf_site_name %>" />
+    			<input type="hidden" name="quotaopt"        value="12"/>
+				<!-- 필수 항목 : 결제 금액/화폐단위 -->
+				<input type="hidden" name="currency"        value="WON"/>
+				<input type="hidden" name="module_type"     value="<%= module_type %>"/> <!-- 표준웹 설정 정보입니다(변경 불가) -->
+				<input type="hidden" name="res_cd"          value=""/>
+				<input type="hidden" name="res_msg"         value=""/>
+				<input type="hidden" name="enc_info"        value=""/>
+				<input type="hidden" name="enc_data"        value=""/>
+				<input type="hidden" name="ret_pay_method"  value=""/>
+				<input type="hidden" name="tran_cd"         value=""/>
+				<input type="hidden" name="use_pay_method"  value=""/>
+					
+				<!-- 주문정보 검증 관련 정보 : 표준웹 에서 설정하는 정보입니다 -->
+				<input type="hidden" name="ordr_chk"        value=""/>
+				
+				<!--  현금영수증 관련 정보 : 표준웹 에서 설정하는 정보입니다 -->
+				<input type="hidden" name="cash_yn"         value=""/>
+				<input type="hidden" name="cash_tr_code"    value=""/>
+				<input type="hidden" name="cash_id_info"    value=""/>
+				
+				<!-- 2012년 8월 18일 전자상거래법 개정 관련 설정 부분 -->
+				<!-- 제공 기간 설정 0:일회성 1:기간설정(ex 1:2012010120120131)  -->
+				<input type="hidden" name="good_expr" value="0">    
 			</form>
+			
 		</div>
 	</div>
 
