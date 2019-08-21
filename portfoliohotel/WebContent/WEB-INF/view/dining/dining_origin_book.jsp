@@ -31,17 +31,6 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
 
 <script>
 
-/* function submit_value() {
-	var a=document.price_exec;
-	opened=window.open('','test','width=300,height=300');
-	opened.document.writeln('<pre>총 가격 : '+a.exec_price.value+'<br>성인 :'+a.adult.value+'<br>어린이 :'+a.kid.value');
-}
-
-function change_price(value){
-	var a=document.price_exec;
-	original_price=parseInt(a.total_price.value);
-} */
- 
  
 $(function() {
 	
@@ -85,7 +74,23 @@ $(function() {
 		console.log($("#guest_tel2").val());
 		console.log($("#guest_tel3").val());
 	});  */
+	
 });
+	
+  	function change_price() {
+  		var price = Number($("#dining_product option:selected").data("price"));
+  		var adult = Number($("#res_adult").val());
+  		var kid = Number($("#res_kid").val());
+  		
+  		var totalPrice = price * (adult + kid);
+  		
+  		if (adult >= 5) {
+  			totalPrice = totalPrice - totalPrice*0.1;
+  		}
+  		console.log(totalPrice);
+  		$("#totalPrice").html(totalPrice);
+  		$("#total_price").val(totalPrice);
+	}  
 </script>
 
 
@@ -248,7 +253,6 @@ $(function() {
             <!-- 폼태그 / summit 입력버튼 311번 -->
             <!-- <form action="/book/confirm_dining" method="post" id="frm"> -->
             <form method="POST" name="frm" id="frm" action="/book/confirm_dining/process1" enctype="multipart/form-data" >
-            
                 <div class="section-wrap clear">
 
                     <!-- 왼쪽 정보 입력 박스 구역 -->
@@ -301,7 +305,7 @@ $(function() {
                                         </li>
                                     
                                         <li>
-                                            <input type="text" id=email1 maxlength="40" value="<%=email1%>">
+                                            <input type="text" id="email1" name="guest_email" maxlength="40" value="<%=email1%>">
                                         </li>
                                        <%--  <li class="adress">
                                                 <select style="width:100px;height:45px;" name="email" id="selectEmail">
@@ -323,11 +327,11 @@ $(function() {
 
                             <div class="cardType">
                                     <label for="name_ko">예약 상품<span>＊</span></label>
-                                    <select name="dining_name" onChange='change_price();'>
-                                        <option value="더 페스트">더 페스트</option>
-                                        <option value="그라넘 다이닝 라운지">그라넘 다이닝 라운지</option>
-                                        <option value="문바">문바</option>
-                                        <option value="더 오아시스 아웃도어 키친" selected>더 오아시스 아웃도어 키친</option>
+                                    <select name="dining_name" id="dining_product" onChange='change_price();'>
+                                        <option value="더 페스트" data-price="50000">더 페스트</option>
+                                        <option value="그라넘 다이닝 라운지" data-price="50000">그라넘 다이닝 라운지</option>
+                                        <option value="문바" data-price="50000">문바</option>
+                                        <option value="더 오아시스 아웃도어 키친" data-price="50000">더 오아시스 아웃도어 키친</option>
                                     </select>
                             </div>
                             
@@ -361,7 +365,7 @@ $(function() {
                                     <ul class="adult clear">
                                        <li class="per">어른</li>
                                        <li>
-                                           <select name="adult" onChange='change_price();'>
+                                           <select name="adult" id="res_adult" onChange='change_price();'>
                                            		<option value="0">0명</option>
                                                 <option value="1">1명</option>
                                                 <option value="2">2명</option>
@@ -379,7 +383,7 @@ $(function() {
                                     <ul class="child clear">
                                             <li class="per">어린이</li>
                                             <li>
-                                                <select name="kid" onChange='change_price();'>
+                                                <select name="kid" id="res_kid" onChange='change_price();'>
                                                 	 <option value="0">0명</option>
                                                      <option value="1">1명</option>
                                                      <option value="2">2명</option>
@@ -408,7 +412,8 @@ $(function() {
                         <div class="confirmation-box">
                                 
                                 <div class="content-area03 area clear">
-                                    
+                                	<h3><span></span>총가격</h3>
+                                    <p id="totalPrice"></p>
                                 <div class="next-but">
                                     <input type="button" id="countsubmit" type="url" onClick="$('#frm').submit();" value="예약 신청">
                                 </div>

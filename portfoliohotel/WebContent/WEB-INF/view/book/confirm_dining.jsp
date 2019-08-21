@@ -23,6 +23,26 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
     <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="/js/gnb.js"></script>
     <title>다이닝 예약 완료</title>
+    <script>
+    function setComma(v) {
+    	var rV = "";
+    	var vS = new String(V), leng=vS.length;
+    	
+    	var remnant = leng%3;
+    	if(remnant==0) remnant=3;
+    	
+    	while( leng>3 ) {
+    		rV += vS.substr(0,remnant)+",";
+    		vS = vS.substr(remnant);
+    		
+    		leng=vS.length;
+    		remnant=3;
+    	}
+    	rV += vS;
+    	
+    	return rV;
+    }
+    </script>
 </head>
 <body>
 <jsp:include page="/header_menu" flush="true"/>    
@@ -59,7 +79,7 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
                     </ul>
                     <ul class="check_in clear">
                             <li>예약신청일</li>
-                            <li class="second"><%=read.getRegdate()%></li>
+                            <li class="second"><%=DateUtil.getStrTimestamp(read.getRegdate())%></li>
                     </ul>
                     <ul class="check_in clear">
                             <li>예약시간</li>
@@ -72,7 +92,7 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
 
                     <ul class="payment clear">
                         <h3>* 총 결재금액</h3>
-                        <li>KRW 0,000,000원</li>
+                        <li>KRW <%=Function.toPriceComma(read.getTotal_price())%>원</li>
                         <li class="second">세금 및 봉사료 KRW 000,000원 포함</li>
                     </ul>
                 </div>

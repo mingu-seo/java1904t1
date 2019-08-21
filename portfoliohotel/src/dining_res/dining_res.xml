@@ -46,7 +46,7 @@
 		insert into dining_res (
 		d_day, d_time, dining_name, adult, kid, guest_lname, guest_fname, guest_tel1, guest_tel2, guest_tel3, guest_email, regdate, price, total_price) 
 		values (
-		#d_day#, #d_time#,,#dining_name#, #adult#, #kid#, #guest_lname#, #guest_fname#, #guest_tel1#, #guest_tel2#, #guest_tel3#, #guest_email#, 
+		#d_day#, #d_time#, #dining_name#, #adult#, #kid#, #guest_lname#, #guest_fname#, #guest_tel1#, #guest_tel2#, #guest_tel3#, #guest_email#, 
 		now(), #price#, #total_price#)
 		<selectKey keyProperty="no" resultClass="Integer">
 			SELECT LAST_INSERT_ID()
@@ -62,7 +62,7 @@
     </update>
     
     <select id="read" parameterClass="Integer" resultClass="dining_resvo">
-		select no, d_day, d_time, guest_lname, guest_fname, guest_tel1, guest_tel2, guest_tel3, dining_name, adult, kid, regdate, price
+		select no, d_day, d_time, guest_lname, guest_fname, guest_tel1, guest_tel2, guest_tel3, dining_name, adult, kid, regdate, total_price
 		from dining_res where no=#no#
 	</select>
     
