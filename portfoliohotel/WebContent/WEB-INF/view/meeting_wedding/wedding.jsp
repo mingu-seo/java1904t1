@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +19,6 @@
 </head>
 <body>
     <jsp:include page="/header_menu" flush="true"/>
-    
 
     <!-- 컨테이너 영역 시작 -->
     <div id="container">

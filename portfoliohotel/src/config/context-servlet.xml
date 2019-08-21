@@ -11,6 +11,7 @@
             http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
                
    <context:component-scan base-package="test" />
+   <context:component-scan base-package="manage" />
    <context:component-scan base-package="manage.admin" />
    <context:component-scan base-package="board" />
    <context:component-scan base-package="main" />
@@ -24,6 +25,19 @@
    <context:component-scan base-package="support.qna" />
 
    <mvc:annotation-driven/>
+   
+    <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/manage/**" />
+			<mvc:exclude-mapping path="/manage"/>
+			<mvc:exclude-mapping path="/manage/css/*"/>
+			<mvc:exclude-mapping path="/manage/js/*"/>
+			<mvc:exclude-mapping path="/manage/img/*"/>
+			<mvc:exclude-mapping path="/manage/"/>
+			<mvc:exclude-mapping path="/manage/login.do"/>
+			<bean class="interceptors.AdminLoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> 
    
 
 <!-- 

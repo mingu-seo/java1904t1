@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +19,6 @@
 </head>
 <body>
     <jsp:include page="/header_menu" flush="true"/>
-    
 
     <!-- 컨테이너 영역 시작 -->
     <div id="container">
@@ -57,7 +56,7 @@
                     서울의 중심인 남산에 위치해 지리적 편리함을 갖췄으며 특별한 자연 환경을 배경으로 한 다양한 크기의 연회 공간에서 비즈니스 미팅, 컨퍼런스, 론칭 행사 등 목적에 따른 미팅 또는 이벤트를 계획할 수 있습니다. 반얀트리 서울 연회 전문가의 세심한 배려와 정성을 담은 다이닝 서비스는 비즈니스 이벤트를 성공적으로 만들어 드립니다.
                 </h5>
 
-                <div class="book">예약 및 문의 : Telephone    02-2250-8000</div>
+                <div class="book">예약 및 문의 : Telephone    02-1234-5678</div>
             </div>
         </div>
         <div class="meeting-rooms">

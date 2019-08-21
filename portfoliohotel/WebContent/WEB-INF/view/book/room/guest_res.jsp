@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="util.*"%>
+<%@ page import="room.res.*"%>
 
+<%
+Room_resVO mdata = (Room_resVO)request.getAttribute("mdata");
+ArrayList<Room_opt_resVO> odata = (ArrayList<Room_opt_resVO>)request.getAttribute("odata");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,23 +28,61 @@
     <div id="container">
         <div class="nonmember-section">
             <h2>비회원 예약 조회 페이지</h2>
-            <h3>NONMEMBER RESERVATION STATUS</h3>
+            <h3>GUEST RESERVATION STATUS</h3>
             <div class="nonmember-box clear">
-                <!-- <form action="#" method="POST"> -->
-                <form name="frm" id="frm" method="post" action="/book/room/nonmember_res">
-                    <div class="nonmember-box-logo"><img src="/img/header-logo.png"></div>
+                <form name="reslist" id="reslist" action="/book/room/guest_res/cancel" method="post">
+                    <div class="nonmember-box-logo"><img src="/img/header-logo.png"></div> 
                     <div class="nonmember-board clear">
-                        <div class="nonmember-box-left">
-                            <!-- email 구역 -->
-                            <input type="text" id="guest_email" name="guest_email" placeholder="이메일">
-                            <!-- 예약 번호 구역 -->
-                            <input type="text" id="no" name="no" placeholder="예약 번호">
-                        </div>
-                        <div class="nonmember-board-right">
-                            <input type="submit" value ="예약 확인" class="nonmemberBtn"/>
-                        </div>
+                        <table class="room">
+                        	<colgroup>
+                        		<col width="15%"/>
+                        		<col width="45%"/>
+                        		<col width="15%"/>
+                        		<col width="25%"/>
+                        	</colgroup>
+                        	<tr>
+                        		<th>객실명</th>
+                        		<td><%=mdata.getRoom_name() %></td>
+                        	</tr>
+                        	<tr>
+                        		<th>체크인</th>
+                        		<td><%=Function.toDateKorean(mdata.getCheckin()) %></td>
+                        		<th>체크아웃</th>
+                        		<td><%=Function.toDateKorean(mdata.getCheckout()) %></td>
+                        	</tr>
+                        	<tr>
+                        		<th>성인</th>
+                        		<td><%=mdata.getAdult() %> 명</td>
+                        		<th>어린이</th>
+                        		<td><%=mdata.getKid() %> 명</td>
+                        	</tr>
+                        </table>
+                        <br/>
+                        <br/>
+                        <table class="option">	
+                        	<colgroup>
+                        		<col width="60%"/>
+                        		<col width="40%"/>
+                        	</colgroup>
+                        	<%
+                        	for(int i=0; i<odata.size(); i++) {
+                        		if(odata.get(i).getCount() != 0) {
+                        	%>
+                        	<tr>
+                        		<th><%=odata.get(i).getName() %></th>
+                        		<td>[ <%=odata.get(i).getCount() %> ]</td>
+                        	</tr>
+                        	<%
+                        		}
+                        	}
+                        	%>
+                        </table>
                     </div> 
-                </form>    
+                    
+                    <div class="nonmember-board-right">
+                		<input type="submit" value="예약 취소" class="nonmember_cancelBtn"/>
+                	</div>
+                </form>  
             </div>    
         </div>
     </div>

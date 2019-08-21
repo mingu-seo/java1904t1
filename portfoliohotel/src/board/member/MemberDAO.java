@@ -17,25 +17,11 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 		return (Integer) getSqlMapClient().queryForObject("member.count", param);
 	}
 
-	/**
-	 * 관리자 목록 조회
-	 * 
-	 * @param param
-	 * @return ArrayList<AdminVO>
-	 * @throws SQLException
-	 */
 
 	public ArrayList list(MemberVO param) throws SQLException {
 		return (ArrayList) getSqlMapClient().queryForList("member.list", param);
 	}
 
-	/**
-	 * 관리자 등록
-	 * 
-	 * @param vo
-	 * @return no 마지막 등록된 no
-	 * @throws SQLException
-	 */
 	public int insert(MemberVO vo) throws SQLException {
 		return (Integer) getSqlMapClient().insert("member.insert", vo);
 	}
@@ -44,20 +30,6 @@ public class MemberDAO extends SqlMapClientDAOSupport {
 		return (Integer) getSqlMapClient().insert("member.insertSns", vo);
 	}
 
-	
-//	  public int insert(Member_serviceVO vo) throws SQLException { return (Integer)
-//	  getSqlMapClient().insert("member_service.insert", vo); }
-//	  
-//	  public int insert(Member_loginVO vo) throws SQLException { return (Integer)
-//	  getSqlMapClient().insert("member_login.insert", vo); }
-	 
-
-	/**
-	 * 관리자 수정
-	 * 
-	 * @param vo
-	 * @throws SQLException
-	 */
 	public int update(MemberVO vo) throws SQLException {
 		return getSqlMapClient().update("member.update", vo);
 	}

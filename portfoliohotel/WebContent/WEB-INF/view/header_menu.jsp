@@ -15,38 +15,12 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
 %>
 <div id="header">
 
-    <%-- <%if(sessionMember != null) {%>
-          <div id="logined">
-            <div class="logined-box">
-                <h2 class="close-btn"><a href="#">x</a></h2>
-                 
-                <h3><%=sessionMember.getF_name()%> <%=sessionMember.getL_name()%><span>님 안녕하세요.</span></h3>
-                <p class="mypage"><a href="/membership/mypage">마이페이지 <img src="img/white-arrow.png" class="white-arrow"></a></p>
-                <table>
-               
-                    <tr>
-                        <td class="left">등급</td>
-                        <td class="right"><%=CodeUtil.getMgrade(sessionMember.getGrade())%></td>
-                    </tr
-                    <tr>
-                        <td class="left">포인트</td>
-                        <td class="right"><%=sessionMember.getPoint()%> P</td>
-                    </tr>
-                    <tr>
-                        <td class="left">회원번호</td>
-                        <td class="right"><%=sessionMember.getNo()%></td>
-                    </tr>
-                </table>
-            </div>      
-        </div>  
-        <%} %> --%>
-
         <div class="header-center">
             <div class="pc-header">
                 <h1 class="logo"><a href="/index"><img src="/img/header-logo.png"></a></h1>
                 <ul class="pc-gnb">
                     <li>
-                        <a href="#">BOOK</a>
+                        <a href="#">Book</a>
                             <div class="pc-sub">
                                     <div class="pc-sub-center">
                                         <div class="pc-sub-box">
@@ -93,9 +67,9 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                                         <div class="pc-sub-box">
                                             <h2>Meeting & Wedding</h2>
                                             <ul class="Meeting & Wedding">
-                                                <li><a href="#">Meeting</li>
-                                                <li><a href="#">Wedding</a></li>
-                                                <li><a href="#">Family Party</a></li>
+                                                <li><a href="/meeting_wedding/meeting">Meeting</li>
+                                                <li><a href="/meeting_wedding/wedding">Wedding</a></li>
+                                                <li><a href="/meeting_wedding/familyparty">Family Party</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -104,27 +78,32 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                     <li class="facilities">
                         <a href="#">Facilities</a>
                             <div class="pc-sub">
-                                    <div class="pc-sub-center center clear">
+                                    <div class="pc-sub-center">
                                             <div class="pc-sub-box facil-left">
                                                 <h2 class="no-line">Facilities</h2>
                                                 <ul>
-                                                    <li><a href="/facilities.html#f1">The Oasis</a></li>
-                                                    <li><a href="/facilities.html#f2">Indoor Swimming Pool</a></li>
-                                                    
+                                                    <li><a href="/facilities#f1">The Oasis</a></li>
+                                                    <li><a href="/facilities#f2">Indoor Swimming Pool</a></li>
+                                                    <li><a href="/facilities#f3">Fitness Centre</a></li>
                                                 </ul>
                                             </div>
                                             <div class="pc-sub-box mtop">
-                
                                                 <ul class="Rooms">
-                                                	<li><a href="/facilities.html#f3">Fitness Centre</a></li>
-                                                    <li><a href="/facilities.html#f4">Sauna</a></li>
+                                                	<li><a href="/facilities#f4">Sauna</a></li>
+                                                	<li><a href="/facilities#f5">Troon Golf Academy</a></li>
                                                 </ul>
                                             </div>
                                             <div class="pc-sub-box mtop facil-right">
-                                                
                                                 <ul class="Dining">
-                                                    <li><a href="#">Troon Golf Academy</a></li>
-                                                    <li><a href="#">Foresta Beauty Salon</a></li>
+                                                    <li><a href="/facilities#f6">Tennis Court</a></li>
+                                                    <li><a href="/facilities#f7">Futsal Field</a></li>
+                                                    <li><a href="/facilities#f8">Basketball Court</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="pc-sub-box mtop facil-right">
+                                                <ul class="Meeting & Wedding">
+                                                    <li><a href="/facilities#f9">Ice Rink</a></li>
+                                                    <li><a href="/facilities#f10">Foresta</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -177,16 +156,15 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                     <!-- <li><a href="#">SIGN IN</a></li> -->
                     <li>
 		                <%if(sessionMember == null){ %>
-		                <a href="/membership/sign_in">Sign in</a>
+		                <a href="/membership/sign_in">Sign In</a>
 		                <%}else{ %>
-		                <a href="/membership/mypage">My page</a>
+		                <a href="/membership/mypage">My Page</a>
 		                <%} %>
 	                </li>
 	                <li>
-	                	<a href="/book/room/nonmember">Nonmember</a>
+	                	<a href="/book/room/guest">Guest</a>
 	                </li>
                 </ul>
-                <!-- <a href="/membership/sign_in">Sign In</a> -->
             </div>
         </div>
     </div>
