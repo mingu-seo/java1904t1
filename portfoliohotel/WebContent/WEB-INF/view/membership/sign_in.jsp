@@ -114,7 +114,7 @@ function CookieVal(cookieName) {
                                         <div class="pc-sub-box">
                                             <h2>Rooms</h2>
                                             <ul class="Rooms">
-                                                <li><a href="../room/room-detail-subpage.html">Namsan Pool Deluxe Room</a></li>
+                                                <li><a href="/room/room-detail-subpage">Namsan Pool Deluxe Room</a></li>
                                                 <li><a href="../room/room-detail-subpage2.html">Namsan Pool Premier Suite</a></li>
                                                 <li><a href="../room/room-detail-subpage3.html">Namsan Presidential Suite</a></li>
                                                 <li><a href="../room/room-detail-subpage4.html">Spa Sanctuary Suite</a></li>
@@ -213,11 +213,11 @@ function CookieVal(cookieName) {
                                         </div>
                             </div>
                     </li>
-<<<<<<< HEAD
+
                     <li> <a href="/membership/sign_in">Sign in</a></li> 
-=======
-                  <li><a href="/membership/sign_in">Sign in</a></li>
->>>>>>> branch 'master' of https://github.com/mingu-seo/java1904t1.git
+
+                  
+
                 </ul>
                
             </div>
