@@ -17,7 +17,7 @@
 /* 회원가입 입력창 영역 */
 
 .account-form {width:320px; margin:0 auto;}
-.account-form input {height:35px; padding-left:10px; background:inherit; border:1px solid #d1d4d6; color:#fff; margin-bottom:18px; font-size:14px; border-radius:5px;}
+.account-form input {height:35px; padding-left:10px; background:transparent; border:1px solid #d1d4d6; color:#fff; margin-bottom:18px; font-size:14px; border-radius:5px;}
 
 
 .account-form input::placeholder {color:#d1d4d6; font-size:12px;}

@@ -11,7 +11,7 @@ public class SiteProperty {
 	/**
 	 * 관리자 시작페이지
 	 */
-	public static final String	INDEX_PAGE				= "/index";
+	public static final String	INDEX_PAGE				= "/manage/member/index";
 	
 	
 			
@@ -101,7 +101,8 @@ public class SiteProperty {
 		 * 로컬 홈디렉토리경로 (실서버 변경 필요)
 		 */
 
-	public static final String REAL_PATH = "C:\\java\\git\\java1904t1\\portfoliohotel\\WebContent";
+	//public static final String REAL_PATH = "C:\\java\\git\\java1904t1\\portfoliohotel\\WebContent";
+	public static final String REAL_PATH = "/home/hosting_users/hyeon012/tomcat/webapps/ROOT";
 	
 
 

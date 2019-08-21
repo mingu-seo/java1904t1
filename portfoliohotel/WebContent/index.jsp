@@ -1,4 +1,2 @@
-Portfolio Hotel
-withsky
-sooya12
-joonoh94
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<% response.sendRedirect("/index.do"); %>

@@ -45,8 +45,10 @@ body {color:#1d1d1d;}
                     border-bottom:1px solid #888;}
 .d-r-input1 p {display:inline-block; margin:0 25px; color:#454545;}
 
-.d-r-input1 select {width:90px; height:30px; text-align:center; 
-margin-left:60px; background:inherit; border:none; 
+.d-r-input1 .d-r-span {color: #0e693f; font-size: 16px; margin-left:50px; position:relative; top:8px; font-weight: 500;}
+
+.d-r-input1 select {width:50px; height:30px; text-align:center; 
+margin-left:30px; background:inherit; border:none; 
 font-size:16px; color:#454545; font-weight:500;
 font-family: 'Noto Sans KR', sans-serif;
 position: relative; top:7px;}

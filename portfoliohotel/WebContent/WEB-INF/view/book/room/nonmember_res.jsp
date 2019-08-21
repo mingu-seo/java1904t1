@@ -31,7 +31,7 @@ ArrayList<Room_opt_resVO> odata = (ArrayList<Room_opt_resVO>)request.getAttribut
             <h3>NONMEMBER RESERVATION STATUS</h3>
             <div class="nonmember-box clear">
                 <form name="reslist" id="reslist" action="/book/room/nonmember_res/cancel" method="post">
-                    <div class="nonmember-box-logo"><img src="/img/header-logo.png"></div>
+                    <div class="nonmember-box-logo"><img src="/img/header-logo.png"></div> 
                     <div class="nonmember-board clear">
                         <table class="room">
                         	<colgroup>
