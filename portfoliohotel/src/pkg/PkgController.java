@@ -181,8 +181,9 @@ public class PkgController {
 	}
 	
 	@RequestMapping("/pkg/special_promotion")
-	public String special_promotion(Model model, AdminVO param) throws Exception {
-		
+	public String special_promotion(Model model, PkgVO vo) throws Exception {
+		ArrayList<PkgVO> plist = (ArrayList<PkgVO>)pkgService.list2(vo);
+		model.addAttribute("plist", plist);
 		return "pkg/special_promotion";
 	}
 	

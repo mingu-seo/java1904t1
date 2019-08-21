@@ -25,17 +25,9 @@
 .package-box > div > .package-text table tr {height:24px;}
 .package-box > div > .package-text table td.table-a {font-weight:300; text-indent:20px;}
 
-.package1 .package-bg {background-image: url("/img/package/the-oasis.jpg");}
-.package2 .package-bg {background-image: url("/img/package/indoor-pool.jpg");}
-.package3 .package-bg {background-image: url("/img/package/fitness-center.jpg");}
-.package4 .package-bg {background-image: url("/img/package/sauna.jpg");}
-.package5 .package-bg {background-image: url("/img/package/troon-golf-academy.jpg");}
-.package6 .package-bg {background-image: url("/img/package/tennis-court.jpg");}
-.package7 .package-bg {background-image: url("/img/package/futsal-field.jpg");}
-.package8 .package-bg {background-image: url("/img/package/basketball-court.jpg");}
-.package9 .package-bg {background-image: url("/img/package/ice-rink.jpg");}
-.package10 .package-bg {background-image: url("/img/package/foresta.jpg");}
-
+.package1 .package-bg {background-image: url("/img/promotion/birthday.jpg");}
+.package2 .package-bg {background-image: url("/img/promotion/halloween3.jpg");}
+.package3 .package-bg {background-image: url("/img/promotion/anniversary.jpg");}
 
 /* 
 #special_promotion {position: relative; width:1200px; margin:0 auto; padding-bottom:80px;}

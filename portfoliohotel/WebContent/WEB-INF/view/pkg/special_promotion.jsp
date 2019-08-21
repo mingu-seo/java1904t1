@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page import="pkg.*" %>
+<%
+ArrayList<PkgVO> plist = (ArrayList<PkgVO>)request.getAttribute("plist");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -32,21 +37,25 @@
 		<div class="contents">
 			<div class="contents-center">
 				<h3>PACKAGE</h3>
+				
+				<%
+				for(int i=0; i<plist.size(); i++) {
+				%>
 				<div class="package-box">
-					<div id="f1" class="package1 clear">
+					<div id="f<%=i+1 %>" class="package<%=i+1 %> clear">
 						<div class="package-bg"></div>
 						<div class="package-text">
 							<h4>
-								오아시스<span>The Oasis</span>
+								<%=plist.get(i).getKname() %><span><%=plist.get(i).getEname() %></span>
 							</h4>
 							<p>
-								남산의 아름다운 전경 속에 자리한 오아시스는<br /> 도심 속 한가로운 휴양을 위한 최적의 장소입니다. <br />쾌적한
-								온도로 유지되는 온수풀, 해외 반얀트리 리조트 풀빌라의 분위기를 느낄 수 있는<br /> 프라이빗 카바나가 선사하는
-								여름의 여유를 즐길 수 있습니다.
+								<h3>Birthday Package</h3>
+                                    <p>2019.07.17 ~ 2019.09.18</p>
+                                    <h4>85,000원 부터</h4>
 							</p>
 							<table>
 								<tr>
-									<td>위치</td>
+									<td></td>
 									<td class="table-a">야외공간</td>
 								</tr>
 								<tr>
@@ -61,6 +70,10 @@
 						</div>
 					</div>
 				</div>
+				<%
+				}
+				%>
+				
 			</div>
 		</div>
 	</div>
