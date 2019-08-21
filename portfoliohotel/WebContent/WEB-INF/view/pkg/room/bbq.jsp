@@ -50,7 +50,7 @@
 </head>
 <body>
  
-    <%@ include file="../../header_menu.jsp" %>
+    <jsp:include page="/header_menu" flush="true"/>
     
     <div id="container">
         <div class="banner bbq">
@@ -107,7 +107,7 @@
                     <h3>예약 및 이용문의</h3>
                     <h4>전화</h4>
                     <h4>02 2250 8000</h4>
-                    <a href="#">온라인 예약</a>
+                    <!-- <a href="#">온라인 예약</a> -->
                 </div>
             </div>
         </div>

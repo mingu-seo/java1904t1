@@ -213,11 +213,17 @@ function CookieVal(cookieName) {
                                         </div>
                             </div>
                     </li>
+<<<<<<< HEAD
+=======
 
+>>>>>>> branch 'master' of https://github.com/mingu-seo/java1904t1.git
                     <li> <a href="/membership/sign_in">Sign in</a></li> 
+<<<<<<< HEAD
+=======
 
                   
 
+>>>>>>> branch 'master' of https://github.com/mingu-seo/java1904t1.git
                 </ul>
                
             </div>

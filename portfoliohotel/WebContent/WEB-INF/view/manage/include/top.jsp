@@ -103,8 +103,6 @@ $(window).load(function(){
 
 						<li><a href="<%=request.getContextPath()%>/manage/board/faq/index.do"><span>FAQ</span></a></li>
 						<li><a href="<%=request.getContextPath()%>/manage/board/qna/index"><span>QnA</span></a></li>
-						<li><a href="<%=request.getContextPath()%>/manage/board/"><span>자주하는질문</span></a></li>
-						<li><a href="<%=request.getContextPath()%>/manage/board/"><span>FAQ분류관리</span></a></li>
 						
 					</ul>
 					</div>

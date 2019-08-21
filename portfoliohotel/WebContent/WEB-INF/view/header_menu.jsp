@@ -20,7 +20,7 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                 <h1 class="logo"><a href="/index"><img src="/img/header-logo.png"></a></h1>
                 <ul class="pc-gnb">
                     <li>
-                        <a href="#">BOOK</a>
+                        <a href="#">Book</a>
                             <div class="pc-sub">
                                     <div class="pc-sub-center">
                                         <div class="pc-sub-box">
@@ -78,28 +78,33 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                     <li class="facilities">
                         <a href="#">Facilities</a>
                             <div class="pc-sub">
-                                    <div class="pc-sub-center center clear">
+                                    <div class="pc-sub-center">
                                             <div class="pc-sub-box facil-left">
                                                 <h2 class="no-line">Facilities</h2>
                                                 <ul>
                                                     <li><a href="/facilities#f1">The Oasis</a></li>
                                                     <li><a href="/facilities#f2">Indoor Swimming Pool</a></li>
-                                                    
+                                                    <li><a href="/facilities#f3">Fitness Centre</a></li>
                                                 </ul>
                                             </div>
                                             <div class="pc-sub-box mtop">
-                
                                                 <ul class="Rooms">
-                                                	<li><a href="/facilities#f3">Fitness Centre</a></li>
-                                                    <li><a href="/facilities#f4">Sauna</a></li>
+                                                	<li><a href="/facilities#f4">Sauna</a></li>
+                                                	<li><a href="/facilities#f5">Troon Golf Academy</a></li>
                                                 </ul>
                                             </div>
                                             <div class="pc-sub-box mtop facil-right">
-                                                
-                                                <!-- <ul class="Dining">
-                                                    <li><a href="#">Troon Golf Academy</a></li>
-                                                    <li><a href="#">Foresta Beauty Salon</a></li>
-                                                </ul> -->
+                                                <ul class="Dining">
+                                                    <li><a href="/facilities#f6">Tennis Court</a></li>
+                                                    <li><a href="/facilities#f7">Futsal Field</a></li>
+                                                    <li><a href="/facilities#f8">Basketball Court</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="pc-sub-box mtop facil-right">
+                                                <ul class="Meeting & Wedding">
+                                                    <li><a href="/facilities#f9">Ice Rink</a></li>
+                                                    <li><a href="/facilities#f10">Foresta</a></li>
+                                                </ul>
                                             </div>
                                         </div>
                             </div>
@@ -151,13 +156,13 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                     <!-- <li><a href="#">SIGN IN</a></li> -->
                     <li>
 		                <%if(sessionMember == null){ %>
-		                <a href="/membership/sign_in">Sign in</a>
+		                <a href="/membership/sign_in">Sign In</a>
 		                <%}else{ %>
-		                <a href="/membership/mypage">My page</a>
+		                <a href="/membership/mypage">My Page</a>
 		                <%} %>
 	                </li>
 	                <li>
-	                	<a href="/book/room/nonmember">Nonmember</a>
+	                	<a href="/book/room/guest">Guest</a>
 	                </li>
                 </ul>
             </div>

@@ -1,4 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page import="pkg.*" %>
+<%@ page import="util.*" %>
+<%
+ArrayList<PkgVO> plist = (ArrayList<PkgVO>)request.getAttribute("plist");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,9 +28,63 @@
 
 </head>
 <body>
-    <%@ include file="../header_menu.jsp" %>
-    
+<jsp:include page="/header_menu" flush="true"/>
     <div id="container">
+		<div class="banner">
+			<h2>
+				EXPERIENCE <br/>
+				BEYOND <br/>
+				EXPECTATIONS  
+			</h2>
+		</div>
+		<div class="contents">
+			<div class="contents-center">
+				<h3>PACKAGE</h3>
+				
+				<%
+				for(int i=0; i<plist.size(); i++) {
+				%>
+				<div class="package-box" OnClick="location.href='/pkg/detail_page/pkg_detail_page?no=<%=plist.get(i).getNo()%>'">
+					<div id="f<%=i+1 %>" class="package<%=i+1 %> clear">
+						<div class="package-bg"></div>
+						<div class="package-text">
+							<h4>
+								<%=plist.get(i).getKname() %><span><%=plist.get(i).getEname() %></span>
+							</h4>
+							<table>
+								<tr>
+		                            <td>기간</td>
+		                            <td class="table-a"><%=plist.get(i).getStartdate()%> ~ <%=plist.get(i).getEnddate()%></td>
+		                        </tr>
+		                        <tr>
+		                            <td>가격</td>
+		                            <td class="table-a"><%=Function.toPriceComma(plist.get(i).getPrice()) %>원</td>
+		                        </tr>
+		                        <tr>
+		                            <td>포함내역</td>
+		                            <td class="table-a"><%=plist.get(i).getPkg() %></td>
+		                        </tr>
+		                        <tr class="event">
+		                            <td>이벤트</td>
+		                            <td class="table-a-event"><%=plist.get(i).getEvent()%></td>
+		                        </tr>
+		                        <tr>
+		                            <td>안내</td>
+		                            <td class="table-a-info"><%=plist.get(i).getGuide()%></td>
+		                        </tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<%
+				}
+				%>
+				
+			</div>
+		</div>
+	</div>
+	
+   <!--  <div id="container">
         <div class="container">
             <div id="banner">
                 <div class="banner">
@@ -42,13 +102,17 @@
 
             <div id="special_promotion">
                     <div class="main_title">
-                        <h2>OFFERS ROOM</h2>
+                        <h2>OFFERS Package</h2>
                     </div>
-                    <div class="title-box"><p>Room Package</p></div>
-
+                    <div class="title-box"><p>Package</p></div>
+					
                     <div class="promotion_list clear">
                         <div class="promo_list">
-                            <a href="oasis.html">
+<<<<<<< HEAD
+                            <a href="/pkg/room/oasis">
+=======
+                            <a href="/pkg/detail_page/pkg_detail_page?no=12">
+>>>>>>> branch 'master' of https://github.com/mingu-seo/java1904t1.git
                                 <div class="promo-bg">
                                     <div class="promo-text">
                                         <p>자세히보기</p>
@@ -57,14 +121,14 @@
                                 </div>
                                 <img src="/img/promotion3.jpg">
                                 <div class="list-text">
-                                    <h3>The Oasis Summer Package</h3>
-                                    <p>2019.05.01 ~ 2019.09.01</p>
-                                    <h4>420,000원 부터</h4>
+                                    <h3>Birthday Package</h3>
+                                    <p>2019.07.17 ~ 2019.09.18</p>
+                                    <h4>85,000원 부터</h4>
                                 </div>
                             </a>
                         </div>
                         <div class="promo_list">
-                            <a href="bbq.html">
+                            <a href="/pkg/room/bbq">
                                 <div class="promo-bg">
                                         <div class="promo-text">
                                                 <p>자세히보기</p>
@@ -80,7 +144,7 @@
                             </a>
                         </div>
                         <div class="promo_list">
-                            <a href="senseof.html">
+                            <a href="/pkg/room/senseof">
                                 <div class="promo-bg">
                                         <div class="promo-text">
                                                 <p>자세히보기</p>
@@ -96,7 +160,7 @@
                             </a>
                         </div>
                         <div class="promo_list">
-                            <a href="oasis.html">
+                            <a href="/pkg/room/oasis">
                                 <div class="promo-bg">
                                     <div class="promo-text">
                                         <p>자세히보기</p>
@@ -146,9 +210,8 @@
                     </div>
                     <button class="slick-prev"></button>
                     <button class="slick-next"></button>
-                   
-            </div>
-
+            </div> -->
+<!-- 
             <div id="special_promotion">
                         <div class="main_title">
                             <h2>OFFERS DINING</h2>
@@ -158,7 +221,7 @@
 
                         <div class="promotion_list clear">
                             <div>
-                                <a href="reasonable.html">
+                                <a href="/pkg/room/reasonable">
                                         <div class="promo-bg">
                                                 <div class="promo-text">
                                                     <p>자세히보기</p>
@@ -370,7 +433,7 @@
                             <button class="slick-prev"></button>
                             <button class="slick-next"></button>
                                   
-            </div>
+            </div> -->
         </div>
     </div>
 

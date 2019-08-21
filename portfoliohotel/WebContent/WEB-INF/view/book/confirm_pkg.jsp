@@ -23,12 +23,8 @@ Pkg_resVO res_data = (Pkg_resVO) request.getAttribute("res_data");
     <link rel="stylesheet" href="/css/footer.css">
     <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="/js/gnb.js"></script>
-    <title>객실 예약 완료</title>
+    <title>패키지 예약 완료</title>
 </head>
-<script>
-int tax = 0;
-<%=res_data.getTotal_price()%> * 0.1 = tax;
-</script>
 
 <body>
   	
@@ -78,11 +74,6 @@ int tax = 0;
                         <li class="second"><%=res_data.getPurchase_date()%></li>
                     </ul>                    
 
-                    <!-- <ul class="check_out clear">
-                            <li>체크아웃 날짜</li>
-                            <li class="second">0000년 0월 0일 요일</li>
-                    </ul> -->
-
                     <div class="option">
                         <h3>* 예약자 정보</h3>
                         <ul class="option-form clear">
@@ -106,7 +97,7 @@ int tax = 0;
 					%>
                         <h3>* 총 결재금액</h3>
                         <li>KRW <%=res_data.getTotal_price() %>원</li>
-                        <li class="second">세금 및 봉사료<%=tax %>원 포함</li>
+                        <li class="second">세금 및 봉사료<%=tax %>원이 포함된 금액입니다.</li>
                     </ul>
                 </div>
             </div>
