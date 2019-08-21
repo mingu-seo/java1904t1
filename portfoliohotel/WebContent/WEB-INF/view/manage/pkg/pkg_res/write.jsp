@@ -1,9 +1,15 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page import="java.util.*" %>
 <%@ page import="pkg.res.*" %>
+<%@ page import="pkg.*" %>
 <%@ page import="util.*" %>
 <%
 	Pkg_resVO param = (Pkg_resVO)request.getAttribute("vo");
+%>
+<%
+ArrayList<PkgVO> nlist = (ArrayList<PkgVO>)request.getAttribute("nlist");
+int ntotCount = (Integer)request.getAttribute("ntotCount");
+int ntotPage = (Integer)request.getAttribute("ntotPage");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
@@ -40,6 +46,10 @@
 		var pkg_count = $("#pkg_count").val();
 		var price = Number(pkg_price) * Number(pkg_count);
 		$("#total_price").val(price);
+	}
+	function select_price() {
+		var pkg_price = $("#price").val();
+		$("#pkg_price").val(pkg_price);
 	}
 	
 </script>
@@ -80,12 +90,38 @@
 								<tbody>
 									<tr>
 										<th scope="row"><label for="">패키지 이름</label></th>
+										<%
+											if (ntotCount == 0) {
+										%>
 										<td colspan="3">
-											<input type="text" id="pkg_name" name="pkg_name" class="w30" title="제목을 입력해주세요" />	
+											<select name="pkg_name">
+												<option>등록된 패키지가 없습니다.</option>
+											</select>
 										</td>
+										<%
+											} else {
+												PkgVO pdata;
+										%>
+										<td colspan="3">
+											<select name="pkg_name" onchange="select_price()">
+											<option value="">패키지를 선택해주세요</option>										
+										<%
+												for (int i=0; i<nlist.size(); i++) {
+													pdata = nlist.get(i);
+										%>
+												<option value="<%=pdata.getEname()%>"><%=pdata.getEname()%></option>
+										<%
+												}
+											}
+										%>
+											</select>
+										</td>										
+										<!-- <td colspan="3">
+											<input type="text" id="pkg_name" name="pkg_name" class="w30" title="제목을 입력해주세요" />	
+										</td> -->
 									</tr>		
 									<tr>
-										<th scope="row"><label for="">사용일</label></th>
+										<th scope="row"><label for="">결제일</label></th>
 										<td colspan="3">
 											<input type="text" id="use_date" name="use_date" class="inputTitle" value=""/>&nbsp;
 											<span id="Caluse_dateIcon">

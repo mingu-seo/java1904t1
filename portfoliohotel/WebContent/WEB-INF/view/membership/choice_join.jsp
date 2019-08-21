@@ -4,12 +4,13 @@
 <%@ page import="java.net.URLEncoder"  %>
 <%
 String client_id = "yyt5qpvTbPa5tqyLB0Td";   //수정할 시 클라이언트 아이디 수정
-String redirectURI = URLEncoder.encode("http://localhost:8080/login/naverCallback.jsp"); //수정할 시 콜백url 수정
+String redirectURI = URLEncoder.encode("http://localhost:8080/sns/join/naverCallback.jsp"); //수정할 시 콜백url 수정
 SecureRandom random = new SecureRandom();
 String state = new BigInteger(130, random).toString(32);
 session.setAttribute("state", state);
 
 String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id="+client_id+"&redirect_uri="+redirectURI+"&state="+state;
+
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -29,40 +30,7 @@ String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&cli
 
 
 
-<script>
-function goJoin() {
-	if ($("#email").val() == "") {
-		alert("이메일 입력해주세요.");
-		$("#email").focus();
-		return false;
-	}
-	
-$(function(){
-	$("#emailCheckBtn").click(function(){
-		if ($("#email").val()==""){
-			alert("이메일을 입력하세요");
-		}else{
-		$.ajax ({
-			type:'POST',
-			url:"/membership/choice_join",
-			data:$("[name=frm]").serialize(), //serialize() 직렬로 정렬
-			async:false,
-			success:function(data) {
-				var val = data.trim();
-				if (val == "1") {
-					alert("존재하는 이메일입니다.");
-					$("#email").val("");
-					$("#emailcheck").val("0");
-					return false;					
-				} 
-			}
-		
-		});
-	  }
-	});
-  });
-}
-</script>
+
 <body>
     <div id="header">
         <div class="header-center">
@@ -183,9 +151,9 @@ $(function(){
                                         </div>
                             </div>
                     </li>
-                    <!-- <li><a href="#">SIGN IN</a></li> -->
+                   <li><a href="#">SIGN IN</a></li>
                 </ul>
-                <a href="sign_in">SIGN IN</a>
+                
             </div>
         </div>
     </div>
@@ -233,9 +201,10 @@ $(function(){
                         </li>
 
                         <li>
-                            <button class="kakao" onclick="loginWithKakao()"><p>카카오로 회원가입</p></button>
+                            <button class="kakao" onclick="loginWithKakao()"><p>카카오로 회원가입</p></button> 
+                            <!-- <button class="kakao" href="#;" id="kakaoBtn"><p>카카오로 회원가입</p></button> -->
+                    
                            
-                            
                         </li>
                     </ul>
                 
@@ -284,7 +253,7 @@ $(function(){
     <a href="http://developers.kakao.com/logout">로그아웃</a> -->
     <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-   <script type='text/javascript'>
+   <script type='text/javascript' >
       //<![CDATA[
         // 사용할 앱의 JavaScript 키를 설정해 주세요.
         Kakao.init('4d081a510a22bd9e6626b30d9311132e');
@@ -305,17 +274,24 @@ $(function(){
                     
                     
                     $.ajax({
-                       url : "/membership/choice_join",
+                       url : "/member/insertSns.do",
                        data : {
-                          "id":res.id,
-                          "email":res.kakao_account.email
+                    	   
+                    	   l_name : res.properties.nickname,
+	               			email : res.kakao_account.email,
+	               			sns_key : res.id,
+	               			gender : "0",
+	               			sns_type : "2"
                        },
-                       dataType: "HTML",
-                       success : function(data) {
-                          if(data.trim() == "ok"){
-                             
-                          }
-                       }
+                       dataType : "HTML",
+               		success : function(data) {
+               			alert("정상적으로 가입되었습니다.");
+               			window.close();
+               		},
+               		/* error : function () {
+               			alert("이미 가입된 계정입니다.");
+               			window.close();
+               		} */
                     })
                     // 로그인 하는 경우
                     // ajax member 테이블에 카카오계정을 회원가입한 데이터가
@@ -358,7 +334,7 @@ $(function(){
               loginWithKakao();
            });
         });   */
-    </script>
+    </script> 
 
    <!-- <img src="kakao.png" onclick="loginWithKaKao();"> -->
    

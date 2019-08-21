@@ -59,7 +59,7 @@ NoticeVO data = (NoticeVO) request.getAttribute("data");
 			<div id="container">
 				<div id="content">
 					<div class="con_tit">
-						<h2>관리자관리 - [상세]</h2>
+						<h2>공지사항관리 - [상세]</h2>
 					</div>
 					<!-- //con_tit -->
 					<div class="con">
@@ -80,21 +80,26 @@ NoticeVO data = (NoticeVO) request.getAttribute("data");
 									<tbody>
 										<tr>
 											<th scope="row"><label for="">제목</label></th>
-											<td colspan="5"><%=data.getTitle()%></td>
+											<td colspan="3"><%=data.getTitle()%></td>
 										</tr>
 										<tr>
-											<th scope="row"><label for="">비밀글</label></th>
-											<td><%=CodeUtil.getMemberName(data.getMember())%></td>
-											<th scope="row"><label for="">노출,상단노출</label></th>
+											<%-- <th scope="row"><label for="">비밀글</label></th>
+											<td><%=CodeUtil.getMemberName(data.getMember())%></td> --%>
+											<th scope="row"><label for="">노출 여부</label></th>
 											<td><%=CodeUtil.getDisplayName(data.getDisplay())%></td>
-											<th scope="row"><label for="">상단노출</label></th>
+											<th scope="row"><label for="">상단노출 여부</label></th>
 											<td><%=CodeUtil.getTopName(data.getTop()) %></td>
 										</tr>
 										<tr>
 											<th scope="row"><label for="">첨부파일</label></th>
-											<td colspan="5">
+											<!-- <td colspan="5"> -->
 											<% if(data.getFile_org() != null && data.getFile_org() != "") {%>
-											<a href="<%= Function.downloadUrl(SiteProperty.NOTICE_UPLOAD_PATH, java.net.URLEncoder.encode(data.getFile_org(), "UTF-8"), data.getFile()) %>" target="_blank"><%=data.getFile_org()%></a></td>
+											<td colspan="3"><a href="<%= Function.downloadUrl(SiteProperty.NOTICE_UPLOAD_PATH, java.net.URLEncoder.encode(data.getFile_org(), "UTF-8"), data.getFile()) %>" target="_blank"><%=data.getFile_org()%></a></td>
+											<%
+											} else if(data.getFile_org() == null) {
+											%>
+											<%-- <% if(data.getFile_org() == null) {%> --%>
+											<td colspan="3">첨부된 파일이 없습니다.</td>
 											<%
 											}
 											%>

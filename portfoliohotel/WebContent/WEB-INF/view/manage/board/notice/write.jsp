@@ -76,22 +76,24 @@
 										</td>
 									</tr>		
 									<tr>
-										<th scope="row"><label for="">비밀글</label></th>
+										<!-- <th scope="row"><label for="">비밀글</label></th>
 										<td>
 											<select name="member">
 											
 											<option value="1">공개</option>
 											<option value="2">비공개</option>
 											</select>
-										</td>
-										<th scope="row"><label for="">노출, 상단노출</label></th>
+										</td> -->
+										<th scope="row"><label for="">노출 여부</label></th>
 										<td>
 											<select name="display">
 											
 											<option value="1">노출</option>
 											<option value="2">숨김</option>
 											</select>
-											
+										</td>
+										<th scope="row"><label for="">상단노출 여부</label></th>
+										<td>
 											<select name="top">
 												
 												<option value="1">상단 노출</option>

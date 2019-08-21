@@ -119,7 +119,7 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
           <div id="logined">
             <div class="logined-box">
                 <h2 class="close-btn"><a href="#">x</a></h2>
-                <h3><%=sessionMember.getF_name()%> <%=sessionMember.getL_name()%><span>님 안녕하세요.</span></h3>
+                <h3><%=Function.checkNull(sessionMember.getF_name())%> <%=sessionMember.getL_name()%><span>님 안녕하세요.</span></h3>
                 <p class="mypage"><a href="/membership/mypage">마이페이지 <img src="img/white-arrow.png" class="white-arrow"></a></p>
                 <table>
                

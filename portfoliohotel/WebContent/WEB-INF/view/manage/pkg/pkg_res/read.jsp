@@ -58,7 +58,7 @@ Pkg_resVO res_param = (Pkg_resVO) request.getAttribute("res_param");
 			<div id="container">
 				<div id="content">
 					<div class="con_tit">
-						<h2>관리자관리 - [상세]</h2>
+						<h2>패키지관리 - [상세]</h2>
 					</div>
 					<!-- //con_tit -->
 					<div class="con">
@@ -86,7 +86,7 @@ Pkg_resVO res_param = (Pkg_resVO) request.getAttribute("res_param");
 											<td><%=res_data.getGuest_name1()%><%=res_data.getGuest_name2()%></td>
 										</tr>										
 										<tr>
-											<th scope="row"><label for="">사용일</label></th>
+											<th scope="row"><label for="">결제일</label></th>
 											<td><%=res_data.getUse_date()%></td>
 											<th scope="row"><label for="">예약일</label></th>
 											<td><%=res_data.getPurchase_date()%></td>

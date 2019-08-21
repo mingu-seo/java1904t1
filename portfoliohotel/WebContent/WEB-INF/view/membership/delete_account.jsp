@@ -182,12 +182,14 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                             </div>
                     </li>
                     <!-- <li><a href="#">SIGN IN</a></li> -->
-                </ul>
-                <%if(sessionMember == null){ %>
-                <a href="/membership/sign_in">Sign in</a>
+                    <%if(sessionMember == null){ %>
+                 <li><a href="/membership/sign_in">Sign in</a> </li>
+                
                 <%}else{ %>
-                <a href="/membership/mypage">My page</a>
+                 <li><a href="/membership/mypage">My page</a> </li>
                 <%} %>
+                </ul>
+                
             </div>
         </div>
     </div>
@@ -205,7 +207,7 @@ MemberVO data = (MemberVO)request.getAttribute("data");
             <div class="support-list">
                 <ul class="support-list-center">
                     <li><a href="edit_account">회원정보 수정</a></li>
-                    <li><a href="edit_password">비밀번호 설정 및 변경</a></li>
+                    <li><a href="edit_password">비밀번호 변경</a></li>
                     <li class="on"><a href="delete_account">탈퇴요청</a></li>
                 </ul>
             </div>

@@ -170,9 +170,9 @@ $("#frm").submit();
                     <!-- <li><a href="#">SIGN IN</a></li> -->
                 </ul>
                 <%if(sessionMember == null){ %>
-                <a href="/membership/sign_in">Sign in</a>
+                <li><a href="/membership/sign_in">Sign in</a></li>
                 <%}else{ %>
-                <a href="/membership/mypage">My page</a>
+                <li><a href="/membership/mypage">My page</a></li>
                 <%} %>
             </div>
         </div>

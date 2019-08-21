@@ -35,7 +35,7 @@ public class MainController {
 			MemberVO memberInfo = memberService.getLoginSessionInfo(vo);
 			
 			memberInfo.setIp(vo.getIp());
-			
+			memberInfo.setLogindate(vo.getLogindate());
 //			memberService.insertLoginHistory(memberInfo);		// 로그인히스토리 저장
 			session.setAttribute("memberInfo", memberInfo);	// 세션 저장
 			String redirectUrl = SiteProperty.INDEX_PAGE; // 시작페이지

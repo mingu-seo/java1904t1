@@ -122,7 +122,6 @@ $(function(){
                         			prdata = plist.get(i);
                         %>
                         	<li><%=prdata.getPkg_name()%></li>
-                        	<br><br>
                         <%
                         		}
                         	}
@@ -149,7 +148,6 @@ $(function(){
                         </td>
                         <td class="participants">
                         <%
-                        	int totalPrice = 0;
                         	if (ptotCount == 0) {
                         %>
                         	<ul>
@@ -160,7 +158,6 @@ $(function(){
                         		Pkg_resVO prdata;
                         		for (int i=0; i<plist.size(); i++) {
                         			prdata = plist.get(i);
-                        			totalPrice += prdata.getTotal_price();
                         %>
                         	<li><%=prdata.getUse_date()%></li>
                         <%
@@ -169,19 +166,13 @@ $(function(){
                         %>                              
                         </td>
                     </tr>                                                                             
-                    <tr>
-                        <td>TOTAL</td>
-                        <td class="price" colspan="2">
-                        	<%=totalPrice%> WON
-						</td>
-                    </tr>
                 </table>
             </div>
             <div class="reservation-status-right">
                 <div class="my-info">
                   <h4>
   
-	<%=sessionMember.getF_name()%> <%=sessionMember.getL_name()%> 님<br/>
+	<%=Function.checkNull(sessionMember.getF_name())%> <%=sessionMember.getL_name()%> 님<br/>
 	
                       환영합니다 !
                     </h4>

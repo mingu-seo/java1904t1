@@ -36,22 +36,43 @@
     <insert id="insert" parameterClass="membervo" >
         insert into member
         	(email, password, f_name, l_name, gender,f_tel, m_tel, l_tel, birthday_year,birthday_month,birthday_day,regdate,zipcode,addr,
-        	 addr_detail,logindate,point,grade,sns_type,sns_key,secession,secession_reason) 
+        	 addr_detail,point,grade,sns_type,sns_key,secession,secession_reason) 
         	 
         values
         	(#email#, md5(#password#), #f_name#, #l_name#, #gender#, #f_tel#, #m_tel#, #l_tel#, #birthday_year#, #birthday_month#, #birthday_day#,now(),#zipcode#,#addr#,
-        	 #addr_detail#,now(),#point#,#grade#,#sns_type#,#sns_key#,#secession#,#secession_reason#)
+        	 #addr_detail#,#point#,#grade#,#sns_type#,#sns_key#,#secession#,#secession_reason#)
         	 
         <selectKey keyProperty="no" resultClass="Integer">
 			SELECT  LAST_INSERT_ID()
 		</selectKey>
     </insert>
     
+    <insert id="insertSns" parameterClass="membervo" >
+        insert into member
+        	(email, f_name,l_name, gender,regdate,
+        	 point,grade,sns_type,sns_key,secession) 
+        	 
+        values
+        	(#email#, '', #l_name#, #gender#, now(),
+        	 0,0,#sns_type#,#sns_key#,0)
+        	 
+        <selectKey keyProperty="no" resultClass="Integer">
+			SELECT  LAST_INSERT_ID()
+		</selectKey>
+    </insert>
     
-
+ <!--    <insert id="naverCallback" parameterClass="membervo">
+    	insert into member
+    	(email, password,l_name,gender,birthday_month, birthday_day,sns_type )    	
+    	values
+    	(#email#, md5(#password#), #l_name, #gender#,#birthday_month#, #birthday_day#,#sns_type#)
+    	<selectKey keyProperty="no" resultClass="Integer">
+			SELECT  LAST_INSERT_ID()
+		</selectKey>
+    	
+    </insert>  -->
     
-
-   
+    
     <update id="update" parameterClass="membervo">
         update member set
         	<!-- <isNotEqual property="password" compareValue="">
@@ -134,7 +155,12 @@
     
     <select id="loginCheck" parameterClass="membervo" resultClass="Integer">
         select count(*) as cnt from member where email=#email# and password=md5(#password#) and secession=0
+        
     </select>
+    
+    <update id="logindate" parameterClass="membervo">
+    	update member set logindate=now() where no=#no#
+    </update>
     
     <select id="loginSessionInfo" parameterClass="membervo" resultClass="membervo">
         select * from member where email=#email# and password=md5(#password#) and secession=0
@@ -142,6 +168,10 @@
     
      <select id="emailSrc" parameterClass="membervo" resultClass="Integer">
         select count(*) as cnt from member where email=#email# and password=md5(#password#)
+    </select>
+    
+    <select id="snsCheck" parameterClass="membervo" resultClass="membervo">
+        select * from member where email=#email# and sns_type=#sns_type# and sns_key=#sns_key#
     </select>
     
     <!-- 

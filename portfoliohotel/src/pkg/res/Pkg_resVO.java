@@ -21,7 +21,6 @@ public class Pkg_resVO extends Parameter {
 	private int pkg_price; // 패키지 가격
 	private int pkg_count; // 패키지 수량
 	private int total_price; // 총 가격
-	private String rsv_num; // 예약번호
 	
 	
 	public Pkg_resVO(int pageRows) {
@@ -119,12 +118,6 @@ public class Pkg_resVO extends Parameter {
 	}
 	public void setGuest_tel3(String guest_tel3) {
 		this.guest_tel3 = guest_tel3;
-	}
-	public String getRsv_num() {
-		return rsv_num;
-	}
-	public void setRsv_num(String rsv_num) {
-		this.rsv_num = rsv_num;
 	}
 	
 }
