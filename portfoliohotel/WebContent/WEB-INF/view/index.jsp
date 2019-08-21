@@ -222,11 +222,11 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                     </li>
 
                     <li class="special_offer">
-                        <p>SPECIAL OFFERS</p>
+                        <p>PACKAGE</p>
                         <div class="bg">
                                 <a href="/pkg/special_promotion">
                                     <div class="hover-box">
-                                        <p>SPECIAL OFFER</p>
+                                        <p>PACKAGE</p>
                                         <img src="img/ico_arrow.png">
                                     </div>
                                 </a>
@@ -235,11 +235,11 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                     </li>
 
                     <li class="fitness">
-                        <p>FACILITIES</p>
+                        <p>MEETING</p>
                         <div class="bg">
-                                <a href="/facilities">
+                                <a href="/meeting_wedding/meeting">
                                         <div class="hover-box">
-                                            <p>FACILITIES</p>
+                                            <p>MEETING</p>
                                             <img src="img/ico_arrow.png">
                                         </div>
                                 </a>
@@ -247,11 +247,11 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                     </li>
 
                     <li class="spa_relax">
-                        <p>MEETING & WEDDING</p>
+                        <p>WEDDING</p>
                         <div class="bg">
-                                <a href="/meeting_wedding/meeting">
+                                <a href="/meeting_wedding/wedding">
                                         <div class="hover-box">
-                                            <p>MEETING & WEDDING</p>
+                                            <p>WEDDING</p>
                                             <img src="img/ico_arrow.png">
                                         </div>
                                 </a>
@@ -271,11 +271,11 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                     </li>
 
                     <li class="event_gift">
-                        <p>EVENT & GIFT</p>
+                        <p>FACILITIES</p>
                         <div class="bg">
-                                <a href="#">
+                                <a href="/facilities">
                                         <div class="hover-box">
-                                            <p>EVENT & GIFT</p>
+                                            <p>FACILITIES</p>
                                             <img src="img/ico_arrow.png">
                                         </div>
                                 </a>

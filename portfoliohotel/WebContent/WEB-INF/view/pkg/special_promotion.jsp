@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page import="pkg.*" %>
+<%@ page import="util.*" %>
 <%
 ArrayList<PkgVO> plist = (ArrayList<PkgVO>)request.getAttribute("plist");
 %>
@@ -31,7 +32,9 @@ ArrayList<PkgVO> plist = (ArrayList<PkgVO>)request.getAttribute("plist");
     <div id="container">
 		<div class="banner">
 			<h2>
-				THE PLACES FOR YOUR<br /> HEALTH AND RELAXATION
+				EXPERIENCE <br/>
+				BEYOND <br/>
+				EXPECTATIONS  
 			</h2>
 		</div>
 		<div class="contents">
@@ -41,31 +44,34 @@ ArrayList<PkgVO> plist = (ArrayList<PkgVO>)request.getAttribute("plist");
 				<%
 				for(int i=0; i<plist.size(); i++) {
 				%>
-				<div class="package-box">
+				<div class="package-box" OnClick="location.href='/pkg/detail_page/pkg_detail_page?no=<%=plist.get(i).getNo()%>'">
 					<div id="f<%=i+1 %>" class="package<%=i+1 %> clear">
 						<div class="package-bg"></div>
 						<div class="package-text">
 							<h4>
 								<%=plist.get(i).getKname() %><span><%=plist.get(i).getEname() %></span>
 							</h4>
-							<p>
-								<h3>Birthday Package</h3>
-                                    <p>2019.07.17 ~ 2019.09.18</p>
-                                    <h4>85,000원 부터</h4>
-							</p>
 							<table>
 								<tr>
-									<td></td>
-									<td class="table-a">야외공간</td>
-								</tr>
-								<tr>
-									<td>운영시간</td>
-									<td class="table-a">기간별 상이</td>
-								</tr>
-								<tr>
-									<td>문의</td>
-									<td class="table-a">02-2250-8230</td>
-								</tr>
+		                            <td>기간</td>
+		                            <td class="table-a"><%=plist.get(i).getStartdate()%> ~ <%=plist.get(i).getEnddate()%></td>
+		                        </tr>
+		                        <tr>
+		                            <td>가격</td>
+		                            <td class="table-a"><%=Function.toPriceComma(plist.get(i).getPrice()) %>원</td>
+		                        </tr>
+		                        <tr>
+		                            <td>포함내역</td>
+		                            <td class="table-a"><%=plist.get(i).getPkg() %></td>
+		                        </tr>
+		                        <tr class="event">
+		                            <td>이벤트</td>
+		                            <td class="table-a-event"><%=plist.get(i).getEvent()%></td>
+		                        </tr>
+		                        <tr>
+		                            <td>안내</td>
+		                            <td class="table-a-info"><%=plist.get(i).getGuide()%></td>
+		                        </tr>
 							</table>
 						</div>
 					</div>

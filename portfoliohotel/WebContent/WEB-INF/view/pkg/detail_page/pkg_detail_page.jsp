@@ -62,7 +62,21 @@ Pkg_resVO prparams = (Pkg_resVO) request.getAttribute("prparam");
     <jsp:include page="/header_menu" flush="true"/>
     
     <div id="container">
-        <div class="banner senseof">
+    	<%
+    	if(pkg_data.getNo() == 12) {
+    	%>
+        <div class="banner oasis"> 
+        <%
+    	} else if(pkg_data.getNo() == 13) {
+        %>
+        <div class="banner reasonable">
+        <%	
+        } else {
+        %>
+        <div class="banner propose">
+        <%
+        }
+        %>
             <div class="banner-center">
                 <div class="banner-text">
                     <h2><%=pkg_data.getKname()%>
@@ -91,18 +105,15 @@ Pkg_resVO prparams = (Pkg_resVO) request.getAttribute("prparam");
                         </tr>
                         <tr>
                             <td class="table-list">포함내역</td>
-                            <td class="td-lh"><%=pkg_data.getPkg() %> <br/>
-                            </td>
+                            <td class="td-lh"><%=pkg_data.getPkg() %> <br/></td>
                         </tr>
                         <tr>
                             <td class="table-list event">이벤트</td>
-                            <td class="td-lh"><%=pkg_data.getEvent()%>
-                            </td>
+                            <td class="td-lh"><%=pkg_data.getEvent()%></td>
                         </tr>
                         <tr>
                             <td class="table-list info">안내</td>
-                            <td class="td-lh"><%=pkg_data.getGuide()%>
-                            </td>
+                            <td class="td-lh"><%=pkg_data.getGuide()%></td>
                         </tr>
                     </table>
                 </div>
