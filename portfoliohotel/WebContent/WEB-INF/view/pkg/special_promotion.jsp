@@ -22,9 +22,50 @@
 
 </head>
 <body>
-    <%@ include file="../header_menu.jsp" %>
-    
+<jsp:include page="/header_menu" flush="true"/>
     <div id="container">
+		<div class="banner">
+			<h2>
+				THE PLACES FOR YOUR<br /> HEALTH AND RELAXATION
+			</h2>
+		</div>
+		<div class="contents">
+			<div class="contents-center">
+				<h3>PACKAGE</h3>
+				<div class="package-box">
+					<div id="f1" class="package1 clear">
+						<div class="package-bg"></div>
+						<div class="package-text">
+							<h4>
+								오아시스<span>The Oasis</span>
+							</h4>
+							<p>
+								남산의 아름다운 전경 속에 자리한 오아시스는<br /> 도심 속 한가로운 휴양을 위한 최적의 장소입니다. <br />쾌적한
+								온도로 유지되는 온수풀, 해외 반얀트리 리조트 풀빌라의 분위기를 느낄 수 있는<br /> 프라이빗 카바나가 선사하는
+								여름의 여유를 즐길 수 있습니다.
+							</p>
+							<table>
+								<tr>
+									<td>위치</td>
+									<td class="table-a">야외공간</td>
+								</tr>
+								<tr>
+									<td>운영시간</td>
+									<td class="table-a">기간별 상이</td>
+								</tr>
+								<tr>
+									<td>문의</td>
+									<td class="table-a">02-2250-8230</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+   <!--  <div id="container">
         <div class="container">
             <div id="banner">
                 <div class="banner">
@@ -42,13 +83,13 @@
 
             <div id="special_promotion">
                     <div class="main_title">
-                        <h2>OFFERS ROOM</h2>
+                        <h2>OFFERS Package</h2>
                     </div>
-                    <div class="title-box"><p>Room Package</p></div>
-
+                    <div class="title-box"><p>Package</p></div>
+					
                     <div class="promotion_list clear">
                         <div class="promo_list">
-                            <a href="oasis.html">
+                            <a href="/pkg/detail_page/pkg_detail_page?no=12">
                                 <div class="promo-bg">
                                     <div class="promo-text">
                                         <p>자세히보기</p>
@@ -57,9 +98,9 @@
                                 </div>
                                 <img src="/img/promotion3.jpg">
                                 <div class="list-text">
-                                    <h3>The Oasis Summer Package</h3>
-                                    <p>2019.05.01 ~ 2019.09.01</p>
-                                    <h4>420,000원 부터</h4>
+                                    <h3>Birthday Package</h3>
+                                    <p>2019.07.17 ~ 2019.09.18</p>
+                                    <h4>85,000원 부터</h4>
                                 </div>
                             </a>
                         </div>
@@ -146,9 +187,8 @@
                     </div>
                     <button class="slick-prev"></button>
                     <button class="slick-next"></button>
-                   
-            </div>
-
+            </div> -->
+<!-- 
             <div id="special_promotion">
                         <div class="main_title">
                             <h2>OFFERS DINING</h2>
@@ -370,7 +410,7 @@
                             <button class="slick-prev"></button>
                             <button class="slick-next"></button>
                                   
-            </div>
+            </div> -->
         </div>
     </div>
 

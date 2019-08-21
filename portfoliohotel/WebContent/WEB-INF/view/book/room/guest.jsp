@@ -23,10 +23,10 @@
     <div id="container">
         <div class="nonmember-section">
             <h2>비회원 예약 조회 페이지</h2>
-            <h3>NONMEMBER RESERVATION STATUS</h3>
+            <h3>GUEST RESERVATION STATUS</h3>
             <div class="nonmember-box clear">
                 <!-- <form action="#" method="POST"> -->
-                <form name="frm" id="frm" method="post" action="/book/room/nonmember_res">
+                <form name="frm" id="frm" method="post" action="/book/room/guest_res">
                     <div class="nonmember-box-logo"><img src="/img/header-logo.png"></div> 
                     <div class="nonmember-board clear">
                         <div class="nonmember-box-left">

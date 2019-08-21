@@ -7,6 +7,37 @@
 .banner {width:740px; padding-top:270px; margin:0 auto; color:#fff;font-size:62px;}
 .banner > h2 {text-align:center;}
 
+.contents {}
+.contents-center {width:1200px; margin:0 auto;}
+.contents-center h3 {text-align:center; font-size:62px; }
+.contents-center h3:before {content:""; width:100%; height:1px; background-color:#888; display:block; margin-bottom:30px;}
+.contents-center h3:after {content:""; width:100%; height:1px; background-color:#888; display:block; margin-top:30px; margin-bottom:120px;}
+
+.package-box {}
+.package-box > div {width:100%; height:390px; margin-bottom:80px;}
+.package-box > div:last-child {margin-bottom:150px;}
+.package-box > div > div {width:50%; height:100%; float:left;}
+.package-box > div > .package-text {background-color:#eee; padding:35px;}
+.package-box > div > .package-text h4 { color:#0e693f; font-size:42px; margin-bottom:30px; margin-top:15px;}
+.package-box > div > .package-text h4 span {margin-left:10px; color:#454545; font-size:26px; font-weight:300;}
+.package-box > div > .package-text p {font-size:15px; font-weight:200; color:#454545; line-height:23px; margin-bottom:60px;}
+.package-box > div > .package-text table {color:#454545; font-weight:400;}
+.package-box > div > .package-text table tr {height:24px;}
+.package-box > div > .package-text table td.table-a {font-weight:300; text-indent:20px;}
+
+.package1 .package-bg {background-image: url("/img/package/the-oasis.jpg");}
+.package2 .package-bg {background-image: url("/img/package/indoor-pool.jpg");}
+.package3 .package-bg {background-image: url("/img/package/fitness-center.jpg");}
+.package4 .package-bg {background-image: url("/img/package/sauna.jpg");}
+.package5 .package-bg {background-image: url("/img/package/troon-golf-academy.jpg");}
+.package6 .package-bg {background-image: url("/img/package/tennis-court.jpg");}
+.package7 .package-bg {background-image: url("/img/package/futsal-field.jpg");}
+.package8 .package-bg {background-image: url("/img/package/basketball-court.jpg");}
+.package9 .package-bg {background-image: url("/img/package/ice-rink.jpg");}
+.package10 .package-bg {background-image: url("/img/package/foresta.jpg");}
+
+
+/* 
 #special_promotion {position: relative; width:1200px; margin:0 auto; padding-bottom:80px;}
 #special_promotion:nth-child(3):after, #special_promotion:nth-child(4):after {content:""; display:block; width:100%; height:1px; background-color:#c1c1c1; 
     position:relative; bottom:-60px; }
@@ -48,5 +79,5 @@
 
 .title-box {position: absolute; top:72px; left:0; width:125px; height:60px; background-color:rgba(0,0,0,0.9); z-index:10;}
 .title-box > p {line-height:60px; font-weight:bold; color:#fff; font-size:12px; text-align:center;}
-
+ */
 

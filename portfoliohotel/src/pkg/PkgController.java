@@ -180,4 +180,10 @@ public class PkgController {
 		return "pkg/room/oasis";
 	}
 	
+	@RequestMapping("/pkg/special_promotion")
+	public String special_promotion(Model model, AdminVO param) throws Exception {
+		
+		return "pkg/special_promotion";
+	}
+	
 }
