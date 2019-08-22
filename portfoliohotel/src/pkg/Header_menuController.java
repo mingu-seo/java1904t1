@@ -19,19 +19,19 @@ public class Header_menuController {
 	@Autowired
 	Pkg_resService pkg_resService;
 	
-	@RequestMapping("/header_menu")
-	public String header_menu(Model model, PkgVO param) throws Exception {
-		param.setTablename("pkg");
-		int[] rowPageCount = pkgService.count(param);
-		ArrayList<PkgVO> plist = pkgService.list2(param);
-		
-		model.addAttribute("ptotCount", rowPageCount[0]);
-		model.addAttribute("ptotPage", rowPageCount[1]);
-		model.addAttribute("plist", plist);
-		model.addAttribute("pvo", param);
-		
-		return "header_menu";
-	}
+//	@RequestMapping("/header_menu")
+//	public String header_menu(Model model, PkgVO param) throws Exception {
+//		param.setTablename("pkg");
+//		int[] rowPageCount = pkgService.count(param);
+//		ArrayList<PkgVO> plist = pkgService.list2(param);
+//		
+//		model.addAttribute("ptotCount", rowPageCount[0]);
+//		model.addAttribute("ptotPage", rowPageCount[1]);
+//		model.addAttribute("plist", plist);
+//		model.addAttribute("pvo", param);
+//		
+//		return "header_menu";
+//	}
 	
 	@RequestMapping("/pkg/detail_page/pkg_detail_page")
 	public String Senseof(Model model, PkgVO param, Pkg_resVO prparam)  throws Exception {

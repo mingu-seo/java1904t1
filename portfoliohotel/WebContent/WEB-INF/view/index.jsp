@@ -496,8 +496,8 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                                 </ul>
                                 <ul class="table1-1 clear">
                                     <li>
-                                        <p><span class="th">전망</span><span>남산 & 시티뷰</span></p>
-                                        <p><span class="th">객실타입</span><span>원룸</span></p>
+                                        <p><span class="th">전망</span><span>남산뷰 / 시티뷰</span></p>
+                                        <p><span class="th">객실타입</span><span>원룸 / 투룸</span></p>
                                     </li>
                                 </ul>
                             </li>
