@@ -12,7 +12,7 @@ String clientId = "yyt5qpvTbPa5tqyLB0Td";//애플리케이션 클라이언트 �
 String clientSecret = "cNNDkHZfCt";//애플리케이션 클라이언트 시크릿값";
 String code = request.getParameter("code");
 String state = request.getParameter("state");
-String redirectURI = URLEncoder.encode("YOUR_CALLBACK_URL", "UTF-8");
+String redirectURI = URLEncoder.encode("http://hyeon012.cafe24.com/sns/login/naverCallback.jsp", "UTF-8");
 String apiURL;
 apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&;";
 apiURL += "client_id=" + clientId;
@@ -82,13 +82,7 @@ JSONObject resJson = (JSONObject) obj.get("response");
 
 
 %>
-<!-- 
-이름 : <%=(String)resJson.get("name")%><br/>
-이메일 : <%=(String)resJson.get("email")%><br/>
-ID : <%=(String)resJson.get("id")%><br/>
-성별 : <%=(String)resJson.get("gender")%><br/>
-생일 : <%=(String)resJson.get("birthday")%><br/>
- -->
+
 <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
 <script>
 $(function() {

@@ -23,7 +23,7 @@
           container: '#kakao-login-btn',
           success: function(authObj) {
             /* alert(JSON.stringify(authObj)); */
-             alert("로그인됐다");
+             alert("로그인 되었습니다.");
              Kakao.API.request({
                   url: '/v2/user/me',
                   success: function(res) {
@@ -35,16 +35,25 @@
                     
                     
                     $.ajax({
-                       url : "/membership/login.do",
+                       url : "/membership/snsCheck.do",
                        data : {
-                          "id":res.id,
-                          "email":res.kakao_account.email
+                          /* "id":res.id,
+                          "email":res.kakao_account.email */
+                    	   email : res.kakao_account.email,
+                    	   sns_key : res.id,
+                    	   sns_type : "2"
                        },
                        dataType: "HTML",
                        success : function(data) {
                           if(data.trim() == "ok"){
-                             
+                        	  opener.location.href="/index";
+                          } else {
+              				alert("가입되지 않은 계정입니다. 먼저 가입해주세요");
                           }
+                          window.close();
+                       },
+                       error : function(){
+                    	   
                        }
                     })
                     // 로그인 하는 경우
@@ -58,36 +67,7 @@
                     // 없으면 ajax DB insert
                     
                     
-                  },
-                  fail: function(error) {
-                    alert(JSON.stringify(error));
-                  }
-                });
-          },
-          fail: function(err) {
-             alert(JSON.stringify(err));
-          }
-        });
-      //]]>
-      
-      
-        function loginWithKakao() {
-            // 로그인 창을 띄웁니다.
-            Kakao.Auth.login({
-              success: function(authObj) {
-                alert(JSON.stringify(authObj));
-              },
-              fail: function(err) {
-                alert(JSON.stringify(err));
-              }
-            });
-          };
-          
-        $(function(){
-           $("img[src='kakao.png']").click(function(){
-              loginWithKakao();
-           });
-        });  
+                 
     </script>
    <hr/>
    <!-- <img src="kakao.png" onclick="loginWithKaKao();"> -->

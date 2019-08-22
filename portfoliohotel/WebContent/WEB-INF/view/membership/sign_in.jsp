@@ -14,7 +14,7 @@
 <%@ page import="java.net.URLEncoder"  %>
 <%
 String client_id = "yyt5qpvTbPa5tqyLB0Td";   //수정할 시 클라이언트 아이디 수정
-String redirectURI = URLEncoder.encode("http://localhost:8080/sns/login/naverCallback.jsp"); //수정할 시 콜백url 수정
+String redirectURI = URLEncoder.encode("http://hyeon012.cafe24.com/sns/login/naverCallback.jsp"); //수정할 시 콜백url 수정
 SecureRandom random = new SecureRandom();
 String state = new BigInteger(130, random).toString(32);
 session.setAttribute("state", state);
@@ -213,18 +213,9 @@ function CookieVal(cookieName) {
                                         </div>
                             </div>
                     </li>
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/mingu-seo/java1904t1.git
                     <li> <a href="/membership/sign_in">Sign in</a></li> 
-<<<<<<< HEAD
-=======
-
-                  
-
->>>>>>> branch 'master' of https://github.com/mingu-seo/java1904t1.git
-                </ul>
+                    </ul>
                
             </div>
         </div>
@@ -305,40 +296,7 @@ function CookieVal(cookieName) {
             </div>    
         </div>
     </div>
-    <div id="footer">
-        <!-- <div class="footer-logo"><img src="img/footer_logo.png"></div> -->
-        
-        <div class="footer-center">
-            <div class="footer-top">
-                <ul class="company-info clear">
-                    <li><a href="#">호텔소개</a></li>
-                    <li><a href="#">오시는 길</a></li>
-                    <li><a href="#">문의</a></li>
-                    <li><a href="#">인재채용</a></li>
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
-                </ul>
-                <ul class="sns clear">
-                    <li><a href="#"><img src="../img/sns1.png"></a></li>
-                    <li><a href="#"><img src="../img/sns2.png"></a></li>
-                    <li><a href="#"><img src="../img/sns3.png"></a></li>
-                    <li><a href="#"><img src="../img/sns4.png"></a></li>
-                </ul>
-            </div>
-            <div class="footer-bottom">
-                <h5>에이블현대호텔앤리조트주식회사  대표이사  JANG PAUL HYUK (장혁),최종윤  사업자 등록번호 104-81-21344  통신판매업신고번호 2012-서울중구-1214<br/>
-                    서울시 중구 장충단로60(장충동2가), 04605 / TEL 02.2250.8000
-                </h5>
-                <h6>Copyright 2018 Banyan Tree Club & Spa. All Rights Reserved</h6>
-                <ul class="support-logo clear">
-                    <li><img src="../img/footericon1.png"></li>
-                    <li><img src="../img/footericon2.png"></li>
-                    <li><img src="../img/footericon3.png"></li>
-                    <li><img src="../img/footericon4.png"></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <jsp:include page="/footer" flush="true"/>
 </body>
 
 <!-- <a id="kakao-login-btn"></a>
@@ -349,76 +307,54 @@ function CookieVal(cookieName) {
       //<![CDATA[
         // 사용할 앱의 JavaScript 키를 설정해 주세요.
         Kakao.init('4d081a510a22bd9e6626b30d9311132e');
-        // 카카오 로그인 버튼을 생성합니다.
-        Kakao.Auth.createLoginButton({
-          container: '#kakao-login-btn',
-          success: function(authObj) {
-            /* alert(JSON.stringify(authObj)); */
-             alert("로그인 되었습니다.");
-             Kakao.API.request({
-                  url: '/v2/user/me',
-                  success: function(res) {
-                    /* alert(JSON.stringify(res)); */
-                    console.log(JSON.stringify(res));
-                    console.log('email:'+res.kakao_account.email);
-                    console.log('name:'+res.properties.nickname);
-                    console.log('id:'+res.id);
-                    
-                    
-                    $.ajax({
-                       url : "/membership/choice_join",
-                       data : {
-                          "id":res.id,
-                          "email":res.kakao_account.email
-                       },
-                       dataType: "HTML",
-                       success : function(data) {
-                          if(data.trim() == "ok"){
-                             
-                          }
-                       }
-                    })
-                    // 로그인 하는 경우
-                    // ajax member 테이블에 카카오계정을 회원가입한 데이터가
-                    // 있으면 ajax 로그인
-                    // 없으면 alert('회원가입해라')
-                    
-                    // 회원가입 하는 경우
-                    // ajax member 테이블에 카카오계정을 회원가입한 데이터가
-                    // 있으면 alert('이미 가입됌')
-                    // 없으면 ajax DB insert
-                    
-                    
-                  },
-                  fail: function(error) {
-                    alert(JSON.stringify(error));
-                  }
-                });
-          },
-          fail: function(err) {
-             alert(JSON.stringify(err));
-          }
-        });
-      //]]>
-      
       
         function loginWithKakao() {
-            // 로그인 창을 띄웁니다.
-            Kakao.Auth.login({
-              success: function(authObj) {
-                alert(JSON.stringify(authObj));
-              },
-              fail: function(err) {
-                alert(JSON.stringify(err));
-              }
+        	Kakao.Auth.loginForm({
+				success: function(authObj) {
+	              	console.log(JSON.stringify(authObj));
+	
+					Kakao.API.request({
+						url: '/v2/user/me',
+						success: function(res) {
+					
+							console.log('kakao id : '+res.id);
+							console.log('kakao email : '+res.kakao_account.email);
+							console.log('kakao birthday : '+res.kakao_account.birthday);
+							console.log('kakao gender : '+res.kakao_account.gender);
+							console.log('kakao nickname : ' +res.properties['nickname']);
+							
+							$.ajax({
+								url : "/member/snsCheck.do",
+								data : {
+									email : res.kakao_account.email,
+									sns_key : res.id,
+									sns_type : "2"
+								},
+								dataType : "HTML",
+								success : function(data) {
+									if (data.trim() == "ok") {
+										location.href="/index";
+									} else {
+										alert("가입되지 않은 계정입니다. 먼저 가입해주세요");
+									}
+									
+								},
+								error : function () {
+									
+								}
+							});
+					
+					 	},
+					 	fail: function(error) {
+							alert(JSON.stringify(error));
+					 	}
+					});
+				},
+				fail: function(err) {
+				  alert(JSON.stringify(err));
+				}
             });
-          };
-          
-       /*  $(function(){
-           $("src='kakao.png'").click(function(){
-              loginWithKakao();
-           });
-        });   */
+        }
     </script>
     
 
