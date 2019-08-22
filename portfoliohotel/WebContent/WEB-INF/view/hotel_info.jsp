@@ -23,27 +23,16 @@
 	
 	    var map = new kakao.maps.Map(container, options);
 	    
-	    document.getElementById('l1').setAttribute("class", "on");
-	    
-	    if(document.getElementById('l1').getAttribute("class") == 'on') {
-	    	$(".hotel_story").show();
-	    	$(".hotel_address").hide();
-	    	$(".terms_of_service").hide();
-	    	$(".privacy_policy").hide();
-	    	$(".reservation_refund_policy").hide();
-	    }
+	    <% int tabIdx = util.Function.getIntParameter(request.getParameter("supportTab")); %>
+	    Change(<%=tabIdx%>);
     });
     
     function Change(i) {
     	$(".divs>div").hide();
-    	document.getElementById('l1').setAttribute("class", "");
-    	document.getElementById('l2').setAttribute("class", "");
-    	document.getElementById('l3').setAttribute("class", "");
-    	document.getElementById('l4').setAttribute("class", "");
-    	document.getElementById('l5').setAttribute("class", "");
+    	$(".supportTab").removeClass("on");
     	
-    	$(".divs>div").eq(i-1).show();
-    	document.getElementById('l'+i).setAttribute("class", "on");
+    	$(".divs>div").eq(i).show();
+    	$(".supportTab").eq(i).addClass("on");
     }
     
     </script>
@@ -66,11 +55,11 @@
         <div class="hotel">
             <div class="support-list">
                 <ul class="support-list-center">
-                    <li id="l1"><a id="d1" href="javascript:Change(1);">호텔 소개</a></li>
-                    <li id="l2"><a id="d2" href="javascript:Change(2);">오시는 길</a></li>
-                    <li id="l3"><a id="d3" href="javascript:Change(3);">이용약관</a></li>
-                    <li id="l4"><a id="d4" href="javascript:Change(4);">개인정보처리방침</a></li>
-                    <li id="l5"><a id="d5" href="javascript:Change(5);">예약환불규정</a></li>
+                    <li class="supportTab"><a id="d1" href="javascript:Change(0);">호텔 소개</a></li>
+                    <li class="supportTab"><a id="d2" href="javascript:Change(1);">오시는 길</a></li>
+                    <li class="supportTab"><a id="d3" href="javascript:Change(2);">이용약관</a></li>
+                    <li class="supportTab"><a id="d4" href="javascript:Change(3);">개인정보처리방침</a></li>
+                    <li class="supportTab"><a id="d5" href="javascript:Change(4);">예약환불규정</a></li>
                 </ul>
             </div>
         </div>

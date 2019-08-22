@@ -3,12 +3,12 @@
         <div class="footer-center">
             <div class="footer-top">
                 <ul class="company-info clear">
-                    <li><a href="/hotel_info">호텔소개</a></li>
-                    <li><a href="/hotel_info">오시는 길</a></li>
+                    <li><a href="/hotel_info?supportTab=0">호텔소개</a></li>
+                    <li><a href="/hotel_info?supportTab=1">오시는 길</a></li>
                     <li><a href="/support/qna/qna">문의</a></li>
-                    <li><a href="/hotel_info">이용약관</a></li>
-                    <li><a href="/hotel_info">개인정보처리방침</a></li>
-                    <li><a href="/hotel_info">예약환불규정</a></li>
+                    <li><a href="/hotel_info?supportTab=2">이용약관</a></li>
+                    <li><a href="/hotel_info?supportTab=3">개인정보처리방침</a></li>
+                    <li><a href="/hotel_info?supportTab=4">예약환불규정</a></li>
                 </ul>
                 <ul class="sns clear">
                     <li><a href="#"><img src="/img/sns1.png"></a></li>
