@@ -15,23 +15,13 @@ public class DiningVO extends Parameter {
 	private int book_period; // 예약기간
 	private String inclusion; // 포함내역
 	private String info; // 안내
+	
+	private String size;
 
-	// 검색조건
-	/*
-	 * private int display; // 노출여부 (-1:전체, 0:미노출, 1:노출)
-	 */
 	public DiningVO() {
 		super.setPageRows(10);
-//		this.setDisplay(-1);
-	}
 
-//	public int getDisplay() {
-//		return display;
-//	}
-//
-//	public void setDisplay(int display) {
-//		this.display = display;
-//	}
+	}
 
 	public int getNo() {
 		return no;
@@ -56,7 +46,7 @@ public class DiningVO extends Parameter {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-    
+
 	public int getCount() {
 		return count;
 	}
@@ -119,6 +109,14 @@ public class DiningVO extends Parameter {
 
 	public void setInfo(String info) {
 		this.info = info;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
 	}
 
 }

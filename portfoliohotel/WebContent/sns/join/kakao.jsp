@@ -36,7 +36,7 @@
                     console.log('name:'+res.properties.nickname);
                     console.log('id:'+res.id); */
                     
-                   $(function(){ 
+                  
                     $.ajax({
                        url : "/member/insertSns.do",
                        data : {

@@ -312,24 +312,8 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                                 </div>
                             </a>
                         </div>
-
+                        
                         <div class="pro_list2 pro_list">
-                                <a href="/pkg/room/bbq">
-                                    <img src="/img/dining/p_rooftop.jpg">
-                                    <div class="promotion_text">
-                                        <p>Festa Rooftop Bar</p>
-                                        <h6>트로피컬 무드의 루프탑 바에서 장르를 넘나드는 신나는 공연과 라이브 퍼포먼스, 화려한 조명이 더해진 이색적인 공간에서 나른한 일상 속 즐거움을 일깨워보시기 바랍니다.
-										<br/>
-                                        </h6>
-                                        <p class="pro_price">50000원 부터</p>
-                                    </div>
-                                    <div class="pro-top-box">
-                                            <p>Dining</p>
-                                    </div>
-                                </a>
-                        </div>
-
-                        <div class="pro_list1 pro_list">
                                 <a href="#">
                                     <img src="/img/dining/p_granum.jpg">
                                     <div class="promotion_text">
@@ -344,8 +328,8 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                                     </div>
                                 </a>
                         </div>
-
-                        <div class="pro_list2 pro_list">
+                        
+                        <div class="pro_list1 pro_list">
                                 <a href="/pkg/room/senseof">
                                     <img src="/img/dining/p_moonbar.jpg">
                                     <div class="promotion_text">
@@ -378,6 +362,23 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                                 </a>
                         </div>
 
+                        <div class="pro_list1 pro_list">
+                                <a href="/pkg/room/bbq">
+                                    <img src="/img/dining/p_rooftop.jpg">
+                                    <div class="promotion_text">
+                                        <p>Festa Rooftop Bar</p>
+                                        <h6>트로피컬 무드의 루프탑 바에서 장르를 넘나드는 신나는 공연과 라이브 퍼포먼스, 화려한 조명이 더해진 이색적인 공간에서 나른한 일상 속 즐거움을 일깨워보시기 바랍니다.
+										<br/>
+                                        </h6>
+                                        <p class="pro_price">50000원 부터</p>
+                                    </div>
+                                    <div class="pro-top-box">
+                                            <p>Dining</p>
+                                    </div>
+                                </a>
+                        </div>
+
+
                         <div class="pro_list2 pro_list">
                                 <a href="#">
                                     <img src="/img/dining/p_club.jpg">
@@ -394,7 +395,7 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                                 </a>
                         </div>
 
-                        <div class="pro_list1 pro_list">
+                        <div class="pro_list2 pro_list">
                                 <a href="#">
                                     <img src="/img/dining/p_montst.jpg">
                                     <div class="promotion_text">
@@ -408,7 +409,7 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                                             <p>Dining</p>
                                     </div>
                                 </a>
-                        </div> -->
+                        </div> 
 
                          <!-- <div class="pro_list2 pro_list">
                                 <a href="#">
@@ -496,8 +497,8 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                                 </ul>
                                 <ul class="table1-1 clear">
                                     <li>
-                                        <p><span class="th">전망</span><span>남산뷰 / 시티뷰</span></p>
-                                        <p><span class="th">객실타입</span><span>원룸 / 투룸</span></p>
+                                        <p><span class="th">전망</span><span>남산 & 시티뷰</span></p>
+                                        <p><span class="th">객실타입</span><span>원룸</span></p>
                                     </li>
                                 </ul>
                             </li>
@@ -659,6 +660,6 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
             </div>
         </div>
     </div>
-    <jsp:include page="/footer" flush="true" />
+   <jsp:include page="/footer" flush="true"/>
 </body>
 </html>

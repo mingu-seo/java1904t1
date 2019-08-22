@@ -12,7 +12,7 @@ String clientId = "yyt5qpvTbPa5tqyLB0Td";//애플리케이션 클라이언트 �
 String clientSecret = "cNNDkHZfCt";//애플리케이션 클라이언트 시크릿값";
 String code = request.getParameter("code");
 String state = request.getParameter("state");
-String redirectURI = URLEncoder.encode("YOUR_CALLBACK_URL", "UTF-8");
+String redirectURI = URLEncoder.encode("http://hyeon012.cafe24.com/sns/join/naverCallback.jsp", "UTF-8");
 String apiURL;
 apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&;";
 apiURL += "client_id=" + clientId;

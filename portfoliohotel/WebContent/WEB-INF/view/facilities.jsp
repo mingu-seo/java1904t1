@@ -342,7 +342,7 @@
 			</div>
 		</div>
 	</div>
-	<jsp:include page="/footer" flush="true" />
+	<jsp:include page="/footer" flush="true"/>
 
 </body>
 </html>

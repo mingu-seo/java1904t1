@@ -169,7 +169,7 @@ $(function(){
                             
                             <div class="cardType">
                                     <label for="name_ko">총 가격 &nbsp &nbsp<span>＊</span></label>
-                                    <input type="text" id="total_price" name="total_price" value="" style="color:#000000;">
+                                    <input type="text" id="total_price" name="total_price" value="" style="color:#000000;" readonly>
                             </div>                            
                         </div>
                                                      
