@@ -202,7 +202,7 @@ function goSave() {
                                         </div>
                             </div>
                     </li>
-                    <li><a href="sign_in.html">SIGN IN</a></li>
+                    <li><a href="sign_in.html">Sign in</a></li>
                 </ul>
                 
             </div>

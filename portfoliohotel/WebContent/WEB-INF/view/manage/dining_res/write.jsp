@@ -14,7 +14,11 @@ Dining_resVO param = (Dining_resVO)request.getAttribute("vo");
 jQuery(window).load(function() {
 	initCal({id:"d_day",type:"day",today:"y"});
 });
-
+$(function() {
+$("#member_name").change(function() {
+	console.log($("#member_name").val());
+});
+});
 function goSave() {
 	
 }
@@ -57,33 +61,24 @@ function goSave() {
 										</td>
 									</tr>
 									<tr>
-										<th scope="row"><label for="">투숙객 성</label></th>
-										<td colspan="3">
-											<input type="text" id="guest_lname" name="guest_lname" class="w10" />	
+										<th scope="row"><label for="">투숙객 성명</label></th>
+										<td colspan="2">
+											<input type="text" id="guest_lname" name="guest_lname" class="w10" />
+											<input type="text" id="guest_fname" name="guest_fname" class="w20" />
 										</td>
 									</tr>
 									<tr>
-										<th scope="row"><label for="">투숙객 이름</label></th>
+										<th scope="row"><label for="">투숙객 연락처</label></th>
 										<td colspan="3">
-											<input type="text" id="guest_fname" name="guest_fname" class="w10" />	
-										</td>
-									</tr>
-									<tr>
-										<th scope="row"><label for="">투숙객 연락처1</label></th>
-										<td colspan="3">
-											<input type="text" id="guest_tel1" name="guest_tel1" class="w10" />	
-										</td>
-									</tr>
-									<tr>
-										<th scope="row"><label for="">투숙객 연락처2</label></th>
-										<td colspan="3">
-											<input type="text" id="guest_tel2" name="guest_tel2" class="w10" />	
-										</td>
-									</tr>
-									<tr>
-										<th scope="row"><label for="">투숙객 연락처3</label></th>
-										<td colspan="3">
+											<input type="text" id="guest_tel1" name="guest_tel1" class="w10" />
+											<input type="text" id="guest_tel2" name="guest_tel2" class="w10" />
 											<input type="text" id="guest_tel3" name="guest_tel3" class="w10" />	
+										</td>
+									</tr>
+									<tr>
+										<th scope="row"><label for="">투숙객 이메일</label></th>
+										<td colspan="3">
+											<input type="text" id="guest_email" name="guest_email" class="w10" />	
 										</td>
 									</tr>
 									<tr>
@@ -94,14 +89,32 @@ function goSave() {
 									</tr>
 									<tr>
 										<th scope="row"><label for="">예약인원(성인)</label></th>
-										<td colspan="3">
-											<input type="text" id="adult" name="adult" class="w10" />	
+										<td>
+											<select name="adult" id="adult">
+												<option value="0">0명</option>
+												<%
+												for(int i=1; i<=10; i++) {
+												%>
+												<option value="<%=i %>" data-num="<%=i%>"><%=i %>명</option>
+												<%
+												} 
+												%>
+											</select>
 										</td>
 									</tr>
 									<tr>
 										<th scope="row"><label for="">예약인원(어린이)</label></th>
-										<td colspan="3">
-											<input type="text" id="kid" name="kid" class="w10" />	
+										<td>
+											<select name="kid" id="kid">
+												<option value="0">0명</option>
+												<%
+												for(int i=1; i<=10; i++) {
+												%>
+												<option value="<%=i %>" data-num="<%=i%>"><%=i %>명</option>
+												<%
+												} 
+												%>
+											</select>
 										</td>
 									</tr>
 									<tr>
@@ -125,7 +138,12 @@ function goSave() {
 											<input type="text" id="d_time" name="d_time" class="w10" />	
 										</td>
 									</tr>
-									
+									<tr>
+										<th scope="row"><label for="">총가격</label></th>
+										<td colspan="3">
+											<input type="text" id="total_price" name="total_price" class="w10" />	
+										</td>
+									</tr>
 									
 								</tbody>
 							</table>

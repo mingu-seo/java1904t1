@@ -80,21 +80,15 @@ Dining_resVO data = (Dining_resVO) request.getAttribute("data");
 											<th scope="row"><label for="">예약날짜</label></th>
 											<td colspan="6"><%=data.getD_day()%></td>
 										</tr>
-										<tr>
+										 <tr>
 											<th scope="row"><label for="">회원명</label></th>
-											<td colspan="6"><%=data.getMember_name()%></td>
-										<tr>
+											<td colspan="6"><%=data.getGuest_lname()%><%=data.getGuest_fname()%></td>
+										<tr> 
 										</tr>	
-											<th scope="row"><label for="">회원 연락처</label></th>
-											<td colspan="2"><%=data.getGuest_tel1()%></td>
-										<tr>
-										</tr>	
-											<th scope="row"><label for="">회원 연락처</label></th>
-											<td colspan="2"><%=data.getGuest_tel2()%></td>
-										<tr>
-										</tr>	
-											<th scope="row"><label for="">회원 연락처</label></th>
-											<td colspan="2"><%=data.getGuest_tel3()%></td>
+											<th scope="row"><label for="">투숙객 연락처</label></th>
+											<td colspan="6">
+											<%=data.getGuest_tel1()%> - <%=data.getGuest_tel2()%> - <%=data.getGuest_tel3()%>
+											</td>
 										<tr>
 											<th scope="row"><label for="">다이닝명</label></th>
 											<td colspan="6"><%=data.getDining_name()%></td>
@@ -103,7 +97,7 @@ Dining_resVO data = (Dining_resVO) request.getAttribute("data");
 											<th rowspan="2"><label for="">예약인원</th>
 																					
 											<th scope="row" style="border-left: 1px solid #bec0c4;"><label for="">성인</th>
-											<td colspan="2"><%=data.getAdult()%></td>
+											<td colspan="4"><%=data.getAdult()%></td>
 										</tr>
 										<tr>	
 											<th scope="row"><label for="">어린이</label></th>

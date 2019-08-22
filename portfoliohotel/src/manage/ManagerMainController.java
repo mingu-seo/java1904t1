@@ -31,7 +31,7 @@ public class ManagerMainController {
 			adminInfo.setIp(vo.getIp());
 			adminService.insertLoginHistory(adminInfo);		// 로그인히스토리 저장
 			session.setAttribute("adminInfo", adminInfo);	// 세션 저장
-			String redirectUrl = SiteProperty.INDEX_PAGE; // 시작페이지
+			String redirectUrl = SiteProperty.MEMBERINDEX; // 시작페이지
 			
 			// 로그인 이전페이지 존재하는 경우
 			if(login_url != null && !"".equals(login_url)) {
