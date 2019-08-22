@@ -10,7 +10,6 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 MemberVO data = (MemberVO)request.getAttribute("data");
 
 ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
-
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -345,9 +344,8 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                                     </div>
                                 </a> 
                         </div>
-                        
-                        
-                        <div class="pro_list2 pro_list">
+
+                       <!--  <div class="pro_list1 pro_list">
                                 <a href="#">
                                     <img src="/img/dining/p_outdoor.jpg">
                                     <div class="promotion_text">
@@ -363,7 +361,6 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                                     </div>
                                 </a>
                         </div>
-                        
 
                         <div class="pro_list1 pro_list">
                                 <a href="/pkg/room/bbq">

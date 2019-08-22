@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pkg.PkgService;
+import pkg.PkgVO;
+import pkg.res.Pkg_resService;
 import room.RoomService;
 import room.RoomVO;
 
@@ -15,6 +18,31 @@ public class UserMainController {
 	
 	@Autowired
 	RoomService roomService;
+	
+	@Autowired
+	PkgService pkgService;
+	
+	@Autowired
+	Pkg_resService pkg_resService;
+	
+	@RequestMapping("/header_menu")
+	public String header_menu(Model model, PkgVO param) throws Exception {
+		param.setTablename("pkg");
+		int[] rowPageCount = pkgService.count(param);
+		ArrayList<PkgVO> plist = pkgService.list2(param);
+		
+		model.addAttribute("ptotCount", rowPageCount[0]);
+		model.addAttribute("ptotPage", rowPageCount[1]);
+		model.addAttribute("plist", plist);
+		model.addAttribute("pvo", param);
+		
+		return "header_menu";
+	}
+	
+	@RequestMapping("/footer")
+	public String footer(Model model) throws Exception {
+		return "footer";
+	}
 
 	@RequestMapping("/index")
 	public String index(Model model, RoomVO rvo) throws Exception {
@@ -46,6 +74,12 @@ public class UserMainController {
 	public String facilities(Model model) throws Exception {
 		
 		return "facilities";
+	}
+	
+	@RequestMapping("/hotel_info")
+	public String hotel_info(Model model) throws Exception {
+		
+		return "hotel_info";
 	}
 	
 }

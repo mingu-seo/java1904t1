@@ -156,7 +156,7 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                     <!-- <li><a href="#">SIGN IN</a></li> -->
                     <li>
 		                <%if(sessionMember == null){ %>
-		                <a href="/membership/sign_in">Sign In</a>
+		                <a href="/membership/sign_in">Sign in</a>
 		                <%}else{ %>
 		                <a href="/membership/mypage">My Page</a>
 		                <%} %>
