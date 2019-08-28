@@ -35,6 +35,11 @@
 		<!-- <include refid="searchSql" /> -->
 		ORDER BY no DESC LIMIT $startPageNo$, $pageRows$
 	</select>
+	
+	<select id="list_asc" parameterClass="diningvo" resultClass="diningvo">
+		select * from dining
+		ORDER BY no ASC
+	</select>
 
 	<insert id="insert" parameterClass="diningvo">
 		insert into dining (

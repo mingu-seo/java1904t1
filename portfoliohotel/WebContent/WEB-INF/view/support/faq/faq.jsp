@@ -48,47 +48,47 @@ int totPage = (Integer)request.getAttribute("totPage");
             </div>
             <div class="faq-table">
                 <div class="table-box">
-                    <table>
-			<form name="searchForm" id="searchForm" action="" method="post">
-				<div class="search">
-					<select name="category" onchange="$('#searchForm').submit();">
-						<option value="0" <%=Function.getSelected(param.getCategory(), 0)%>>카테고리 선택</option>
-						<option value="1" <%=Function.getSelected(param.getCategory(), 1)%>>예약</option>
-						<option value="2" <%=Function.getSelected(param.getCategory(), 2)%>>결제</option>
-					</select>   
-				</div>                   
-                        <tr class="table-head">
-                            <th>내용</th>
-                        </tr>
-					<%
-						if (totCount == 0) {
-					%>
-						<tr>
-							<td colspan="2">등록된 글이 없습니다.</td>
-						</tr>
-					<%
-						} else {
-							for (int i=0; i<list.size(); i++) {
-					%>
-					<%
-						if(list.get(i).getDisplay() == 1) {
-					%>
-						<tr class="faq-q">
-							<td><a href="#">Q. <%=list.get(i).getTitle() %></a></td>
-						</tr>
-						<tr class="faq-answer">
-							<td><a href="#"><%=list.get(i).getContents() %></a></td>
-						</tr>
-					<%
-						}
-					%>
-					<%
+					<table>
+						<form name="searchForm" id="searchForm" action="" method="post">
+							<tr class="table-head">
+								<th>내용 <span class="search"> <select name="category"
+										onchange="$('#searchForm').submit();">
+											<option value="0"
+												<%=Function.getSelected(param.getCategory(), 0)%>>카테고리
+												선택</option>
+											<option value="1"
+												<%=Function.getSelected(param.getCategory(), 1)%>>예약</option>
+											<option value="2"
+												<%=Function.getSelected(param.getCategory(), 2)%>>결제</option>
+									</select>
+								</span>
+								</th>
+							</tr>
+							<%
+							if (totCount == 0) {
+							%>
+							<tr>
+								<td colspan="2">등록된 글이 없습니다.</td>
+							</tr>
+							<%
+							} else {
+								for (int i = 0; i < list.size(); i++) {
+									if (list.get(i).getDisplay() == 1) {
+							%>
+							<tr class="faq-q">
+								<td><a href="#">Q. <%=list.get(i).getTitle()%></a></td>
+							</tr>
+							<tr class="faq-answer">
+								<td><a href="#">A. <%=list.get(i).getContents()%></a></td>
+							</tr>
+							<%
+									}
+								}
 							}
-						 }
-					%>
-				</form>
-                    </table>
-                </div>
+							%>
+						</form>
+					</table>
+				</div>
                 <!-- 페이징 처리 -->
                         <%=Page.userIndexList(param.getReqPageNo(), totPage, request)%>
                 </div>               

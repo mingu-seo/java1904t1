@@ -14,6 +14,10 @@ public class DiningDAO extends SqlMapClientDAOSupport {
 		return (ArrayList) getSqlMapClient().queryForList("dining.list", vo);
 	}
 
+	public ArrayList list_asc(DiningVO vo) throws SQLException {
+		return (ArrayList) getSqlMapClient().queryForList("dining.list_asc", vo);
+	}
+	
 	public int count(DiningVO vo) throws SQLException {
 		return (Integer) getSqlMapClient().queryForObject("dining.count", vo);
 	}

@@ -34,6 +34,11 @@ public class DiningService {
 		ArrayList list = diningDao.list(vo);
 		return list;
 	}
+	
+	public ArrayList list_asc(DiningVO vo) throws Exception {
+		ArrayList list = diningDao.list_asc(vo);
+		return list;
+	}
 
 	public int insert(DiningVO vo, HttpServletRequest request) throws Exception {
 		FileUtil fu = new FileUtil();
@@ -41,6 +46,7 @@ public class DiningService {
 		MultipartFile file= (MultipartFile)fileMap.get("image_tmp");
 		if (!file.isEmpty()) {
 			fu.upload(file, SiteProperty.DINING_UPLOAD_PATH, SiteProperty.REAL_PATH, "dining");
+			fu.upload(file, SiteProperty.DINING_UPLOAD_PATH, SiteProperty.LOCAL_PATH, "dining");
 			vo.setImagename(fu.getName());
 			vo.setImagename_org(fu.getSrcName());
 		}
@@ -56,6 +62,7 @@ public class DiningService {
 		MultipartFile file= (MultipartFile)fileMap.get("image_tmp");
 		if (!file.isEmpty()) {
 			fu.upload(file, SiteProperty.DINING_UPLOAD_PATH, SiteProperty.REAL_PATH, "dining");
+			fu.upload(file, SiteProperty.DINING_UPLOAD_PATH, SiteProperty.LOCAL_PATH, "dining");
 			vo.setImagename(fu.getName());
 			vo.setImagename_org(fu.getSrcName());
 		}

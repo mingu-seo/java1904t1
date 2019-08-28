@@ -56,36 +56,93 @@ public class DiningController {
 		return "manage/dining/write";
 	}
 
-	@RequestMapping("/dining/thefesta")
+//	@RequestMapping("/dining/thefesta")
+//	public String thefesta(Model model, DiningVO param) throws Exception {
+//		DiningVO data = diningService.read(36);
+//		model.addAttribute("data", data);
+//		model.addAttribute("vo", param);
+//		return "dining/thefesta";
+//	}
+//
+//	@RequestMapping("/dining/granum-dining")
+//	public String granum_dining(Model model, DiningVO param) throws Exception {
+//			DiningVO data = diningService.read(37);
+//			model.addAttribute("data", data);
+//			model.addAttribute("vo", param);
+//			return "dining/granum-dining";
+//		}
+//
+//	@RequestMapping("/dining/moon-bar")
+//	public String moon_bar(Model model, DiningVO param) throws Exception {
+//		DiningVO data = diningService.read(38);
+//		model.addAttribute("data", data);
+//		model.addAttribute("vo", param);
+//		return "dining/moon-bar";
+//	}
+//
+//	@RequestMapping("/dining/outdoor-kitchen")
+//	public String outdoor_kitchen(Model model, DiningVO param) throws Exception {
+//		DiningVO data = diningService.read(39);
+//		model.addAttribute("data", data);
+//		model.addAttribute("vo", param);
+//		return "dining/outdoor-kitchen";
+//	}
+	
+	
+	@RequestMapping("/dining/detail_sub1")
 	public String thefesta(Model model, DiningVO param) throws Exception {
-		DiningVO data = diningService.read(36);
-		model.addAttribute("data", data);
-		model.addAttribute("vo", param);
-		return "dining/thefesta";
+		DiningVO data = diningService.read(1);
+		model.addAttribute("ddata", data);
+		model.addAttribute("dvo", param);
+		return "dining/dining_detail";
+	}
+	
+	@RequestMapping("/dining/detail_sub2")
+	public String rooftop(Model model, DiningVO param) throws Exception {
+		DiningVO data = diningService.read(2);
+		model.addAttribute("ddata", data);
+		model.addAttribute("dvo", param);
+		return "dining/dining_detail";
 	}
 
-	@RequestMapping("/dining/granum-dining")
+	@RequestMapping("/dining/detail_sub3")
 	public String granum_dining(Model model, DiningVO param) throws Exception {
-			DiningVO data = diningService.read(37);
-			model.addAttribute("data", data);
-			model.addAttribute("vo", param);
-			return "dining/granum-dining";
-		}
+		DiningVO data = diningService.read(3);
+		model.addAttribute("ddata", data);
+		model.addAttribute("dvo", param);
+		return "dining/dining_detail";
+	}	
 
-	@RequestMapping("/dining/moon-bar")
+	@RequestMapping("/dining/detail_sub4")
 	public String moon_bar(Model model, DiningVO param) throws Exception {
-		DiningVO data = diningService.read(38);
-		model.addAttribute("data", data);
-		model.addAttribute("vo", param);
-		return "dining/moon-bar";
+		DiningVO data = diningService.read(4);
+		model.addAttribute("ddata", data);
+		model.addAttribute("dvo", param);
+		return "dining/dining_detail";
 	}
 
-	@RequestMapping("/dining/outdoor-kitchen")
+	@RequestMapping("/dining/detail_sub5")
 	public String outdoor_kitchen(Model model, DiningVO param) throws Exception {
-		DiningVO data = diningService.read(39);
-		model.addAttribute("data", data);
-		model.addAttribute("vo", param);
-		return "dining/outdoor-kitchen";
+		DiningVO data = diningService.read(5);
+		model.addAttribute("ddata", data);
+		model.addAttribute("dvo", param);
+		return "dining/dining_detail";
+	}
+	
+	@RequestMapping("/dining/detail_sub6")
+	public String club_member(Model model, DiningVO param) throws Exception {
+		DiningVO data = diningService.read(6);
+		model.addAttribute("ddata", data);
+		model.addAttribute("dvo", param);
+		return "dining/dining_detail";
+	}
+	
+	@RequestMapping("/dining/detail_sub7")
+	public String montst(Model model, DiningVO param) throws Exception {
+		DiningVO data = diningService.read(7);
+		model.addAttribute("ddata", data);
+		model.addAttribute("dvo", param);
+		return "dining/dining_detail";
 	}
 
 	@RequestMapping("/book/confirm-dining")

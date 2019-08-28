@@ -3,6 +3,7 @@
 <%@ page import="board.member.*" %>
 <%@ page import="util.*" %>
 <%@ page import="room.*" %>
+<%@ page import="dining.*" %>
 <%
 MemberVO param = (MemberVO)request.getAttribute("vo");
 ArrayList<MemberVO> list = (ArrayList)request.getAttribute("list");
@@ -10,6 +11,7 @@ MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 MemberVO data = (MemberVO)request.getAttribute("data");
 
 ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
+ArrayList<DiningVO> list_d = (ArrayList<DiningVO>)request.getAttribute("list_d");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -298,134 +300,44 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                 <!-- 슬라이드 구역 -->
                 <div class="promotion_panel">
                     <div class="promotion_list clear">
-                        <div class="pro_list1 pro_list">
-                            <a href="/pkg/room/oasis">
-                                <img src="/img/dining/p_festa.jpg"> 
+                    
+                    <%
+                	for(int i=0; i<list_d.size(); i++) {
+                		if(i%2 == 0) {
+                	%>
+                		<div class="pro_list1 pro_list">
+                            <a href="/dining/detail_sub<%=i+1%>">
+                                <img src="/img/dining/p_detail/p_<%=i+1 %>.jpg"> 
                                 <div class="promotion_text">
-                                    <p>Festa by mingoo</p>
-                                    <h6>총괄 셰프인 강민구 셰프의 터치로 완성되는 자유분방하면서도 정성이 담긴 유러피안 캐주얼 푸드를 경험해보세요.
-                                    </h6>
-                                    <p class="pro_price">50000원 부터</p>
+                                    <p><%=list_d.get(i).getName() %></p>
+                                    <h6><%=list_d.get(i).getInclusion() %></h6>
+                                    <p class="pro_price"><%=Function.toPriceComma(list_d.get(i).getPrice()) %>원 부터</p>
                                 </div>
                                 <div class="pro-top-box">
                                     <p>Dining</p>
                                 </div>
                             </a>
                         </div>
-                        
-                        <div class="pro_list2 pro_list">
-                                <a href="#">
-                                    <img src="/img/dining/p_granum.jpg">
-                                    <div class="promotion_text">
-                                        <p>Granum Dining Lounge</p>
-                                        <h6>더욱 여유롭고 프라이빗한 휴식을 오아시스<br/>
-                                            카바나에서 즐겨보세요.<br/>
-                                        </h6>
-                                        <p class="pro_price">50000원 부터</p>
-                                    </div>
-                                    <div class="pro-top-box">
-                                            <p>Dining</p>
-                                    </div>
-                                </a>
+                	<%			
+                		} else {
+                	%>
+                		<div class="pro_list2 pro_list">
+                            <a href="/dining/detail_sub<%=i+1%>">
+                                <img src="/img/dining/p_detail/p_<%=i+1 %>.jpg"> 
+                                <div class="promotion_text">
+                                    <p><%=list_d.get(i).getName() %></p>
+                                    <h6><%=list_d.get(i).getInclusion() %></h6>
+                                    <p class="pro_price"><%=Function.toPriceComma(list_d.get(i).getPrice()) %>원 부터</p>
+                                </div>
+                                <div class="pro-top-box">
+                                    <p>Dining</p>
+                                </div>
+                            </a>
                         </div>
-                        
-                        <div class="pro_list1 pro_list">
-                                <a href="/pkg/room/senseof">
-                                    <img src="/img/dining/p_moonbar.jpg">
-                                    <div class="promotion_text">
-                                        <p>Moon Bar</p>
-                                        <h6>도심 속에서 즐기는 로맨틱한 여행, ‘센스<br/>
-                                            오브 로맨스’ 패키지를 소개합니다.
-                                        </h6>
-                                        <p class="pro_price">50000원 부터</p>
-                                    </div>
-                                    <div class="pro-top-box">
-                                            <p>Dining</p>
-                                    </div>
-                                </a> 
-                        </div>
-
-                       <!--  <div class="pro_list1 pro_list">
-                                <a href="#">
-                                    <img src="/img/dining/p_outdoor.jpg">
-                                    <div class="promotion_text">
-                                        <p>‘For My Parents’ & ‘For my Fiance’</p>
-                                        <h6>서울의 야경이 펼쳐진 문 바에서<br/>
-                                            커플들을 위한 프로포즈 & 기념일<br/>
-                                            패키지를 선보입니다.
-                                        </h6>
-                                        <p class="pro_price">50000원 부터</p>
-                                    </div>
-                                    <div class="pro-top-box">
-                                            <p>Dining</p>
-                                    </div>
-                                </a>
-                        </div>
-
-                        <div class="pro_list1 pro_list">
-                                <a href="/pkg/room/bbq">
-                                    <img src="/img/dining/p_rooftop.jpg">
-                                    <div class="promotion_text">
-                                        <p>Festa Rooftop Bar</p>
-                                        <h6>트로피컬 무드의 루프탑 바에서 장르를 넘나드는 신나는 공연과 라이브 퍼포먼스, 화려한 조명이 더해진 이색적인 공간에서 나른한 일상 속 즐거움을 일깨워보시기 바랍니다.
-										<br/>
-                                        </h6>
-                                        <p class="pro_price">50000원 부터</p>
-                                    </div>
-                                    <div class="pro-top-box">
-                                            <p>Dining</p>
-                                    </div>
-                                </a>
-                        </div>
-
-
-                        <div class="pro_list2 pro_list">
-                                <a href="#">
-                                    <img src="/img/dining/p_club.jpg">
-                                    <div class="promotion_text">
-                                        <p>The Reasonable</p>
-                                        <h6>싱글 몰트 위스키와 함께 서울의 야경처럼<br/>
-                                            반짝이는 밤을 즐겨보시기 바랍니다.<br/>
-                                        </h6>
-                                        <p class="pro_price">50000원 부터</p>
-                                    </div>
-                                    <div class="pro-top-box">
-                                            <p>Dining</p>
-                                    </div>
-                                </a>
-                        </div>
-
-                        <div class="pro_list2 pro_list">
-                                <a href="#">
-                                    <img src="/img/dining/p_montst.jpg">
-                                    <div class="promotion_text">
-                                        <p>Petit Ibiza width Moonlight</p>
-                                        <h6>환상적인 서울 야경이 펼쳐지는 문 바 야외<br/>
-                                            테라스에서 프라이빗 파티를 계획해보세요.<br/>
-                                        </h6>
-                                        <p class="pro_price">50000원 부터</p>
-                                    </div>
-                                    <div class="pro-top-box">
-                                            <p>Dining</p>
-                                    </div>
-                                </a>
-                        </div> 
-
-                         <!-- <div class="pro_list2 pro_list">
-                                <a href="#">
-                                    <img src="img/promotion8.jpg">
-                                    <div class="promotion_text">
-                                        <p>Granum Dinner Table</p>
-                                        <h6>맛과 건강을 담은 나만의 샐러드와 풍성한<br/>
-                                            메인 플래터로 푸짐한 디너를 즐겨보세요.<br/>
-                                        </h6>
-                                        <p class="pro_price">170,000원 부터</p>
-                                    </div>
-                                    <div class="pro-top-box">
-                                            <p>Promotion</p>
-                                    </div> 
-                                </a>
-                        </div> -->
+                	<%			
+                		}
+                	}
+                	%>
                     </div>
                 </div>
             </div>
@@ -486,40 +398,48 @@ ArrayList<RoomVO> list_r = (ArrayList<RoomVO>)request.getAttribute("list_r");
                         <button class="slick-next"></button>
                     </div>
                     <!-- 객실 하단 정보들어갈 구역 -->
-                    <ul class="room-bot-info clear">
-                            <li class="room-left-info">
-                                <h3>INFORMATION</h3>
-                                <ul class="table1 clear">
-                                    <li>
-                                        <p><span class="th">체크인</span><span>15:00</span></p>
-                                        <p><span class="th">체크아웃</span><span>12:00</span></p>      
-                                    </li>
-                                </ul>
-                                <ul class="table1-1 clear">
-                                    <li>
-                                        <p><span class="th">전망</span><span>남산 & 시티뷰</span></p>
-                                        <p><span class="th">객실타입</span><span>원룸</span></p>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="room-right-info">
-                                <h3>FACILITIES</h3>
-                                <ul class="table2 clear">
-                                    <li>
-                                        <p class="wid-1">·피트니스 클럽</p>
-                                        <p class="wid-2">·실내 수영장</p>
-                                        <p>·몽상클레르 10%할인</p>
-                                    </li>
-                                
-                                    <li>
-                                            <p class="wid-1">·사우나 이용</p>
-                                            <p class="wid-2">·갤러리 10%할인</p>
-                                            <p>·반얀트리 스파</p>
-                                    </li>
-                                </ul>
-                            </li>
-                    </ul>  
-                </div>
+					<ul class="room-bot-info clear">
+						<li class="room-left-info">
+							<h3>INFORMATION</h3>
+							<ul class="table1 clear">
+								<li>
+									<p>
+										<span class="th">체크인</span><span>15:00</span>
+									</p>
+									<p>
+										<span class="th">체크아웃</span><span>12:00</span>
+									</p>
+								</li>
+							</ul>
+							<ul class="table1-1 clear">
+								<li>
+									<p>
+										<span class="th">전망</span><span>남산 & 시티뷰</span>
+									</p>
+									<p>
+										<span class="th">객실타입</span><span>원룸 & 투룸</span>
+									</p>
+								</li>
+							</ul>
+						</li>
+						<li class="room-right-info">
+							<h3>FACILITIES</h3>
+							<ul class="table2 clear">
+								<li>
+									<p class="wid-1">·피트니스 클럽</p>
+									<p class="wid-2">·실내 수영장</p>
+									<p>·몽상클레르 10%할인</p>
+								</li>
+	
+								<li>
+									<p class="wid-1">·사우나 이용</p>
+									<p class="wid-2">·갤러리 10%할인</p>
+									<p>·반얀트리 스파</p>
+								</li>
+							</ul>
+						</li>
+					</ul>
+			</div>
         </div>
 
         <!-- 05시설소개 구역  -->

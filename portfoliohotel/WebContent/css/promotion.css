@@ -9,11 +9,21 @@
 .banner.granum {background-image: url("/img/promotion/granum.jpg");}
 .banner.bridal {background-image: url("/img/promotion/bridal.jpg");}
 
+.banner.dining1 {background-image: url("/img/dining/detail/festa-dining.jpg");}
+.banner.dining2 {background-image: url("/img/dining/detail/festa-rooftop-bar.jpg");}
+.banner.dining3 {background-image: url("/img/dining/detail/granum-dining-lounge.jpg");}
+.banner.dining4 {background-image: url("/img/dining/detail/moonbar.jpg");}
+.banner.dining5 {background-image: url("/img/dining/detail/outdoor.jpg");}
+.banner.dining6 {background-image: url("/img/dining/detail/club-members.jpg");}
+.banner.dining7 {background-image: url("/img/dining/detail/montst.jpg");} 
+
+
 .banner-center {width:1200px; height:100%; margin:0 auto; position: relative;}
 .banner-text {width:350px; height:350px; position:absolute; bottom:0; right:0; color:#fff; background-color:rgba(0, 0, 0, 0.7); padding:60px 20px 20px 20px; text-align:center;}
 .banner-text h2 {font-size:20px; font-weight:300; margin-bottom:30px;}
 .banner-text h2 span {display:block; margin-top:5px; font-size:14px;}
 .banner-text h3 {font-size:15px; font-weight:200; margin-bottom:30px; line-height:18px; letter-spacing:0.2px;}
+.banner-text h3.dining {font-size:15px; font-weight:200; margin-bottom:30px; line-height:18px; letter-spacing:0.2px; position: relative; top: 50px;}
 .banner-text p {font-size:13px; font-weight:200; line-height:20px;}
 
 /* 프로모션 상세 내용 */

@@ -61,7 +61,10 @@ NoticeVO notice_data = (NoticeVO)request.getAttribute("notice_data");
                             </li>
                         </ul>                        
                         <h1>내용</h1>
-                        <div class="notice-cont"><%=notice_data.getContents() %></div>
+                        <div class="notice-cont">
+                        	<img src="/upload/notice/<%=notice_data.getFile()%>" style="width:100%; height:auto;"></img><br/><br/>
+                        	<%=notice_data.getContents() %>
+                        </div>   
                         <h1>첨부파일</h1>
                         <div class="notice-title">
                         <% if(notice_data.getFile_org() != null && notice_data.getFile_org() != "")  { %>

@@ -2,16 +2,21 @@
 <%@ page import="java.util.*" %>
 <%@ page import="board.member.*" %>
 <%@ page import="pkg.*" %>
+<%@ page import="room.*" %>
+<%@ page import="dining.*" %>
 <%@ page import="util.*" %>
 <%
 MemberVO sessionMember = (MemberVO)session.getAttribute("memberInfo");
 MemberVO data = (MemberVO)request.getAttribute("data");
-%>
-<%
+
 PkgVO pparam = (PkgVO)request.getAttribute("pvo");
 ArrayList<PkgVO> plist = (ArrayList<PkgVO>)request.getAttribute("plist");
 int ptotCount = (Integer)request.getAttribute("ptotCount");
 int ptotPage = (Integer)request.getAttribute("ptotPage");
+
+ArrayList<RoomVO> rlist = (ArrayList<RoomVO>)request.getAttribute("rlist");
+
+ArrayList<DiningVO> dlist = (ArrayList<DiningVO>)request.getAttribute("dlist");
 %>
 <div id="header">
 
@@ -48,20 +53,25 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                                         <div class="pc-sub-box">
                                             <h2>Rooms</h2>
                                             <ul class="Rooms">
-                                                <li><a href="/room/detail_sub1">Namsan Pool Deluxe Room</a></li>
-                                                <li><a href="/room/detail_sub2">Namsan Pool Premier Suite</a></li>
-                                                <li><a href="/room/detail_sub3">Namsan Presidential Suite</a></li>
-                                                <li><a href="/room/detail_sub4">Spa Sanctuary Suite</a></li>
-                                                <li><a href="/room/detail_sub5">Portfolio Pool Presidential Suite</a></li>
+                                            	<%
+                                            	for(int i=0; i<rlist.size(); i++){
+                                            	%>
+                                            		<li><a href="/room/detail_sub<%=i+1%>"><%=rlist.get(i).getName() %></a></li>	
+                                            	<%
+                                            	}
+                                            	%>
                                             </ul>
                                         </div>
                                         <div class="pc-sub-box">
                                             <h2>Dining</h2>
                                             <ul class="Dining">
-                                                <li><a href="/dining/thefesta">The Festa</a></li>
-                                                <li><a href="/dining/granum-dining">Granum Dining Lounge</a></li>
-                                                <li><a href="/dining/moon-bar">Moon Bar</a></li>
-                                                <li><a href="/dining/outdoor-kitchen">The Oasis Outdoor Kitchen</a></li>
+                                            	<%
+                                            	for(int i=0; i<dlist.size(); i++){
+                                            	%>
+                                            		<li><a href="/dining/detail_sub<%=i+1%>"><%=dlist.get(i).getName() %></a></li>	
+                                            	<%
+                                            	}
+                                            	%>
                                             </ul>
                                         </div>
                                         <div class="pc-sub-box">
@@ -77,39 +87,38 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                     </li>
                     <li class="facilities">
                         <a href="#">Facilities</a>
-                            <div class="pc-sub">
-                                    <div class="pc-sub-center">
-                                            <div class="pc-sub-box facil-left">
-                                                <h2 class="no-line">Facilities</h2>
-                                                <ul>
-                                                    <li><a href="/facilities#f1">The Oasis</a></li>
-                                                    <li><a href="/facilities#f2">Indoor Swimming Pool</a></li>
-                                                    <li><a href="/facilities#f3">Fitness Centre</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pc-sub-box mtop">
-                                                <ul class="Rooms">
-                                                	<li><a href="/facilities#f4">Sauna</a></li>
-                                                	<li><a href="/facilities#f5">Troon Golf Academy</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pc-sub-box mtop facil-right">
-                                                <ul class="Dining">
-                                                    <li><a href="/facilities#f6">Tennis Court</a></li>
-                                                    <li><a href="/facilities#f7">Futsal Field</a></li>
-                                                    <li><a href="/facilities#f8">Basketball Court</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="pc-sub-box mtop facil-right">
-                                                <ul class="Meeting & Wedding">
-                                                    <li><a href="/facilities#f9">Ice Rink</a></li>
-                                                    <li><a href="/facilities#f10">Foresta</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                            </div>
-                        
-                    </li>
+                        <div class="pc-sub">
+							<div class="pc-sub-center">
+							<div class="pc-sub-box facil-left">
+								<h2 class="no-line">Facilities</h2>
+								<ul>
+									<li><a href="/facilities#f1">The Oasis</a></li>
+									<li><a href="/facilities#f2">Indoor Swimming Pool</a></li>
+									<li><a href="/facilities#f3">Fitness Centre</a></li>
+								</ul>
+							</div>
+							<div class="pc-sub-box mtop">
+								<ul class="Rooms">
+									<li><a href="/facilities#f4">Sauna</a></li>
+									<li><a href="/facilities#f5">Troon Golf Academy</a></li>
+								</ul>
+							</div>
+							<div class="pc-sub-box mtop facil-right">
+								<ul class="Dining">
+									<li><a href="/facilities#f6">Tennis Court</a></li>
+									<li><a href="/facilities#f7">Futsal Field</a></li>
+									<li><a href="/facilities#f8">Basketball Court</a></li>
+								</ul>
+							</div>
+							<div class="pc-sub-box mtop facil-right">
+								<ul class="Meeting & Wedding">
+									<li><a href="/facilities#f9">Ice Rink</a></li>
+									<li><a href="/facilities#f10">Foresta</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</li>
                     <li>
                         <a href="#">Support</a>
                             <div class="pc-sub">
@@ -153,10 +162,9 @@ int ptotPage = (Integer)request.getAttribute("ptotPage");
                                         </div>
                             </div>
                     </li>
-                    <!-- <li><a href="#">SIGN IN</a></li> -->
                     <li>
 		                <%if(sessionMember == null){ %>
-		                <a href="/membership/sign_in">Sign in</a>
+		                <a href="/membership/sign_in">Sign In</a>
 		                <%}else{ %>
 		                <a href="/membership/mypage">My Page</a>
 		                <%} %>
