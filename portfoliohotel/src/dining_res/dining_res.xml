@@ -75,6 +75,11 @@
 		delete from dining_res where no=#no#
 	</delete>
 
+	<select id="read_list" parameterClass="Integer" resultClass="dining_resvo">
+		SELECT * FROM dining_res
+		WHERE member_pk=#member_pk#
+	</select>
+	
 </sqlMap>
 
 

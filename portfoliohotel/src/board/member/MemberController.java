@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import board.qna.QnaService;
 import board.qna.QnaVO;
+import dining_res.Dining_resService;
+import dining_res.Dining_resVO;
 import pkg.res.Pkg_resService;
 import pkg.res.Pkg_resVO;
 import room.res.Room_opt_resVO;
@@ -34,6 +36,9 @@ public class MemberController {
 	
 	@Autowired
 	private QnaService qnaService;
+	
+	@Autowired
+	private Dining_resService dining_resService;
 	
 	
 	//========================================관리자===================================================
@@ -276,14 +281,17 @@ public class MemberController {
 
 	
 	@RequestMapping("/membership/mypage")
-	public String mypage(Model model, MemberVO param, Pkg_resVO prparam, Room_resVO rvo, QnaVO qparam, HttpSession session) throws Exception {
+	public String mypage(Model model, MemberVO param, Pkg_resVO prparam, Room_resVO rvo, QnaVO qparam, HttpSession session, Dining_resVO drvo) throws Exception {
+		/*고객 정보*/
 		MemberVO data = memberService.read(param.getNo());
 		MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
 		
+		/*패키지 예약*/
 		prparam.setMember_pk(memberInfo.getNo());
 		int[] rowPageCount = pkg_resService.count(prparam);
 		ArrayList<Pkg_resVO> plist = pkg_resService.list(prparam);
 		
+		/*객실 예약*/
 		ArrayList<Room_resVO> mdata = room_resService.read_list(memberInfo.getNo());
 		ArrayList<ArrayList<Room_opt_resVO>> modata = new ArrayList<ArrayList<Room_opt_resVO>>();
 		
@@ -297,6 +305,10 @@ public class MemberController {
 			modata.add(odata);
 		}
 		
+		/*다이닝 예약*/
+		ArrayList<Dining_resVO> ddata = dining_resService.read_list(memberInfo.getNo()); 
+		
+		/*포인트*/
 		ArrayList<HashMap> pdata = room_resService.point(memberInfo.getNo());
 		
 		// ============= qna ======================== 
@@ -310,15 +322,21 @@ public class MemberController {
 		
 		model.addAttribute("memberInfo", memberInfo);
 		
+		/*패키지 예약*/
 		model.addAttribute("prparam",prparam);
 		
 		model.addAttribute("ptotCount", rowPageCount[0]);
 		model.addAttribute("ptotPage", rowPageCount[1]);
 		model.addAttribute("plist",plist);
 		
+		/*객실 예약*/
 		model.addAttribute("mdata", mdata);
 		model.addAttribute("modata", modata);
-
+		
+		/*다이닝 예약*/
+		model.addAttribute("ddata", ddata);
+		
+		/*포인트*/
 		model.addAttribute("pdata", pdata);
 		
 		// ============= qna ======================== 

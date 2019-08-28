@@ -34,5 +34,9 @@ public class Dining_resDAO extends SqlMapClientDAOSupport {
 	public Dining_resVO read(int no) throws SQLException {
 		return (Dining_resVO) getSqlMapClient().queryForObject("dining_res.read", no);
 	}
+	
+	public ArrayList read_list(int no) throws SQLException {
+		return (ArrayList<Dining_resVO>) getSqlMapClient().queryForList("dining_res.read_list", no);
+	}
 
 }

@@ -5,6 +5,7 @@
 <%@ page import="pkg.res.*" %>
 <%@ page import="room.res.*" %>
 <%@ page import="board.qna.*" %>
+<%@ page import="dining_res.*" %>
 <%
 MemberVO param = (MemberVO)request.getAttribute("vo");
 MemberVO data = (MemberVO)request.getAttribute("data");
@@ -18,6 +19,9 @@ Pkg_resVO prparam = (Pkg_resVO)request.getAttribute("prvo");
 
 ArrayList<Room_resVO> mdata = (ArrayList<Room_resVO>)request.getAttribute("mdata");
 ArrayList<ArrayList<Room_opt_resVO>> modata = (ArrayList<ArrayList<Room_opt_resVO>>)request.getAttribute("modata");
+
+ArrayList<Dining_resVO> ddata = (ArrayList<Dining_resVO>)request.getAttribute("ddata");
+
 ArrayList<HashMap> pdata = (ArrayList<HashMap>)request.getAttribute("pdata");
 
 ArrayList<QnaVO> qdata = (ArrayList<QnaVO>)request.getAttribute("qlist");
@@ -73,7 +77,8 @@ $(function(){
                         <th>결제 금액</th>
                     </tr>
                     <%
-                    for(int i=0; i<mdata.size(); i++) {
+                    if(mdata.size() != 0) {
+                    	for(int i=0; i<mdata.size(); i++) {
                     %>
 					<tr class="reserved">
                         <td><%=mdata.get(i).getRoom_name() %></td>
@@ -96,10 +101,53 @@ $(function(){
                         %>
                         </td>
                     </tr>	
-                    <%	
+                    <%
+                    	}
+                    } else {
+                    %>
+                    <tr class="reserved">
+                    	<td class="participants" colspan="3">예약된 내역이 없습니다.</td>
+                    <tr>
+                    <%
                     }
                     %>
                     </table>
+                    <br/>
+                    <table>
+	                    <tr class="table-head">
+	                        <th>다이닝 예약 상품</th>
+	                        <th>예약일</th>
+	                        <th>예약시간</th>
+	                        <th>결제 금액</th>
+	                    </tr>
+	                    <%
+	                    if(ddata.size() != 0) {
+	                    	for(int i=0; i<ddata.size(); i++) {
+	                    %>
+						<tr class="reserved">
+	                        <td><%=ddata.get(i).getDining_name() %></td>
+	                        <td><%=Function.toDateKorean(ddata.get(i).getD_day()) %></td>
+	                        <td><%=ddata.get(i).getD_time() %></td>
+	                        <td class="price"><%=Function.toPriceComma(ddata.get(i).getTotal_price()) %> 원</td>
+	                    </tr>
+	                    <tr class="reserved_detail">
+	                    	<td>예약번호 <%=ddata.get(i).getNo() %> </td>
+	                    	<td class="participants" colspan="3">
+	                        	성인 x <%=ddata.get(i).getAdult() %><br/>
+	                           	어린이 x <%=ddata.get(i).getKid() %>
+	                        </td>
+	                    </tr>	
+	                    <%	
+	                    	}
+	                    } else {
+	                    %>
+	                    <tr class="reserved">
+	                    	<td class="participants" colspan="4">예약된 내역이 없습니다.</td>
+	                    <tr>
+	                    <%
+	                    }
+	                    %>
+                    </table>                    
                     <br/>
                     <table>
                     <tr class="table-head">

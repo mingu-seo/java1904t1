@@ -60,4 +60,8 @@ public class Dining_resService {
 		return vo;
 	}
 
+	public ArrayList read_list(int no) throws SQLException {
+		ArrayList list = dining_resDao.read_list(no);
+		return list;
+	}
 }

@@ -306,7 +306,15 @@ $(function() {
                                 
                         </div>
                     </div>
-                </div>  
+                </div> 
+                
+                <%
+                if(member_vo != null) {
+                %>
+                <input type="hidden" name="member_pk" id="member_pk" value="<%=member_vo.getNo()%>"/>
+                <%	
+                }
+                %> 
                 <input type="hidden" name="dining_pk" id="dining_pk" value=""/>
                 <input type="hidden" name="price" id="price" value=""/>
                 <input type="hidden" name="total_price" id="total_price" value=""/>
