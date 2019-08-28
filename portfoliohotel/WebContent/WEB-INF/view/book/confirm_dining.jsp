@@ -4,10 +4,8 @@
 <%@ page import="java.util.*" %>
 <%@ page import="board.member.*" %>
 <%
-
 Dining_resVO read = (Dining_resVO) request.getAttribute("read");
 MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
-
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -59,7 +57,17 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
                 <h1>* 다이닝 예약 확정 *</h1>
                 <div class="completion-form">
                     <!-- 이름 - p span 태그 이용 -->
+                    <%
+                    if(member_vo != null) {
+                    %>
                     <h3><span><%=member_vo.getF_name()%><%=member_vo.getL_name()%></span>님의 예약이 확정되었습니다.</h3>
+                    <%	
+                    } else {
+                    %>
+                     <h3>예약이 확정되었습니다.</h3>
+                    <%	
+                    }
+                    %>
 
                     <ul class="guest clear">
                             <li>투숙객 이름</li>
@@ -69,36 +77,41 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
                             <li>예약번호</li>
                             <li class="second"><%=read.getNo()%></li>
                     </ul>
-                    <ul class="dining_number clear">
-                        	<li>다이닝 예약날짜</li>
-                        	<li class="second"><%=read.getD_day()%></li>
-                    </ul>
                     <ul class="dining_name clear">
                             <li>다이닝 이름</li>
                             <li class="second"><%=read.getDining_name()%></li>
                     </ul>
-                    <ul class="check_in clear">
-                            <li>예약신청일</li>
-                            <li class="second"><%=DateUtil.getStrTimestamp(read.getRegdate())%></li>
+                    <ul class="dining_number clear">
+                        	<li>다이닝 예약날짜</li>
+                        	<li class="second"><%=read.getD_day()%></li>
                     </ul>
                     <ul class="check_in clear">
-                            <li>예약시간</li>
+                            <li>다이닝 예약시간</li>
                             <li class="second"><%=read.getD_time()%></li>
                     </ul>
                     <ul class="check_out clear">
                             <li>인원수</li>
                             <li class="second">성인 <%=read.getAdult() %>명 / 어린이 <%=read.getKid() %>명 [총 <%=read.getAdult() + read.getKid() %>명]</li>
                     </ul>
-
+                    <ul class="check_in clear">	
+                    	<li></li>
+                    	<li></li>
+                    </ul>
+                    <ul class="check_in clear">
+                            <li>예약신청일</li>
+                            <li class="second"><%=DateUtil.getStrTimestamp(read.getRegdate())%></li>
+                    </ul>
                     <ul class="payment clear">
-                        <h3>* 총 결재금액</h3>
+                        <h3>* 총 결제금액</h3>
                         <li>KRW <%=Function.toPriceComma(read.getTotal_price())%>원</li>
-                        <li class="second">세금 및 봉사료 KRW 000,000원 포함</li>
+                        <%
+                        double charge_d = read.getTotal_price()*0.1;
+                        int charge = (int)charge_d;
+                        %>
+                        <li class="second">세금 및 봉사료 KRW <%=Function.toPriceComma(charge)%>원 포함</li>
                     </ul>
                 </div>
             </div>
-            
-
     </div>
     <jsp:include page="/footer" flush="true"/>
 </body>

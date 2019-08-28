@@ -44,10 +44,15 @@
 	
 	<insert id="insert" parameterClass="dining_resvo">
 		insert into dining_res (
-		d_day, d_time, dining_name, adult, kid, guest_lname, guest_fname, guest_tel1, guest_tel2, guest_tel3, guest_email, regdate, price, total_price) 
+								d_day, d_time, dining_name, adult, kid, 
+								guest_lname, guest_fname, guest_tel1, guest_tel2, guest_tel3, guest_email, 
+								regdate, price, total_price,
+								member_pk, dining_pk) 
 		values (
-		#d_day#, #d_time#, #dining_name#, #adult#, #kid#, #guest_lname#, #guest_fname#, #guest_tel1#, #guest_tel2#, #guest_tel3#, #guest_email#, 
-		now(), #price#, #total_price#)
+				#d_day#, #d_time#, #dining_name#, #adult#, #kid#, 
+				#guest_lname#, #guest_fname#, #guest_tel1#, #guest_tel2#, #guest_tel3#, #guest_email#, 
+				now(), #price#, #total_price#,
+				#member_pk#, #dining_pk#)
 		<selectKey keyProperty="no" resultClass="Integer">
 			SELECT LAST_INSERT_ID()
 		</selectKey>

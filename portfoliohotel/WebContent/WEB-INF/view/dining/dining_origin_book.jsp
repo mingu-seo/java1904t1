@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="dining_res.*"%>
+<%@ page import="dining.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="board.member.*" %>
 <%@ page import="util.*" %>
 <%
 MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
+ArrayList<DiningVO> dlist = (ArrayList<DiningVO>)request.getAttribute("dlist");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -14,15 +16,15 @@ MemberVO member_vo = (MemberVO)session.getAttribute("memberInfo");
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/default.css">
-    <link rel="stylesheet" href="../css/jquery-ui.css">
-    <link rel="stylesheet" href="../css/header-fixed.css">
-    <link rel="stylesheet" href="../css/dining_book_channel.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <script type="text/javascript" src="../js/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="../js/jquery-ui.js"></script>
-    <script type="text/javascript" src="../js/gnb.js"></script>
-    <script type="text/javascript" src="../js/datepicker.js"></script>
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/header-fixed.css">
+    <link rel="stylesheet" href="/css/dining_book_channel.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="/js/gnb.js"></script>
+    <script type="text/javascript" src="/js/datepicker.js"></script>
     <title>정보입력</title>
 </head>
 
@@ -64,14 +66,6 @@ $(function() {
 		    }); 
 	});
 	
-	
-	/* $("#telselect").change(function(){
-		$("#guest_tel1").val($("#telselect option:selected").val());
-		console.log($("#guest_tel1").val());
-		console.log($("#guest_tel2").val());
-		console.log($("#guest_tel3").val());
-	});  */
-	
 });
 	
   	function change_price() {
@@ -82,11 +76,16 @@ $(function() {
   		var totalPrice = price * (adult + kid);
   		
   		if (adult >= 5) {
-  			totalPrice = totalPrice - totalPrice*0.1;
+  			totalPrice = totalPrice - totalPrice * 0.1;
   		}
-  		console.log(totalPrice);
+  		//console.log(totalPrice);
+  		
+  		var no = Number($("#dining_product option:selected").data("no"));
+  		
   		$("#totalPrice").html(totalPrice);
   		$("#total_price").val(totalPrice);
+  		$("#price").val(price);
+  		$("#dining_pk").val(no);
 	}  
 </script>
 
@@ -135,11 +134,11 @@ $(function() {
                             <div class="sec01-title">
                                 <p>예약고객 정보 입력</p>
                             </div>
-
+							
                             <div class="name_ko">
                                     <label for="name_ko">성명 (한글)＊</label>
-                                    <input type="text" id="name_ko" name="guest_lname" placeholder="성" value="<%=member_vo.getF_name()%>">
-                                    <input type="text" id="name_ko" name="guest_fname"placeholder="이름" value="<%=member_vo.getL_name()%>">
+                                    <input type="text" id="name_ko" name="guest_lname" placeholder="성" value="<%=F_name%>">
+                                    <input type="text" id="name_ko" name="guest_fname"placeholder="이름" value="<%=L_name%>">
                             </div>
 
                            <!-- <div class="name_en clear">
@@ -199,12 +198,17 @@ $(function() {
                             </div>
 
                             <div class="cardType">
-                                    <label for="name_ko">예약 상품<span>＊</span></label>
-                                    <select name="dining_name" id="dining_product" onChange='change_price();'>
-                                        <option value="더 페스트" data-price="50000">더 페스트</option>
-                                        <option value="그라넘 다이닝 라운지" data-price="50000">그라넘 다이닝 라운지</option>
-                                        <option value="문바" data-price="50000">문바</option>
-                                        <option value="더 오아시스 아웃도어 키친" data-price="50000">더 오아시스 아웃도어 키친</option>
+                            	<label for="name_ko">예약 상품<span>＊</span></label>
+                                	<select name="dining_name" id="dining_product" onChange='change_price();'>
+                                    	<%
+                                    	for(int i=0; i<dlist.size(); i++) {
+                                    	%>
+                                    	<option value="<%=dlist.get(i).getName() %>" data-price="<%=dlist.get(i).getPrice()%>" data-no="<%=dlist.get(i).getNo()%>">
+                                    		<%=dlist.get(i).getName() %>
+                                    	</option>
+                                    	<%	
+                                    	}
+                                    	%>
                                     </select>
                             </div>
                             
@@ -285,7 +289,7 @@ $(function() {
                         <div class="confirmation-box">
                                 
                                 <div class="content-area03 area clear">
-                                	<h3><span></span>총가격</h3>
+                                	<h3>총가격</h3>
                                     <p id="totalPrice"></p>
                                 <div class="next-but">
                                     <input type="button" id="countsubmit" type="url" onClick="$('#frm').submit();" value="예약 신청">
@@ -303,7 +307,9 @@ $(function() {
                         </div>
                     </div>
                 </div>  
-                <input type="hidden" name="total_price" id="total_price" value="0"/>
+                <input type="hidden" name="dining_pk" id="dining_pk" value=""/>
+                <input type="hidden" name="price" id="price" value=""/>
+                <input type="hidden" name="total_price" id="total_price" value=""/>
                 <input type="hidden" name="cmd" value="write" />
             </form> 
         </div>

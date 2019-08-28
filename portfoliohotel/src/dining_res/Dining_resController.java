@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import board.member.MemberVO;
+import dining.DiningService;
+import dining.DiningVO;
 import util.Function;
 
 @Controller
@@ -18,6 +20,9 @@ public class Dining_resController {
 
 	@Autowired
 	Dining_resService dining_resService;
+	
+	@Autowired
+	DiningService diningService;
 
 	@RequestMapping("/manage/dining_res/index")
 	public String index(Model model, Dining_resVO param) throws Exception {
@@ -61,10 +66,12 @@ public class Dining_resController {
 	// 사용자
 	
 	@RequestMapping("/dining/dining_origin_book")
-	public String dining_origin_book(Model model, Dining_resVO param, HttpSession session) throws Exception {
-		MemberVO vo = (MemberVO)session.getAttribute("memberInfo");
-	
-		model.addAttribute("vo", param);
+	public String dining_origin_book(Model model, Dining_resVO param, HttpSession session, DiningVO dvo) throws Exception {
+		MemberVO memberInfo = (MemberVO)session.getAttribute("memberInfo");
+		ArrayList<DiningVO> dlist = (ArrayList<DiningVO>)diningService.list_asc(dvo);
+		
+		model.addAttribute("memberInfo", memberInfo);
+		model.addAttribute("dlist", dlist);
 		
 		return "dining/dining_origin_book";
 	}
