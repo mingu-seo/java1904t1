@@ -211,7 +211,7 @@ function goSave() {
             <div class="account-box clear">
                 <div class="account-box-logo"><img src="/img/header-logo.png"></div>
                 <div class="account-form">
-                    <form name="frm" id="frm" action="join_insert" method="post" onsubmit="return goSave();">
+                    <form name="frm" id="frm" action="join_complete" method="post" onsubmit="return goSave();">
                         <div class="account-form1">
                         <div class="email">
                                 <label for="account-email">이메일</label>
