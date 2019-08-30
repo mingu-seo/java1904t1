@@ -141,7 +141,6 @@ function goPay(method, state) {
 		$("#pay_method").val(method);
 		$("#pay_state").val(state);
 		$("#paydate").val("-");
-		
 	}
 }
 </script>
@@ -327,7 +326,7 @@ function goSubmit() {
 									</th>
 								</tr>
 								<tr>
-									<th>객실/패키지 가격</th>
+									<th>객실 가격</th>
 									<td>KRW <%=Function.toPriceComma(Integer.parseInt(request.getParameter("room_price"))) %></td>
 								</tr>
 								<tr>
