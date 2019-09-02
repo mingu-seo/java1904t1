@@ -72,7 +72,7 @@ AdminVO data = (AdminVO)request.getAttribute("data");
 								</div>
 								<div class="btnRight">
 									<a class="btns" href="<%=param.getTargetURLParam("edit", param, data.getNo())%>"><strong>수정</strong></a>
-									<a class="btns" href="#" onClick="goDelete();"><strong>삭제</strong></a>
+									<a class="btns" href="#" onclick="goDelete();"><strong>삭제</strong></a>
 								</div>
 							</div>
 							<!--//btn-->

@@ -9,7 +9,7 @@
 	<sql id="searchSql">		
 		<!-- WHERE 절 검색 -->
 		<dynamic prepend="where">
-		    no > 1
+		    no > 0
 			<isNotEqual property="sval" compareValue="" prepend="and">
 				<isEqual property="stype" compareValue="all" prepend="and">
 					and ( (name like '%$sval$%' ) or (id like '%$sval$%' ) or (memo like '%$sval$%') ) 					
@@ -57,13 +57,17 @@
     </delete>
     
     <select id="read" parameterClass="Integer" resultClass="vo">
-    	<![CDATA[
+    	select no, id, password, email, name, memo, registdate
+    	from admin
+    	where no=#no#
+    
+    	<!-- <![CDATA[
         select no, id, password, email,
         	name, memo, registdate,
         	ifnull((select max(no) from admin where no>1 and no<#no#), 0) as prev_no,
         	ifnull((select min(no) from admin where no>1 and no>#no#), 0) as next_no
          from admin where no>1 and no=#no#
-         ]]>
+         ]]> -->
     </select>
     
     <select id="idcheck" parameterClass="param" resultClass="Integer">

@@ -153,7 +153,7 @@ function goSave() {
 	
 	$.ajax ({
 		type:'POST',
-		url:"/manage/member/emailcheck",
+		url:"/membership/emailcheck",
 		data:$("[name=frm]").serialize(), //serialize() 직렬로 정렬
 		async:false,
 		success:function(data) {
@@ -197,7 +197,8 @@ function goSave() {
 </head>
 <body>
 	<div id="zipcode_layer" style="display:none;position:fixed;overflow:hidden;z-index:999;-webkit-overflow-scrolling:touch;">
-	<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+	<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" 
+		style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
 	</div>
 	
     <jsp:include page="/header_menu" flush="true" />
@@ -211,7 +212,7 @@ function goSave() {
             <div class="account-box clear">
                 <div class="account-box-logo"><img src="/img/header-logo.png"></div>
                 <div class="account-form">
-                    <form name="frm" id="frm" action="join_complete" method="post" onsubmit="return goSave();">
+                    <form name="frm" id="frm" action="join_insert" method="post" onsubmit="return goSave();">
                         <div class="account-form1">
                         <div class="email">
                                 <label for="account-email">이메일</label>
@@ -287,6 +288,7 @@ function goSave() {
 							<input type="hidden" name="stype" id="stype" value="<%=param.getStype()%>"/>
 							<input type="hidden" name="sval" id="sval" value="<%=param.getSval()%>"/>
 							<input type="hidden" name="idcheck" id="idcheck" value="0"/> --%>
+							<input type="hidden" name="emailcheck" id="emailcheck" value="0"/>
                             
                         </div>
                     </form>

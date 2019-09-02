@@ -212,7 +212,7 @@ MemberVO data = (MemberVO)request.getAttribute("data");
                 </ul>
             </div>
             <div class="section-edit">
-                <p>워커힐 리워즈 멤버십 회원 탈퇴 시, 보유하신 포인트가 삭제됩니다.</p>
+                <p>멤버십 회원 탈퇴 시, 보유하신 포인트가 삭제됩니다.</p>
 
                 <div class="edit-table">
                     <div class="edit-table-right">

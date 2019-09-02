@@ -39,8 +39,8 @@ String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&cli
             <h2>멤버십 회원가입</h2>
             <h3>Log In</h3>
             <div class="join-box join-box1 clear">
-                <h2>더호텔 계정 만들기</h2>
-                <p>이메일 인증후 회원가입 페이지로<br/> 이동하실 수 있습니다.</p>
+                <h2>호텔 멤버십 계정 만들기</h2>
+                <p>회원가입 페이지로 이동합니다.</p>
                 <form action="#" method="POST">
 
                     <div class="join-box-logo"><img src="/img/header-logo.png"></div>
@@ -82,8 +82,6 @@ String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&cli
                            
                         </li>
                     </ul>
-                
-               
             </div>  
         </div>
     </div>

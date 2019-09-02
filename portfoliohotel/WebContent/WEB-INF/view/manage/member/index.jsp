@@ -41,7 +41,7 @@ function groupDelete() {
 		<div id="container">
 			<div id="content">
 				<div class="con_tit">
-					<h2>관리자관리 - [회원목록]</h2>
+					<h2>회원관리 - [목록]</h2>
 				</div>
 				<!-- //con_tit -->
 				<div class="con">

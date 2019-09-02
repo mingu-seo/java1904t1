@@ -5,7 +5,7 @@
 <%@ page import="java.util.*" %>
 <%
 AdminVO param = (AdminVO)request.getAttribute("vo");
-ArrayList<AdminVO> list = (ArrayList)request.getAttribute("list");
+ArrayList<AdminVO> list = (ArrayList<AdminVO>)request.getAttribute("list");
 int totCount = (Integer)request.getAttribute("totCount");
 int totPage = (Integer)request.getAttribute("totPage");
 %>
