@@ -4,13 +4,13 @@ import util.Parameter;
 
 public class Room_opt_resVO extends Parameter {
 	
-	private int no;
-	private int room_res_pk;
-	private int option_pk;
-	private int count;
-	private String name;
-	private int price;
-	private int total_price;
+	private int no; //pk
+	private int room_res_pk; //객실 예약 pk
+	private int option_pk; //객실 옵션 pk
+	private int count; //옵션 수량
+	private String name; //옵션명
+	private int price; //옵션가격
+	private int total_price; //총 가격
 	
 	public int getNo() {
 		return no;

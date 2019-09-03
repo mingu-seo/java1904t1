@@ -23,6 +23,12 @@ public class NoticeService {
 	@Autowired
 	private NoticeDAO noticeDao;
 	
+	/**
+	 * 공지사항 총 개수
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
 	public int[] count(NoticeVO vo) throws Exception {
 		int rowCount = noticeDao.count(vo);
 		int[] rowPageCount = new int[2];
@@ -32,11 +38,25 @@ public class NoticeService {
 		return rowPageCount;
 	}
 	
+	/**
+	 * 공지사항 목록
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
 	public ArrayList list(NoticeVO vo) throws Exception {
 		ArrayList list = noticeDao.list(vo);
 		return list;
 	}	
 	
+	/**
+	 * 공지사항 등록
+	 * @param vo
+	 * @param request
+	 * @return
+	 * @throws SQLException
+	 * @throws IOException
+	 */
 	public int insert(NoticeVO vo, HttpServletRequest request) throws SQLException, IOException {
 		FileUtil fu = new FileUtil();
 		Map fileMap = fu.getFileMap(request);
@@ -50,6 +70,14 @@ public class NoticeService {
 		return no;
 	}
 	
+	/**
+	 * 공지사항 수정
+	 * @param vo
+	 * @param request
+	 * @return
+	 * @throws SQLException
+	 * @throws IOException
+	 */
 	public int update(NoticeVO vo, HttpServletRequest request) throws SQLException, IOException {
 		FileUtil fu = new FileUtil();
 		Map fileMap = fu.getFileMap(request);
@@ -69,11 +97,24 @@ public class NoticeService {
 		return cnt;
 	}
 	
+	/**
+	 * 공지사항 삭제
+	 * @param no
+	 * @return
+	 * @throws SQLException
+	 */
 	public int delete(int no) throws SQLException {
 		int cnt = noticeDao.delete(no);
 		return cnt;
 	}
 	
+	/**
+	 * 공지사항 상세
+	 * @param no
+	 * @param userCon
+	 * @return
+	 * @throws SQLException
+	 */
 	public NoticeVO read(int no, boolean userCon) throws SQLException {
 		NoticeVO vo = noticeDao.read(no);
 		if (userCon) {
@@ -82,6 +123,12 @@ public class NoticeService {
 		return vo;
 	}
 	
+	/**
+	 * 공지사항 그룹 삭제
+	 * @param request
+	 * @return
+	 * @throws SQLException
+	 */
 	public int groupDelete(HttpServletRequest request) throws SQLException {
 		String[] no = request.getParameterValues("no");
 		int r = 0;

@@ -16,9 +16,9 @@ public class RoomVO extends Parameter{
 	private String location; //객실 위치
 	private String landscape; //객실 뷰
 	private String type; //객실 타입_방 개수
-	private String image;
+	private String image; //객실 사진
 	
-	private String size;
+	private String size; //객실 크기
 	
 	public int getNo() {
 		return no;

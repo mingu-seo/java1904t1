@@ -4,7 +4,7 @@
 	<!-- 공통 검색 조건 -->
 	<sql id="searchSql">
 		<dynamic prepend="WHERE">
-		1=1
+			1=1
 			<isEqual property="category" compareValue="0">
 				AND (res_state=1 OR res_state=0)
 			</isEqual>

@@ -4,9 +4,9 @@ import util.Parameter;
 
 public class Room_serviceVO extends Parameter {
 	
-	private int no;
-	private String name_s;
-	private int room_pk;
+	private int no; //pk
+	private String name_s; //객실 편의시설명
+	private int room_pk; //객실 pk
 	
 	public int getNo() {
 		return no;

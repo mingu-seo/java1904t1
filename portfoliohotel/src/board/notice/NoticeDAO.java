@@ -12,7 +12,7 @@ import db.SqlMapClientDAOSupport;
 public class NoticeDAO extends SqlMapClientDAOSupport{
 	
 	/**
-	 * 총글수 구하기
+	 * 총 글 개수
 	 * @param vo
 	 * @return
 	 * @throws SQLException
@@ -42,7 +42,7 @@ public class NoticeDAO extends SqlMapClientDAOSupport{
 	}
 	
 	/**
-	 * 관리자 수정
+	 * 수정
 	 * @param vo
 	 * @throws SQLException
 	 */
@@ -50,12 +50,18 @@ public class NoticeDAO extends SqlMapClientDAOSupport{
 		return getSqlMapClient().update("notice.update", vo);
 	}
 	
+	/**
+	 * 조회수
+	 * @param vo
+	 * @return
+	 * @throws SQLException
+	 */
 	public int updateReadno(NoticeVO vo) throws SQLException {
 		return getSqlMapClient().update("notice.updateReadno", vo);
 	}
 	
 	/**
-	 * 관리자 삭제
+	 * 삭제
 	 * @param no
 	 * @throws SQLException
 	 */
@@ -63,6 +69,12 @@ public class NoticeDAO extends SqlMapClientDAOSupport{
 		return getSqlMapClient().delete("notice.delete", no);
 	}
 	
+	/**
+	 * 상세
+	 * @param no
+	 * @return
+	 * @throws SQLException
+	 */
 	public NoticeVO read(int no) throws SQLException {
 		return (NoticeVO)getSqlMapClient().queryForObject("notice.read", no);
 	}

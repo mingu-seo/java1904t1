@@ -4,16 +4,16 @@ import util.Parameter;
 
 public class Room_optVO extends Parameter {
 	
-	private int no;
-	private String name;
-	private String instruction;
-	private String image;
-	private String image_org;
-	private String info;
-	private int price;
+	private int no; //pk
+	private String name; //옵션명
+	private String instruction; //옵션 설명
+	private String image; //옵션 이미지
+	private String image_org; //옵션 원본 이미지
+	private String info; //옵션 정보
+	private int price; //옵션 가격
 	
-	private String info_1;
-	private String info_2;
+	private String info_1; //옵션 상세 정보1
+	private String info_2; //옵션 상세 정보2
 	
 	public int getNo() {
 		return no;

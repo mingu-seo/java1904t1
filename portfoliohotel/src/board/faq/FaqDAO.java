@@ -28,10 +28,22 @@ public class FaqDAO extends SqlMapClientDAOSupport {
 		return getSqlMapClient().delete("faq.delete", no);
 	}
 	
+	/**
+	 * 총 개수
+	 * @param param
+	 * @return
+	 * @throws SQLException
+	 */
 	public int count(FaqVO param) throws SQLException {
 		return (Integer)getSqlMapClient().queryForObject("faq.count", param);
 	}
 	
+	/**
+	 * 목록
+	 * @param param
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList list(FaqVO param) throws SQLException {
 		return (ArrayList)getSqlMapClient().queryForList("faq.list", param);
 	}	
@@ -46,6 +58,12 @@ public class FaqDAO extends SqlMapClientDAOSupport {
 		return (Integer) getSqlMapClient().insert("faq.insert", vo);
 	}
 	
+	/**
+	 * 상세
+	 * @param no
+	 * @return
+	 * @throws SQLException
+	 */
 	public FaqVO read(int no) throws SQLException {
 		return (FaqVO)getSqlMapClient().queryForObject("faq.read", no);
 	}

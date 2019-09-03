@@ -27,7 +27,16 @@ public class MainController {
 		return "membership";
 	}
 
-	
+	/**
+	 * 로그인
+	 * @param model
+	 * @param login_url
+	 * @param login_param
+	 * @param vo
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/membership/login")
 	public String login(Model model, @RequestParam(value="login_url", required=false) String login_url, @RequestParam(value="login_param", required=false) String login_param, MemberVO vo, HttpSession session) throws Exception {
 		if (memberService.loginCheck(vo)) {
@@ -43,14 +52,16 @@ public class MainController {
 			if(room_resService.count_res(memberInfo.getNo()) > 0) {
 				HashMap map_m = room_resService.count_use(memberInfo.getNo());
 				if(map_m.get("useNumber") != null && map_m.get("dayStay") != null) {
-					int useN = Integer.parseInt(String.valueOf(map_m.get("useNumber")));			
-					int dayS = Integer.parseInt(String.valueOf(map_m.get("dayStay")));
+					int useN = Integer.parseInt(String.valueOf(map_m.get("useNumber"))); //예약 횟수			
+					int dayS = Integer.parseInt(String.valueOf(map_m.get("dayStay"))); //숙박일수
 					int grade = 0;
-					
+					//classic
 					if((useN >= 1 && useN < 3) || (dayS >= 3 && dayS < 6)) {
 						grade = 1;
+					//vip	
 					} else if((useN >= 3 && useN < 7) || (dayS >= 6 && dayS < 12)) {
 						grade = 2;
+					//vvip
 					} else if(useN >= 7 || dayS >= 12) {
 						grade = 3;
 					}

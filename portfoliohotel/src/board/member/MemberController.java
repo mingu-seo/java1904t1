@@ -40,9 +40,15 @@ public class MemberController {
 	@Autowired
 	private Dining_resService dining_resService;
 	
+//=======================================================관리자=================================================================================	
 	
-	//========================================관리자===================================================
-
+	/**
+	 * 관리자 회원 목록
+	 * @param model
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/manage/member/index")
 	public String index(Model model, MemberVO param) throws Exception {
 		int[] rowPageCount = memberService.count(param);
@@ -55,10 +61,14 @@ public class MemberController {
 
 		return "manage/member/index";
 	}
-	
-	
-	
 
+	/**
+	 * 관리자 회원 상세
+	 * @param model
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/manage/member/read")
 	public String read(Model model, MemberVO param) throws Exception {
 		MemberVO data = memberService.read(param.getNo());
@@ -68,8 +78,13 @@ public class MemberController {
 		return "manage/member/read";
 	}
 	
-	
-
+	/**
+	 * 관리자 회원 수정
+	 * @param model
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/manage/member/edit")
 	public String edit(Model model, MemberVO param) throws Exception {
 		MemberVO data = memberService.read(param.getNo());
@@ -79,6 +94,13 @@ public class MemberController {
 		return "manage/member/edit";
 	}
 	
+	/**
+	 * 사용자 회원 수정 
+	 * @param model
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/manage/member/memberEdit")
 	public String memberEdit(Model model, MemberVO param) throws Exception {
 		MemberVO data = memberService.read(param.getNo());
@@ -88,6 +110,13 @@ public class MemberController {
 		return "manage/member/memberEdit";
 	}
 	
+	/**
+	 * 사용자 회원 마이페이지
+	 * @param model
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/manage/member/memberMypage")
 	public String memberMypage(Model model, MemberVO param) throws Exception {
 		MemberVO data = memberService.read(param.getNo());
@@ -97,6 +126,13 @@ public class MemberController {
 		return "manage/member/memberMypage";
 	}
 	
+	/**
+	 * 사용자 메인페이지 회원 정보
+	 * @param model
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/manage/member/memberIndex")
 	public String memberIndex(Model model, MemberVO param) throws Exception {
 		MemberVO data = memberService.read(param.getNo());
@@ -106,7 +142,13 @@ public class MemberController {
 		return "manage/member/memberIndex";
 	}
 	
-
+	/**
+	 * 사용자 회원 탈퇴
+	 * @param model
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/manage/member/memberDelete")
 	public String memberDelete(Model model, MemberVO param) throws Exception {
 		MemberVO data = memberService.read(param.getNo());
@@ -125,6 +167,13 @@ public class MemberController {
 //		return "manage/member/pwedit";
 //	}
 
+	/**
+	 * 관리자 회원 등록
+	 * @param model
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/manage/member/write")
 	public String write(Model model, MemberVO param) throws Exception {
 		model.addAttribute("vo", param);
@@ -132,15 +181,19 @@ public class MemberController {
 		return "manage/member/write";
 	}
 	
+	/**
+	 * 관리자 회원 로그인
+	 * @param model
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/manage/member/loginForm")
 	public String loginForm(Model model, MemberVO param) throws Exception {
 		model.addAttribute("vo", param);
 
 		return "manage/member/loginForm";
 	}
-	
-	
-	
 	
 	@RequestMapping("/manage/member/idcheck")
 	public String idcheck(Model model, MemberVO param) throws Exception {
@@ -167,14 +220,13 @@ public class MemberController {
 	}
 
 	/**
-	 * 관리자 아이디 중복체크 사용자에서 저장시 ajax로 체크
+	 * 관리자 아이디 중복체크 사용자에서 저장 시 ajax로 체크
 	 * 
 	 * @param model
 	 * @param param
 	 * @return
 	 * @throws Exception
 	 */
-	
 	@RequestMapping("/manage/member/loginCheck")
 	public String loginCheck(Model model, MemberVO param, HttpSession session) throws Exception {
 		model.addAttribute("vo", param);
@@ -207,8 +259,15 @@ public class MemberController {
 //	}
 	
 	
-	
-	@RequestMapping("/manage/member/emailcheck") //회원 가입 이메일 체크
+	/**
+	 * 회원가입 이메일 체크
+	 * @param model
+	 * @param param
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/manage/member/emailcheck")
 	public String emailcheck(Model model, MemberVO param, HttpServletRequest request) throws Exception {
 		model.addAttribute("vo", param);
 
@@ -219,7 +278,15 @@ public class MemberController {
 		return "include/return";
 	}
 	
-	@RequestMapping("/manage/member/pwdcheck")//회원가입 비밀번호 체크
+	/**
+	 * 회원가입 비밀번호 체크
+	 * @param model
+	 * @param param
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/manage/member/pwdcheck")
 	public String pwdcheck(Model model, MemberVO param, HttpServletRequest request) throws Exception {
 		model.addAttribute("vo", param);
 
@@ -230,7 +297,15 @@ public class MemberController {
 		return "include/return";
 	}
 	
-	@RequestMapping("/manage/member/samePwdcheck") //회원가입 비밀번호 체크
+	/**
+	 * 회원가입 비밀번호 확인 체크
+	 * @param model
+	 * @param param
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/manage/member/samePwdcheck")
 	public String samePwdcheck(Model model, MemberVO param, HttpServletRequest request) throws Exception {
 		model.addAttribute("vo", param);
 
