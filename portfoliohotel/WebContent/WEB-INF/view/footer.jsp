@@ -11,10 +11,10 @@
                     <li><a href="/hotel_info?supportTab=4">예약환불규정</a></li>
                 </ul>
                 <ul class="sns clear">
-                    <li><a href="#"><img src="/img/sns1.png"></a></li>
-                    <li><a href="#"><img src="/img/sns2.png"></a></li>
-                    <li><a href="#"><img src="/img/sns3.png"></a></li>
-                    <li><a href="#"><img src="/img/sns4.png"></a></li>
+                    <li><a href="https://www.instagram.com/banyantree_seoul/"><img src="/img/sns1.png"></a></li>
+                    <li><a href="https://www.facebook.com/BanyanTreeClubandSpaSeoul"><img src="/img/sns2.png"></a></li>
+                    <li><a href="https://www.youtube.com/BanyanTreeHotels"><img src="/img/sns3.png"></a></li>
+                    <li><a href="https://www.tripadvisor.co.kr/Hotel_Review-g294197-d1796658-Reviews-Banyan_Tree_Club_Spa_Seoul-Seoul.html"><img src="/img/sns4.png"></a></li>
                 </ul>
             </div>
             <div class="footer-bottom">
