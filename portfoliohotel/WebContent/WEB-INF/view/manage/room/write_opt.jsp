@@ -26,14 +26,7 @@ function groupDelete() {
 	}
 }
 
-function goDelete(v) {	
-	if (confirm ('삭제하시겠습니까?')) {
-		document.location.href = "process_opt?no="+v+"&cmd=delete_opt";
-	}
-}
-
 function goSave() {
-	
 	
 	/* var sHTML = oEditors.getById["instruction"].getIR();
 	if (sHTML == "" || sHTML == "<p><br></p>") {

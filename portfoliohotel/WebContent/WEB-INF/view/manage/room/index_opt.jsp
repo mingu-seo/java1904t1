@@ -35,10 +35,6 @@ function goUpdate(x) {
 	}
 }
 
-function goSearch() {
-	$("#searchForm").submit();
-}
-
 </script>
 <title>관리자 객실 편의시설 목록</title>
 </head>
@@ -129,24 +125,6 @@ function goSearch() {
 								</div>
 							</div>
 							<!--//btn-->
-							<%-- <form name="searchForm" id="searchForm" action="index" method="post">
-								<div class="search">
-									<select name="sdisplay" onchange="$('#searchForm').submit();">
-										<option value="-1" <%=Function.getSelected(param.getSdisplay(), -1)%>>전체</option>
-										<option value="0" <%=Function.getSelected(param.getSdisplay(), 0)%>>숨김</option>
-										<option value="1" <%=Function.getSelected(param.getSdisplay(), 1)%>>노출</option>
-									</select>
-									<select name="stype" title="검색을 선택해주세요">
-										<option value="all" <%=Function.getSelected(param.getStype(), "all") %>>전체</option>
-										<option value="name" <%=Function.getSelected(param.getStype(), "name") %>>작성자</option>
-										<option value="email" <%=Function.getSelected(param.getStype(), "email") %>>이메일</option>
-										<option value="memo" <%=Function.getSelected(param.getStype(), "memo") %>>내용</option>
-									</select>
-									<input type="text" name="sval" value="<%=param.getSval()%>" title="검색할 내용을 입력해주세요" />
-									<input type="image" src="/manage/img/btn_search.gif" class="sbtn" alt="검색" />
-								</div>
-							</form>
-							<!-- //search -->  --%>
 						</div>
 						<!-- //blist -->
 					</div>

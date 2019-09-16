@@ -134,9 +134,6 @@ function goSearch() {
 }
 
 function checkDate(checkin, checkout) {
-	console.log(checkin);
-	console.log(checkout);
-	
 	$.ajax({
 		type : "GET",
 		url : "/book/room/check_pr?checkin="+checkin+"&checkout="+checkout, 

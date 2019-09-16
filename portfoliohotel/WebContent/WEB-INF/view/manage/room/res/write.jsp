@@ -124,7 +124,7 @@ $(function(){
 		});
 		$("#option_price_span").text(price_opt);
 		calculate();
-		$("#option_price").val(Number(price_opt)); // hidden에 value 넣기
+		$("#option_price").val(Number(price_opt));
 	});
 	
 	$("#adult, #kid").change(function() {
@@ -145,7 +145,7 @@ $(function(){
 		price_person = adult_add + kid_add;
 		$("#person_price_span").text(price_person);
 		calculate();
-		$("#person_price").val(Number(price_person)); // hidden에 value 넣기
+		$("#person_price").val(Number(price_person));
 	});
 	
 	$("#checkin, #checkout").change(function() {
@@ -181,10 +181,10 @@ function checkDate(checkin, checkout) {
 	
 	$("#room_pk").change(function() {
 		price_stay = $("#room_pk option:selected").data("price") * day_stay;
-		$("#room_price_span").text(price_stay); // span 태그에 표시
+		$("#room_price_span").text(price_stay);
 		calculate();
-		$("#room_price").val(Number(price_stay)); // hidden에 value 넣기
-		$("#room_name").val($("#room_pk option:selected").data("name")); // hidden에 value 넣기
+		$("#room_price").val(Number(price_stay));
+		$("#room_name").val($("#room_pk option:selected").data("name"));
 	});
 }
 </script>
